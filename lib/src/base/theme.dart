@@ -6,14 +6,18 @@ abstract class AppTheme {
   static final _light = ThemeData(
     primaryColor: primaryColor,
     accentColor: primaryColor,
-
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         textStyle: GoogleFonts.bebasNeue(
-          fontSize: 18,
-          fontWeight: FontWeight.bold
-        )
-      )
-    )
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
   );
 }
