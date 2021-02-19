@@ -8,6 +8,7 @@ abstract class Assets {
   static const dropIcon = '$_iconsDir/drop.png';
   static const folderIcon = '$_iconsDir/folder.png';
 
+  static const logo = '$_imagesDir/logo.png';
   static const nbqFast = '$_imagesDir/nbq_fast.png';
   static const nbqPropulse = '$_imagesDir/nbq_propulse.png';
   static const nbqSlow = '$_imagesDir/nbq_slow.png';
