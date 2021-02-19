@@ -6,6 +6,10 @@ abstract class AppTheme {
   static final _light = ThemeData(
     primaryColor: primaryColor,
     accentColor: primaryColor,
+
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: GoogleFonts.bebasNeue()
+    ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         primary: Colors.white,
