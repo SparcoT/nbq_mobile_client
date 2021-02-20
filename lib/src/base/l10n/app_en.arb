@@ -1,3 +1,40 @@
 {
-  "@@locale": "en"
+  "@@locale": "en",
+
+  "name": "Name",
+  "@name": {},
+  "email": "Email",
+  "@email": {},
+  "telephone": "Telephone",
+  "@telephone": {},
+
+  "sendOrShare": "Send / Share",
+  "@sendOrShare": {},
+
+  "total": "Total",
+  "@total": {},
+
+  "can": "can",
+  "@can": {},
+
+  "pack": "pack",
+  "@pack": {},
+
+  "add": "Add",
+  "@add": {},
+
+  "viewOrder": "VIEW ORDER",
+  "@viewOrder": {},
+
+  "contact": "contact",
+  "@contact": {},
+
+  "send": "Send",
+  "@send": {},
+
+  "message": "Message",
+  "@message": {},
+
+  "terms": "I accept the terms of use.",
+  "@terms": {}
 }
