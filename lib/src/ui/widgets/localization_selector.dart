@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 
 class LocalizationSelector extends StatefulWidget {
-  final locale = ValueNotifier<Locale>(
+  static final locale = ValueNotifier<Locale>(
     Locale(Intl.systemLocale.contains('en') ? 'en' : 'es'),
   );
 
@@ -17,14 +17,14 @@ class _LocalizationSelectorState extends State<LocalizationSelector> {
     return GestureDetector(
       onTap: () {
         print('here');
-        widget.locale.value =
-            Locale(widget.locale.value.languageCode == 'en' ? 'es' : 'en');
+        LocalizationSelector.locale.value =
+            Locale(LocalizationSelector.locale.value.languageCode == 'en' ? 'es' : 'en');
         setState(() {});
       },
       child: SizedBox(
         width: 60,
         height: 37,
-        child: widget.locale.value.languageCode == 'en'
+        child: LocalizationSelector.locale.value.languageCode == 'en'
             ? Stack(children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
