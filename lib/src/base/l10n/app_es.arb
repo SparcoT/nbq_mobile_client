@@ -1,3 +1,46 @@
 {
-  "@@locale": "es"
+  "@@locale": "es",
+
+  "name": "Nombre",
+  "@name": {},
+  "email": "Email",
+  "@email": {},
+  "telephone": "Teléfono",
+  "@telephone": {},
+
+  "sendOrShare": "Enviar / Compartir",
+  "@sendOrShare": {},
+
+  "total": "Total",
+  "@total": {},
+
+  "can": "Latas",
+  "@can": {},
+
+  "pack": "Pack",
+  "@pack": {},
+
+  "add": "Agregar",
+  "@add": {},
+
+  "viewOrder": "VER PEDIDO",
+  "@viewOrder": {},
+
+  "contact": "Contacto",
+  "@contact": {},
+
+  "send": "Enviar",
+  "@send": {},
+
+  "message": "Mensaje",
+  "@message": {},
+
+  "totalCans": "Latas totales",
+  "@totalCans": {},
+
+  "seeOrder": "Ver pedido",
+  "@seeOrder": {},
+
+  "terms": "Acepto los términos de uso.",
+  "@terms": {}
 }
