@@ -25,6 +25,7 @@ class _ContactUsViewState extends State<ContactUsView> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Form(
         key: formKey,
         child: LocalizedView(
