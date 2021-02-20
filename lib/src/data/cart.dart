@@ -16,6 +16,7 @@ class Cart {
 
   final _products = <CartProduct>[];
 
+  List<CartProduct> get products => _products;
   void add(CartProduct product) {
     _products.add(product);
   }
@@ -23,4 +24,6 @@ class Cart {
   void addAll(Iterable<CartProduct> products) {
     _products.addAll(products);
   }
+
+  void clear() => _products.clear();
 }
