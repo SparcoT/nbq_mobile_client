@@ -5,8 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProductQtyCounter extends StatefulWidget {
   final int quantity;
+  final ValueChanged<int> onChanged;
 
-  ProductQtyCounter([this.quantity = 0]);
+  ProductQtyCounter({this.quantity = 0, this.onChanged});
 
   @override
   _ProductQtyCounterState createState() => _ProductQtyCounterState();
@@ -21,8 +22,8 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
     _qty = widget.quantity;
   }
 
-  void _increment() => ++_qty;
-  void _decrement() => --_qty;
+  void _increment() => widget.onChanged?.call(++_qty);
+  void _decrement() => widget.onChanged?.call(--_qty);
   void _incrementAction() => setState(_increment);
   void _decrementAction() {
     if (_qty > 0) setState(_decrement);
@@ -39,8 +40,8 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
 
     return Center(
       child: Container(
-        width: 120,
-        height: 30,
+        width: 105,
+        height: 25,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -51,18 +52,18 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
         ),
         child: Row(children: [
           SizedBox(
-            width: 35,
+            width: 30,
             child: TextButton(
               style: style,
               onPressed: _decrementAction,
-              child: Icon(FontAwesomeIcons.minus, size: 12),
+              child: Icon(FontAwesomeIcons.minus, size: 10),
             ),
           ),
           VerticalDivider(indent: 5, endIndent: 5, thickness: 1.5, width: 0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
-              width: 40,
+              width: 35,
               child: Text(
                 _qty.toString(),
                 style: GoogleFonts.bebasNeue(),
@@ -72,11 +73,11 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
           ),
           VerticalDivider(indent: 5, endIndent: 5, thickness: 1.5, width: 0),
           SizedBox(
-            width: 35,
+            width: 30,
             child: TextButton(
               style: style,
               onPressed: _incrementAction,
-              child: Icon(FontAwesomeIcons.plus, size: 12),
+              child: Icon(FontAwesomeIcons.plus, size: 10),
             ),
           ),
         ]),
