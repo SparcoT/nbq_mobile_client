@@ -5,7 +5,7 @@ import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
 
-class ProductDetail {
+class Category {
   final String name;
   final Color color;
   final String image;
@@ -13,7 +13,7 @@ class ProductDetail {
   final Offset offset;
   final ProductCategory category;
 
-  const ProductDetail._({
+  const Category._({
     this.category,
     this.name,
     this.color,
@@ -23,11 +23,11 @@ class ProductDetail {
   });
 }
 
-class ProductTile extends StatelessWidget {
-  final ProductDetail _detail;
+class CategoryTile extends StatelessWidget {
+  final Category _detail;
 
-  const ProductTile.slow()
-      : _detail = const ProductDetail._(
+  const CategoryTile.slow()
+      : _detail = const Category._(
           width: 130,
           name: 'SLOW',
           image: Assets.nbqSlow,
@@ -36,8 +36,8 @@ class ProductTile extends StatelessWidget {
           category: ProductCategory.slow,
         );
 
-  const ProductTile.fast()
-      : _detail = const ProductDetail._(
+  const CategoryTile.fast()
+      : _detail = const Category._(
           width: 167,
           name: 'FAST',
           offset: Offset(-4.55, -28.5),
@@ -46,8 +46,8 @@ class ProductTile extends StatelessWidget {
           category: ProductCategory.fast,
         );
 
-  const ProductTile.wtf()
-      : _detail = const ProductDetail._(
+  const CategoryTile.wtf()
+      : _detail = const Category._(
           width: 167,
           name: 'WTF',
           offset: Offset(-4.55, 7.5),
@@ -56,8 +56,8 @@ class ProductTile extends StatelessWidget {
           category: ProductCategory.wtf,
         );
 
-  const ProductTile.pro()
-      : _detail = const ProductDetail._(
+  const CategoryTile.pro()
+      : _detail = const Category._(
           width: 161,
           name: 'PRO',
           offset: Offset(7, 16),
