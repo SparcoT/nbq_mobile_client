@@ -1,24 +1,11 @@
 import 'package:nbq_mobile_client/src/data/db.dart';
 
 class CartProduct {
-  int _cans;
-  int _packs;
+  int cans;
+  int packs;
   final Product product;
 
-  CartProduct(this.product) : _cans = 0, _packs = 0;
-
-  incrementCans() => ++_cans;
-  decrementCans() {
-    if (_cans > 0) --_cans;
-  }
-
-  incrementPacks() => ++_packs;
-  decrementPacks() {
-    if (_cans > 0) --_packs;
-  }
-
-  int get cans => _cans;
-  int get packs => _packs;
+  CartProduct(this.product) : cans = 0, packs = 0;
 }
 
 class Cart {
