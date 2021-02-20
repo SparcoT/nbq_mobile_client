@@ -28,5 +28,19 @@ abstract class AppTheme {
         ),
       ),
     ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: Colors.white,
+        backgroundColor: primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        textStyle: GoogleFonts.bebasNeue(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
   );
 }
