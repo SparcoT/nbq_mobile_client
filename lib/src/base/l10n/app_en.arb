@@ -14,10 +14,10 @@
   "total": "Total",
   "@total": {},
 
-  "can": "can",
+  "can": "Can",
   "@can": {},
 
-  "pack": "pack",
+  "pack": "Pack",
   "@pack": {},
 
   "add": "Add",
@@ -26,7 +26,7 @@
   "viewOrder": "VIEW ORDER",
   "@viewOrder": {},
 
-  "contact": "contact",
+  "contact": "Contact",
   "@contact": {},
 
   "send": "Send",
@@ -34,6 +34,12 @@
 
   "message": "Message",
   "@message": {},
+
+  "totalCans": "Total Cans",
+  "@totalCans": {},
+
+  "seeOrder": "See Order",
+  "@seeOrder": {},
 
   "terms": "I accept the terms of use.",
   "@terms": {}
