@@ -27,6 +27,8 @@ dependencies:
     sdk: flutter
   intl: ^0.17.0
 
+  pdf: ^3.0.0-nullsafety.1
+  share: ^2.0.0-nullsafety.2
   url_launcher: ^6.0.0-nullsafety.7
   # todo(arish) just for development - for release mode remove it and add the required font.
   google_fonts: ^2.0.0-nullsafety.0
