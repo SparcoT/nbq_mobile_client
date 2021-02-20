@@ -8,13 +8,14 @@ abstract class AppTheme {
   static const colorOfSlow = Color(0xFF553972);
   static const colorOfWTF = Color(0xFFCF7726);
 
+  static const textStyleOfSlow =
+      TextStyle(fontSize: 42, color: colorOfSlow, fontFamily: 'Futura');
+
   static final _light = ThemeData(
     primaryColor: primaryColor,
     accentColor: primaryColor,
-
-    inputDecorationTheme: InputDecorationTheme(
-      labelStyle: GoogleFonts.bebasNeue()
-    ),
+    inputDecorationTheme:
+        InputDecorationTheme(labelStyle: GoogleFonts.bebasNeue()),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         primary: Colors.white,
@@ -28,7 +29,6 @@ abstract class AppTheme {
         ),
       ),
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
         primary: Colors.white,

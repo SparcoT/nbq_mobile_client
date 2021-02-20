@@ -11,12 +11,12 @@ class AppPages {
 }
 
 class AppNavigation {
-  Future<dynamic> navigateTo(BuildContext context, Widget destination) =>
+  static Future<dynamic> navigateTo(BuildContext context, Widget destination) =>
       Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => destination),
       );
 
-  Future<dynamic> navigateToPage(BuildContext context, _AppPage page) =>
+  static Future<dynamic> navigateToPage(BuildContext context, _AppPage page) =>
       Navigator.of(context).pushNamed(page.name);
 
   static final _routes = <String, WidgetBuilder>{
