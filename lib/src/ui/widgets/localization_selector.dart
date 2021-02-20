@@ -24,7 +24,7 @@ class _LocalizationSelectorState extends State<LocalizationSelector> {
       child: SizedBox(
         width: 60,
         height: 37,
-        child: LocalizationSelector.locale.value.languageCode == 'en'
+        child: LocalizationSelector.locale.value.languageCode == 'es'
             ? Stack(children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
