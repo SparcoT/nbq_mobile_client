@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatelessWidget {
   final String label;
   final FormFieldSetter onSaved;
-  final FormFieldValidator validator;
+  final FormFieldValidator<String> validator;
 
   AppTextField({this.label, this.onSaved, this.validator});
 
