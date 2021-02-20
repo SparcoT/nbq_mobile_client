@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nbq_mobile_client/src/app.dart';
+import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
-import 'package:nbq_mobile_client/src/data/models/db.dart';
 import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
 
 class ProductDetail {
@@ -73,7 +72,7 @@ class ProductTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 45),
       child: TextButton(
         onPressed: () {
-          AppNavigation.navigateTo(context, ProductDetailPage());
+          AppNavigation.navigateTo(context, ProductDetailPage(_detail));
         },
         style: TextButton.styleFrom(
           primary: _detail.color,
@@ -107,10 +106,7 @@ class ProductTile extends StatelessWidget {
           Column(children: [
             Text(
               _detail.name,
-              style: TextStyle(
-                fontFamily: 'Futura',
-                fontSize: 42,
-              ),
+              style: TextStyle(fontFamily: 'Futura', fontSize: 42),
             ),
             Text(
               Product.all
