@@ -12,6 +12,8 @@ import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 
+import '../../utils/validators.dart';
+
 class CartView extends StatefulWidget {
   @override
   _CartViewState createState() => _CartViewState();
@@ -26,6 +28,8 @@ class _CartViewState extends State<CartView> {
   final _fastProducts = <CartProduct>[];
 
   final _data = OrderData();
+
+  AutovalidateMode _mode = AutovalidateMode.disabled;
 
   @override
   void initState() {
@@ -56,6 +60,7 @@ class _CartViewState extends State<CartView> {
 
     return Form(
       key: _formKey,
+      autovalidateMode: _mode,
       child: LocalizedView(
         builder: (context, lang) =>
             CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
@@ -122,7 +127,7 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                validator: Validators.required,
+                validator: (val)=> emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -141,18 +146,21 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (!_formKey.currentState.validate()) return;
+                    if (!_formKey.currentState.validate()){
+                      setState(() {_mode = AutovalidateMode.always;});
+                      return;
+                    }
                     _formKey.currentState.save();
                     await _generatePdf();
 
-                    setState(() {
-                      _slowProducts.clear();
-                      _fastProducts.clear();
-                      _wtfProducts.clear();
-                      _proProducts.clear();
-
-                      // Cart().clear();
-                    });
+                    // setState(() {
+                    //   _slowProducts.clear();
+                    //   _fastProducts.clear();
+                    //   _wtfProducts.clear();
+                    //   _proProducts.clear();
+                    //
+                    //   Cart().clear();
+                    // });
                   },
                   child: Text(lang.sendOrShare),
                   style: ElevatedButton.styleFrom(
@@ -182,11 +190,11 @@ class _CartViewState extends State<CartView> {
     return pw.Table(
       children: <pw.TableRow>[
         pw.TableRow(children: [
-          pw.Text(' Color'),
-          pw.Text(' Ref'),
-          pw.Text(' Name'),
-          pw.Text(' Cans'),
-          pw.Text(' Packs')
+          pw.Text(' Color',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Ref',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Name',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Cans',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Packs',style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
         ]),
         ...products.map(
           (e) => pw.TableRow(

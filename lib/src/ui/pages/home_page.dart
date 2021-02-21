@@ -6,6 +6,8 @@ import 'package:nbq_mobile_client/src/ui/views/products_view.dart';
 import 'package:nbq_mobile_client/src/ui/views/contact_us_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 
+import 'design-images_page.dart';
+
 class HomePage extends StatelessWidget {
   final int initialIndex;
   HomePage({this.initialIndex=0});
@@ -46,7 +48,7 @@ class HomePage extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             children: [
               ProductsView(),
-              Container(),
+              DesignImages(),
               CartView(),
               ContactUsView()
             ],

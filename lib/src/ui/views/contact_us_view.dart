@@ -62,6 +62,7 @@ class _ContactUsViewState extends State<ContactUsView> {
       physics: BouncingScrollPhysics(),
       child: Form(
         key: formKey,
+        autovalidateMode: _mode,
         child: LocalizedView(
           builder: (context, lang) => Column(children: [
             Padding(
