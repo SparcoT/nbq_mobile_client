@@ -3,7 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
+import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import '../../utils/validators.dart';
+import '../../utils/validators.dart';
+import '../../utils/validators.dart';
+
+class Contact {
+  String name;
+  String email;
+  String message;
+
+  Contact({this.message,this.email,this.name});
+}
 
 /// TODO(arish) refactor and implement email sending scenario
 class ContactUsView extends StatefulWidget {
@@ -14,12 +27,33 @@ class ContactUsView extends StatefulWidget {
 class _ContactUsViewState extends State<ContactUsView> {
   var _termsAccepted = false;
   final formKey = GlobalKey<FormState>();
+  Contact contact = Contact();
+  AutovalidateMode _mode = AutovalidateMode.disabled;
 
-  void _sendMessage() {
-    if (!formKey.currentState.validate()) return;
+  void _sendMessage() async {
+    if (!formKey.currentState.validate()){
+      setState(() {
+        _mode = AutovalidateMode.always;
+      });
+      return;
+    }
     formKey.currentState.save();
+    await performLazyTask(context, () async {
+      var headers = {
+        'Authorization': 'Bearer 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',
+        'Content-Type': 'application/json',
+      };
 
-    /// TODO: To be implemented;
+      var data = '{"personalizations": [{"to": [{"email": "em1407@nbqpro.com"}]}], '
+          '"from": {"email": "em1407@nbqpro.com"},"subject": "Contact From App", '
+          '"content": [{"type": "text/plain", "value": "Name : ${contact.name} Email : ${contact.email} Message : ${contact.message}"}]}';
+
+      var response = await http.post('https://api.sendgrid.com/v3/mail/send', headers: headers, body: data);
+      print(response.body);
+    });
+
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text("We have received your request, you will be contacted shortly!")));
+
   }
 
   @override
@@ -59,12 +93,21 @@ class _ContactUsViewState extends State<ContactUsView> {
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     children: [
-                      AppTextField(label: lang.name),
-                      AppTextField(label: lang.email),
+                      AppTextField(
+                        value: contact.name,
+                          label: lang.name,
+                        validator: Validators.required,
+                        onSaved: (value) =>  contact.name = value,
+                      ),
+                      AppTextField(label: lang.email,
+                        value: contact.email,
+                        validator: (val)=> emailValidator(val),
+                        onSaved: (value) =>  contact.email = value,
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 18),
                         child: Text(
-                          'MENSAJE',
+                          lang.message,
                           style: GoogleFonts.bebasNeue(
                             fontSize: 16,
                             color: Colors.grey.shade600,
@@ -79,6 +122,9 @@ class _ContactUsViewState extends State<ContactUsView> {
                   margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
                   child: TextFormField(
                     maxLines: 4,
+                    onSaved: (value) =>  contact.email = value,
+                    validator: Validators.required,
+                    initialValue: contact.message,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,

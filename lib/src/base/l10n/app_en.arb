@@ -42,5 +42,8 @@
   "@seeOrder": {},
 
   "terms": "I accept the terms of use.",
-  "@terms": {}
+  "@terms": {},
+
+  "searchByReference": "Search by Reference #",
+  "@searchByReference": {}
 }

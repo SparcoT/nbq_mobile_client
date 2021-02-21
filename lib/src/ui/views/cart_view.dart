@@ -151,7 +151,7 @@ class _CartViewState extends State<CartView> {
                       _wtfProducts.clear();
                       _proProducts.clear();
 
-                      Cart().clear();
+                      // Cart().clear();
                     });
                   },
                   child: Text(lang.sendOrShare),
@@ -278,7 +278,7 @@ class _CartViewState extends State<CartView> {
     await file.writeAsBytes(await document.save());
 
     await Share.shareFiles([path]);
-    await file.delete();
+    // await file.delete();
   }
 
   Widget _buildHeader(String text) {

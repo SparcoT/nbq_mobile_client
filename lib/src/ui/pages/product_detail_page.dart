@@ -7,7 +7,9 @@ import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/product_tile.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
-
+import '../../app.dart';
+import '../../data/cart.dart';
+import 'home_page.dart';
 class ProductDetailPage extends StatefulWidget {
   final Category category;
 
@@ -44,7 +46,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
   Widget build(BuildContext context) {
     return LocalizedView(
       builder: (context, lang) => Container(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+5),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
             color: Colors.black38,
@@ -72,7 +74,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CupertinoSearchTextField(
+                  child: CupertinoTextField(
                     placeholderStyle: TextStyle(fontSize: 14),
                     placeholder: 'Search by Reference #',
                     onChanged: widget.onSearched,
@@ -93,7 +95,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
               ),
               SizedBox(width: 15),
             ]),
-            SizedBox(height: 15),
+            SizedBox(height: 10),
           ],
         ),
       ),
@@ -107,6 +109,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   List<CartProduct> viewedProducts;
 
   int get cansCount => products.fold(0, (v, e) => v + e.cans);
+  int get packsCount => products.fold(0, (v, e) => v + e.packs);
 
   @override
   void initState() {
@@ -152,12 +155,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Row(children: [
                 Spacer(),
                 Text(
+                  "Total Packs",
+                  style: GoogleFonts.bebasNeue(fontSize: 17),
+                ),
+                SizedBox(width: 15),
+                Container(
+                  width: 55,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 4)
+                    ],
+                  ),
+                  child: Center(child: Text(packsCount.toString())),
+                ),
+                SizedBox(width: 15),
+                Text(
                   lang.totalCans,
                   style: GoogleFonts.bebasNeue(fontSize: 17),
                 ),
                 SizedBox(width: 15),
                 Container(
-                  width: 105,
+                  width: 55,
                   height: 40,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -174,16 +195,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Row(children: [
                 SizedBox(width: 30),
                 Expanded(
-                  child: ElevatedButton(
-                    onPressed: () => Cart().addAll(products.where(
-                      (element) => element.cans > 0 || element.packs > 0,
-                    )),
-                    child: Text(lang.add),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      minimumSize: Size.fromHeight(40),
+                  child: Builder(
+                    builder:(ctx)=> ElevatedButton(
+                      onPressed: () async {
+                        Cart().addAll(products.where(
+                              (element) => element.cans > 0 || element.packs > 0,
+                        ));
+                        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text("Added to cart!")));
+                      },
+                      child: Text(lang.add),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        minimumSize: Size.fromHeight(40),
+                      ),
                     ),
                   ),
                 ),
@@ -191,7 +217,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      print('here');
+                      AppNavigation.navigateTo(context, HomePage(initialIndex: 2,));
                     },
                     child: Text(lang.seeOrder),
                     style: ElevatedButton.styleFrom(

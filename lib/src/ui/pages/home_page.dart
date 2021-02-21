@@ -7,10 +7,13 @@ import 'package:nbq_mobile_client/src/ui/views/contact_us_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 
 class HomePage extends StatelessWidget {
+  final int initialIndex;
+  HomePage({this.initialIndex=0});
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
+      initialIndex: initialIndex,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(

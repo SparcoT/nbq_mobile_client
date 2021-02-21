@@ -42,5 +42,8 @@
   "@seeOrder": {},
 
   "terms": "Acepto los términos de uso.",
-  "@terms": {}
+  "@terms": {},
+
+  "searchByReference": "Buscar por referencia #",
+  "@searchByReference": {}
 }

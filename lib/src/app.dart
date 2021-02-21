@@ -6,7 +6,7 @@ import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 
 part 'base/nav.dart';
 part 'base/theme.dart';
-part 'base/ui_service.dart';
+// part 'base/ui_service.dart';
 
 class App extends StatelessWidget {
   const App();
@@ -26,7 +26,7 @@ class App extends StatelessWidget {
           theme: AppTheme._light,
           routes: AppNavigation._routes,
           supportedLocales: AppLocalizations.supportedLocales,
-          scaffoldMessengerKey: UIService._scaffoldMessengerKey,
+          // scaffoldMessengerKey: UIService._scaffoldMessengerKey,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
         );
       }
