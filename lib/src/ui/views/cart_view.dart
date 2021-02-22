@@ -31,6 +31,9 @@ class _CartViewState extends State<CartView> {
 
   AutovalidateMode _mode = AutovalidateMode.disabled;
 
+  var _cans = 0;
+  var _packs = 0;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +53,11 @@ class _CartViewState extends State<CartView> {
     _proProducts.addAll(Cart()
         .products
         .where((e) => e.product.category == ProductCategory.pro));
+
+    Cart().products.forEach((element) {
+      _cans += element.cans;
+      _packs += element.packs;
+    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -127,7 +135,7 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                validator: (val)=> emailValidator(val),
+                validator: (val) => emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -146,8 +154,10 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (!_formKey.currentState.validate()){
-                      setState(() {_mode = AutovalidateMode.always;});
+                    if (!_formKey.currentState.validate()) {
+                      setState(() {
+                        _mode = AutovalidateMode.always;
+                      });
                       return;
                     }
                     _formKey.currentState.save();
@@ -190,11 +200,12 @@ class _CartViewState extends State<CartView> {
     return pw.Table(
       children: <pw.TableRow>[
         pw.TableRow(children: [
-          pw.Text(' Color',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Ref',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Name',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Cans',style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Packs',style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
+          pw.Text(' Color',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Ref', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Cans', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Packs', style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
         ]),
         ...products.map(
           (e) => pw.TableRow(
@@ -278,6 +289,26 @@ class _CartViewState extends State<CartView> {
               )),
           _generateTable(_proProducts),
         ],
+        pw.SizedBox(height: 10),
+        pw.Table(
+          children: <pw.TableRow>[
+            pw.TableRow(
+              children: [
+                pw.Text(
+                  ' Total',
+                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                ),
+                pw.Text(' ' + _cans.toString()),
+                pw.Text(' ' + _packs.toString()),
+              ],
+            ),
+          ],
+          columnWidths: {
+            0: pw.FlexColumnWidth(4.5),
+            1: pw.FlexColumnWidth(1),
+            2: pw.FlexColumnWidth(1),
+          },
+        ),
       ], crossAxisAlignment: pw.CrossAxisAlignment.start);
     }));
 
