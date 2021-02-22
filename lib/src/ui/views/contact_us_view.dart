@@ -208,7 +208,7 @@ class _ContactUsViewState extends State<ContactUsView> {
                     child: Icon(FontAwesomeIcons.instagram),
                   ),
                   onPressed: () =>
-                      launch('https://www.instagram.com/nbqcompany/'),
+                      launch('https://www.instagram.com/nbqspray/'),
                 ),
               ], mainAxisAlignment: MainAxisAlignment.center),
             ),

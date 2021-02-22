@@ -50,6 +50,8 @@
   "@colors": {},
   "box": "Box",
   "@box": {},
+  "clear": "Clear",
+  "@clear": {},
   "phone": "Phone",
   "@phone": {},
   "receivedRequest": "We have received your request, you will be contacted shortly!",

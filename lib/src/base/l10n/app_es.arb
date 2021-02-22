@@ -50,6 +50,8 @@
   "@colors": {},
   "box": "caja",
   "@box": {},
+  "clear": "Borrar",
+  "@clear": {},
   "phone": "Teléfono",
   "@phone": {},
   "receivedRequest": "Hemos recibido tu solicitud, ¡te contactaremos en breve!",
