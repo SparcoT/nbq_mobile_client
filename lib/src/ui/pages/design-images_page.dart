@@ -1,6 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:nbq_mobile_client/src/ui/pages/images-detail_page.dart';
+
+import '../../app.dart';
 
 class DesignImages extends StatefulWidget {
   @override
@@ -14,16 +17,16 @@ class _DesignImagesState extends State<DesignImages> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-         _tile("Diseños", (){}),
-         _tile("Expositores", (){}),
-         _tile("Marketing", (){}),
-         _tile("Sprays", (){}),
+         _tile("Diseños"),
+         _tile("Expositores"),
+         _tile("Marketing"),
+         _tile("Sprays"),
         ],
       ),
     );
   }
 
-  Widget _tile(String title,Function onTap){
+  Widget _tile(String title){
     return Padding(
       padding: const EdgeInsets.only(bottom:20.0),
       child: ListTile(
@@ -31,7 +34,8 @@ class _DesignImagesState extends State<DesignImages> {
         title: Text(title,style: TextStyle(
             fontFamily: 'Futura',
             fontWeight: FontWeight.bold,fontSize: 20),),
-        onTap: onTap,
+        onTap: () =>
+          AppNavigation.navigateTo(context, ImagesDetailPage(title: title)),
       ),
     );
   }
