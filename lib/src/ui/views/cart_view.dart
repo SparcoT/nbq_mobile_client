@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
 import 'package:nbq_mobile_client/src/utils/validators.dart';
 import 'package:pdf/pdf.dart';
@@ -72,6 +73,34 @@ class _CartViewState extends State<CartView> {
       child: LocalizedView(
         builder: (context, lang) =>
             CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+              if (Cart().products.isNotEmpty)
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton.icon(
+                  style: TextButton.styleFrom(
+                    minimumSize: Size(50, 15),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _slowProducts.clear();
+                      _fastProducts.clear();
+                      _wtfProducts.clear();
+                      _proProducts.clear();
+
+                      Cart().clear();
+                    });
+                  },
+                  icon: Icon(CupertinoIcons.trash, size: 15,),
+                  label: Text('Clear', style: TextStyle(
+                    fontSize: 13
+                  ),),
+                ),
+              ),
+            ),
+          ),
           if (_slowProducts.isNotEmpty) ...[
             SliverToBoxAdapter(child: _buildHeader('SLOW')),
             SliverList(
@@ -162,15 +191,6 @@ class _CartViewState extends State<CartView> {
                     }
                     _formKey.currentState.save();
                     await _generatePdf();
-
-                    // setState(() {
-                    //   _slowProducts.clear();
-                    //   _fastProducts.clear();
-                    //   _wtfProducts.clear();
-                    //   _proProducts.clear();
-                    //
-                    //   Cart().clear();
-                    // });
                   },
                   child: Text(lang.sendOrShare),
                   style: ElevatedButton.styleFrom(
