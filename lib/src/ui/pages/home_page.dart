@@ -5,12 +5,15 @@ import 'package:nbq_mobile_client/src/ui/views/cart_view.dart';
 import 'package:nbq_mobile_client/src/ui/views/products_view.dart';
 import 'package:nbq_mobile_client/src/ui/views/contact_us_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'design-images_page.dart';
 
 class HomePage extends StatelessWidget {
   final int initialIndex;
-  HomePage({this.initialIndex=0});
+
+  HomePage({this.initialIndex = 0});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -34,7 +37,10 @@ class HomePage extends StatelessWidget {
                   width: 60,
                   child: IconButton(
                     icon: Icon(Icons.share),
-                    onPressed: () {},
+                    onPressed: () {
+                      launch(
+                          'https://play.google.com/store/apps/details?id=com.sparco.nbq_mobile_client');
+                    },
                   ),
                 )
               ],

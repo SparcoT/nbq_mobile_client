@@ -7,6 +7,7 @@ import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/validators.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../utils/validators.dart';
 import '../../utils/validators.dart';
 
@@ -52,7 +53,7 @@ class _ContactUsViewState extends State<ContactUsView> {
       print(response.body);
     });
 
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text("We have received your request, you will be contacted shortly!")));
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).receivedRequest)));
 
   }
 

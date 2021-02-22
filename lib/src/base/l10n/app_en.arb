@@ -45,5 +45,23 @@
   "@terms": {},
 
   "searchByReference": "Search by Reference #",
-  "@searchByReference": {}
+  "@searchByReference": {},
+  "colors": "Colors",
+  "@colors": {},
+  "box": "Box",
+  "@box": {},
+  "phone": "Phone",
+  "@phone": {},
+  "receivedRequest": "We have received your request, you will be contacted shortly!",
+  "@receivedRequest": {},
+  "totalBox": "Total Box",
+  "@totalBox": {},
+  "totalCans": "Total Cans",
+  "@totalCans": {},
+  "totalPacks": "Total Packs",
+  "@totalPacks": {},
+  "noProducts": "No Products are selected",
+  "@noProducts": {},
+  "addedToCart": "Added to Cart",
+  "@addedToCart": {}
 }

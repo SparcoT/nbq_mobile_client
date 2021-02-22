@@ -76,7 +76,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CupertinoTextField(
                     placeholderStyle: TextStyle(fontSize: 14),
-                    placeholder: 'Search by Reference #',
+                    placeholder: lang.searchByReference,
                     onChanged: widget.onSearched,
                     onSubmitted: widget.onSearched,
                   ),
@@ -155,7 +155,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Row(children: [
                 Spacer(),
                 Text(
-                  "Total Packs",
+                  lang.totalPacks,
                   style: GoogleFonts.bebasNeue(fontSize: 17),
                 ),
                 SizedBox(width: 15),
@@ -201,7 +201,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         Cart().addAll(products.where(
                               (element) => element.cans > 0 || element.packs > 0,
                         ));
-                        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text("Added to cart!")));
+                        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text(lang.addedToCart)));
                       },
                       child: Text(lang.add),
                       style: ElevatedButton.styleFrom(

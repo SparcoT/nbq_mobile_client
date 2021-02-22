@@ -206,7 +206,7 @@ class _CartViewState extends State<CartView> {
             SliverFillRemaining(
               child: Center(
                 child: Text(
-                  'No Products are selected!',
+                  lang.noProducts,
                   style: TextStyle(fontSize: 20, fontFamily: 'Futura'),
                 ),
               ),

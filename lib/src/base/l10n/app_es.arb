@@ -45,5 +45,23 @@
   "@terms": {},
 
   "searchByReference": "Buscar por referencia #",
-  "@searchByReference": {}
+  "@searchByReference": {},
+  "colors": "colores",
+  "@colors": {},
+  "box": "caja",
+  "@box": {},
+  "phone": "Teléfono",
+  "@phone": {},
+  "receivedRequest": "Hemos recibido tu solicitud, ¡te contactaremos en breve!",
+  "@receivedRequest": {},
+  "totalBox": "cajas totales",
+  "@totalBox": {},
+  "totalCans": "latas totales",
+  "@totalCans": {},
+  "totalPacks": "Paquetes totales",
+  "@totalPacks": {},
+  "noProducts": "No has añadido nada todavía.",
+  "@noProducts": {},
+  "addedToCart": "Añadido al pedido",
+  "@addedToCart": {}
 }
