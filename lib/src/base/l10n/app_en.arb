@@ -17,7 +17,7 @@
   "can": "Can",
   "@can": {},
 
-  "pack": "Pack",
+  "pack": "Box",
   "@pack": {},
 
   "add": "Add",
@@ -60,7 +60,7 @@
   "@totalBox": {},
   "totalCans": "Total Cans",
   "@totalCans": {},
-  "totalPacks": "Total Packs",
+  "totalPacks": "Total Boxes",
   "@totalPacks": {},
   "noProducts": "No Products are selected",
   "@noProducts": {},

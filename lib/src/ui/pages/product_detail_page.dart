@@ -86,7 +86,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                 width: 110,
                 child: CupertinoSlidingSegmentedControl(
                   groupValue: _group,
-                  children: {0: Text(lang.can), 1: Text(lang.pack)},
+                  children: {0: Text(lang.can), 1: Text(lang.box)},
                   onValueChanged: (val) => setState(() {
                     _group = val;
                     widget.onChanged?.call(val);
@@ -130,7 +130,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           category: widget.category,
           onSearched: (val) {
             viewedProducts = List.from(products
-                .where((e) => e.product.ref.startsWith(val.toUpperCase())));
+                .where((e) => e.product.ref.contains(val.toUpperCase())));
             setState(() {});
           },
           onChanged: (val) => setState(() => group = val),
