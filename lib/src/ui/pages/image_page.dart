@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission/permission.dart';
 
@@ -20,45 +21,47 @@ class _ImagePageState extends State<ImagePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: widget.image,
-      child: Scaffold(
-        key: _scaffoldKey,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _ImageWidget(
-              src: widget.image,
-              // onLoad: () => setState(() => _show = false),
-            ),
-            // if (_show)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: TextButton.icon(
-                  onPressed: () async {
-                    await Permission.requestPermissions(
-                        [PermissionName.Storage]);
-                    var dir = await getExternalStorageDirectory();
-                    var folderDir = Directory(dir.path + '/NBQ');
-                    if (!folderDir.existsSync()) {
-                      folderDir.create(recursive: true);
-                    }
-                    final _response = await Dio().download(
-                        widget.image,
-                        folderDir.path +
-                            '/${DateTime.now().microsecondsSinceEpoch}.png');
-                    _scaffoldKey.currentState
-                        .showSnackBar(SnackBar(content: Text('Saved!')));
-                    print(_response.data.toString());
-                  },
-                  icon: Icon(Icons.download_sharp),
-                  label: Text('Download'),
+    return LocalizedView(
+      builder: (ctx, lang) => Hero(
+        tag: widget.image,
+        child: Scaffold(
+          key: _scaffoldKey,
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _ImageWidget(
+                src: widget.image,
+                // onLoad: () => setState(() => _show = false),
+              ),
+              // if (_show)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      await Permission.requestPermissions(
+                          [PermissionName.Storage]);
+                      var dir = await getExternalStorageDirectory();
+                      var folderDir = Directory(dir.path + '/NBQ');
+                      if (!folderDir.existsSync()) {
+                        folderDir.create(recursive: true);
+                      }
+                      final _response = await Dio().download(
+                          widget.image,
+                          folderDir.path +
+                              '/${DateTime.now().microsecondsSinceEpoch}.png');
+                      _scaffoldKey.currentState
+                          .showSnackBar(SnackBar(content: Text(lang.saved)));
+                      print(_response.data.toString());
+                    },
+                    icon: Icon(Icons.download_sharp),
+                    label: Text(lang.download),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

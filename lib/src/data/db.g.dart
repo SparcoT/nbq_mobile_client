@@ -396,7 +396,7 @@ const _products = [
   const Product._(
     ProductCategory.slow,
     name: 'Marrón barro ',
-    ref: 'N155',
+    ref: 'N55',
     ml: '520/400',
     color: Color.fromRGBO(92, 77, 71, 1.0),
   ),
