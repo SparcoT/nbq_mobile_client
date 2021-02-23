@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                     icon: Icon(Icons.share),
                     onPressed: () {
                       launch(
-                          'https://play.google.com/store/apps/details?id=com.sparco.nbq_mobile_client');
+                          'https://play.google.com/store/apps/details?id=com.sparkosol.nbq');
                     },
                   ),
                 )

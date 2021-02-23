@@ -8,8 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/validators.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../utils/validators.dart';
-import '../../utils/validators.dart';
 
 class Contact {
   String name;
@@ -19,7 +17,6 @@ class Contact {
   Contact({this.message,this.email,this.name});
 }
 
-/// TODO(arish) refactor and implement email sending scenario
 class ContactUsView extends StatefulWidget {
   @override
   _ContactUsViewState createState() => _ContactUsViewState();

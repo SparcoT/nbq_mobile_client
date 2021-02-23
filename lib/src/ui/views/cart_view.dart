@@ -161,7 +161,7 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.name,
-                validator: Validators.required,
+                // validator: Validators.required,
                 onSaved: (val) => _data.name = val,
               )),
             ),
@@ -170,7 +170,7 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                validator: (val) => emailValidator(val),
+                // validator: (val) => emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -179,7 +179,7 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                 child: AppTextField(
                   label: lang.telephone,
-                  validator: Validators.required,
+                  // validator: Validators.required,
                   onSaved: (val) => _data.contact = val,
                 ),
               ),

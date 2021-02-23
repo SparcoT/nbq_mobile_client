@@ -1,4 +1,4 @@
-package com.sparco.nbq_mobile_client
+package com.sparkosol.nbq
 
 import io.flutter.embedding.android.FlutterActivity
 

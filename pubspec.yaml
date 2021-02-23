@@ -30,7 +30,6 @@ dependencies:
   pdf: 2.1.0
   share:  0.6.5+4
   url_launcher: 5.7.10
-  # todo(arish) just for development - for release mode remove it and add the required font.
   google_fonts: 1.1.2
   font_awesome_flutter: 8.11.0
   # To download files from url
