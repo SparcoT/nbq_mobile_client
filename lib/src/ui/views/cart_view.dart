@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
 import 'package:nbq_mobile_client/src/utils/validators.dart';
 import 'package:pdf/pdf.dart';
@@ -73,34 +75,38 @@ class _CartViewState extends State<CartView> {
       child: LocalizedView(
         builder: (context, lang) =>
             CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
-              if (Cart().products.isNotEmpty)
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: TextButton.icon(
-                  style: TextButton.styleFrom(
-                    minimumSize: Size(50, 15),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _slowProducts.clear();
-                      _fastProducts.clear();
-                      _wtfProducts.clear();
-                      _proProducts.clear();
+          if (Cart().products.isNotEmpty)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(50, 15),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _slowProducts.clear();
+                        _fastProducts.clear();
+                        _wtfProducts.clear();
+                        _proProducts.clear();
 
-                      Cart().clear();
-                    });
-                  },
-                  icon: Icon(CupertinoIcons.trash, size: 15,),
-                  label: Text('Clear', style: TextStyle(
-                    fontSize: 13
-                  ),),
+                        Cart().clear();
+                      });
+                    },
+                    icon: Icon(
+                      CupertinoIcons.trash,
+                      size: 15,
+                    ),
+                    label: Text(
+                      'Clear',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
           if (_slowProducts.isNotEmpty) ...[
             SliverToBoxAdapter(child: _buildHeader('SLOW')),
             SliverList(
@@ -255,25 +261,40 @@ class _CartViewState extends State<CartView> {
 
   _generatePdf() async {
     final document = pw.Document();
+    final _image = (await rootBundle.load(Assets.logo)).buffer.asUint8List();
     document.addPage(pw.Page(build: (pw.Context context) {
       return pw.Column(children: [
-        pw.Column(children: [
-          pw.RichText(
-            text: pw.TextSpan(text: 'Name: ', children: [
-              pw.TextSpan(text: _data.name),
-            ]),
-          ),
-          pw.RichText(
-            text: pw.TextSpan(text: 'Email: ', children: [
-              pw.TextSpan(text: _data.email),
-            ]),
-          ),
-          pw.RichText(
-            text: pw.TextSpan(text: 'Phone: ', children: [
-              pw.TextSpan(text: _data.contact),
-            ]),
-          )
-        ], crossAxisAlignment: pw.CrossAxisAlignment.start),
+        pw.Row(
+          children: [
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Name: ', children: [
+                    pw.TextSpan(text: _data.name),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Email: ', children: [
+                    pw.TextSpan(text: _data.email),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Phone: ', children: [
+                    pw.TextSpan(text: _data.contact),
+                  ]),
+                ),
+              ],
+            ),
+            pw.Spacer(),
+            pw.Column(
+              children: [
+                pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
+                pw.Text('NBQ Spray Company'),
+              ],
+            ),
+          ],
+        ),
         pw.Divider(),
         if (_slowProducts.isNotEmpty) ...[
           pw.Text('SLOW',
