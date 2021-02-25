@@ -1,0 +1,483 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:nbq_mobile_client/src/base/assets.dart';
+import 'package:nbq_mobile_client/src/data/order_data.dart';
+import 'package:nbq_mobile_client/src/utils/validators.dart';
+import 'package:pdf/pdf.dart';
+import 'package:share/share.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/material.dart';
+import 'package:nbq_mobile_client/src/app.dart';
+import 'package:nbq_mobile_client/src/data/db.dart';
+import 'package:nbq_mobile_client/src/data/cart.dart';
+import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
+import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
+import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
+
+import '../../utils/validators.dart';
+
+class CartView extends StatefulWidget {
+  @override
+  _CartViewState createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
+  var isHeaderBuilt = false;
+
+  final _wtfProducts = <CartProduct>[];
+  final _proProducts = <CartProduct>[];
+  final _slowProducts = <CartProduct>[];
+  final _fastProducts = <CartProduct>[];
+
+  final _data = OrderData();
+
+  AutovalidateMode _mode = AutovalidateMode.disabled;
+
+  var _cans = 0;
+  var _packs = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _slowProducts.addAll(Cart()
+        .products
+        .where((e) => e.product.category == ProductCategory.slow));
+
+    _fastProducts.addAll(Cart()
+        .products
+        .where((e) => e.product.category == ProductCategory.fast));
+
+    _wtfProducts.addAll(Cart()
+        .products
+        .where((e) => e.product.category == ProductCategory.wtf));
+
+    _proProducts.addAll(Cart()
+        .products
+        .where((e) => e.product.category == ProductCategory.pro));
+
+    Cart().products.forEach((element) {
+      _cans += element.cans;
+      _packs += element.packs;
+    });
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    isHeaderBuilt = false;
+
+    return Form(
+      key: _formKey,
+      autovalidateMode: _mode,
+      child: LocalizedView(
+        builder: (context, lang) =>
+            CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+          if (Cart().products.isNotEmpty)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                      minimumSize: Size(50, 15),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _slowProducts.clear();
+                        _fastProducts.clear();
+                        _wtfProducts.clear();
+                        _proProducts.clear();
+
+                        Cart().clear();
+                      });
+                    },
+                    icon: Icon(
+                      CupertinoIcons.trash,
+                      size: 15,
+                    ),
+                    label: Text(
+                      'Clear',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (_slowProducts.isNotEmpty) ...[
+            SliverToBoxAdapter(child: _buildHeader('SLOW')),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: ColorTile(_slowProducts[index]),
+                ),
+                childCount: _slowProducts.length,
+              ),
+            ),
+          ],
+          if (_fastProducts.isNotEmpty) ...[
+            SliverToBoxAdapter(child: _buildHeader('FAST')),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: ColorTile(_fastProducts[index]),
+                ),
+                childCount: _fastProducts.length,
+              ),
+            ),
+          ],
+          if (_wtfProducts.isNotEmpty) ...[
+            SliverToBoxAdapter(child: _buildHeader('WTF')),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: ColorTile(_wtfProducts[index]),
+                ),
+                childCount: _wtfProducts.length,
+              ),
+            ),
+          ],
+          if (_proProducts.isNotEmpty) ...[
+            SliverToBoxAdapter(child: _buildHeader('PRO')),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: ColorTile(_proProducts[index]),
+                ),
+                childCount: _proProducts.length,
+              ),
+            ),
+          ],
+          if (Cart().products.isNotEmpty) ...[
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
+              sliver: SliverToBoxAdapter(
+                  child: AppTextField(
+                label: lang.name,
+                // validator: Validators.required,
+                onSaved: (val) => _data.name = val,
+              )),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              sliver: SliverToBoxAdapter(
+                  child: AppTextField(
+                label: lang.email,
+                // validator: (val) => emailValidator(val),
+                onSaved: (val) => _data.email = val,
+              )),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              sliver: SliverToBoxAdapter(
+                child: AppTextField(
+                  label: lang.telephone,
+                  // validator: Validators.required,
+                  onSaved: (val) => _data.contact = val,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              sliver: SliverToBoxAdapter(
+                child: AppTextField(
+                  maxLines: 3,
+                  label: "Note",
+                  // validator: Validators.required,
+                  onSaved: (val) => _data.note = val,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
+              sliver: SliverToBoxAdapter(
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (!_formKey.currentState.validate()) {
+                      setState(() {
+                        _mode = AutovalidateMode.always;
+                      });
+                      return;
+                    }
+                    _formKey.currentState.save();
+                    await _generatePdf();
+                  },
+                  child: Text(lang.sendOrShare),
+                  style: ElevatedButton.styleFrom(
+                    elevation: 5,
+                    primary: Colors.black,
+                    onPrimary: AppTheme.primaryColor,
+                    minimumSize: Size.fromHeight(40),
+                  ),
+                ),
+              ),
+            ),
+          ] else
+            SliverFillRemaining(
+              child: Center(
+                child: Text(
+                  lang.noProducts,
+                  style: TextStyle(fontSize: 20, fontFamily: 'Futura'),
+                ),
+              ),
+            )
+        ]),
+      ),
+    );
+  }
+
+  pw.Table _generateTable(List<CartProduct> products) {
+    return pw.Table(
+      children: <pw.TableRow>[
+        pw.TableRow(children: [
+          pw.Text(' Color',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Ref', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Cans', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Packs', style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
+        ]),
+        ...products.map(
+          (e) => pw.TableRow(
+            children: [
+              pw.Container(
+                color: PdfColor.fromInt(e.product.color.value),
+                height: 14,
+              ),
+              pw.Text(' ' + e.product.ref),
+              pw.Text(' ' + e.product.name),
+              pw.Text(' ' + e.cans.toString()),
+              pw.Text(' ' + e.packs.toString())
+            ],
+          ),
+        ),
+      ],
+      border: pw.TableBorder.all(color: PdfColors.black),
+      columnWidths: {
+        0: pw.FixedColumnWidth(40),
+        1: pw.FlexColumnWidth(1),
+        2: pw.FlexColumnWidth(3),
+        3: pw.FlexColumnWidth(1),
+        4: pw.FlexColumnWidth(1),
+      },
+    );
+  }
+
+  _generatePdf() async {
+    final document = pw.Document();
+    final _image = (await rootBundle.load(Assets.logo)).buffer.asUint8List();
+    document.addPage(pw.Page(build: (pw.Context context) {
+      return pw.Column(children: [
+        pw.Row(
+          children: [
+            pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Name: ', children: [
+                    pw.TextSpan(text: _data.name),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Email: ', children: [
+                    pw.TextSpan(text: _data.email),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Phone: ', children: [
+                    pw.TextSpan(text: _data.contact),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Note: ', children: [
+                    pw.TextSpan(text: _data.note),
+                  ]),
+                ),
+              ],
+            ),
+            pw.Spacer(),
+            pw.Column(
+              children: [
+                pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
+                pw.Text('NBQ Spray Company'),
+              ],
+            ),
+          ],
+        ),
+        pw.Divider(),
+        if (_slowProducts.isNotEmpty) ...[
+          pw.Text('SLOW',
+              style: pw.TextStyle(
+                fontSize: 18,
+                fontWeight: pw.FontWeight.bold,
+              )),
+          _generateTable(_slowProducts),
+        ],
+        if (_fastProducts.isNotEmpty) ...[
+          pw.Text(
+            'FAST',
+            style: pw.TextStyle(
+              fontSize: 18,
+              fontWeight: pw.FontWeight.bold,
+            ),
+          ),
+          _generateTable(_fastProducts),
+        ],
+        if (_wtfProducts.isNotEmpty) ...[
+          pw.Text('WTF',
+              style: pw.TextStyle(
+                fontSize: 18,
+                fontWeight: pw.FontWeight.bold,
+              )),
+          _generateTable(_wtfProducts),
+        ],
+        if (_proProducts.isNotEmpty) ...[
+          pw.Text('PRO',
+              style: pw.TextStyle(
+                fontSize: 18,
+                fontWeight: pw.FontWeight.bold,
+              )),
+          _generateTable(_proProducts),
+        ],
+        pw.SizedBox(height: 10),
+        pw.Table(
+          children: <pw.TableRow>[
+            pw.TableRow(
+              children: [
+                pw.Text(
+                  ' Total',
+                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                ),
+                pw.Text(' ' + _cans.toString()),
+                pw.Text(' ' + _packs.toString()),
+              ],
+            ),
+          ],
+          columnWidths: {
+            0: pw.FlexColumnWidth(4.5),
+            1: pw.FlexColumnWidth(1),
+            2: pw.FlexColumnWidth(1),
+          },
+        ),
+      ], crossAxisAlignment: pw.CrossAxisAlignment.start);
+    }));
+
+    final path = Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
+    final file = File(path);
+    await file.writeAsBytes(await document.save());
+
+    await Share.shareFiles([path]);
+    // await file.delete();
+  }
+
+  Widget _buildHeader(String text) {
+    final header =
+        Text(text, style: TextStyle(fontFamily: 'Futura', fontSize: 30));
+
+    if (isHeaderBuilt) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 15, bottom: 10),
+        child: header,
+      );
+    } else {
+      isHeaderBuilt = true;
+      return Padding(
+        padding: const EdgeInsets.only(left: 15, bottom: 10),
+        child: Row(
+          children: [
+            Expanded(child: header),
+            ShadowedBox(
+                width: 50,
+                height: 20,
+                borderRadius: 6,
+                child: Center(child: Text('Lata'))),
+            Padding(
+              padding: const EdgeInsets.only(right: 15, left: 10),
+              child: ShadowedBox(
+                width: 50,
+                height: 20,
+                borderRadius: 6,
+                child: Center(child: Text('Pack')),
+              ),
+            )
+          ],
+          crossAxisAlignment: CrossAxisAlignment.center,
+        ),
+      );
+    }
+  }
+}
+
+class ColorTile extends StatelessWidget {
+  final CartProduct product;
+
+  ColorTile(this.product);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      Expanded(
+        child: Row(children: [
+          Container(
+            width: 60,
+            height: 30,
+            decoration: BoxDecoration(
+              color: product.product.color,
+              borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 2,
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: SizedBox(
+              width: 35,
+              child: Text(
+                product.product.ref,
+                style: TextStyle(
+                  fontFamily: 'Futura',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+          ),
+          Text(product.product.name, style: TextStyle(fontSize: 15)),
+        ]),
+      ),
+      ShadowedBox(
+        width: 50,
+        height: 20,
+        borderRadius: 6,
+        child: Center(
+          child: Text(product.cans.toString(), style: TextStyle(fontSize: 12)),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(right: 15, left: 10),
+        child: ShadowedBox(
+          width: 50,
+          height: 20,
+          borderRadius: 6,
+          child: Center(
+            child: Text(
+              product.packs.toString(),
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+        ),
+      ),
+    ]);
+  }
+}

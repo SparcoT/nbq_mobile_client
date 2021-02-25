@@ -1,0 +1,73 @@
+{
+  "@@locale": "es",
+
+  "name": "Nombre",
+  "@name": {},
+  "email": "Email",
+  "@email": {},
+  "telephone": "Teléfono",
+  "@telephone": {},
+
+  "sendOrShare": "Enviar / Compartir",
+  "@sendOrShare": {},
+
+  "total": "Total",
+  "@total": {},
+
+  "can": "Latas",
+  "@can": {},
+
+  "pack": "Pack",
+  "@pack": {},
+
+  "add": "Agregar",
+  "@add": {},
+
+  "viewOrder": "VER PEDIDO",
+  "@viewOrder": {},
+
+  "contact": "Contacto",
+  "@contact": {},
+
+  "send": "Enviar",
+  "@send": {},
+
+  "message": "Mensaje",
+  "@message": {},
+
+  "totalCans": "Latas totales",
+  "@totalCans": {},
+
+  "seeOrder": "Ver pedido",
+  "@seeOrder": {},
+
+  "terms": "Acepto los términos de uso.",
+  "@terms": {},
+
+  "searchByReference": "Buscar por referencia #",
+  "@searchByReference": {},
+  "colors": "colores",
+  "@colors": {},
+  "box": "caja",
+  "@box": {},
+  "clear": "Borrar",
+  "@clear": {},
+  "phone": "Teléfono",
+  "@phone": {},
+  "download": "Descargar",
+  "@download": {},
+  "saved": "Salvado",
+  "@saved": {},
+  "receivedRequest": "Hemos recibido tu solicitud, ¡te contactaremos en breve!",
+  "@receivedRequest": {},
+  "totalBox": "cajas totales",
+  "@totalBox": {},
+  "totalCans": "latas totales",
+  "@totalCans": {},
+  "totalPacks": "Paquetes totales",
+  "@totalPacks": {},
+  "noProducts": "No has añadido nada todavía.",
+  "@noProducts": {},
+  "addedToCart": "Añadido al pedido",
+  "@addedToCart": {}
+}
