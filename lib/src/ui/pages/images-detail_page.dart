@@ -28,31 +28,31 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
         ),
         itemBuilder: (ctx, index) {
           final _image = kImages[widget.title][index];
+          final image = Image.network(
+            _image,
+            fit: BoxFit.fill,
+            height: 300,
+            cacheHeight: 200,
+            cacheWidth: 200,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
+
           return InkWell(
             onTap: () => AppNavigation.navigateTo(
               context,
               ImagePage(
                 image: _image,
+                imageWidget: image,
               ),
             ),
-            child: Hero(
-              tag: _image,
-              child: Image.network(
-                _image,
-                fit: BoxFit.fill,
-                height: 300,
-                cacheHeight: 200,
-                cacheWidth: 200,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
+            child: Hero(tag: _image, child: image),
           );
         },
       ),
