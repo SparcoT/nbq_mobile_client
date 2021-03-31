@@ -22,6 +22,7 @@ class App extends StatelessWidget {
       valueListenable: LocalizationSelector.locale,
       builder: (BuildContext context, value, Widget child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'NBQ',
           locale: value,
           theme: AppTheme._light,

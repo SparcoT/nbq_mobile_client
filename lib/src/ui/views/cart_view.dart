@@ -170,7 +170,8 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                // validator: (val) => emailValidator(val),
+                    keyboardType: TextInputType.emailAddress,
+                    // validator: (val) => emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -179,8 +180,20 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                 child: AppTextField(
                   label: lang.telephone,
+                  keyboardType: TextInputType.phone,
                   // validator: Validators.required,
                   onSaved: (val) => _data.contact = val,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+              sliver: SliverToBoxAdapter(
+                child: AppTextField(
+                  maxLines: 3,
+                  label: "Note",
+                  // validator: Validators.required,
+                  onSaved: (val) => _data.note = val,
                 ),
               ),
             ),
@@ -282,6 +295,11 @@ class _CartViewState extends State<CartView> {
                 pw.RichText(
                   text: pw.TextSpan(text: 'Phone: ', children: [
                     pw.TextSpan(text: _data.contact),
+                  ]),
+                ),
+                pw.RichText(
+                  text: pw.TextSpan(text: 'Note: ', children: [
+                    pw.TextSpan(text: _data.note),
                   ]),
                 ),
               ],
