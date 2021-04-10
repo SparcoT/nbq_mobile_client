@@ -55,7 +55,9 @@ class _ImagePageState extends State<ImagePage> {
             if (loading)
               Center(child: CircularProgressIndicator())
             else ...[
-              Image.file(File(imageName)),
+              SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Image.file(File(imageName))),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(

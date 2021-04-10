@@ -10,6 +10,7 @@ import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
 import '../../app.dart';
 import '../../data/cart.dart';
 import 'home_page.dart';
+
 class ProductDetailPage extends StatefulWidget {
   final Category category;
 
@@ -46,7 +47,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
   Widget build(BuildContext context) {
     return LocalizedView(
       builder: (context, lang) => Container(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top+5),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 5),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
             color: Colors.black38,
@@ -58,7 +59,10 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
             Row(children: [
               Transform.rotate(
                 angle: -1.56,
-                child: Image.asset(widget.category.image, height: 109,),
+                child: Image.asset(
+                  widget.category.image,
+                  height: 109,
+                ),
               ),
               Text(
                 widget.category.name,
@@ -109,6 +113,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   List<CartProduct> viewedProducts;
 
   int get cansCount => products.fold(0, (v, e) => v + e.cans);
+
   int get packsCount => products.fold(0, (v, e) => v + e.packs);
 
   @override
@@ -129,8 +134,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         appBar: _ProductDetailPageAppBar(
           category: widget.category,
           onSearched: (val) {
-            viewedProducts = List.from(products
-                .where((e) => e.product.ref.contains(val.toUpperCase())));
+            viewedProducts = List.from(
+              products.where(
+                (e) => (e.product.ref.contains(val.toUpperCase()) ||
+                    e.product.name.toLowerCase().contains(val.toLowerCase())),
+              ),
+            );
             setState(() {});
           },
           onChanged: (val) => setState(() => group = val),
@@ -196,12 +205,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 SizedBox(width: 30),
                 Expanded(
                   child: Builder(
-                    builder:(ctx)=> ElevatedButton(
+                    builder: (ctx) => ElevatedButton(
                       onPressed: () async {
                         Cart().addAll(products.where(
-                              (element) => element.cans > 0 || element.packs > 0,
+                          (element) => element.cans > 0 || element.packs > 0,
                         ));
-                        Scaffold.of(ctx).showSnackBar(SnackBar(content: Text(lang.addedToCart)));
+                        if (products.any(
+                            (element) => element.cans > 0 || element.packs > 0))
+                          ScaffoldMessenger.of(ctx).showSnackBar(
+                              SnackBar(content: Text(lang.addedToCart)));
                       },
                       child: Text(lang.add),
                       style: ElevatedButton.styleFrom(
@@ -217,7 +229,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      AppNavigation.navigateTo(context, HomePage(initialIndex: 2,));
+                      AppNavigation.navigateTo(
+                          context,
+                          HomePage(
+                            initialIndex: 3,
+                          ));
                     },
                     child: Text(lang.seeOrder),
                     style: ElevatedButton.styleFrom(

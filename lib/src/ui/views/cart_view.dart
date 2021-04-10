@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
-import 'package:nbq_mobile_client/src/utils/validators.dart';
 import 'package:pdf/pdf.dart';
 import 'package:share/share.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -15,7 +14,6 @@ import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 
-import '../../utils/validators.dart';
 
 class CartView extends StatefulWidget {
   @override
@@ -242,6 +240,7 @@ class _CartViewState extends State<CartView> {
           pw.Text(' Color',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           pw.Text(' Ref', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+          pw.Text(' Sku', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           pw.Text(' Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           pw.Text(' Cans', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           pw.Text(' Packs', style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
@@ -254,6 +253,7 @@ class _CartViewState extends State<CartView> {
                 height: 14,
               ),
               pw.Text(' ' + e.product.ref),
+              pw.Text(' ' +( e.product.sku==null?'': e.product.sku.toInt().toString())),
               pw.Text(' ' + e.product.name),
               pw.Text(' ' + e.cans.toString()),
               pw.Text(' ' + e.packs.toString())
@@ -265,9 +265,10 @@ class _CartViewState extends State<CartView> {
       columnWidths: {
         0: pw.FixedColumnWidth(40),
         1: pw.FlexColumnWidth(1),
-        2: pw.FlexColumnWidth(3),
-        3: pw.FlexColumnWidth(1),
+        2: pw.FlexColumnWidth(1),
+        3: pw.FlexColumnWidth(3),
         4: pw.FlexColumnWidth(1),
+        5: pw.FlexColumnWidth(1),
       },
     );
   }
@@ -363,7 +364,7 @@ class _CartViewState extends State<CartView> {
             ),
           ],
           columnWidths: {
-            0: pw.FlexColumnWidth(4.5),
+            0: pw.FlexColumnWidth(5.5),
             1: pw.FlexColumnWidth(1),
             2: pw.FlexColumnWidth(1),
           },
