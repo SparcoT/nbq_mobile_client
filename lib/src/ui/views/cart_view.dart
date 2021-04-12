@@ -1,10 +1,10 @@
-import 'dart:io';
+import 'dart:convert';
+import 'dart:io' as io;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
-import 'package:nbq_mobile_client/src/ui/pages/test-pdf-page.dart';
-import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
 import 'package:pdf/pdf.dart';
 import 'package:share/share.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -210,7 +210,7 @@ class _CartViewState extends State<CartView> {
                     _formKey.currentState.save();
                     await _generatePdf();
                   },
-                  child: Text(lang.sendOrShare),
+                  child: Text(kIsWeb?"DOWNLOAD" :lang.sendOrShare),
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
                     primary: Colors.black,
@@ -377,13 +377,22 @@ class _CartViewState extends State<CartView> {
         );
       }));
     }
-
-    final path = Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
-    final file = File(path);
+    // if(kIsWeb) {
+    //
+    //   // final content = base64Encode(await document.save());
+    //   // html.AnchorElement(
+    //   //     href: "data:application/octet-stream;charset=utf-16le;base64,$content")
+    //   //   ..setAttribute("download", "order${DateTime.now()}.pdf")
+    //   //   ..click();
+    // }
+    // else {
+      final path = io.Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
+      final file = io.File(path);
     await file.writeAsBytes(await document.save());
-
     await Share.shareFiles([path]);
-    await file.delete();
+      await file.delete();
+    // }
+
   }
 
   Widget _buildHeader(String text) {

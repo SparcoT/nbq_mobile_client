@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ import '../../data/cart.dart';
 import 'home_page.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  final Category category;
+  final $Category category;
 
   ProductDetailPage(this.category);
 
@@ -24,7 +25,7 @@ class ProductDetailPage extends StatefulWidget {
 
 class _ProductDetailPageAppBar extends StatefulWidget
     implements PreferredSizeWidget {
-  final Category category;
+  final $Category category;
   final ValueChanged<int> onChanged;
   final ValueChanged<String> onSearched;
   final Function onReset;
@@ -65,16 +66,21 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
           children: [
             Stack(
               children: [
-                if (Platform.isIOS)
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                if (!kIsWeb)
+                  if (Platform.isIOS)
+                    IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
                 Padding(
                   padding: EdgeInsets.only(
-                    left: Platform.isIOS ? 40 : 0,
+                    left: kIsWeb
+                        ? 0
+                        : Platform.isIOS
+                            ? 40
+                            : 0,
                   ),
                   child: Row(
                     children: [
