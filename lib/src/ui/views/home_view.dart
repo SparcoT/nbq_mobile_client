@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
         imageCon(
             url: Assets.pedidos,
             function: () {
-              HomePageState.tabController.animateTo(3);
+              HomePageState.tabController.animateTo(1);
             }),
         imageCon(
           url: Assets.multiMedia,

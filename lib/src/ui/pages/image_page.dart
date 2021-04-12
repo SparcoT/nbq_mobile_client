@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission/permission.dart';
-import 'package:share/share.dart';
 
 class ImagePage extends StatefulWidget {
   final String image;
@@ -56,8 +53,12 @@ class _ImagePageState extends State<ImagePage> {
               Center(child: CircularProgressIndicator())
             else ...[
               SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: Image.file(File(imageName))),
+                height: MediaQuery.of(context).size.height / 2,
+                child: Image.file(
+                  File(imageName),
+                  fit: BoxFit.fill,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -82,33 +83,33 @@ class _ImagePageState extends State<ImagePage> {
   }
 }
 
-class _ImageWidget extends StatelessWidget {
-  final String src;
-  final String tag;
-  final Widget image;
-  final Function onLoad;
-
-  _ImageWidget({this.tag, this.onLoad, this.src, this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    print('tag: $tag');
-    return InteractiveViewer(
-      panEnabled: true,
-      child: Hero(
-        tag: tag,
-        child: Image.network(
-          src,
-          height: 500,
-          fit: BoxFit.fitWidth,
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            }
-            return image;
-          },
-        ),
-      ),
-    );
-  }
-}
+// class _ImageWidget extends StatelessWidget {
+//   final String src;
+//   final String tag;
+//   final Widget image;
+//   final Function onLoad;
+//
+//   _ImageWidget({this.tag, this.onLoad, this.src, this.image});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     print('tag: $tag');
+//     return InteractiveViewer(
+//       panEnabled: true,
+//       child: Hero(
+//         tag: tag,
+//         child: Image.network(
+//           src,
+//           height: 500,
+//           fit: BoxFit.fitWidth,
+//           loadingBuilder: (context, child, loadingProgress) {
+//             if (loadingProgress == null) {
+//               return child;
+//             }
+//             return image;
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }

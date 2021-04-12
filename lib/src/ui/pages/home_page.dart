@@ -101,6 +101,11 @@ class HomePageState extends State<HomePage>
 class _NavBarTab extends Tab {
   _NavBarTab(String asset)
       : super(
-          icon: Image.asset(asset, color: Colors.grey, width: 24, height: 24),
+          icon: Image.asset(
+            asset,
+            color: Colors.grey,
+            width: 24,
+            height: 24,
+          ),
         );
 }

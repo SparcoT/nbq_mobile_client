@@ -46,6 +46,10 @@
 
   "searchByReference": "Search any color",
   "@searchByReference": {},
+  "searchVideo": "Search video",
+  "@searchVideo": {},
+  "test": "Test",
+  "@test": {},
   "colors": "Colors",
   "@colors": {},
   "box": "Box",

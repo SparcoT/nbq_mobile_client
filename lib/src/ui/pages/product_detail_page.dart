@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,11 +27,13 @@ class _ProductDetailPageAppBar extends StatefulWidget
   final Category category;
   final ValueChanged<int> onChanged;
   final ValueChanged<String> onSearched;
+  final Function onReset;
 
   _ProductDetailPageAppBar({
     this.category,
     this.onChanged,
     this.onSearched,
+    this.onReset,
   });
 
   @override
@@ -48,31 +52,65 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
     return LocalizedView(
       builder: (context, lang) => Container(
         padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 5),
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [
-          BoxShadow(
-            color: Colors.black38,
-            blurRadius: 10,
-          )
-        ]),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 10,
+            ),
+          ],
+        ),
         child: Column(
           children: [
-            Row(children: [
-              Transform.rotate(
-                angle: -1.56,
-                child: Image.asset(
-                  widget.category.image,
-                  height: 109,
+            Stack(
+              children: [
+                if (Platform.isIOS)
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: Platform.isIOS ? 40 : 0,
+                  ),
+                  child: Row(
+                    children: [
+                      Transform.rotate(
+                        angle: -1.56,
+                        child: Image.asset(
+                          widget.category.image,
+                          height: 109,
+                        ),
+                      ),
+                      Text(
+                        widget.category.name,
+                        style: TextStyle(
+                          color: widget.category.color,
+                          fontFamily: 'Futura',
+                          fontSize: 60,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                widget.category.name,
-                style: TextStyle(
-                  color: widget.category.color,
-                  fontFamily: 'Futura',
-                  fontSize: 60,
-                ),
-              ),
-            ]),
+                Padding(
+                  padding: const EdgeInsets.only(top:60.0,right: 10),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      child: Text('Reset'),
+                      onPressed: (){
+                        widget.onReset();
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ),
+
             Spacer(),
             Row(children: [
               Expanded(
@@ -119,11 +157,27 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   void initState() {
     super.initState();
-
     products = Product.all
         .where((e) => widget.category.category == e.category)
         .map((e) => CartProduct(e))
         .toList(growable: false);
+    if (Cart().products.isNotEmpty) {
+      final rs = Cart()
+          .products
+          .where(
+              (element) => element.product.category == widget.category.category)
+          .toList();
+      print(rs.length);
+      rs.forEach((element) {
+        products.forEach((element1) {
+          if (element.product.ref == element1.product.ref) {
+            print('Match');
+            element1.cans = element.cans;
+            element1.packs = element.packs;
+          }
+        });
+      });
+    }
     viewedProducts = List.from(products);
   }
 
@@ -132,6 +186,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return LocalizedView(
       builder: (context, lang) => Scaffold(
         appBar: _ProductDetailPageAppBar(
+          onReset: (){
+           viewedProducts.forEach((element){
+             element.cans=0;
+             element.packs=0;
+           });
+            setState(() {});
+          },
           category: widget.category,
           onSearched: (val) {
             viewedProducts = List.from(
@@ -229,11 +290,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
-                      AppNavigation.navigateTo(
-                          context,
-                          HomePage(
-                            initialIndex: 3,
-                          ));
+                      Navigator.of(context).pop();
+                      HomePageState.tabController.animateTo(1);
+                      // AppNavigation.navigateTo(
+                      //     context,
+                      //     HomePage(
+                      //       initialIndex: 2,
+                      //     ));
                     },
                     child: Text(lang.seeOrder),
                     style: ElevatedButton.styleFrom(

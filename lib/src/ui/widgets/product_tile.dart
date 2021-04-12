@@ -46,20 +46,26 @@ class ProductTile extends StatelessWidget {
       AnimatedCrossFade(
         firstChild: Padding(
           padding: const EdgeInsets.all(2),
-          child: ProductQtyCounter(onChanged: (val) {
-            product.cans = val;
-            changed();
-          }),
+          child: ProductQtyCounter(
+            onChanged: (val) {
+              product.cans = val;
+              changed();
+            },
+            quantity: product.cans ?? 0,
+          ),
         ),
         secondChild: Padding(
           padding: const EdgeInsets.all(2),
-          child: ProductQtyCounter(onChanged: (val) {
-            product.packs = val;
-            changed();
-          }),
+          child: ProductQtyCounter(
+            onChanged: (val) {
+              product.packs = val;
+              changed();
+            },
+            quantity: product.packs ?? 0,
+          ),
         ),
         crossFadeState:
-        isCans ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            isCans ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         duration: Duration(milliseconds: 500),
       ),
       SizedBox(width: 15),

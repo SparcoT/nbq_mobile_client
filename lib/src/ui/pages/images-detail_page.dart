@@ -31,9 +31,9 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
           final image = Image.network(
             _image,
             fit: BoxFit.fill,
-            height: 300,
-            cacheHeight: 200,
-            cacheWidth: 200,
+            // height: 300,
+            // cacheHeight: 200,
+            // cacheWidth: 200,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;

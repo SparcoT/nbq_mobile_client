@@ -7,7 +7,7 @@ abstract class Assets {
   static const cartIcon = '$_iconsDir/cart.png';
   static const dropIcon = '$_iconsDir/drop.png';
   static const folderIcon = '$_iconsDir/folder.png';
-  static const homeIcon = '$_iconsDir/home.jpeg';
+  static const homeIcon = '$_iconsDir/home.png';
 
   static const logo = '$_imagesDir/logo.png';
   static const nbqFast = '$_imagesDir/nbq_fast.png';

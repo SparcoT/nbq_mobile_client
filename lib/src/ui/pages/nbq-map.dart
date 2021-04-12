@@ -38,145 +38,11 @@ class _NBQMapState extends State<NBQMap> {
         .asUint8List();
   }
 
-  var _contact = Contact();
-  var _termsAccepted = false;
-  AutovalidateMode _mode = AutovalidateMode.disabled;
-  final formKey = GlobalKey<FormState>();
-  var _email = '';
-
-  void _sendMessage() async {
-    if (!formKey.currentState.validate()) {
-      setState(() {
-        _mode = AutovalidateMode.always;
-      });
-      return;
-    }
-    formKey.currentState.save();
-    await performLazyTask(context, () async {
-      var headers = {
-        'Authorization':
-            'Bearer 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',
-        'Content-Type': 'application/json',
-      };
-
-      var data = '{"personalizations": [{"to": [{"email": "$_email"}]}], '
-          '"from": {"email": "em1407@nbqpro.com"},"subject": "Contact From App", '
-          '"content": [{"type": "text/plain", "value": "Name : ${_contact.name} Email : ${_contact.email} Message : ${_contact.message}"}]}';
-
-      var response = await http.post(
-          Uri.parse('https://api.sendgrid.com/v3/mail/send'),
-          headers: headers,
-          body: data);
-      print(response.body);
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).receivedRequest)));
-  }
-
-  _showContactDialog() {
+  _showContactDialog(String email) {
     showDialog(
       context: context,
       builder: (ctx) {
-        return LocalizedView(
-          builder: (ctx1, lang) => AlertDialog(
-            title: Text(lang.contact),
-            content: Form(
-              key: formKey,
-              autovalidateMode: _mode,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      children: [
-                        AppTextField(
-                          value: _contact.name,
-                          label: lang.name,
-                          validator: Validators.required,
-                          onSaved: (value) => _contact.name = value,
-                        ),
-                        AppTextField(
-                          label: lang.email,
-                          value: _contact.email,
-                          validator: emailValidator,
-                          onSaved: (value) => _contact.email = value,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: Text(
-                            lang.message,
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 16,
-                              color: Colors.grey.shade600,
-                            ),
-                          ),
-                        ),
-                      ],
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
-                    child: TextFormField(
-                      maxLines: 4,
-                      onSaved: (value) => _contact.email = value,
-                      validator: Validators.required,
-                      initialValue: _contact.message,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.all(10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(2, 2),
-                          color: Colors.grey.shade400,
-                          blurRadius: 2,
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 7.5, right: 9),
-                    child: Row(
-                      children: [
-                        Checkbox(
-                          value: _termsAccepted,
-                          visualDensity: VisualDensity.compact,
-                          onChanged: (val) =>
-                              setState(() => _termsAccepted = val),
-                        ),
-                        Expanded(
-                            child: Text(
-                          lang.terms,
-                          style: TextStyle(fontSize: 13),
-                        )),
-                        Transform.scale(
-                          scale: .8,
-                          child: TextButton(
-                            child: Text(lang.send),
-                            style: TextButton.styleFrom(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                            ),
-                            onPressed: _termsAccepted ? _sendMessage : null,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
+        return _ShowDialog(email: email);
       },
     );
   }
@@ -197,8 +63,7 @@ class _NBQMapState extends State<NBQMap> {
                   title: element['name'],
                   snippet: element['email'],
                   onTap: () {
-                    _email = element['email'];
-                    _showContactDialog();
+                    _showContactDialog(element['email']);
                     // print(element['email']);
                     // Navigator.of(context).pop();
                     // HomePageState.tabController.animateTo(4);
@@ -304,3 +169,156 @@ class _NBQMapState extends State<NBQMap> {
 // }
 
 const apiKey = "AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w";
+
+class _ShowDialog extends StatefulWidget {
+  final String email;
+
+  _ShowDialog({@required this.email});
+
+  @override
+  __ShowDialogState createState() => __ShowDialogState();
+}
+
+class __ShowDialogState extends State<_ShowDialog> {
+  var _contact = Contact();
+  var _termsAccepted = false;
+  AutovalidateMode _mode = AutovalidateMode.disabled;
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return LocalizedView(
+      builder: (ctx1, lang) => AlertDialog(
+        title: Text(lang.contact),
+        content: Form(
+          key: formKey,
+          autovalidateMode: _mode,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    children: [
+                      AppTextField(
+                        value: _contact.name,
+                        label: lang.name,
+                        validator: Validators.required,
+                        onSaved: (value) => _contact.name = value,
+                      ),
+                      AppTextField(
+                        label: lang.email,
+                        value: _contact.email,
+                        validator: emailValidator,
+                        onSaved: (value) => _contact.email = value,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 18),
+                        child: Text(
+                          lang.message,
+                          style: GoogleFonts.bebasNeue(
+                            fontSize: 16,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
+                  child: TextFormField(
+                    maxLines: 4,
+                    onSaved: (value) => _contact.email = value,
+                    validator: Validators.required,
+                    initialValue: _contact.message,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(2, 2),
+                        color: Colors.grey.shade400,
+                        blurRadius: 2,
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 7.5, right: 9),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                        value: _termsAccepted,
+                        visualDensity: VisualDensity.compact,
+                        onChanged: (val) =>
+                            setState(() => _termsAccepted = val),
+                      ),
+                      Expanded(
+                          child: Text(
+                        lang.terms,
+                        style: TextStyle(fontSize: 13),
+                      )),
+                      Transform.scale(
+                        scale: .8,
+                        child: TextButton(
+                          child: Text(lang.send),
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                          ),
+                          onPressed: _termsAccepted ? _sendMessage : null,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _sendMessage() async {
+    if (!formKey.currentState.validate()) {
+      setState(() {
+        _mode = AutovalidateMode.always;
+      });
+      return;
+    }
+    formKey.currentState.save();
+    await performLazyTask(context, () async {
+      var headers = {
+        'Authorization':
+            'Bearer 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',
+        'Content-Type': 'application/json',
+      };
+
+      var data =
+          '{"personalizations": [{"to": [{"email": "${widget.email}"}]}], '
+          '"from": {"email": "em1407@nbqpro.com"},"subject": "Contact From App", '
+          '"content": [{"type": "text/plain", "value": "Name : ${_contact.name} Email : ${_contact.email} Message : ${_contact.message}"}]}';
+
+      var response = await http.post(
+          Uri.parse('https://api.sendgrid.com/v3/mail/send'),
+          headers: headers,
+          body: data);
+      print(response.body);
+    });
+    Navigator.of(context).pop();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).receivedRequest)));
+  }
+}

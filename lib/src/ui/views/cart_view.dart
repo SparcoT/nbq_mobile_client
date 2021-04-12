@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
+import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
 import 'package:pdf/pdf.dart';
 import 'package:share/share.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -13,7 +14,6 @@ import 'package:nbq_mobile_client/src/data/cart.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
-
 
 class CartView extends StatefulWidget {
   @override
@@ -168,8 +168,8 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                    keyboardType: TextInputType.emailAddress,
-                    // validator: (val) => emailValidator(val),
+                keyboardType: TextInputType.emailAddress,
+                // validator: (val) => emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -233,144 +233,216 @@ class _CartViewState extends State<CartView> {
     );
   }
 
-  pw.Table _generateTable(List<CartProduct> products) {
-    return pw.Table(
-      children: <pw.TableRow>[
-        pw.TableRow(children: [
-          pw.Text(' Color',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Ref', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Sku', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Cans', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Packs', style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
-        ]),
-        ...products.map(
-          (e) => pw.TableRow(
-            children: [
-              pw.Container(
-                color: PdfColor.fromInt(e.product.color.value),
-                height: 14,
-              ),
-              pw.Text(' ' + e.product.ref),
-              pw.Text(' ' +( e.product.sku==null?'': e.product.sku.toInt().toString())),
-              pw.Text(' ' + e.product.name),
-              pw.Text(' ' + e.cans.toString()),
-              pw.Text(' ' + e.packs.toString())
-            ],
-          ),
-        ),
-      ],
-      border: pw.TableBorder.all(color: PdfColors.black),
-      columnWidths: {
-        0: pw.FixedColumnWidth(40),
-        1: pw.FlexColumnWidth(1),
-        2: pw.FlexColumnWidth(1),
-        3: pw.FlexColumnWidth(3),
-        4: pw.FlexColumnWidth(1),
-        5: pw.FlexColumnWidth(1),
-      },
-    );
-  }
+  // pw.Table _generateTable(List<CartProduct> products) {
+  //   return ;
+  // }
 
   _generatePdf() async {
     final document = pw.Document();
     final _image = (await rootBundle.load(Assets.logo)).buffer.asUint8List();
-    document.addPage(pw.Page(build: (pw.Context context) {
-      return pw.Column(children: [
-        pw.Row(
-          children: [
-            pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Name: ', children: [
-                    pw.TextSpan(text: _data.name),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Email: ', children: [
-                    pw.TextSpan(text: _data.email),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Phone: ', children: [
-                    pw.TextSpan(text: _data.contact),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Note: ', children: [
-                    pw.TextSpan(text: _data.note),
-                  ]),
-                ),
-              ],
-            ),
-            pw.Spacer(),
-            pw.Column(
-              children: [
+
+    var products = [
+      if (_slowProducts.isNotEmpty) ...['SLOW', ..._slowProducts],
+      if (_fastProducts.isNotEmpty) ...['FAST', ..._fastProducts],
+      if (_wtfProducts.isNotEmpty) ...['WTF', ..._wtfProducts],
+      if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts]
+    ];
+
+    var rows = <pw.TableRow>[];
+    var children = <pw.Widget>[];
+
+    for (var i = 0; i < products.length; ++i) {
+      if (products[i] is String) {
+        children.add(pw.Text(
+          products[i],
+          style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+        ));
+      } else {}
+
+      if ((i % 25 == 0 && i != 0) || i == products.length) {
+        document.addPage(pw.Page(build: (context) {
+          return pw.Column(children: [
+            pw.Row(children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Name: ',
+                      children: [pw.TextSpan(text: _data.name)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Email: ',
+                      children: [pw.TextSpan(text: _data.email)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Phone: ',
+                      children: [pw.TextSpan(text: _data.contact)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Note: ',
+                      children: [pw.TextSpan(text: _data.note)],
+                    ),
+                  ),
+                ],
+              ),
+              pw.Spacer(),
+              pw.Column(children: [
                 pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
                 pw.Text('NBQ Spray Company'),
-              ],
-            ),
-          ],
-        ),
-        pw.Divider(),
-        if (_slowProducts.isNotEmpty) ...[
-          pw.Text('SLOW',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_slowProducts),
-        ],
-        if (_fastProducts.isNotEmpty) ...[
-          pw.Text(
-            'FAST',
-            style: pw.TextStyle(
-              fontSize: 18,
-              fontWeight: pw.FontWeight.bold,
-            ),
-          ),
-          _generateTable(_fastProducts),
-        ],
-        if (_wtfProducts.isNotEmpty) ...[
-          pw.Text('WTF',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_wtfProducts),
-        ],
-        if (_proProducts.isNotEmpty) ...[
-          pw.Text('PRO',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_proProducts),
-        ],
-        pw.SizedBox(height: 10),
-        pw.Table(
-          children: <pw.TableRow>[
-            pw.TableRow(
-              children: [
-                pw.Text(
-                  ' Total',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                ),
-                pw.Text(' ' + _cans.toString()),
-                pw.Text(' ' + _packs.toString()),
-              ],
-            ),
-          ],
-          columnWidths: {
-            0: pw.FlexColumnWidth(5.5),
-            1: pw.FlexColumnWidth(1),
-            2: pw.FlexColumnWidth(1),
-          },
-        ),
-      ], crossAxisAlignment: pw.CrossAxisAlignment.start);
-    }));
+              ]),
+            ]),
+            pw.Divider(),
+            ...children,
+          ]);
+        }));
+
+        children = [];
+      }
+    }
+
+    // var i = 0;
+    // var children = <pw.Widget>[];
+    // var rows = <pw.TableRow>[];
+    //
+    // for (var i = 0; i < products.length; ++i) {
+    //   if (products[i] is String) {
+    //     rows = [
+    //       pw.TableRow(children: [
+    //         pw.Text(' Color',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Ref',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Sku',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Name',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Cans',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Packs',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
+    //       ])
+    //     ];
+    //     children.addAll(
+    //       [
+    //         pw.Text(
+    //           products[i],
+    //           style: pw.TextStyle(
+    //             fontSize: 18,
+    //             fontWeight: pw.FontWeight.bold,
+    //           ),
+    //         ),
+    //
+    //         pw.Table(
+    //           children: rows,
+    //           border: pw.TableBorder.all(color: PdfColors.black),
+    //           columnWidths: {
+    //             0: pw.FixedColumnWidth(40),
+    //             1: pw.FlexColumnWidth(1),
+    //             2: pw.FlexColumnWidth(1),
+    //             3: pw.FlexColumnWidth(3),
+    //             4: pw.FlexColumnWidth(1),
+    //             5: pw.FlexColumnWidth(1),
+    //           },
+    //         )
+    //       ],
+    //     );
+    //   } else {
+    //     final e = products[i] as CartProduct;
+    //     rows.add(pw.TableRow(
+    //       children: [
+    //         pw.Container(
+    //           color: PdfColor.fromInt(e.product.color.value),
+    //           height: 14,
+    //         ),
+    //         pw.Text(' ' + e.product.ref),
+    //         pw.Text(' ' +
+    //             (e.product.sku == null
+    //                 ? ''
+    //                 : e.product.sku.toInt().toString())),
+    //         pw.Text(' ' + e.product.name),
+    //         pw.Text(' ' + e.cans.toString()),
+    //         pw.Text(' ' + e.packs.toString())
+    //       ],
+    //     ));
+    //   }
+    //
+    //   if (i != 0 && (i % 25 == 0 || i == products.length - 1)) {
+    //     document.addPage(pw.Page(
+    //       build: (pw.Context context) {
+    //         return pw.Column(
+    //           children: [
+    //             pw.Row(
+    //               children: [
+    //                 pw.Column(
+    //                   crossAxisAlignment: pw.CrossAxisAlignment.start,
+    //                   children: [
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(text: 'Name: ', children: [
+    //                         pw.TextSpan(text: _data.name),
+    //                       ]),
+    //                     ),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(text: 'Email: ', children: [
+    //                         pw.TextSpan(text: _data.email),
+    //                       ]),
+    //                     ),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(text: 'Phone: ', children: [
+    //                         pw.TextSpan(text: _data.contact),
+    //                       ]),
+    //                     ),
+    //                     pw.RichText(
+    //                       text: pw.TextSpan(text: 'Note: ', children: [
+    //                         pw.TextSpan(text: _data.note),
+    //                       ]),
+    //                     ),
+    //                   ],
+    //                 ),
+    //                 pw.Spacer(),
+    //                 pw.Column(
+    //                   children: [
+    //                     pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
+    //                     pw.Text('NBQ Spray Company'),
+    //                   ],
+    //                 ),
+    //               ],
+    //             ),
+    //             pw.Divider(),
+    //             ...List.from(children.sublist(i)),
+    //           ],
+    //           crossAxisAlignment: pw.CrossAxisAlignment.start,
+    //         );
+    //       },
+    //     ));
+    //
+    //     rows = [
+    //       pw.TableRow(children: [
+    //         pw.Text(' Color',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Ref',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Sku',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Name',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Cans',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+    //         pw.Text(' Packs',
+    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
+    //       ])
+    //     ];
+    //  -   i += children.length;
+    //     print(children);
+    //     // children = [];
+    //   }
+    // }
 
     final path = Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
     final file = File(path);
