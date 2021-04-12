@@ -306,7 +306,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop();
-                      HomePageState.tabController.animateTo(1);
+                      HomePageState.tabController.animateTo(3);
                       // AppNavigation.navigateTo(
                       //     context,
                       //     HomePage(
