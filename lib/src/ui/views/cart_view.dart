@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
+import 'package:nbq_mobile_client/src/ui/pages/test-pdf-page.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
 import 'package:pdf/pdf.dart';
 import 'package:share/share.dart';
@@ -248,20 +249,92 @@ class _CartViewState extends State<CartView> {
       if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts]
     ];
 
-    var rows = <pw.TableRow>[];
-    var children = <pw.Widget>[];
+    List<pw.Widget> page = [];
+    List<pw.TableRow> rows = [];
+    List<List<pw.Widget>> widgets = [];
 
     for (var i = 0; i < products.length; ++i) {
+      if (i % 35 == 0) {
+        page = [];
+        rows = [];
+        widgets.add(page);
+      }
+
       if (products[i] is String) {
-        children.add(pw.Text(
+        if (rows.isNotEmpty) rows = [];
+        page.add(pw.Text(
           products[i],
           style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
         ));
-      } else {}
+      } else {
+        final dynamic e = products[i];
+        if (rows.isEmpty) {
+          rows.add(pw.TableRow(children: [
+            pw.Text(
+              ' Color',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Ref',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Sku',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Name',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Cans',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Packs',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            )
+          ]));
+          page.add(pw.Table(
+            children: rows,
+            border: pw.TableBorder.all(color: PdfColors.black),
+            columnWidths: {
+              0: pw.FixedColumnWidth(40),
+              1: pw.FlexColumnWidth(1),
+              2: pw.FlexColumnWidth(1),
+              3: pw.FlexColumnWidth(3),
+              4: pw.FlexColumnWidth(1),
+              5: pw.FlexColumnWidth(1),
+            },
+          ));
+        }
 
-      if ((i % 25 == 0 && i != 0) || i == products.length) {
-        document.addPage(pw.Page(build: (context) {
-          return pw.Column(children: [
+        rows.add(pw.TableRow(
+          children: [
+            pw.Container(
+              height: 14,
+              color: PdfColor.fromInt(e.product.color.value),
+            ),
+            pw.Text(' ' + e.product.ref),
+            pw.Text(
+              ' ' +
+                  (e.product.sku == null
+                      ? ''
+                      : e.product.sku.toInt().toString()),
+            ),
+            pw.Text(' ' + e.product.name),
+            pw.Text(' ' + e.cans.toString()),
+            pw.Text(' ' + e.packs.toString())
+          ],
+        ));
+      }
+    }
+
+    for (final page in widgets) {
+      document.addPage(pw.Page(build: (context) {
+        return pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
             pw.Row(children: [
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -299,157 +372,18 @@ class _CartViewState extends State<CartView> {
               ]),
             ]),
             pw.Divider(),
-            ...children,
-          ]);
-        }));
-
-        children = [];
-      }
+            ...page,
+          ],
+        );
+      }));
     }
-
-    // var i = 0;
-    // var children = <pw.Widget>[];
-    // var rows = <pw.TableRow>[];
-    //
-    // for (var i = 0; i < products.length; ++i) {
-    //   if (products[i] is String) {
-    //     rows = [
-    //       pw.TableRow(children: [
-    //         pw.Text(' Color',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Ref',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Sku',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Name',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Cans',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Packs',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
-    //       ])
-    //     ];
-    //     children.addAll(
-    //       [
-    //         pw.Text(
-    //           products[i],
-    //           style: pw.TextStyle(
-    //             fontSize: 18,
-    //             fontWeight: pw.FontWeight.bold,
-    //           ),
-    //         ),
-    //
-    //         pw.Table(
-    //           children: rows,
-    //           border: pw.TableBorder.all(color: PdfColors.black),
-    //           columnWidths: {
-    //             0: pw.FixedColumnWidth(40),
-    //             1: pw.FlexColumnWidth(1),
-    //             2: pw.FlexColumnWidth(1),
-    //             3: pw.FlexColumnWidth(3),
-    //             4: pw.FlexColumnWidth(1),
-    //             5: pw.FlexColumnWidth(1),
-    //           },
-    //         )
-    //       ],
-    //     );
-    //   } else {
-    //     final e = products[i] as CartProduct;
-    //     rows.add(pw.TableRow(
-    //       children: [
-    //         pw.Container(
-    //           color: PdfColor.fromInt(e.product.color.value),
-    //           height: 14,
-    //         ),
-    //         pw.Text(' ' + e.product.ref),
-    //         pw.Text(' ' +
-    //             (e.product.sku == null
-    //                 ? ''
-    //                 : e.product.sku.toInt().toString())),
-    //         pw.Text(' ' + e.product.name),
-    //         pw.Text(' ' + e.cans.toString()),
-    //         pw.Text(' ' + e.packs.toString())
-    //       ],
-    //     ));
-    //   }
-    //
-    //   if (i != 0 && (i % 25 == 0 || i == products.length - 1)) {
-    //     document.addPage(pw.Page(
-    //       build: (pw.Context context) {
-    //         return pw.Column(
-    //           children: [
-    //             pw.Row(
-    //               children: [
-    //                 pw.Column(
-    //                   crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //                   children: [
-    //                     pw.RichText(
-    //                       text: pw.TextSpan(text: 'Name: ', children: [
-    //                         pw.TextSpan(text: _data.name),
-    //                       ]),
-    //                     ),
-    //                     pw.RichText(
-    //                       text: pw.TextSpan(text: 'Email: ', children: [
-    //                         pw.TextSpan(text: _data.email),
-    //                       ]),
-    //                     ),
-    //                     pw.RichText(
-    //                       text: pw.TextSpan(text: 'Phone: ', children: [
-    //                         pw.TextSpan(text: _data.contact),
-    //                       ]),
-    //                     ),
-    //                     pw.RichText(
-    //                       text: pw.TextSpan(text: 'Note: ', children: [
-    //                         pw.TextSpan(text: _data.note),
-    //                       ]),
-    //                     ),
-    //                   ],
-    //                 ),
-    //                 pw.Spacer(),
-    //                 pw.Column(
-    //                   children: [
-    //                     pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
-    //                     pw.Text('NBQ Spray Company'),
-    //                   ],
-    //                 ),
-    //               ],
-    //             ),
-    //             pw.Divider(),
-    //             ...List.from(children.sublist(i)),
-    //           ],
-    //           crossAxisAlignment: pw.CrossAxisAlignment.start,
-    //         );
-    //       },
-    //     ));
-    //
-    //     rows = [
-    //       pw.TableRow(children: [
-    //         pw.Text(' Color',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Ref',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Sku',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Name',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Cans',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-    //         pw.Text(' Packs',
-    //             style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
-    //       ])
-    //     ];
-    //  -   i += children.length;
-    //     print(children);
-    //     // children = [];
-    //   }
-    // }
 
     final path = Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
     final file = File(path);
     await file.writeAsBytes(await document.save());
 
     await Share.shareFiles([path]);
-    // await file.delete();
+    await file.delete();
   }
 
   Widget _buildHeader(String text) {
