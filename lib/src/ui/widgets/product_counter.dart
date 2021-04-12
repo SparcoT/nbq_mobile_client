@@ -19,7 +19,6 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
   @override
   void initState() {
     super.initState();
-    _qty = widget.quantity;
   }
 
   void _increment() => widget.onChanged?.call(++_qty);
@@ -31,6 +30,7 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
 
   @override
   Widget build(BuildContext context) {
+    _qty = widget.quantity;
     final style = TextButton.styleFrom(
       primary: Colors.black,
       padding: EdgeInsets.zero,

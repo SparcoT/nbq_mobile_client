@@ -97,12 +97,12 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:60.0,right: 10),
+                  padding: const EdgeInsets.only(top: 60.0, right: 10),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: TextButton(
                       child: Text('Reset'),
-                      onPressed: (){
+                      onPressed: () {
                         widget.onReset();
                       },
                     ),
@@ -110,7 +110,6 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                 )
               ],
             ),
-
             Spacer(),
             Row(children: [
               Expanded(
@@ -186,11 +185,21 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     return LocalizedView(
       builder: (context, lang) => Scaffold(
         appBar: _ProductDetailPageAppBar(
-          onReset: (){
-           viewedProducts.forEach((element){
-             element.cans=0;
-             element.packs=0;
-           });
+          onReset: () {
+            if (Cart().products.isNotEmpty) {
+              final rs = Cart()
+                  .products
+                  .where((element) =>
+                      element.product.category == widget.category.category)
+                  .toList();
+              rs.forEach((element) {
+                Cart().products.remove(element);
+              });
+            }
+            viewedProducts.forEach((element) {
+              element.packs = 0;
+              element.cans = 0;
+            });
             setState(() {});
           },
           category: widget.category,
