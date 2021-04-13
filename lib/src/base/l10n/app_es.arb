@@ -46,6 +46,10 @@
 
   "searchByReference": "Buscar cualquier color",
   "@searchByReference": {},
+  "searchVideo": "Buscar video",
+  "@searchVideo": {},
+  "test": "prueba",
+  "@test": {},
   "colors": "colores",
   "@colors": {},
   "box": "caja",

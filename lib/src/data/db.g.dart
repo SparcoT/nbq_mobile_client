@@ -1299,7 +1299,7 @@ const _products = [
   ),
   const Product._(
     ProductCategory.slow,
-    name: 'Blanco',
+    name: 'Blanco Translucido',
     sku: 501.0,
     ref: 'N501',
     ml: '520/400',
@@ -1307,7 +1307,7 @@ const _products = [
   ),
   const Product._(
     ProductCategory.slow,
-    name: 'Negro',
+    name: 'Negro Translucido',
     sku: 502.0,
     ref: 'N502',
     ml: '520/400',
@@ -1656,5 +1656,13 @@ const _products = [
     ref: 'W219',
     ml: '800/600',
     color: Color.fromRGBO(65, 176, 208, 1.0),
+  ),
+  const Product._(
+    ProductCategory.pro,
+    name: 'Blanco',
+    sku: 617.0,
+    ref: 'P17',
+    ml: '1000/750',
+    color: Color.fromRGBO(255, 255, 255, 1.0),
   ),
 ];

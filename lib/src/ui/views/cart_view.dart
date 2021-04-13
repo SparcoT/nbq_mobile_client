@@ -1,5 +1,7 @@
-import 'dart:io';
+import 'dart:convert';
+import 'dart:io' as io;
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
@@ -13,7 +15,6 @@ import 'package:nbq_mobile_client/src/data/cart.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
-
 
 class CartView extends StatefulWidget {
   @override
@@ -168,8 +169,8 @@ class _CartViewState extends State<CartView> {
               sliver: SliverToBoxAdapter(
                   child: AppTextField(
                 label: lang.email,
-                    keyboardType: TextInputType.emailAddress,
-                    // validator: (val) => emailValidator(val),
+                keyboardType: TextInputType.emailAddress,
+                // validator: (val) => emailValidator(val),
                 onSaved: (val) => _data.email = val,
               )),
             ),
@@ -209,7 +210,7 @@ class _CartViewState extends State<CartView> {
                     _formKey.currentState.save();
                     await _generatePdf();
                   },
-                  child: Text(lang.sendOrShare),
+                  child: Text(kIsWeb?"DOWNLOAD" :lang.sendOrShare),
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
                     primary: Colors.black,
@@ -233,151 +234,165 @@ class _CartViewState extends State<CartView> {
     );
   }
 
-  pw.Table _generateTable(List<CartProduct> products) {
-    return pw.Table(
-      children: <pw.TableRow>[
-        pw.TableRow(children: [
-          pw.Text(' Color',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Ref', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Sku', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Name', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Cans', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          pw.Text(' Packs', style: pw.TextStyle(fontWeight: pw.FontWeight.bold))
-        ]),
-        ...products.map(
-          (e) => pw.TableRow(
-            children: [
-              pw.Container(
-                color: PdfColor.fromInt(e.product.color.value),
-                height: 14,
-              ),
-              pw.Text(' ' + e.product.ref),
-              pw.Text(' ' +( e.product.sku==null?'': e.product.sku.toInt().toString())),
-              pw.Text(' ' + e.product.name),
-              pw.Text(' ' + e.cans.toString()),
-              pw.Text(' ' + e.packs.toString())
-            ],
-          ),
-        ),
-      ],
-      border: pw.TableBorder.all(color: PdfColors.black),
-      columnWidths: {
-        0: pw.FixedColumnWidth(40),
-        1: pw.FlexColumnWidth(1),
-        2: pw.FlexColumnWidth(1),
-        3: pw.FlexColumnWidth(3),
-        4: pw.FlexColumnWidth(1),
-        5: pw.FlexColumnWidth(1),
-      },
-    );
-  }
+  // pw.Table _generateTable(List<CartProduct> products) {
+  //   return ;
+  // }
 
   _generatePdf() async {
     final document = pw.Document();
     final _image = (await rootBundle.load(Assets.logo)).buffer.asUint8List();
-    document.addPage(pw.Page(build: (pw.Context context) {
-      return pw.Column(children: [
-        pw.Row(
-          children: [
-            pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Name: ', children: [
-                    pw.TextSpan(text: _data.name),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Email: ', children: [
-                    pw.TextSpan(text: _data.email),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Phone: ', children: [
-                    pw.TextSpan(text: _data.contact),
-                  ]),
-                ),
-                pw.RichText(
-                  text: pw.TextSpan(text: 'Note: ', children: [
-                    pw.TextSpan(text: _data.note),
-                  ]),
-                ),
-              ],
+
+    var products = [
+      if (_slowProducts.isNotEmpty) ...['SLOW', ..._slowProducts],
+      if (_fastProducts.isNotEmpty) ...['FAST', ..._fastProducts],
+      if (_wtfProducts.isNotEmpty) ...['WTF', ..._wtfProducts],
+      if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts]
+    ];
+
+    List<pw.Widget> page = [];
+    List<pw.TableRow> rows = [];
+    List<List<pw.Widget>> widgets = [];
+
+    for (var i = 0; i < products.length; ++i) {
+      if (i % 35 == 0) {
+        page = [];
+        rows = [];
+        widgets.add(page);
+      }
+
+      if (products[i] is String) {
+        if (rows.isNotEmpty) rows = [];
+        page.add(pw.Text(
+          products[i],
+          style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+        ));
+      } else {
+        final dynamic e = products[i];
+        if (rows.isEmpty) {
+          rows.add(pw.TableRow(children: [
+            pw.Text(
+              ' Color',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
-            pw.Spacer(),
-            pw.Column(
-              children: [
+            pw.Text(
+              ' Ref',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Sku',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Name',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Cans',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            ),
+            pw.Text(
+              ' Packs',
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            )
+          ]));
+          page.add(pw.Table(
+            children: rows,
+            border: pw.TableBorder.all(color: PdfColors.black),
+            columnWidths: {
+              0: pw.FixedColumnWidth(40),
+              1: pw.FlexColumnWidth(1),
+              2: pw.FlexColumnWidth(1),
+              3: pw.FlexColumnWidth(3),
+              4: pw.FlexColumnWidth(1),
+              5: pw.FlexColumnWidth(1),
+            },
+          ));
+        }
+
+        rows.add(pw.TableRow(
+          children: [
+            pw.Container(
+              height: 14,
+              color: PdfColor.fromInt(e.product.color.value),
+            ),
+            pw.Text(' ' + e.product.ref),
+            pw.Text(
+              ' ' +
+                  (e.product.sku == null
+                      ? ''
+                      : e.product.sku.toInt().toString()),
+            ),
+            pw.Text(' ' + e.product.name),
+            pw.Text(' ' + e.cans.toString()),
+            pw.Text(' ' + e.packs.toString())
+          ],
+        ));
+      }
+    }
+
+    for (final page in widgets) {
+      document.addPage(pw.Page(build: (context) {
+        return pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Row(children: [
+              pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Name: ',
+                      children: [pw.TextSpan(text: _data.name)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Email: ',
+                      children: [pw.TextSpan(text: _data.email)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Phone: ',
+                      children: [pw.TextSpan(text: _data.contact)],
+                    ),
+                  ),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                      text: 'Note: ',
+                      children: [pw.TextSpan(text: _data.note)],
+                    ),
+                  ),
+                ],
+              ),
+              pw.Spacer(),
+              pw.Column(children: [
                 pw.Image(pw.MemoryImage(_image), width: 50, height: 20),
                 pw.Text('NBQ Spray Company'),
-              ],
-            ),
+              ]),
+            ]),
+            pw.Divider(),
+            ...page,
           ],
-        ),
-        pw.Divider(),
-        if (_slowProducts.isNotEmpty) ...[
-          pw.Text('SLOW',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_slowProducts),
-        ],
-        if (_fastProducts.isNotEmpty) ...[
-          pw.Text(
-            'FAST',
-            style: pw.TextStyle(
-              fontSize: 18,
-              fontWeight: pw.FontWeight.bold,
-            ),
-          ),
-          _generateTable(_fastProducts),
-        ],
-        if (_wtfProducts.isNotEmpty) ...[
-          pw.Text('WTF',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_wtfProducts),
-        ],
-        if (_proProducts.isNotEmpty) ...[
-          pw.Text('PRO',
-              style: pw.TextStyle(
-                fontSize: 18,
-                fontWeight: pw.FontWeight.bold,
-              )),
-          _generateTable(_proProducts),
-        ],
-        pw.SizedBox(height: 10),
-        pw.Table(
-          children: <pw.TableRow>[
-            pw.TableRow(
-              children: [
-                pw.Text(
-                  ' Total',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                ),
-                pw.Text(' ' + _cans.toString()),
-                pw.Text(' ' + _packs.toString()),
-              ],
-            ),
-          ],
-          columnWidths: {
-            0: pw.FlexColumnWidth(5.5),
-            1: pw.FlexColumnWidth(1),
-            2: pw.FlexColumnWidth(1),
-          },
-        ),
-      ], crossAxisAlignment: pw.CrossAxisAlignment.start);
-    }));
-
-    final path = Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
-    final file = File(path);
+        );
+      }));
+    }
+    // if(kIsWeb) {
+    //
+    //   // final content = base64Encode(await document.save());
+    //   // html.AnchorElement(
+    //   //     href: "data:application/octet-stream;charset=utf-16le;base64,$content")
+    //   //   ..setAttribute("download", "order${DateTime.now()}.pdf")
+    //   //   ..click();
+    // }
+    // else {
+      final path = io.Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
+      final file = io.File(path);
     await file.writeAsBytes(await document.save());
-
     await Share.shareFiles([path]);
-    // await file.delete();
+      await file.delete();
+    // }
+
   }
 
   Widget _buildHeader(String text) {
