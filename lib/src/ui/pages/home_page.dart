@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
@@ -48,19 +51,37 @@ class HomePageState extends State<HomePage>
                 padding: const EdgeInsets.only(left: 15),
                 child: LocalizationSelector(),
               ),
+              SizedBox(width: 100,),
               Image.asset(Assets.logo, height: 45),
-              SizedBox(
+              SizedBox(width: 100,),
+              kIsWeb ?  Expanded(
+                child: TabBar(
+                  controller: tabController,
+                  indicatorWeight: 2,
+                  indicatorColor: AppTheme.primaryColor,
+                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
+                  tabs: [
+                    _NavBarTab(Assets.homeIcon),
+                    _NavBarTab(Assets.dropIcon),
+                    _NavBarTab(Assets.folderIcon),
+                    _NavBarTab(Assets.cartIcon),
+                    _NavBarTab(Assets.contactIcon),
+                  ],
+                ),
+              ) : SizedBox(),
+             kIsWeb ? SizedBox(): SizedBox(
                 width: 60,
                 child: IconButton(
                   icon: Icon(Icons.share),
                   onPressed: () {
                     launch(
-                        'https://play.google.com/store/apps/details?id=com.sparkosol.nbq');
+                      Platform.isAndroid ?
+                        'https://play.google.com/store/apps/details?id=com.sparkosol.nbq' : 'https://apps.apple.com/us/app/nbq/id1555068851');
                   },
                 ),
               )
             ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
         ),
       ),
@@ -78,7 +99,7 @@ class HomePageState extends State<HomePage>
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: kIsWeb ? SizedBox():BottomAppBar(
         elevation: 10,
         child: TabBar(
           controller: tabController,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nbq_mobile_client/src/app.dart';
@@ -69,63 +70,116 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LocalizedView(
-      builder:(ctx, lang)=> Padding(
-        padding: const EdgeInsets.only(bottom: 45),
-        child: TextButton(
-          onPressed: () {
-            AppNavigation.navigateTo(context, ProductDetailPage(_detail));
-          },
-          style: TextButton.styleFrom(
-            primary: _detail.color,
-            padding: EdgeInsets.zero,
-            shape: BeveledRectangleBorder(),
-            minimumSize: Size.fromHeight(90),
-            backgroundColor: Colors.transparent,
-          ),
-          child: Row(children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  width: 130,
-                  height: 90,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFE9E9E9),
-                    borderRadius: BorderRadius.horizontal(
-                      right: Radius.circular(10),
+    return kIsWeb
+        ? LocalizedView(
+            builder: (ctx, lang) => Padding(
+              padding: const EdgeInsets.only(bottom: 45),
+              child: TextButton(
+                onPressed: () {
+                  AppNavigation.navigateTo(context, ProductDetailPage(_detail));
+                },
+                style: TextButton.styleFrom(
+                  primary: _detail.color,
+                  padding: EdgeInsets.zero,
+                  shape: BeveledRectangleBorder(),
+                  minimumSize: Size.fromHeight(90),
+                  backgroundColor: Colors.transparent,
+                ),
+                child: Row(children: [
+                  Container(
+                    width: 200,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFE9E9E9),
+                      borderRadius: BorderRadius.horizontal(
+                        right: Radius.circular(10),
+                      ),
                     ),
+                    child: Image.asset(_detail.image, width: _detail.width),
                   ),
-                ),
-                Positioned(
-                  top: _detail.offset.dy,
-                  left: _detail.offset.dx,
-                  child: Image.asset(_detail.image, width: _detail.width),
-                )
-              ],
+                  SizedBox(width: 30),
+                  Column( children: [
+                    Text(
+                      _detail.name,
+                      style: TextStyle(fontFamily: 'Futura', fontSize: 42),
+                    ),
+                    Text(
+                      Product.all
+                              .where((element) =>
+                                  element.category == _detail.category)
+                              .length
+                              .toString() +
+                          ' ${lang.colors}',
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                    crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,),
+                ]),
+              ),
             ),
-            SizedBox(width: 30),
-            Column(children: [
-              Text(
-                _detail.name,
-                style: TextStyle(fontFamily: 'Futura', fontSize: 42),
-              ),
-              Text(
-                Product.all
-                        .where((element) => element.category == _detail.category)
-                        .length
-                        .toString() +
-                    ' ${lang.colors}',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.normal,
+          )
+        : LocalizedView(
+            builder: (ctx, lang) => Padding(
+              padding: const EdgeInsets.only(bottom: 45),
+              child: TextButton(
+                onPressed: () {
+                  AppNavigation.navigateTo(context, ProductDetailPage(_detail));
+                },
+                style: TextButton.styleFrom(
+                  primary: _detail.color,
+                  padding: EdgeInsets.zero,
+                  shape: BeveledRectangleBorder(),
+                  minimumSize: Size.fromHeight(90),
+                  backgroundColor: Colors.transparent,
                 ),
+                child: Row(children: [
+                  Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        width: 130,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9E9E9),
+                          borderRadius: BorderRadius.horizontal(
+                            right: Radius.circular(10),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: _detail.offset.dy,
+                        left: _detail.offset.dx,
+                        child: Image.asset(_detail.image, width: _detail.width),
+                      )
+                    ],
+                  ),
+                  SizedBox(width: 30),
+                  Column(children: [
+                    Text(
+                      _detail.name,
+                      style: TextStyle(fontFamily: 'Futura', fontSize: 42),
+                    ),
+                    Text(
+                      Product.all
+                              .where((element) =>
+                                  element.category == _detail.category)
+                              .length
+                              .toString() +
+                          ' ${lang.colors}',
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ], crossAxisAlignment: CrossAxisAlignment.start),
+                ]),
               ),
-            ], crossAxisAlignment: CrossAxisAlignment.start),
-          ]),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }

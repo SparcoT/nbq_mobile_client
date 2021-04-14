@@ -1,7 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+// import './image_page.dart'
+
 import 'package:nbq_mobile_client/src/app.dart';
-import 'package:nbq_mobile_client/src/ui/pages/image_page.dart';
 import 'package:nbq_mobile_client/src/utils/constants.dart';
+
+import 'package:nbq_mobile_client/src/ui/pages/image_page.dart'
+    if (dart.library.io) 'package:nbq_mobile_client/src/ui/pages/image_page_io.dart'
+    if (dart.library.html) 'package:nbq_mobile_client/src/ui/pages/image_page_web.dart';
 
 class ImagesDetailPage extends StatefulWidget {
   final String title;
@@ -22,9 +28,9 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
       body: GridView.builder(
         itemCount: kImages[widget.title].length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
+          crossAxisCount: kIsWeb ? 5 : 2,
+          crossAxisSpacing: kIsWeb ? 12 : 4.0,
+          mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
         ),
         itemBuilder: (ctx, index) {
           final _image = kImages[widget.title][index];
@@ -47,10 +53,7 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
           return InkWell(
             onTap: () => AppNavigation.navigateTo(
               context,
-              ImagePage(
-                image: _image,
-                imageWidget: image,
-              ),
+              createImagePage(image: _image, imageWidget: image),
             ),
             child: Hero(tag: _image, child: image),
           );

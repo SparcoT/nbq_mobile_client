@@ -1,5 +1,6 @@
 
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/ui/pages/images-detail_page.dart';
 
@@ -15,7 +16,13 @@ class _DesignImagesState extends State<DesignImages> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
+      body:kIsWeb?GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 2/0.2),children: [
+        _tile("Diseños"),
+        _tile("Expositores"),
+        _tile("Marketing"),
+        _tile("Sprays"),
+
+      ],) :Column(
         children: [
          _tile("Diseños"),
          _tile("Expositores"),

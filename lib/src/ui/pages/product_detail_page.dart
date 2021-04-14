@@ -29,12 +29,15 @@ class _ProductDetailPageAppBar extends StatefulWidget
   final ValueChanged<int> onChanged;
   final ValueChanged<String> onSearched;
   final Function onReset;
+  final packCount, cansCount;
 
   _ProductDetailPageAppBar({
     this.category,
     this.onChanged,
     this.onSearched,
     this.onReset,
+    this.cansCount,
+    this.packCount,
   });
 
   @override
@@ -47,6 +50,39 @@ class _ProductDetailPageAppBar extends StatefulWidget
 
 class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
   var _group = 0;
+  List<CartProduct> products;
+
+  // List<CartProduct> viewedProducts;
+  //
+  // int get cansCount => products.fold(0, (v, e) => v + e.cans);
+  //
+  // int get packsCount => products.fold(0, (v, e) => v + e.packs);
+  //
+  // void initState() {
+  //   super.initState();
+  //   products = Product.all
+  //       .where((e) => widget.category.category == e.category)
+  //       .map((e) => CartProduct(e))
+  //       .toList(growable: false);
+  //   if (Cart().products.isNotEmpty) {
+  //     final rs = Cart()
+  //         .products
+  //         .where(
+  //             (element) => element.product.category == widget.category.category)
+  //         .toList();
+  //     print(rs.length);
+  //     rs.forEach((element) {
+  //       products.forEach((element1) {
+  //         if (element.product.ref == element1.product.ref) {
+  //           print('Match');
+  //           element1.cans = element.cans;
+  //           element1.packs = element.packs;
+  //         }
+  //       });
+  //     });
+  //   }
+  //   viewedProducts = List.from(products);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +90,19 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
       builder: (context, lang) => Container(
         padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 5),
         decoration: BoxDecoration(
+          borderRadius: kIsWeb
+              ? BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                )
+              : null,
           color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 10,
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black38,
+          //     blurRadius: kIsWeb ? 0 : 10,
+          //   ),
+          // ],
         ),
         child: Column(
           children: [
@@ -102,18 +144,133 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 60.0, right: 10),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: TextButton(
-                      child: Text('Reset'),
-                      onPressed: () {
-                        widget.onReset();
-                      },
-                    ),
-                  ),
-                )
+                kIsWeb
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 5.0, right: 10),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: Column(
+                            children: [
+
+                              Row(mainAxisAlignment: MainAxisAlignment.end, children: [Text(
+                                lang.totalPacks,
+                                style: GoogleFonts.bebasNeue(fontSize: 17),
+                              ),
+                                SizedBox(width: 15),
+                                Container(
+                                  width: 55,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black26, blurRadius: 4)
+                                    ],
+                                  ),
+                                  child: Center(
+                                    child: Text(widget.packCount.toString()),
+                                  ),
+                                ),
+                                SizedBox(width: 15),
+                                Text(
+                                  lang.totalCans,
+                                  style: GoogleFonts.bebasNeue(fontSize: 17),
+                                ),
+                                SizedBox(width: 15),
+                                Container(
+                                  width: 55,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black26, blurRadius: 4)
+                                    ],
+                                  ),
+                                  child:
+                                  Center(child: Text(widget.cansCount.toString())),
+                                )],)
+                           ,  Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    child: Text('Reset'),
+                                    onPressed: () {
+                                      widget.onReset();
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  SizedBox(
+                                    width: 100,
+                                    child: Builder(
+                                      builder: (ctx) => ElevatedButton(
+                                        onPressed: () async {
+                                          Cart().addAll(products.where(
+                                                (element) =>
+                                            element.cans > 0 ||
+                                                element.packs > 0,
+                                          ));
+                                          if (products.any((element) =>
+                                          element.cans > 0 ||
+                                              element.packs > 0))
+                                            ScaffoldMessenger.of(ctx).showSnackBar(
+                                                SnackBar(
+                                                    content:
+                                                    Text(lang.addedToCart)));
+                                        },
+                                        child: Text(lang.add),
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 5,
+                                          primary: Colors.white,
+                                          onPrimary: Colors.black,
+                                          minimumSize: Size.fromHeight(40),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 15),
+                                  SizedBox(
+                                    width: 100,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        HomePageState.tabController.animateTo(3);
+                                        // AppNavigation.navigateTo(
+                                        //     context,
+                                        //     HomePage(
+                                        //       initialIndex: 2,
+                                        //     ));
+                                      },
+                                      child: Text(lang.seeOrder),
+                                      style: ElevatedButton.styleFrom(
+                                        elevation: 5,
+                                        primary: Colors.black,
+                                        onPrimary: AppTheme.primaryColor,
+                                        minimumSize: Size.fromHeight(40),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ), ],
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 60.0, right: 10),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: TextButton(
+                            child: Text('Reset'),
+                            onPressed: () {
+                              widget.onReset();
+                            },
+                          ),
+                        ),
+                      ),
               ],
             ),
             Spacer(),
@@ -189,143 +346,167 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return LocalizedView(
-      builder: (context, lang) => Scaffold(
-        appBar: _ProductDetailPageAppBar(
-          onReset: () {
-            if (Cart().products.isNotEmpty) {
-              final rs = Cart()
-                  .products
-                  .where((element) =>
-                      element.product.category == widget.category.category)
-                  .toList();
-              rs.forEach((element) {
-                Cart().products.remove(element);
+      builder: (context, lang) => Padding(
+        padding: kIsWeb
+            ? const EdgeInsets.symmetric(horizontal: 0, vertical: 4)
+            : EdgeInsets.zero,
+        child: Scaffold(
+          appBar: _ProductDetailPageAppBar(
+            cansCount: cansCount,
+            packCount: packsCount,
+            onReset: () {
+              if (Cart().products.isNotEmpty) {
+                final rs = Cart()
+                    .products
+                    .where((element) =>
+                        element.product.category == widget.category.category)
+                    .toList();
+                rs.forEach((element) {
+                  Cart().products.remove(element);
+                });
+              }
+              viewedProducts.forEach((element) {
+                element.packs = 0;
+                element.cans = 0;
               });
-            }
-            viewedProducts.forEach((element) {
-              element.packs = 0;
-              element.cans = 0;
-            });
-            setState(() {});
-          },
-          category: widget.category,
-          onSearched: (val) {
-            viewedProducts = List.from(
-              products.where(
-                (e) => (e.product.ref.contains(val.toUpperCase()) ||
-                    e.product.name.toLowerCase().contains(val.toLowerCase())),
-              ),
-            );
-            setState(() {});
-          },
-          onChanged: (val) => setState(() => group = val),
-        ),
-        body: ListView.separated(
-          itemCount: viewedProducts.length,
-          physics: BouncingScrollPhysics(),
-          separatorBuilder: (_, __) => SizedBox(height: 5),
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          itemBuilder: (_, i) =>
-              ProductTile(viewedProducts[i], group == 0, () => setState(() {})),
-        ),
-        bottomNavigationBar: Container(
-          height: 130,
-          padding: const EdgeInsets.only(top: 15),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [BoxShadow(color: Colors.black38, blurRadius: 10)],
+              setState(() {});
+            },
+            category: widget.category,
+            onSearched: (val) {
+              viewedProducts = List.from(
+                products.where(
+                  (e) => (e.product.ref.contains(val.toUpperCase()) ||
+                      e.product.name.toLowerCase().contains(val.toLowerCase())),
+                ),
+              );
+              setState(() {});
+            },
+            onChanged: (val) => setState(() => group = val),
           ),
-          child: Column(
-            children: [
-              Row(children: [
-                Spacer(),
-                Text(
-                  lang.totalPacks,
-                  style: GoogleFonts.bebasNeue(fontSize: 17),
+          body: kIsWeb
+              ? GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, childAspectRatio: 2 / 0.2),
+                  itemBuilder: (_, i) => ProductTile(
+                      viewedProducts[i], group == 0, () => setState(() {})),
+                  itemCount: viewedProducts.length,
+                )
+              : ListView.separated(
+                  itemCount: viewedProducts.length,
+                  physics: BouncingScrollPhysics(),
+                  separatorBuilder: (_, __) => SizedBox(height: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  itemBuilder: (_, i) => ProductTile(
+                      viewedProducts[i], group == 0, () => setState(() {})),
                 ),
-                SizedBox(width: 15),
-                Container(
-                  width: 55,
-                  height: 40,
+          bottomNavigationBar: kIsWeb
+              ? SizedBox()
+              : Container(
+                  height: kIsWeb ? 110 : 130,
+                  padding: const EdgeInsets.only(top: 15),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black26, blurRadius: 4)
-                    ],
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                    ),
                   ),
-                  child: Center(child: Text(packsCount.toString())),
-                ),
-                SizedBox(width: 15),
-                Text(
-                  lang.totalCans,
-                  style: GoogleFonts.bebasNeue(fontSize: 17),
-                ),
-                SizedBox(width: 15),
-                Container(
-                  width: 55,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black26, blurRadius: 4)
-                    ],
-                  ),
-                  child: Center(child: Text(cansCount.toString())),
-                ),
-                SizedBox(width: 15),
-              ]),
-              SizedBox(height: 15),
-              Row(children: [
-                SizedBox(width: 30),
-                Expanded(
-                  child: Builder(
-                    builder: (ctx) => ElevatedButton(
-                      onPressed: () async {
-                        Cart().addAll(products.where(
-                          (element) => element.cans > 0 || element.packs > 0,
-                        ));
-                        if (products.any(
-                            (element) => element.cans > 0 || element.packs > 0))
-                          ScaffoldMessenger.of(ctx).showSnackBar(
-                              SnackBar(content: Text(lang.addedToCart)));
-                      },
-                      child: Text(lang.add),
-                      style: ElevatedButton.styleFrom(
-                        elevation: 5,
-                        primary: Colors.white,
-                        onPrimary: Colors.black,
-                        minimumSize: Size.fromHeight(40),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Spacer(),
+                          Text(
+                            lang.totalPacks,
+                            style: GoogleFonts.bebasNeue(fontSize: 17),
+                          ),
+                          SizedBox(width: 15),
+                          Container(
+                            width: 55,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(color: Colors.black26, blurRadius: 4)
+                              ],
+                            ),
+                            child: Center(child: Text(packsCount.toString())),
+                          ),
+                          SizedBox(width: 15),
+                          Text(
+                            lang.totalCans,
+                            style: GoogleFonts.bebasNeue(fontSize: 17),
+                          ),
+                          SizedBox(width: 15),
+                          Container(
+                            width: 55,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(color: Colors.black26, blurRadius: 4)
+                              ],
+                            ),
+                            child: Center(child: Text(cansCount.toString())),
+                          ),
+                          SizedBox(width: 15),
+                        ],
                       ),
-                    ),
+                      SizedBox(height: 15),
+                      Row(children: [
+                        SizedBox(width: 30),
+                        Expanded(
+                          child: Builder(
+                            builder: (ctx) => ElevatedButton(
+                              onPressed: () async {
+                                Cart().addAll(products.where(
+                                  (element) =>
+                                      element.cans > 0 || element.packs > 0,
+                                ));
+                                if (products.any((element) =>
+                                    element.cans > 0 || element.packs > 0))
+                                  ScaffoldMessenger.of(ctx).showSnackBar(
+                                      SnackBar(
+                                          content: Text(lang.addedToCart)));
+                              },
+                              child: Text(lang.add),
+                              style: ElevatedButton.styleFrom(
+                                elevation: 5,
+                                primary: Colors.white,
+                                onPrimary: Colors.black,
+                                minimumSize: Size.fromHeight(40),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 15),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              HomePageState.tabController.animateTo(3);
+                              // AppNavigation.navigateTo(
+                              //     context,
+                              //     HomePage(
+                              //       initialIndex: 2,
+                              //     ));
+                            },
+                            child: Text(lang.seeOrder),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 5,
+                              primary: Colors.black,
+                              onPrimary: AppTheme.primaryColor,
+                              minimumSize: Size.fromHeight(40),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 30),
+                      ], mainAxisAlignment: MainAxisAlignment.center),
+                    ],
                   ),
                 ),
-                SizedBox(width: 15),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      HomePageState.tabController.animateTo(3);
-                      // AppNavigation.navigateTo(
-                      //     context,
-                      //     HomePage(
-                      //       initialIndex: 2,
-                      //     ));
-                    },
-                    child: Text(lang.seeOrder),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      primary: Colors.black,
-                      onPrimary: AppTheme.primaryColor,
-                      minimumSize: Size.fromHeight(40),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 30),
-              ], mainAxisAlignment: MainAxisAlignment.center),
-            ],
-          ),
         ),
       ),
     );
