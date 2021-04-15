@@ -33,12 +33,20 @@ class _NBQMapState extends State<NBQMap> {
 
   static Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
-        .buffer
-        .asUint8List();
+    return data.buffer.asUint8List();
+//    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+//        targetWidth: width);
+//      print(codec);
+//
+//    ui.FrameInfo fi = await codec.getNextFrame();
+//    print('frame');
+//
+//    final d = (await fi.image.toByteData(format: ui.ImageByteFormat.png));
+//    print(d);
+//
+//    return d
+//        ?.buffer
+//        ?.asUint8List();
   }
 
   _showContactDialog(String email) {
