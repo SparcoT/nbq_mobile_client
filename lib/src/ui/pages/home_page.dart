@@ -36,6 +36,50 @@ class HomePageState extends State<HomePage>
     );
   }
 
+  List<Widget> barRow(){
+    return kIsWeb ? [
+      Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: LocalizationSelector(),
+      ),
+      SizedBox(width: 100,),
+      Image.asset(Assets.logo, height: 45),
+      SizedBox(width: 100,),
+       Expanded(
+        child: TabBar(
+          controller: tabController,
+          indicatorWeight: 2,
+          indicatorColor: AppTheme.primaryColor,
+          indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
+          tabs: [
+            _NavBarTab(Assets.homeIcon),
+            _NavBarTab(Assets.dropIcon),
+            _NavBarTab(Assets.folderIcon),
+            _NavBarTab(Assets.cartIcon),
+            _NavBarTab(Assets.contactIcon),
+          ],
+        ),
+      )
+    ] : [
+      Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: LocalizationSelector(),
+      ),
+      Image.asset(Assets.logo, height: 45),
+      SizedBox(
+        width: 60,
+        child: IconButton(
+          icon: Icon(Icons.share),
+          onPressed: () {
+            launch(
+                Platform.isAndroid ?
+                'https://play.google.com/store/apps/details?id=com.sparkosol.nbq' : 'https://apps.apple.com/us/app/nbq/id1555068851');
+          },
+        ),
+      )
+    ];
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,42 +90,8 @@ class HomePageState extends State<HomePage>
           padding:
               EdgeInsets.only(top: MediaQuery.of(context).padding.top + 15),
           child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: LocalizationSelector(),
-              ),
-              SizedBox(width: 100,),
-              Image.asset(Assets.logo, height: 45),
-              SizedBox(width: 100,),
-              kIsWeb ?  Expanded(
-                child: TabBar(
-                  controller: tabController,
-                  indicatorWeight: 2,
-                  indicatorColor: AppTheme.primaryColor,
-                  indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
-                  tabs: [
-                    _NavBarTab(Assets.homeIcon),
-                    _NavBarTab(Assets.dropIcon),
-                    _NavBarTab(Assets.folderIcon),
-                    _NavBarTab(Assets.cartIcon),
-                    _NavBarTab(Assets.contactIcon),
-                  ],
-                ),
-              ) : SizedBox(),
-             kIsWeb ? SizedBox(): SizedBox(
-                width: 60,
-                child: IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () {
-                    launch(
-                      Platform.isAndroid ?
-                        'https://play.google.com/store/apps/details?id=com.sparkosol.nbq' : 'https://apps.apple.com/us/app/nbq/id1555068851');
-                  },
-                ),
-              )
-            ],
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: barRow(),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
         ),
       ),

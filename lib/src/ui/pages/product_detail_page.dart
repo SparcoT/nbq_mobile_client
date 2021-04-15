@@ -144,133 +144,18 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                     ],
                   ),
                 ),
-                kIsWeb
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 5.0, right: 10),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: Column(
-                            children: [
-
-                              Row(mainAxisAlignment: MainAxisAlignment.end, children: [Text(
-                                lang.totalPacks,
-                                style: GoogleFonts.bebasNeue(fontSize: 17),
-                              ),
-                                SizedBox(width: 15),
-                                Container(
-                                  width: 55,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black26, blurRadius: 4)
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: Text(widget.packCount.toString()),
-                                  ),
-                                ),
-                                SizedBox(width: 15),
-                                Text(
-                                  lang.totalCans,
-                                  style: GoogleFonts.bebasNeue(fontSize: 17),
-                                ),
-                                SizedBox(width: 15),
-                                Container(
-                                  width: 55,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black26, blurRadius: 4)
-                                    ],
-                                  ),
-                                  child:
-                                  Center(child: Text(widget.cansCount.toString())),
-                                )],)
-                           ,  Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  TextButton(
-                                    child: Text('Reset'),
-                                    onPressed: () {
-                                      widget.onReset();
-                                    },
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  SizedBox(
-                                    width: 100,
-                                    child: Builder(
-                                      builder: (ctx) => ElevatedButton(
-                                        onPressed: () async {
-                                          Cart().addAll(products.where(
-                                                (element) =>
-                                            element.cans > 0 ||
-                                                element.packs > 0,
-                                          ));
-                                          if (products.any((element) =>
-                                          element.cans > 0 ||
-                                              element.packs > 0))
-                                            ScaffoldMessenger.of(ctx).showSnackBar(
-                                                SnackBar(
-                                                    content:
-                                                    Text(lang.addedToCart)));
-                                        },
-                                        child: Text(lang.add),
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 5,
-                                          primary: Colors.white,
-                                          onPrimary: Colors.black,
-                                          minimumSize: Size.fromHeight(40),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 15),
-                                  SizedBox(
-                                    width: 100,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                        HomePageState.tabController.animateTo(3);
-                                        // AppNavigation.navigateTo(
-                                        //     context,
-                                        //     HomePage(
-                                        //       initialIndex: 2,
-                                        //     ));
-                                      },
-                                      child: Text(lang.seeOrder),
-                                      style: ElevatedButton.styleFrom(
-                                        elevation: 5,
-                                        primary: Colors.black,
-                                        onPrimary: AppTheme.primaryColor,
-                                        minimumSize: Size.fromHeight(40),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ), ],
-                          ),
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 60.0, right: 10),
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: TextButton(
-                            child: Text('Reset'),
-                            onPressed: () {
-                              widget.onReset();
-                            },
-                          ),
-                        ),
-                      ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 60.0, right: 10),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton(
+                      child: Text('Reset'),
+                      onPressed: () {
+                        widget.onReset();
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
             Spacer(),
@@ -399,114 +284,110 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   itemBuilder: (_, i) => ProductTile(
                       viewedProducts[i], group == 0, () => setState(() {})),
                 ),
-          bottomNavigationBar: kIsWeb
-              ? SizedBox()
-              : Container(
-                  height: kIsWeb ? 110 : 130,
-                  padding: const EdgeInsets.only(top: 15),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
+          bottomNavigationBar: Container(
+            height: kIsWeb ? 110 : 130,
+            padding: const EdgeInsets.only(top: 15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Spacer(),
+                    Text(
+                      lang.totalPacks,
+                      style: GoogleFonts.bebasNeue(fontSize: 17),
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Spacer(),
-                          Text(
-                            lang.totalPacks,
-                            style: GoogleFonts.bebasNeue(fontSize: 17),
-                          ),
-                          SizedBox(width: 15),
-                          Container(
-                            width: 55,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(color: Colors.black26, blurRadius: 4)
-                              ],
-                            ),
-                            child: Center(child: Text(packsCount.toString())),
-                          ),
-                          SizedBox(width: 15),
-                          Text(
-                            lang.totalCans,
-                            style: GoogleFonts.bebasNeue(fontSize: 17),
-                          ),
-                          SizedBox(width: 15),
-                          Container(
-                            width: 55,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(color: Colors.black26, blurRadius: 4)
-                              ],
-                            ),
-                            child: Center(child: Text(cansCount.toString())),
-                          ),
-                          SizedBox(width: 15),
+                    SizedBox(width: 15),
+                    Container(
+                      width: 55,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 4)
                         ],
                       ),
-                      SizedBox(height: 15),
-                      Row(children: [
-                        SizedBox(width: 30),
-                        Expanded(
-                          child: Builder(
-                            builder: (ctx) => ElevatedButton(
-                              onPressed: () async {
-                                Cart().addAll(products.where(
-                                  (element) =>
-                                      element.cans > 0 || element.packs > 0,
-                                ));
-                                if (products.any((element) =>
-                                    element.cans > 0 || element.packs > 0))
-                                  ScaffoldMessenger.of(ctx).showSnackBar(
-                                      SnackBar(
-                                          content: Text(lang.addedToCart)));
-                              },
-                              child: Text(lang.add),
-                              style: ElevatedButton.styleFrom(
-                                elevation: 5,
-                                primary: Colors.white,
-                                onPrimary: Colors.black,
-                                minimumSize: Size.fromHeight(40),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              HomePageState.tabController.animateTo(3);
-                              // AppNavigation.navigateTo(
-                              //     context,
-                              //     HomePage(
-                              //       initialIndex: 2,
-                              //     ));
-                            },
-                            child: Text(lang.seeOrder),
-                            style: ElevatedButton.styleFrom(
-                              elevation: 5,
-                              primary: Colors.black,
-                              onPrimary: AppTheme.primaryColor,
-                              minimumSize: Size.fromHeight(40),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 30),
-                      ], mainAxisAlignment: MainAxisAlignment.center),
-                    ],
-                  ),
+                      child: Center(child: Text(packsCount.toString())),
+                    ),
+                    SizedBox(width: 15),
+                    Text(
+                      lang.totalCans,
+                      style: GoogleFonts.bebasNeue(fontSize: 17),
+                    ),
+                    SizedBox(width: 15),
+                    Container(
+                      width: 55,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black26, blurRadius: 4)
+                        ],
+                      ),
+                      child: Center(child: Text(cansCount.toString())),
+                    ),
+                    SizedBox(width: 15),
+                  ],
                 ),
+                SizedBox(height: 15),
+                Row(children: [
+                  SizedBox(width: 30),
+                  Expanded(
+                    child: Builder(
+                      builder: (ctx) => ElevatedButton(
+                        onPressed: () async {
+                          Cart().addAll(products.where(
+                            (element) => element.cans > 0 || element.packs > 0,
+                          ));
+                          if (products.any((element) =>
+                              element.cans > 0 || element.packs > 0))
+                            ScaffoldMessenger.of(ctx).showSnackBar(
+                                SnackBar(content: Text(lang.addedToCart)));
+                        },
+                        child: Text(lang.add),
+                        style: ElevatedButton.styleFrom(
+                          elevation: 5,
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                          minimumSize: Size.fromHeight(40),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        HomePageState.tabController.animateTo(3);
+                        // AppNavigation.navigateTo(
+                        //     context,
+                        //     HomePage(
+                        //       initialIndex: 2,
+                        //     ));
+                      },
+                      child: Text(lang.seeOrder),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5,
+                        primary: Colors.black,
+                        onPrimary: AppTheme.primaryColor,
+                        minimumSize: Size.fromHeight(40),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 30),
+                ], mainAxisAlignment: MainAxisAlignment.center),
+              ],
+            ),
+          ),
         ),
       ),
     );

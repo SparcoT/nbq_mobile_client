@@ -1,20 +1,28 @@
 import 'dart:io';
-
+import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:gallery_saver/gallery_saver.dart';
+import 'package:image/image.dart' as im;
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
+import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 
-Widget createImagePage({String image, Widget imageWidget}) => ImagePage(
-  image: image,
-  imageWidget: imageWidget,
-);
+class DecodeParam {
+  final String file;
+  final SendPort sendPort;
+
+  DecodeParam(
+    this.file,
+    this.sendPort,
+  );
+}
 
 class ImagePage extends StatefulWidget {
   final String image;
-  final Widget imageWidget;
 
-  ImagePage({this.image, this.imageWidget});
+  ImagePage({
+    this.image,
+  });
 
   @override
   _ImagePageState createState() => _ImagePageState();
@@ -25,24 +33,20 @@ class _ImagePageState extends State<ImagePage> {
       '/' +
       DateTime.now().millisecondsSinceEpoch.toString() +
       '.png';
-
-  var loading = true;
+  var loading = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    Dio()
-        .download(widget.image, imageName)
-        .then((value) => setState(() => loading = false));
-  }
+  var downloaded = false;
 
   @override
   void dispose() {
     super.dispose();
+  }
 
-    File(imageName).delete();
+  static decodeIsolate(DecodeParam param) async {
+    var list = param.file.split('||');
+    var image = im.decodeImage(File(list[0]).readAsBytesSync());
+    File file = await File(list[1]).writeAsBytes(im.encodePng(image));
+    param.sendPort.send(file.path);
   }
 
   @override
@@ -59,22 +63,64 @@ class _ImagePageState extends State<ImagePage> {
             else ...[
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
-                child: Image.file(
-                  File(imageName),
-                  fit: BoxFit.fill,
+                child: Hero(
+                  tag: widget.image,
+                  child: Image.network(
+                    widget.image,
+                    fit: BoxFit.fill,
+                    // height: 300,
+                    // cacheHeight: 200,
+                    // cacheWidth: 200,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
                 ),
+                // child: Image.file(
+                //   File(imageName),
+                //   fit: BoxFit.fill,
+                // ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                   width: double.infinity,
                   child: TextButton.icon(
-                    onPressed: () async {
-                      GallerySaver.saveImage(imageName).then((_) {
-                        _scaffoldKey.currentState.showSnackBar(
-                            SnackBar(content: Text('Image saved')));
-                      });
-                    },
+                    onPressed: loading
+                        ? null
+                        : () async {
+                            print(imageName);
+                            openLoadingDialog(context, 'Saving');
+                            try {
+                              await Dio()
+                                  .download(widget.image, imageName)
+                                  .then((value) =>
+                                      setState(() => downloaded = true));
+                              // File imgFile = File(imageName);
+                              var receivePort = ReceivePort();
+                              final filePath =
+                                  '${Directory.systemTemp.path}/${DateTime.now().millisecondsSinceEpoch.toString()}.png';
+                              await Isolate.spawn(
+                                  decodeIsolate,
+                                  DecodeParam(imageName + '||' + filePath,
+                                      receivePort.sendPort));
+                              var path = await receivePort.first as String;
+                              await GallerySaver.saveImage(path).then((_) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Image saved')));
+                              });
+                              await File(imageName).delete();
+                              await File(path).delete();
+                            } catch (e) {
+                              print(e);
+                            }
+                            Navigator.of(context).pop();
+                          },
                     icon: Icon(Icons.download_sharp),
                     label: Text(lang.download),
                   ),

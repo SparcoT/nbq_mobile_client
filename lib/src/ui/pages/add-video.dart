@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/video_model.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/firebase-storage-service.dart';
-
 import 'package:nbq_mobile_client/src/utils/thumbnail/thumbnail.dart'
     if (dart.library.html) 'package:nbq_mobile_client/src/utils/thumbnail/thumbnail_html.dart';
 
@@ -42,6 +40,7 @@ class _AddVideosState extends State<AddVideos> {
     }
   }
 
+////////////////////
   onImageDeleted() {
     setState(() {
       videoThumbnail = null;

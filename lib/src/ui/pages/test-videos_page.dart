@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,12 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/video_model.dart';
-import 'package:nbq_mobile_client/src/ui/pages/add-video.dart';
 import 'package:nbq_mobile_client/src/ui/pages/video_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 
 class TestVideosPage extends StatefulWidget {
   @override
@@ -22,17 +18,17 @@ class _TestVideosPageState extends State<TestVideosPage> {
   List<VideoModel> videosList;
   List<VideoModel> searchedList;
 
-  Future<File> _convertVideoToThumbnail(String url) async {
-    final fileName = await VideoThumbnail.thumbnailFile(
-      thumbnailPath: (await getTemporaryDirectory()).path,
-      imageFormat: ImageFormat.WEBP,
-      maxHeight: 64,
-      quality: 80,
-      video: url,
-    );
-
-    return File(fileName);
-  }
+  // Future<File> _convertVideoToThumbnail(String url) async {
+  //   final fileName = await VideoThumbnail.thumbnailFile(
+  //     thumbnailPath: (await getTemporaryDirectory()).path,
+  //     imageFormat: ImageFormat.WEBP,
+  //     maxHeight: 64,
+  //     quality: 80,
+  //     video: url,
+  //   );
+  //
+  //   return File(fileName);
+  // }
 
   @override
   void initState() {
@@ -60,11 +56,6 @@ class _TestVideosPageState extends State<TestVideosPage> {
   Widget build(BuildContext context) {
     return LocalizedView(
       builder: (ctx, lang) => Scaffold(
-        floatingActionButton:kIsWeb? FloatingActionButton(
-          onPressed: () {
-            AppNavigation.navigateTo(context, AddVideos());
-          },
-        ):null,
         appBar: AppBar(title: Text(lang.test)),
         body: Column(
           children: [
@@ -98,15 +89,15 @@ class _TestVideosPageState extends State<TestVideosPage> {
               Expanded(
                 child: GridView.builder(
                   itemCount: searchedList.length,
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.symmetric(horizontal: 8),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
+                    crossAxisCount: kIsWeb ? 5 : 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
+                    // childAspectRatio: MediaQuery.of(context).size.width / 5
                   ),
                   itemBuilder: (ctx, i) {
-                    print('RRRRRRR');
-                    print(searchedList[i].video);
+                    print(searchedList[i].image);
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.pink,
@@ -114,40 +105,43 @@ class _TestVideosPageState extends State<TestVideosPage> {
                       ),
                       child: Column(
                         children: [
-                          GestureDetector(
-                            onTap: () => AppNavigation.navigateTo(
-                              context,
-                              VideoPage(
-                                url: searchedList[i].video,
-                                videoName: LocalizationSelector
-                                            .locale.value.languageCode ==
-                                        'en'
-                                    ? searchedList[i].nameInEnglish
-                                    : searchedList[i].nameInSpanish,
-                              ),
-                            ),
-                            child: Container(
-                              height: 220,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.blue,
-                                image: DecorationImage(
-                                  image: NetworkImage(searchedList[i].image),
-                                  fit: BoxFit.cover,
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () => AppNavigation.navigateTo(
+                                context,
+                                VideoPage(
+                                  url: searchedList[i].video,
+                                  videoName: LocalizationSelector
+                                              .locale.value.languageCode ==
+                                          'en'
+                                      ? searchedList[i].nameInEnglish
+                                      : searchedList[i].nameInSpanish,
                                 ),
                               ),
-                              child: Center(
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.pink,
-                                  child: Icon(CupertinoIcons.play),
+                              child: Container(
+                                padding: EdgeInsets.all(55),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.blue,
+                                  image: DecorationImage(
+                                    image: NetworkImage(searchedList[i].image),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.pink,
+                                    child: Icon(CupertinoIcons.play),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 4, horizontal: 4),
                               child: Text(
                                 LocalizationSelector
                                             .locale.value.languageCode ==
@@ -158,6 +152,7 @@ class _TestVideosPageState extends State<TestVideosPage> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
+                                overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                               ),
                             ),

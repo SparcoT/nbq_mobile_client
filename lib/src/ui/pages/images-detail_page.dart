@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import './image_page.dart'
 
 import 'package:nbq_mobile_client/src/app.dart';
+import 'package:nbq_mobile_client/src/ui/pages/image_page_web.dart';
 import 'package:nbq_mobile_client/src/utils/constants.dart';
 
-import 'package:nbq_mobile_client/src/ui/pages/image_page.dart'
-    if (dart.library.io) 'package:nbq_mobile_client/src/ui/pages/image_page_io.dart'
-    if (dart.library.html) 'package:nbq_mobile_client/src/ui/pages/image_page_web.dart';
+// import 'package:nbq_mobile_client/src/ui/pages/image_page.dart'
+//     if (dart.library.io) 'package:nbq_mobile_client/src/ui/pages/image_page_io.dart'
+//     if (dart.library.html) 'package:nbq_mobile_client/src/ui/pages/image_page_web.dart';
+
+import 'image_page_io.dart';
 
 class ImagesDetailPage extends StatefulWidget {
   final String title;
@@ -38,8 +40,8 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
             _image,
             fit: BoxFit.fill,
             // height: 300,
-            // cacheHeight: 200,
-            // cacheWidth: 200,
+            cacheHeight: 200,
+            cacheWidth: 200,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
@@ -51,10 +53,23 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
           );
 
           return InkWell(
-            onTap: () => AppNavigation.navigateTo(
-              context,
-              createImagePage(image: _image, imageWidget: image),
-            ),
+            onTap: () {
+              if (kIsWeb) {
+                return AppNavigation.navigateTo(
+                    context,
+                    createImagePage(
+                      image: _image,
+                      // imageWidget: image,
+                    ));
+              } else {
+                return AppNavigation.navigateTo(
+                  context,
+                  ImagePage(
+                    image: _image,
+                  ),
+                );
+              }
+            },
             child: Hero(tag: _image, child: image),
           );
         },

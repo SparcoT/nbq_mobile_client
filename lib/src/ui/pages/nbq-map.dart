@@ -7,8 +7,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_flutter_web/google_maps_flutter_web.dart'
-    as web_map;
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
@@ -58,7 +56,7 @@ class _NBQMapState extends State<NBQMap> {
        kIsWeb ? await getBytesFromAsset(
           'assets/countries_web/${element['image']}.png', 1)
       : await getBytesFromAsset(
-          'assets/countries/${element['image']}.jpg', 20);
+          'assets/countries/${element['image']}.jpg', 50);
 
       _markers.add(Marker(
         markerId: MarkerId(element['image']),

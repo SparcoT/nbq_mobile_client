@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:video_player/video_player.dart';
 
+// ignore: must_be_immutable
 class VideoPage extends StatefulWidget {
   final String url;
   String videoName;

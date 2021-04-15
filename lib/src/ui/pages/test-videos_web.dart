@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -10,8 +10,10 @@ import 'package:nbq_mobile_client/src/ui/pages/add-video.dart';
 import 'package:nbq_mobile_client/src/ui/pages/video_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
+
+// import 'package:path_provider/path_provider.dart';
+// import 'package:video_thumbnail/video_thumbnail.dart';
 
 class TestVideosPageWeb extends StatefulWidget {
   @override
@@ -22,19 +24,19 @@ class _TestVideosPageWebState extends State<TestVideosPageWeb> {
   List<VideoModel> videosList;
   List<VideoModel> searchedList;
 
-  Future<File> _convertVideoToThumbnail(String url) async {
-    final fileName = await VideoThumbnail.thumbnailFile(
-      thumbnailPath: (await getTemporaryDirectory()).path,
-      imageFormat: ImageFormat.WEBP,
-      maxHeight: 64,
-      quality: 80,
-      video: url,
-    );
-
-    print('thumb file name');
-    print(fileName);
-    return File(fileName);
-  }
+  // Future<File> _convertVideoToThumbnail(String url) async {
+  //   final fileName = await VideoThumbnail.thumbnailFile(
+  //     thumbnailPath: (await getTemporaryDirectory()).path,
+  //     imageFormat: ImageFormat.WEBP,
+  //     maxHeight: 64,
+  //     quality: 80,
+  //     video: url,
+  //   );
+  //
+  //   print('thumb file name');
+  //   print(fileName);
+  //   return File(fileName);
+  // }
 
   @override
   void initState() {
@@ -163,6 +165,7 @@ class _TestVideosPageWebState extends State<TestVideosPageWeb> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -174,6 +177,7 @@ class _TestVideosPageWebState extends State<TestVideosPageWeb> {
                           icon: Icon(Icons.cancel),
                           onPressed: () async {
                             try {
+                              openLoadingDialog(context, 'Deleting');
                               await FirebaseStorage.instance
                                   .refFromURL(searchedList[i].video)
                                   .delete();
@@ -184,6 +188,7 @@ class _TestVideosPageWebState extends State<TestVideosPageWeb> {
                                   .collection('videos')
                                   .doc(searchedList[i].id)
                                   .delete();
+                              Navigator.of(context).pop();
                             } catch (e) {
                               print(e);
                             }

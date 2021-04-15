@@ -1,24 +1,25 @@
+
 import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 
-Widget createImagePage({String image, Widget imageWidget}) => ImagePage(
+Widget createImagePage({String image, Widget imageWidget}) => WebImagePage(
   image: image,
   imageWidget: imageWidget,
 );
 
-class ImagePage extends StatefulWidget {
+class WebImagePage extends StatefulWidget {
   final String image;
   final Widget imageWidget;
 
-  ImagePage({this.image, this.imageWidget});
+  WebImagePage({this.image, this.imageWidget});
 
   @override
   _ImagePageWebState createState() => _ImagePageWebState();
 }
 
-class _ImagePageWebState extends State<ImagePage> {
+class _ImagePageWebState extends State<WebImagePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
