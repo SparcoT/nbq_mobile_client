@@ -14,6 +14,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
  var crossAxisCount;
+
   @override
   Widget build(BuildContext context) {
     return kIsWeb
@@ -93,11 +94,16 @@ class _HomeViewState extends State<HomeView> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
-              image: DecorationImage(
-                image: AssetImage(url),
-                fit: BoxFit.fill,
-              ),
+//              image: DecorationImage(
+//                image: AssetImage(url),
+//                fit: BoxFit.fill,
+//              ),
             ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.asset(url, fit: BoxFit.fill,
+                  cacheWidth: MediaQuery.of(context).size.width.toInt(),
+                )),
           ),
         ),
       ),

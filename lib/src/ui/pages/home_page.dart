@@ -117,11 +117,11 @@ class HomePageState extends State<HomePage>
           indicatorColor: AppTheme.primaryColor,
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
           tabs: [
-            _NavBarTab(Assets.homeIcon),
+            _NavBarTab(Assets.homeIcon,32,32),
             _NavBarTab(Assets.dropIcon),
-            _NavBarTab(Assets.folderIcon),
+            _NavBarTab(Assets.folderIcon,26,26),
             _NavBarTab(Assets.cartIcon),
-            _NavBarTab(Assets.contactIcon),
+            _NavBarTab(Assets.contactIcon,28,28),
           ],
         ),
       ),
@@ -130,13 +130,13 @@ class HomePageState extends State<HomePage>
 }
 
 class _NavBarTab extends Tab {
-  _NavBarTab(String asset)
+  _NavBarTab(String asset,[double height=24,double width=24])
       : super(
           icon: Image.asset(
             asset,
             color: Colors.grey,
-            width: 24,
-            height: 24,
+            width: width,
+            height: height,
           ),
         );
 }

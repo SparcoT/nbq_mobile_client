@@ -17,6 +17,10 @@ class DecodeParam {
   );
 }
 
+Widget createImagePage({String image, Widget imageWidget}) => ImagePage(
+  image: image,
+);
+
 class ImagePage extends StatefulWidget {
   final String image;
 
