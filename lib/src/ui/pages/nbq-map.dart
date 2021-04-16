@@ -117,6 +117,7 @@ class _NBQMapState extends State<NBQMap> {
     if (_initiated) {
       return Stack(children: [
         GoogleMap(
+          myLocationButtonEnabled: false,
           initialCameraPosition:
               CameraPosition(target: currentLocation, zoom: 5),
           onMapCreated: (controller) {
