@@ -97,12 +97,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                 )
               : null,
           color: Colors.white,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black38,
-          //     blurRadius: kIsWeb ? 0 : 10,
-          //   ),
-          // ],
+
         ),
         child: Column(
           children: [
