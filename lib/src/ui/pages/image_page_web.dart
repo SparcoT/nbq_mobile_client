@@ -46,7 +46,7 @@ class _ImagePageWebState extends State<WebImagePage> {
                       ..href = widget.image
                       ..click();
                     _scaffoldKey.currentState
-                        .showSnackBar(SnackBar(content: Text('Image will be dcsaved')));
+                        .showSnackBar(SnackBar(content: Text('Image will be saved')));
                   },
                   icon: Icon(Icons.download_sharp),
                   label: Text(lang.download),
