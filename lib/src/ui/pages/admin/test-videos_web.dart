@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/video_model.dart';
-import 'package:nbq_mobile_client/src/ui/pages/add-video.dart';
+import 'package:nbq_mobile_client/src/ui/pages/admin/add-video.dart';
 import 'package:nbq_mobile_client/src/ui/pages/video_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';

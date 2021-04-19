@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:nbq_mobile_client/src/app.dart';
+import 'package:nbq_mobile_client/src/base/services/images_service.dart';
+import 'package:nbq_mobile_client/src/firebase-videos/image_model.dart';
+import 'package:nbq_mobile_client/src/ui/widgets/simple-stream-builder.dart';
 import 'package:nbq_mobile_client/src/utils/constants.dart';
 
 import 'package:nbq_mobile_client/src/ui/pages/image_page.dart'
@@ -24,41 +27,44 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: GridView.builder(
-        itemCount: kImages[widget.title].length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: kIsWeb ? 5 : 2,
-          crossAxisSpacing: kIsWeb ? 12 : 4.0,
-          mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
-        ),
-        itemBuilder: (ctx, index) {
-          final _image = kImages[widget.title][index];
-          final image = Image.network(
-            _image,
-            fit: BoxFit.fill,
-            // height: 300,
-            cacheHeight: 200,
-            cacheWidth: 200,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          );
+      body: SimpleStreamBuilder.simpler(
+        stream: ImagesService().fetchByCategory(widget.title),
+        builder:(List<ImageModel> images)=> GridView.builder(
+          itemCount: images.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: kIsWeb ? 5 : 2,
+            crossAxisSpacing: kIsWeb ? 12 : 4.0,
+            mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
+          ),
+          itemBuilder: (ctx, index) {
+            final _image = images[index].image;
+            final image = Image.network(
+              _image,
+              fit: BoxFit.fill,
+              // height: 300,
+              cacheHeight: 200,
+              cacheWidth: 200,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) {
+                  return child;
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            );
 
-          return InkWell(
-            onTap: () {
-              return AppNavigation.navigateTo(
-                context,
-                createImagePage(image: _image, imageWidget: image),
-              );
-            },
-            child: Hero(tag: _image, child: image),
-          );
-        },
+            return InkWell(
+              onTap: () {
+                return AppNavigation.navigateTo(
+                  context,
+                  createImagePage(image: _image, imageWidget: image),
+                );
+              },
+              child: Hero(tag: _image, child: image),
+            );
+          },
+        ),
       ),
     );
   }

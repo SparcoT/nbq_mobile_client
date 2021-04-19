@@ -21,11 +21,11 @@ abstract class FirebaseStorageService {
 
   static Future<String> uploadImage(Uint8List path,String filePath) async {
     var fs = firebase_storage.FirebaseStorage.instance;
-    firebase_storage.Reference firebaseStorageRef = fs.ref().child(filePath);
+    firebase_storage.Reference firebaseStorageRef = fs.ref().child(DateTime.now().millisecondsSinceEpoch.toString());
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'application/image',
-        customMetadata: {'picked-file-path': filePath});
+    );
 
     firebase_storage.UploadTask uploadTask = firebaseStorageRef.putData(path,metadata);
     var url = await (await uploadTask).ref.getDownloadURL();

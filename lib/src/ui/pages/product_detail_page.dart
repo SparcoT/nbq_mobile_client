@@ -157,7 +157,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
             Row(children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.only(left: 10,right: 5),
                   child: CupertinoTextField(
                     placeholderStyle: TextStyle(fontSize: 14),
                     placeholder: lang.searchByReference,
@@ -166,17 +166,28 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 110,
-                child: CupertinoSlidingSegmentedControl(
-                  groupValue: _group,
-                  children: {0: Text(lang.can), 1: Text(lang.box)},
-                  onValueChanged: (val) => setState(() {
-                    _group = val;
-                    widget.onChanged?.call(val);
-                  }),
+              Padding(
+                padding: const EdgeInsets.only(right:20.0),
+                child: SizedBox(
+                  width: 180,
+                  child: CupertinoSlidingSegmentedControl(
+                    padding: EdgeInsets.zero,
+                    children: {0: Text(lang.can), 1: Text(lang.box)},
+                    onValueChanged: (val){},
+                  ),
                 ),
               ),
+//              SizedBox(
+//                width: 110,
+//                child: CupertinoSlidingSegmentedControl(
+//                  groupValue: _group,
+//                  children: {0: Text(lang.can), 1: Text(lang.box)},
+//                  onValueChanged: (val) => setState(() {
+//                    _group = val;
+//                    widget.onChanged?.call(val);
+//                  }),
+//                ),
+//              ),
               SizedBox(width: 15),
             ]),
             SizedBox(height: 10),

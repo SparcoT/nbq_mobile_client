@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nbq_mobile_client/src/app.dart';
-import 'package:nbq_mobile_client/src/ui/pages/add-video.dart';
-import 'package:nbq_mobile_client/src/ui/pages/test-videos_web.dart';
+import 'package:nbq_mobile_client/src/ui/pages/admin/add-video.dart';
+import 'package:nbq_mobile_client/src/ui/pages/admin/test-videos_web.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/forgot-password-dialog.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
+
+import 'admin/admin-home.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -57,7 +59,7 @@ class _SignInState extends State<SignIn> {
                     email: email.text.trim(), password: password.text);
             User user = userCredential.user;
             Navigator.of(context).pop();
-            AppNavigation.navigateTo(context, TestVideosPageWeb());
+            AppNavigation.navigateToPage(context, AppPages.adminHome);
             // Navigate to add videos page
           } on FirebaseAuthException catch (error) {
             Navigator.pop(context);
