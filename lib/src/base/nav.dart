@@ -8,6 +8,8 @@ class _AppPage {
 
 class AppPages {
   static const home = _AppPage('/');
+  static const signIn = _AppPage('/sign-in');
+  static const adminHome = _AppPage('/admin-home');
 }
 
 class AppNavigation {
@@ -20,8 +22,8 @@ class AppNavigation {
       Navigator.of(context).pushNamed(page.name);
 
   static final _routes = <String, WidgetBuilder>{
-    /// TODO: Change This
-    // AppPages.home.name: (context) => NbqSignIn()
-    AppPages.home.name: (context) => HomePage()
+    AppPages.signIn.name: (context) => SignIn(),
+    AppPages.home.name: (context) => HomePage(),
+    AppPages.adminHome.name: (context) => AdminHome()
   };
 }

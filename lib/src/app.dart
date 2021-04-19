@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:nbq_mobile_client/src/firebase-videos/nbq-signin.dart';
+import 'package:nbq_mobile_client/src/ui/pages/admin/admin-home.dart';
 import 'package:nbq_mobile_client/src/ui/pages/home_page.dart';
-import 'package:nbq_mobile_client/src/ui/pages/images-detail_page.dart';
+import 'package:nbq_mobile_client/src/ui/pages/signin.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 import 'package:firebase_core/firebase_core.dart';
 

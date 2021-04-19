@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
@@ -33,6 +36,50 @@ class HomePageState extends State<HomePage>
     );
   }
 
+  List<Widget> barRow(){
+    return kIsWeb ? [
+      Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: LocalizationSelector(),
+      ),
+      SizedBox(width: 100,),
+      Image.asset(Assets.logo, height: 45),
+      SizedBox(width: 100,),
+       Expanded(
+        child: TabBar(
+          controller: tabController,
+          indicatorWeight: 2,
+          indicatorColor: AppTheme.primaryColor,
+          indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
+          tabs: [
+            _NavBarTab(Assets.homeIcon),
+            _NavBarTab(Assets.dropIcon),
+            _NavBarTab(Assets.folderIcon),
+            _NavBarTab(Assets.cartIcon),
+            _NavBarTab(Assets.contactIcon),
+          ],
+        ),
+      )
+    ] : [
+      Padding(
+        padding: const EdgeInsets.only(left: 15),
+        child: LocalizationSelector(),
+      ),
+      Image.asset(Assets.logo, height: 45),
+      SizedBox(
+        width: 60,
+        child: IconButton(
+          icon: Icon(Icons.share),
+          onPressed: () {
+            launch(
+                Platform.isAndroid ?
+                'https://play.google.com/store/apps/details?id=com.sparkosol.nbq' : 'https://apps.apple.com/us/app/nbq/id1555068851');
+          },
+        ),
+      )
+    ];
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,23 +90,7 @@ class HomePageState extends State<HomePage>
           padding:
               EdgeInsets.only(top: MediaQuery.of(context).padding.top + 15),
           child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: LocalizationSelector(),
-              ),
-              Image.asset(Assets.logo, height: 45),
-              SizedBox(
-                width: 60,
-                child: IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () {
-                    launch(
-                        'https://play.google.com/store/apps/details?id=com.sparkosol.nbq');
-                  },
-                ),
-              )
-            ],
+            children: barRow(),
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
         ),
@@ -78,7 +109,7 @@ class HomePageState extends State<HomePage>
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: kIsWeb ? SizedBox():BottomAppBar(
         elevation: 10,
         child: TabBar(
           controller: tabController,
@@ -86,11 +117,11 @@ class HomePageState extends State<HomePage>
           indicatorColor: AppTheme.primaryColor,
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
           tabs: [
-            _NavBarTab(Assets.homeIcon),
+            _NavBarTab(Assets.homeIcon,32,32),
             _NavBarTab(Assets.dropIcon),
-            _NavBarTab(Assets.folderIcon),
+            _NavBarTab(Assets.folderIcon,26,26),
             _NavBarTab(Assets.cartIcon),
-            _NavBarTab(Assets.contactIcon),
+            _NavBarTab(Assets.contactIcon,28,28),
           ],
         ),
       ),
@@ -99,13 +130,13 @@ class HomePageState extends State<HomePage>
 }
 
 class _NavBarTab extends Tab {
-  _NavBarTab(String asset)
+  _NavBarTab(String asset,[double height=24,double width=24])
       : super(
           icon: Image.asset(
             asset,
             color: Colors.grey,
-            width: 24,
-            height: 24,
+            width: width,
+            height: height,
           ),
         );
 }

@@ -1,17 +1,18 @@
-import 'dart:convert';
-import 'dart:io' as io;
+import '../../utils/pdf_share.dart'
+  if (dart.library.io) '../../utils/pdf_share_io.dart'
+  if (dart.library.html) '../../utils/pdf_share_html.dart';
+
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:nbq_mobile_client/src/base/assets.dart';
-import 'package:nbq_mobile_client/src/data/order_data.dart';
-import 'package:pdf/pdf.dart';
-import 'package:share/share.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/data/cart.dart';
+import 'package:nbq_mobile_client/src/base/assets.dart';
+import 'package:nbq_mobile_client/src/data/order_data.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/shadowed_box.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
@@ -68,7 +69,181 @@ class _CartViewState extends State<CartView> {
   Widget build(BuildContext context) {
     isHeaderBuilt = false;
 
-    return Form(
+    return kIsWeb? Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 350,vertical: 8),
+      child: Container( padding:EdgeInsets.only(top: 12,right: 8,bottom: 12,), decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),border: Border.all(width: 1,color: Colors.grey)),
+        child: Form(
+          key: _formKey,
+          autovalidateMode: _mode,
+          child: LocalizedView(
+            builder: (context, lang) =>
+                CustomScrollView( physics: BouncingScrollPhysics(), slivers: [
+                  if (Cart().products.isNotEmpty)
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton.icon(
+                            style: TextButton.styleFrom(
+                              minimumSize: Size(50, 15),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _slowProducts.clear();
+                                _fastProducts.clear();
+                                _wtfProducts.clear();
+                                _proProducts.clear();
+
+                                Cart().clear();
+                              });
+                            },
+                            icon: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Icon(
+                                CupertinoIcons.trash,
+                                size: 15,
+                              ),
+                            ),
+                            label: Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Text(
+                                'Clear',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (_slowProducts.isNotEmpty) ...[
+                    SliverToBoxAdapter(child: _buildHeader('SLOW')),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                            (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: ColorTile(_slowProducts[index]),
+                        ),
+                        childCount: _slowProducts.length,
+                      ),
+                    ),
+                  ],
+                  if (_fastProducts.isNotEmpty) ...[
+                    SliverToBoxAdapter(child: _buildHeader('FAST')),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                            (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: ColorTile(_fastProducts[index]),
+                        ),
+                        childCount: _fastProducts.length,
+                      ),
+                    ),
+                  ],
+                  if (_wtfProducts.isNotEmpty) ...[
+                    SliverToBoxAdapter(child: _buildHeader('WTF')),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                            (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: ColorTile(_wtfProducts[index]),
+                        ),
+                        childCount: _wtfProducts.length,
+                      ),
+                    ),
+                  ],
+                  if (_proProducts.isNotEmpty) ...[
+                    SliverToBoxAdapter(child: _buildHeader('PRO')),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                            (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: ColorTile(_proProducts[index]),
+                        ),
+                        childCount: _proProducts.length,
+                      ),
+                    ),
+                  ],
+                  if (Cart().products.isNotEmpty) ...[
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
+                      sliver: SliverToBoxAdapter(
+                          child: AppTextField(
+                            label: lang.name,
+                            // validator: Validators.required,
+                            onSaved: (val) => _data.name = val,
+                          )),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      sliver: SliverToBoxAdapter(
+                          child: AppTextField(
+                            label: lang.email,
+                            keyboardType: TextInputType.emailAddress,
+                            // validator: (val) => emailValidator(val),
+                            onSaved: (val) => _data.email = val,
+                          )),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      sliver: SliverToBoxAdapter(
+                        child: AppTextField(
+                          label: lang.telephone,
+                          keyboardType: TextInputType.phone,
+                          // validator: Validators.required,
+                          onSaved: (val) => _data.contact = val,
+                        ),
+                      ),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      sliver: SliverToBoxAdapter(
+                        child: AppTextField(
+                          maxLines: 3,
+                          label: "Note",
+                          // validator: Validators.required,
+                          onSaved: (val) => _data.note = val,
+                        ),
+                      ),
+                    ),
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
+                      sliver: SliverToBoxAdapter(
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (!_formKey.currentState.validate()) {
+                              setState(() {
+                                _mode = AutovalidateMode.always;
+                              });
+                              return;
+                            }
+                            _formKey.currentState.save();
+                            await _generatePdf();
+                          },
+                          child: Text(kIsWeb?"DOWNLOAD" :lang.sendOrShare),
+                          style: ElevatedButton.styleFrom(
+                            elevation: 5,
+                            primary: Colors.black,
+                            onPrimary: AppTheme.primaryColor,
+                            minimumSize: Size.fromHeight(40),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ] else
+                    SliverFillRemaining(
+                      child: Center(
+                        child: Text(
+                          lang.noProducts,
+                          style: TextStyle(fontSize: 20, fontFamily: 'Futura'),
+                        ),
+                      ),
+                    )
+                ]),
+          ),
+        ),
+      ),
+    ):Form(
       key: _formKey,
       autovalidateMode: _mode,
       child: LocalizedView(
@@ -377,22 +552,8 @@ class _CartViewState extends State<CartView> {
         );
       }));
     }
-    // if(kIsWeb) {
-    //
-    //   // final content = base64Encode(await document.save());
-    //   // html.AnchorElement(
-    //   //     href: "data:application/octet-stream;charset=utf-16le;base64,$content")
-    //   //   ..setAttribute("download", "order${DateTime.now()}.pdf")
-    //   //   ..click();
-    // }
-    // else {
-      final path = io.Directory.systemTemp.path + '/order${DateTime.now()}.pdf';
-      final file = io.File(path);
-    await file.writeAsBytes(await document.save());
-    await Share.shareFiles([path]);
-      await file.delete();
-    // }
 
+    sharePDF(document);
   }
 
   Widget _buildHeader(String text) {

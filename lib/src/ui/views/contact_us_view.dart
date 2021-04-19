@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,7 +83,108 @@ class ContactUsViewState extends State<ContactUsView> {
                 ),
               ),
             ),
-            Container(
+         kIsWeb?           Container(
+           margin: const EdgeInsets.symmetric(horizontal: 400,vertical: 15),
+           padding: const EdgeInsets.only(bottom: 10),
+           decoration: BoxDecoration(
+             color: Color(0xFFF5F5F5),
+             borderRadius: BorderRadius.circular(22),
+             boxShadow: [
+               BoxShadow(
+                 color: Colors.grey.shade400,
+                 blurRadius: 3,
+                 offset: Offset(0, 2),
+               )
+             ],
+           ),
+           child: Column(
+             children: [
+               Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 15),
+                 child: Column(
+                   children: [
+                     AppTextField(
+                       value: _contact.name,
+                       label: lang.name,
+                       validator: Validators.required,
+                       onSaved: (value) => _contact.name = value,
+                     ),
+                     AppTextField(
+                       label: lang.email,
+                       value: _contact.email,
+                       validator: emailValidator,
+                       onSaved: (value) => _contact.email = value,
+                     ),
+                     Padding(
+                       padding: const EdgeInsets.only(top: 18),
+                       child: Text(
+                         lang.message,
+                         style: GoogleFonts.bebasNeue(
+                           fontSize: 16,
+                           color: Colors.grey.shade600,
+                         ),
+                       ),
+                     ),
+                   ],
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                 ),
+               ),
+               Container(
+                 margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
+                 child: TextFormField(
+                   maxLines: 4,
+                   onSaved: (value) => _contact.email = value,
+                   validator: Validators.required,
+                   initialValue: _contact.message,
+                   decoration: InputDecoration(
+                     filled: true,
+                     fillColor: Colors.white,
+                     contentPadding: EdgeInsets.all(10),
+                     border: OutlineInputBorder(
+                       borderRadius: BorderRadius.circular(10),
+                     ),
+                   ),
+                 ),
+                 decoration: BoxDecoration(
+                   borderRadius: BorderRadius.circular(16),
+                   boxShadow: [
+                     BoxShadow(
+                       offset: Offset(2, 2),
+                       color: Colors.grey.shade400,
+                       blurRadius: 2,
+                     )
+                   ],
+                 ),
+               ),
+               Padding(
+                 padding: const EdgeInsets.only(left: 7.5, right: 9),
+                 child: Row(children: [
+                   Checkbox(
+                     value: _termsAccepted,
+                     visualDensity: VisualDensity.compact,
+                     onChanged: (val) =>
+                         setState(() => _termsAccepted = val),
+                   ),
+                   Expanded(
+                       child: Text(
+                         lang.terms,
+                         style: TextStyle(fontSize: 13),
+                       )),
+                   Transform.scale(
+                     scale: .8,
+                     child: TextButton(
+                       child: Text(lang.send),
+                       style: TextButton.styleFrom(
+                         padding: const EdgeInsets.symmetric(horizontal: 20),
+                       ),
+                       onPressed: _termsAccepted ? _sendMessage : null,
+                     ),
+                   )
+                 ]),
+               )
+             ],
+           ),
+         ):  Container(
               margin: const EdgeInsets.fromLTRB(15, 15, 15, 35),
               padding: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(

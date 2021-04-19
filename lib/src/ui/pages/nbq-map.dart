@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -8,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:http/http.dart' as http;
+import 'dart:ui' as ui;
 import 'package:nbq_mobile_client/src/ui/views/contact_us_view.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
@@ -24,18 +26,27 @@ class NBQMap extends StatefulWidget {
 
 class _NBQMapState extends State<NBQMap> {
   bool _initiated = true;
-  GoogleMapController _controller;
+
+  // web_map.GoogleMapController _controller;
   LatLng currentLocation = LatLng(51.323946, 10.296971);
   final _markers = Set<Marker>();
 
   static Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
-        .buffer
-        .asUint8List();
+    return data.buffer.asUint8List();
+//    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+//        targetWidth: width);
+//      print(codec);
+//
+//    ui.FrameInfo fi = await codec.getNextFrame();
+//    print('frame');
+//
+//    final d = (await fi.image.toByteData(format: ui.ImageByteFormat.png));
+//    print(d);
+//
+//    return d
+//        ?.buffer
+//        ?.asUint8List();
   }
 
   _showContactDialog(String email) {
@@ -47,38 +58,33 @@ class _NBQMapState extends State<NBQMap> {
     );
   }
 
+  Future<void> _loadMarkers() async {
+    for (final element in countries) {
+      final image =
+       kIsWeb ? await getBytesFromAsset(
+          'assets/countries_web/${element['image']}.png', 1)
+      : await getBytesFromAsset(
+          'assets/countries/${element['image']}.jpg', 50);
+
+      _markers.add(Marker(
+        markerId: MarkerId(element['image']),
+        icon: BitmapDescriptor.fromBytes(image),
+        position: LatLng(element['latitude'], element['longitude']),
+        infoWindow: InfoWindow(
+          title: element['name'],
+          snippet: element['email'],
+          onTap: () {
+            _showContactDialog(element['email']);
+          },
+        ),
+      ));
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    countries.forEach(
-      (element) {
-        getBytesFromAsset('assets/countries/${element['image']}.jpg', 100).then(
-          (onValue) {
-            _markers.add(
-              Marker(
-                markerId: MarkerId(element['image']),
-                icon: BitmapDescriptor.fromBytes(onValue),
-                position: LatLng(element['latitude'], element['longitude']),
-                infoWindow: InfoWindow(
-                  title: element['name'],
-                  snippet: element['email'],
-                  onTap: () {
-                    _showContactDialog(element['email']);
-                    // print(element['email']);
-                    // Navigator.of(context).pop();
-                    // HomePageState.tabController.animateTo(4);
-                    // ContactUsViewState.email = element['email'];
-                  },
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-    Future.delayed(Duration.zero, () {
-      setState(() {});
-    });
+    _loadMarkers().then((_) {setState(() {});});
   }
 
   @override
@@ -111,10 +117,11 @@ class _NBQMapState extends State<NBQMap> {
     if (_initiated) {
       return Stack(children: [
         GoogleMap(
+          myLocationButtonEnabled: false,
           initialCameraPosition:
               CameraPosition(target: currentLocation, zoom: 5),
           onMapCreated: (controller) {
-            _controller = controller;
+            // _controller = controller;
           },
           compassEnabled: true,
           markers: _markers,

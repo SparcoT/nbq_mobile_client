@@ -14,7 +14,7 @@
   "total": "Total",
   "@total": {},
 
-  "can": "Latas",
+  "can": "sprays",
   "@can": {},
 
   "pack": "Pack",
@@ -35,7 +35,7 @@
   "message": "Mensaje",
   "@message": {},
 
-  "totalCans": "Latas totales",
+  "totalCans": "sprays totales",
   "@totalCans": {},
 
   "seeOrder": "Ver pedido",
@@ -66,7 +66,7 @@
   "@receivedRequest": {},
   "totalBox": "cajas totales",
   "@totalBox": {},
-  "totalCans": "latas totales",
+  "totalCans": "sprays totales",
   "@totalCans": {},
   "totalPacks": "Paquetes totales",
   "@totalPacks": {},

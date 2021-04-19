@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "34106583302",
-    "project_id": "nbq-app",
-    "storage_bucket": "nbq-app.appspot.com"
+    "project_number": "607040831514",
+    "firebase_url": "https://nbq-f297b-default-rtdb.firebaseio.com",
+    "project_id": "nbq-f297b",
+    "storage_bucket": "nbq-f297b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34106583302:android:e93673a4c1ef95a4a59687",
+        "mobilesdk_app_id": "1:607040831514:android:70b2d638ddc691824851a3",
         "android_client_info": {
           "package_name": "com.sparkosol.nbq"
         }
       },
       "oauth_client": [
         {
-          "client_id": "34106583302-cbp3kd0cmqemmqdg78braor1rc5ri952.apps.googleusercontent.com",
+          "client_id": "607040831514-oo0dfer5ofaa6fpder1j9a4bvqiquu2u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8eFVJJvGCINuxemm7kgmEgcRUmebvNgk"
+          "current_key": "AIzaSyAIHeIzU-8R23_qmUzzIHGyt9eN49sKchI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "34106583302-cbp3kd0cmqemmqdg78braor1rc5ri952.apps.googleusercontent.com",
+              "client_id": "607040831514-oo0dfer5ofaa6fpder1j9a4bvqiquu2u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

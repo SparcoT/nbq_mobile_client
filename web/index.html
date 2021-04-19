@@ -25,23 +25,49 @@
 
     <title>nbq_mobile_client</title>
     <link rel="manifest" href="manifest.json">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes blinking {
+            0% {
+                transform: scale(0);
+            } 100% {
+                opacity: 0;
+                transform: scale(1);
+            }
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w"></script>
 </head>
 <body>
+<div style="width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center">
+    <div style="position: absolute; width: calc(100vh - 55vh); height: 45%; background: rgba(0, 0, 0, .2); border-radius: 55vh; animation: blinking 2s infinite;">
+    </div>
+    <img src="screen.png" alt="" height="70%">
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
 <script src="main.dart.js" type="application/javascript"></script>
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
-      apiKey: "AIzaSyCk_UHi2iKqhAf-RSqshZbM_sLg5slAltU",
-    authDomain: "nbq-app.firebaseapp.com",
-    projectId: "nbq-app",
-    storageBucket: "nbq-app.appspot.com",
-    messagingSenderId: "34106583302",
-    appId: "1:34106583302:web:263be47a3dfead1ea59687",
-    measurementId: "G-V279M5QD6C"
+         apiKey: "AIzaSyCe6Jg8qyUas-19Uk2ApZpHibOf_sYnBAk",
+    authDomain: "nbq-f297b.firebaseapp.com",
+    databaseURL: "https://nbq-f297b-default-rtdb.firebaseio.com",
+    projectId: "nbq-f297b",
+    storageBucket: "nbq-f297b.appspot.com",
+    messagingSenderId: "607040831514",
+    appId: "1:607040831514:web:80cd42a716881e9f4851a3",
+    measurementId: "G-6Y7K364K6E"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

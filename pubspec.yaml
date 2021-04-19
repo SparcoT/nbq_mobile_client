@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+2
+version: 1.0.0+6
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -26,33 +26,44 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: 0.17.0
-  video_thumbnail: ^0.3.3
-  video_player: ^2.1.1
+#  video_thumbnail: ^0.3.3
+#  video_player: ^2.1.1
   pdf: ^3.1.0
   google_maps_flutter: ^2.0.3
   url_launcher: ^6.0.3
   google_fonts: ^2.0.0
   font_awesome_flutter: ^9.0.0
   # To download files from url
-  permission: ^0.1.7
+#  permission: ^0.1.7
   path_provider: ^2.0.1
   gallery_saver: ^0.0.5
+  image_picker:
   dio: ^4.0.0
   chewie: ^1.0.0
   share: ^2.0.1
-  location: ^4.1.1
-  firebase_core: ^1.0.3
+  wakelock: ^0.5.0+2
+  video_player:
+#  location: ^4.1.1
+#  firebase_core: ^1.0.3
   firebase_auth: ^1.0.3
   cloud_firestore: ^1.0.4
-
+  file_picker:
+  firebase_storage:
+  google_maps_flutter_web: ^0.3.0
+#  image:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: 1.0.2
+#  wakelock: 0.5.0+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash:
+
+dependency_overrides:
+  wakelock: ^0.5.0+2
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -71,6 +82,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/countries/
+    - assets/countries_web/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -4,6 +4,7 @@ import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/ui/pages/home_page.dart';
 import 'package:nbq_mobile_client/src/ui/pages/nbq-map.dart';
+import 'package:nbq_mobile_client/src/ui/pages/signin.dart';
 import 'package:nbq_mobile_client/src/ui/pages/test-videos_page.dart';
 
 class HomeView extends StatefulWidget {
@@ -13,11 +14,16 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
  var crossAxisCount;
+
   @override
   Widget build(BuildContext context) {
     return kIsWeb
         ? GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-     crossAxisCount: 4    ),padding: EdgeInsets.all(20),
+        crossAxisCount: 2,
+        mainAxisSpacing: 40,
+        crossAxisSpacing: 40,
+        childAspectRatio: 2/0.7),
+      padding: EdgeInsets.all(20),
       children: [
       imageCon(
           url: Assets.test,
@@ -88,11 +94,16 @@ class _HomeViewState extends State<HomeView> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(22),
-              image: DecorationImage(
-                image: AssetImage(url),
-                fit: BoxFit.fill,
-              ),
+//              image: DecorationImage(
+//                image: AssetImage(url),
+//                fit: BoxFit.fill,
+//              ),
             ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Image.asset(url, fit: BoxFit.fill,
+                  cacheWidth: MediaQuery.of(context).size.width.toInt(),
+                )),
           ),
         ),
       ),
