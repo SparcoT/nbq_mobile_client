@@ -102,101 +102,105 @@ class _TestVideosPageWebState extends State<TestVideosPageWeb> {
               CircularProgressIndicator()
             else
               Expanded(
-                child: GridView.builder(
-                  itemCount: searchedList.length,
-                  padding: EdgeInsets.all(10),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                child: Scrollbar(
+                  isAlwaysShown: true,
+                  thickness: 15,
+                  child: GridView.builder(
+                    itemCount: searchedList.length,
+                    padding: EdgeInsets.all(10),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemBuilder: (ctx, i) {
+                      return Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.pink,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => AppNavigation.navigateTo(
+                                    context,
+                                    VideoPage(
+                                      url: searchedList[i].video,
+                                      videoName: LocalizationSelector
+                                                  .locale.value.languageCode ==
+                                              'en'
+                                          ? searchedList[i].nameInEnglish
+                                          : searchedList[i].nameInSpanish,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 220,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      // color: Colors.blue,
+                                      image: DecorationImage(
+                                        image:
+                                            NetworkImage(searchedList[i].image),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.pink,
+                                        child: Icon(CupertinoIcons.play),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text(
+                                      LocalizationSelector
+                                                  .locale.value.languageCode ==
+                                              'en'
+                                          ? searchedList[i].nameInEnglish
+                                          : searchedList[i].nameInSpanish,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.cancel),
+                            onPressed: () async {
+                              try {
+                                openLoadingDialog(context, 'Deleting');
+                                await FirebaseStorage.instance
+                                    .refFromURL(searchedList[i].video)
+                                    .delete();
+                                await FirebaseStorage.instance
+                                    .refFromURL(searchedList[i].image)
+                                    .delete();
+                                await FirebaseFirestore.instance
+                                    .collection('videos')
+                                    .doc(searchedList[i].id)
+                                    .delete();
+                                Navigator.of(context).pop();
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  itemBuilder: (ctx, i) {
-                    return Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.pink,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () => AppNavigation.navigateTo(
-                                  context,
-                                  VideoPage(
-                                    url: searchedList[i].video,
-                                    videoName: LocalizationSelector
-                                                .locale.value.languageCode ==
-                                            'en'
-                                        ? searchedList[i].nameInEnglish
-                                        : searchedList[i].nameInSpanish,
-                                  ),
-                                ),
-                                child: Container(
-                                  height: 220,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    // color: Colors.blue,
-                                    image: DecorationImage(
-                                      image:
-                                          NetworkImage(searchedList[i].image),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.pink,
-                                      child: Icon(CupertinoIcons.play),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Text(
-                                    LocalizationSelector
-                                                .locale.value.languageCode ==
-                                            'en'
-                                        ? searchedList[i].nameInEnglish
-                                        : searchedList[i].nameInSpanish,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.cancel),
-                          onPressed: () async {
-                            try {
-                              openLoadingDialog(context, 'Deleting');
-                              await FirebaseStorage.instance
-                                  .refFromURL(searchedList[i].video)
-                                  .delete();
-                              await FirebaseStorage.instance
-                                  .refFromURL(searchedList[i].image)
-                                  .delete();
-                              await FirebaseFirestore.instance
-                                  .collection('videos')
-                                  .doc(searchedList[i].id)
-                                  .delete();
-                              Navigator.of(context).pop();
-                            } catch (e) {
-                              print(e);
-                            }
-                          },
-                        ),
-                      ],
-                    );
-                  },
                 ),
               ),
           ],

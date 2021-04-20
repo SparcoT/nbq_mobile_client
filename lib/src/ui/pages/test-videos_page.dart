@@ -87,85 +87,90 @@ class _TestVideosPageState extends State<TestVideosPage> {
               CircularProgressIndicator()
             else
               Expanded(
-                child: GridView.builder(
-                  itemCount: searchedList.length,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: kIsWeb ? 5 : 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    // childAspectRatio: MediaQuery.of(context).size.width / 5
-                  ),
-                  itemBuilder: (ctx, i) {
-                    print(searchedList[i].image);
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.pink,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () => AppNavigation.navigateTo(
-                                context,
-                                VideoPage(
-                                  url: searchedList[i].video,
-                                  videoName: LocalizationSelector
-                                              .locale.value.languageCode ==
-                                          'en'
-                                      ? searchedList[i].nameInEnglish
-                                      : searchedList[i].nameInSpanish,
-                                ),
-                              ),
-                              child: Container(
-                                padding: EdgeInsets.all(55),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.blue,
-                                  image: DecorationImage(
-                                    image: NetworkImage(searchedList[i].image),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.pink,
-                                    child: Icon(CupertinoIcons.play),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 4),
-                              child: Text(
-                                LocalizationSelector
-                                            .locale.value.languageCode ==
-                                        'en'
-                                    ? searchedList[i].nameInEnglish
-                                    : searchedList[i].nameInSpanish,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                child: kIsWeb ? Scrollbar(
+                  isAlwaysShown: true,
+                    thickness: 15,
+                    child: videosBuilder()) : videosBuilder(),
               ),
           ],
         ),
       ),
     );
   }
+
+  Widget videosBuilder()=>GridView.builder(
+    itemCount: searchedList.length,
+    padding: EdgeInsets.symmetric(horizontal: 8),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: kIsWeb ? 5 : 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      // childAspectRatio: MediaQuery.of(context).size.width / 5
+    ),
+    itemBuilder: (ctx, i) {
+      print(searchedList[i].image);
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.pink,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => AppNavigation.navigateTo(
+                  context,
+                  VideoPage(
+                    url: searchedList[i].video,
+                    videoName: LocalizationSelector
+                        .locale.value.languageCode ==
+                        'en'
+                        ? searchedList[i].nameInEnglish
+                        : searchedList[i].nameInSpanish,
+                  ),
+                ),
+                child: Container(
+                  padding: EdgeInsets.all(55),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.blue,
+                    image: DecorationImage(
+                      image: NetworkImage(searchedList[i].image),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Center(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.pink,
+                      child: Icon(CupertinoIcons.play),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 4, horizontal: 4),
+                child: Text(
+                  LocalizationSelector
+                      .locale.value.languageCode ==
+                      'en'
+                      ? searchedList[i].nameInEnglish
+                      : searchedList[i].nameInSpanish,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
