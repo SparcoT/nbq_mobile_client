@@ -103,8 +103,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
           children: [
             Stack(
               children: [
-                if (!kIsWeb)
-                  if (Platform.isIOS)
+                  if (Platform.isIOS || kIsWeb)
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       onPressed: () {
@@ -167,7 +166,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                 ),
               ),
             kIsWeb ? SizedBox():  Padding(
-                padding: const EdgeInsets.only(right:20.0),
+                padding: const EdgeInsets.only(right:0.0),
                 child: SizedBox(
                   width: 250,
                   child: CupertinoSlidingSegmentedControl(
@@ -188,7 +187,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
 //                  }),
 //                ),
 //              ),
-              SizedBox(width: 15),
+            kIsWeb ?  SizedBox(width: 15) : SizedBox(),
             ]),
             SizedBox(height: 10),
           ],
