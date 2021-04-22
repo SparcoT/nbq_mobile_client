@@ -103,8 +103,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
           children: [
             Stack(
               children: [
-                if (!kIsWeb)
-                  if (Platform.isIOS)
+                  if (Platform.isIOS || kIsWeb)
                     IconButton(
                       icon: Icon(Icons.arrow_back_ios),
                       onPressed: () {
@@ -166,10 +165,10 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right:20.0),
+            kIsWeb ? SizedBox():  Padding(
+                padding: const EdgeInsets.only(right:0.0),
                 child: SizedBox(
-                  width: 180,
+                  width: 250,
                   child: CupertinoSlidingSegmentedControl(
                     padding: EdgeInsets.zero,
                     children: {0: Text(lang.can), 1: Text(lang.box)},
@@ -188,7 +187,7 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
 //                  }),
 //                ),
 //              ),
-              SizedBox(width: 15),
+            kIsWeb ?  SizedBox(width: 15) : SizedBox(),
             ]),
             SizedBox(height: 10),
           ],
@@ -275,13 +274,60 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             onChanged: (val) => setState(() => group = val),
           ),
           body: kIsWeb
-              ? GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, childAspectRatio: 2 / 0.2),
-                  itemBuilder: (_, i) => ProductTile(
-                      viewedProducts[i], group == 0, () => setState(() {})),
-                  itemCount: viewedProducts.length,
-                )
+              ? Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 240,
+                      ),
+                      SizedBox(
+                        width: 250,
+                        child: CupertinoSlidingSegmentedControl(
+                          padding: EdgeInsets.zero,
+                          children: {0: Text(lang.can), 1: Text(lang.box)},
+                          onValueChanged: (val){},
+                        ),
+                      ),
+                      SizedBox(
+                        width: 240,
+                      ),
+                      SizedBox(
+                        width: 250,
+                        child: CupertinoSlidingSegmentedControl(
+                          padding: EdgeInsets.zero,
+                          children: {0: Text(lang.can), 1: Text(lang.box)},
+                          onValueChanged: (val){},
+                        ),
+                      ),
+                      SizedBox(
+                        width: 220,
+                      ),
+                      SizedBox(
+                        width: 240,
+                        child: CupertinoSlidingSegmentedControl(
+                          padding: EdgeInsets.zero,
+                          children: {0: Text(lang.can), 1: Text(lang.box)},
+                          onValueChanged: (val){},
+                        ),
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: Scrollbar(
+            thickness: 15,
+                      isAlwaysShown: true,
+                      child: GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3, childAspectRatio: 2 / 0.2),
+                          itemBuilder: (_, i) => ProductTile(
+                              viewedProducts[i], group == 0, () => setState(() {})),
+                          itemCount: viewedProducts.length,
+                        ),
+                    ),
+                  ),
+                ],
+              )
               : ListView.separated(
                   itemCount: viewedProducts.length,
                   physics: BouncingScrollPhysics(),

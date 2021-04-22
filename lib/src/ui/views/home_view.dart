@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
       imageCon(
           url: Assets.test,
           function: () {
-            AppNavigation.navigateTo(context, TestVideosPage());
+            AppNavigation.navigateTo(context, UserVideosPage());
           }
         // widget: TestVideosPage(),
       ),
@@ -56,7 +56,7 @@ class _HomeViewState extends State<HomeView> {
               imageCon(
                   url: Assets.test,
                   function: () {
-                    AppNavigation.navigateTo(context, TestVideosPage());
+                    AppNavigation.navigateTo(context, UserVideosPage());
                   }
                   // widget: TestVideosPage(),
                   ),

@@ -34,7 +34,7 @@ class _AdminHomeState extends State<AdminHome> {
               height: 200,
               width: 200,
               child: ElevatedButton(onPressed: (){
-                AppNavigation.navigateTo(context, TestVideosPageWeb());
+                AppNavigation.navigateTo(context, AdminVideosPage());
               },
                   child: Text("Videos")),
             ),
