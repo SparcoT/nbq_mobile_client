@@ -22,19 +22,21 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void initState() {
     super.initState();
-
+    //_controller = VideoPlayerController.network(widget.url)
+    _initVideo();
+  }
+  _initVideo()async {
+    final  videoController=VideoPlayerController.network(widget.url);
+    await videoController.initialize();
     _chewieController = ChewieController(
-      videoPlayerController: VideoPlayerController.network(widget.url)
-        ..initialize().then((_) async {
-          // _controller.play();
-          await _chewieController.play();
-          setState(() {});
-        }),
+      videoPlayerController: videoController,
       autoInitialize: true,
       autoPlay: true,
       looping: true,
     );
-    //_controller = VideoPlayerController.network(widget.url)
+    setState(() {
+
+    });
   }
 
   @override
@@ -60,7 +62,7 @@ class _VideoPageState extends State<VideoPage> {
         ],
       ),
       body: Center(
-        child: _chewieController.isPlaying
+        child: _chewieController?.isPlaying??false
             ? Stack(
                 children: [
                   Chewie(controller: _chewieController),
