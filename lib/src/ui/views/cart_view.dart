@@ -558,8 +558,8 @@ class _CartViewState extends State<CartView> {
         ));
       }
     }
-
-    for (final page in widgets) {
+for(int i=0; i<widgets.length;i++) {
+    // for (final page in widgets) {
       document.addPage(pw.Page(build: (context) {
         return pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -601,42 +601,45 @@ class _CartViewState extends State<CartView> {
               ]),
             ]),
             pw.Divider(),
-            ...page,
-            pw.SizedBox(height: 10),
-            pw.Table(
-              children: <pw.TableRow>[
-                pw.TableRow(
-                  children: [
-                    pw.Text(
-                      'Total',
-                      style: pw.TextStyle(
-                        fontSize: 16,
-                        fontWeight: pw.FontWeight.bold,
-                      ),
-                    ),
-                    pw.Text(
-                      '$_totalCans',
-                      style: pw.TextStyle(
-                        fontSize: 12,
-                        fontWeight: pw.FontWeight.bold,
-                      ),
-                    ),
-                    pw.Text(
-                      '$_totalPacks',
-                      style: pw.TextStyle(
-                        fontSize: 12,
-                        fontWeight: pw.FontWeight.bold,
-                      ),
+            ...widgets[i],
+            if(i==widgets.length-1)
+              ...[
+                pw.SizedBox(height: 10),
+                pw.Table(
+                  children: <pw.TableRow>[
+                    pw.TableRow(
+                      children: [
+                        pw.Text(
+                          'Total',
+                          style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
+                        ),
+                        pw.Text(
+                          '$_totalCans',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
+                        ),
+                        pw.Text(
+                          '$_totalPacks',
+                          style: pw.TextStyle(
+                            fontSize: 12,
+                            fontWeight: pw.FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
+                  columnWidths: {
+                    0: pw.FlexColumnWidth(5.8),
+                    1: pw.FlexColumnWidth(1),
+                    2: pw.FlexColumnWidth(1),
+                  },
                 ),
-              ],
-              columnWidths: {
-                0: pw.FlexColumnWidth(5.8),
-                1: pw.FlexColumnWidth(1),
-                2: pw.FlexColumnWidth(1),
-              },
-            ),
+              ]
           ],
         );
       }));
