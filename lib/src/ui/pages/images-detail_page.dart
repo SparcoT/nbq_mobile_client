@@ -28,6 +28,7 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
         title: Text(widget.title),
       ),
       body: SimpleStreamBuilder.simpler(
+        context: context,
         stream: ImagesService().fetchByCategory(widget.title),
         builder:(List<ImageModel> images)=> kIsWeb ? Scrollbar(
           isAlwaysShown: true,
