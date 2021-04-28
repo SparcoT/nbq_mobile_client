@@ -3,9 +3,11 @@ import 'dart:isolate';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image/image.dart' as im;
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DecodeParam {
   final String file;
@@ -33,9 +35,10 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  // final imageName = (await getDownloadsDirectory()).path +
-  //     '/' +
-  //     DateTime.now().millisecondsSinceEpoch.toString();
+  final imageName = Directory.systemTemp.path +
+      '/' +
+      DateTime.now().millisecondsSinceEpoch.toString() +
+      '.png';
 
   // '.jpg';
   var loading = false;
@@ -115,6 +118,35 @@ class _ImagePageState extends State<ImagePage> {
   }
 
   _downloadImage() async {
+    if(Platform.isIOS){
+      print(imageName);
+      openLoadingDialog(context, 'Saving');
+      try {
+        await Dio()
+            .download(widget.image, imageName)
+            .then((value) =>
+            setState(() => downloaded = true));
+        // File imgFile = File(imageName);
+        var receivePort = ReceivePort();
+        final filePath =
+            '${Directory.systemTemp.path}/${DateTime.now().millisecondsSinceEpoch.toString()}.png';
+        await Isolate.spawn(
+            decodeIsolate,
+            DecodeParam(imageName + '||' + filePath,
+                receivePort.sendPort));
+        var path = await receivePort.first as String;
+        await GallerySaver.saveImage(path).then((_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Image saved')));
+        });
+        await File(imageName).delete();
+        await File(path).delete();
+      } catch (e) {
+        print(e);
+      }
+      Navigator.of(context).pop();
+    } else {
+
     Future<Directory> downloadsDirectory = DownloadsPathProvider.downloadsDirectory;
     final imageName = (await downloadsDirectory).path +
         '/' +
@@ -151,6 +183,7 @@ class _ImagePageState extends State<ImagePage> {
       print(e);
     }
     Navigator.of(context).pop();
+  }
   }
 }
 
