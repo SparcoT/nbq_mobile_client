@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image/image.dart' as im;
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
@@ -73,6 +74,7 @@ class _AddImagesState extends State<AddImages> {
                           onPressed: () async {
                             if (key.currentState.validate()) {
                               await performLazyTask(context, () async {
+
                                 var imgUrl =
                                 await FirebaseStorageService.uploadImage(
                                    await image.readAsBytes(), image.path);

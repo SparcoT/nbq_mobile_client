@@ -7,44 +7,32 @@ import 'package:video_player/video_player.dart';
 // ignore: must_be_immutable
 class VideoPage extends StatefulWidget {
   final String url;
-  String videoName;
+  final String videoName;
+  final String image;
 
-  VideoPage({this.url, this.videoName});
+  VideoPage({this.url, this.videoName, this.image});
 
   @override
   _VideoPageState createState() => _VideoPageState();
 }
 
 class _VideoPageState extends State<VideoPage> {
-  // VideoPlayerController _controller;
-  ChewieController _chewieController;
+  var _isLoading = true;
+  VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    //_controller = VideoPlayerController.network(widget.url)
-    _initVideo();
-  }
-  _initVideo()async {
-    final  videoController=VideoPlayerController.network(widget.url);
-    await videoController.initialize();
-    _chewieController = ChewieController(
-      videoPlayerController: videoController,
-      autoInitialize: true,
-      autoPlay: true,
-      looping: true,
-    );
-    setState(() {
 
+    _controller = VideoPlayerController.network(widget.url,
+        videoPlayerOptions: VideoPlayerOptions());
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.initialize().then((value) {
+        setState(() => _isLoading = false);
+        _controller.play();
+      });
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-
-    _chewieController.videoPlayerController.dispose();
-    _chewieController.dispose();
   }
 
   @override
@@ -52,25 +40,28 @@ class _VideoPageState extends State<VideoPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.videoName),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              if (_chewieController.isPlaying) await Share.share(widget.url);
-            },
-            child: Icon(Icons.share),
+      ),
+      body: Stack(children: [
+        if (_isLoading) ...[
+          Image.network(
+            widget.image,
+            fit: BoxFit.fitWidth,
+            color: Colors.white.withOpacity(.3),
+            colorBlendMode: BlendMode.modulate,
           ),
-        ],
-      ),
-      body: Center(
-        child: _chewieController?.isPlaying??false
-            ? Stack(
-                children: [
-                  Chewie(controller: _chewieController),
-//                VideoPlayer(_controller),
-                ],
-              )
-            : CircularProgressIndicator(),
-      ),
+//          Center(child: CircularProgressIndicator()),
+        ] else
+          AspectRatio(
+            aspectRatio: 1 /3 ,
+            child: VideoPlayer(_controller),
+          ),
+      ]),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

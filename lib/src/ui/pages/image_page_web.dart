@@ -40,8 +40,9 @@ class _ImagePageWebState extends State<WebImagePage> {
                 width: double.infinity,
                 child: TextButton.icon(
                   onPressed: () {
+                    final png = "image.jpeg";
                     AnchorElement()
-                      ..download = widget.image.split('/').last
+                      ..download = png
                       ..href = widget.image
                       ..click();
                     _scaffoldKey.currentState

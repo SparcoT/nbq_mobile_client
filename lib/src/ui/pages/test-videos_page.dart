@@ -123,6 +123,7 @@ class _UserVideosPageState extends State<UserVideosPage> {
                     onTap: () => AppNavigation.navigateTo(
                       context,
                       VideoPage(
+                        image: video.image,
                         url: video.video,
                         videoName:
                             LocalizationSelector.locale.value.languageCode ==

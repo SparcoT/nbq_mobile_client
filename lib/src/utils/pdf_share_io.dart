@@ -7,5 +7,5 @@ Future<void> sharePDF(Document document) async {
   final file = File(path);
   await file.writeAsBytes(await document.save());
   await Share.shareFiles([path]);
-  await file.delete();
+//  await file.delete();
 }

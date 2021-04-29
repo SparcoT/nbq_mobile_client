@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
@@ -10,7 +9,6 @@ import 'package:nbq_mobile_client/src/ui/views/products_view.dart';
 import 'package:nbq_mobile_client/src/ui/views/contact_us_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'design-images_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,11 +50,11 @@ class HomePageState extends State<HomePage>
           indicatorColor: AppTheme.primaryColor,
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
           tabs: [
-            _NavBarTab(Assets.homeIcon),
-            _NavBarTab(Assets.dropIcon),
-            _NavBarTab(Assets.folderIcon),
-            _NavBarTab(Assets.cartIcon),
-            _NavBarTab(Assets.contactIcon),
+            _NavBarTab(Assets.homeIcon,context),
+            _NavBarTab(Assets.dropIcon,context),
+            _NavBarTab(Assets.folderIcon,context),
+            _NavBarTab(Assets.cartIcon,context),
+            _NavBarTab(Assets.contactIcon,context),
           ],
         ),
       )
@@ -117,11 +115,11 @@ class HomePageState extends State<HomePage>
           indicatorColor: AppTheme.primaryColor,
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 17),
           tabs: [
-            _NavBarTab(Assets.homeIcon,32,32),
-            _NavBarTab(Assets.dropIcon),
-            _NavBarTab(Assets.folderIcon,26,26),
-            _NavBarTab(Assets.cartIcon),
-            _NavBarTab(Assets.contactIcon,28,28),
+            _NavBarTab(Assets.homeIcon,context,32,32),
+            _NavBarTab(Assets.dropIcon,context),
+            _NavBarTab(Assets.folderIcon,context,26,26),
+            _NavBarTab(Assets.cartIcon,context),
+            _NavBarTab(Assets.contactIcon,context,28,28),
           ],
         ),
       ),
@@ -130,11 +128,12 @@ class HomePageState extends State<HomePage>
 }
 
 class _NavBarTab extends Tab {
-  _NavBarTab(String asset,[double height=24,double width=24])
+  _NavBarTab(String asset,BuildContext context,[double height=24,double width=24])
       : super(
           icon: Image.asset(
             asset,
             color: Colors.grey,
+            cacheWidth: MediaQuery.of(context).size.width.toInt(),
             width: width,
             height: height,
           ),

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -103,20 +101,9 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
           children: [
             Stack(
               children: [
-                  if (Platform.isIOS || kIsWeb)
-                    IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
                 Padding(
                   padding: EdgeInsets.only(
-                    left: kIsWeb
-                        ? 0
-                        : Platform.isIOS
-                            ? 40
-                            : 0,
+                    left: 40,
                   ),
                   child: Row(
                     children: [
@@ -150,6 +137,12 @@ class __ProductDetailPageAppBarState extends State<_ProductDetailPageAppBar> {
                     ),
                   ),
                 ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
               ],
             ),
             Spacer(),

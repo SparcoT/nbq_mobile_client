@@ -10,6 +10,8 @@ import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 
+import 'add-video.dart';
+
 class AdminVideosPage extends StatefulWidget {
   @override
   _AdminVideosPageState createState() => _AdminVideosPageState();
@@ -47,6 +49,12 @@ class _AdminVideosPageState extends State<AdminVideosPage> {
   Widget build(BuildContext context) {
     return LocalizedView(
       builder: (ctx, lang) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: (){
+            AppNavigation.navigateTo(context, AddVideos());
+          },
+        ),
         appBar: AppBar(title: Text(lang.test)),
         body: Column(
           children: [
@@ -127,6 +135,7 @@ class _AdminVideosPageState extends State<AdminVideosPage> {
                     onTap: () => AppNavigation.navigateTo(
                       context,
                       VideoPage(
+                        image: video.image,
                         url: video.video,
                         videoName:
                         LocalizationSelector.locale.value.languageCode ==

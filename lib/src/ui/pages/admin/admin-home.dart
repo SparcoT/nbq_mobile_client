@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'manage-images.dart';
-import 'test-videos_web.dart';
+import 'manage-videos_web.dart';
 
 class AdminHome extends StatefulWidget {
   @override

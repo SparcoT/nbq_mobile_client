@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/ui/pages/admin/add-video.dart';
-import 'package:nbq_mobile_client/src/ui/pages/admin/test-videos_web.dart';
+import 'package:nbq_mobile_client/src/ui/pages/admin/manage-videos_web.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/forgot-password-dialog.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 
