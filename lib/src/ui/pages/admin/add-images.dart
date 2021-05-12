@@ -4,6 +4,7 @@ import 'package:image/image.dart' as im;
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/image_model.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/image-picker-widget.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/round-drop-down-button.dart';
@@ -78,7 +79,6 @@ class _AddImagesState extends State<AddImages> {
                                 var imgUrl =
                                 await FirebaseStorageService.uploadImage(
                                    await image.readAsBytes(), image.path);
-
                                 await FirebaseFirestore.instance
                                     .collection('images')
                                     .add(ImageModel(
