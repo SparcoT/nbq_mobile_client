@@ -20,6 +20,7 @@ abstract class AppTheme {
       style: TextButton.styleFrom(
         primary: Colors.white,
         backgroundColor: primaryColor,
+        padding: kIsWeb ? EdgeInsets.all(17) : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

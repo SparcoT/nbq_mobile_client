@@ -27,7 +27,6 @@ class NBQMap extends StatefulWidget {
 class _NBQMapState extends State<NBQMap> {
   bool _initiated = true;
 
-  // web_map.GoogleMapController _controller;
   LatLng currentLocation = LatLng(51.323946, 10.296971);
   final _markers = Set<Marker>();
 
@@ -92,20 +91,18 @@ class _NBQMapState extends State<NBQMap> {
     return LocalizedView(
       builder: (context, lang) => Scaffold(
         appBar: AppBar(
-          title: Image.asset(Assets.logo, height: 45),
+          titleSpacing: 0,
+          backgroundColor: Colors.white,
+          title: Image.asset(Assets.logo, height: 40),
           centerTitle: true,
           leading: IconButton(
             icon: Transform.rotate(
               angle: Localizations.localeOf(context).toString() == 'ar'
                   ? 3.14159
                   : 0,
-              child: Icon(Icons.arrow_back_ios),
+              child: Icon(Icons.arrow_back_ios, color: Colors.black,),
             ),
             onPressed: Navigator.of(context).pop,
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(10),
-            child: SizedBox(),
           ),
         ),
         body: _resolveMap(),
@@ -144,7 +141,8 @@ class _NBQMapState extends State<NBQMap> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
-              padding: const EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0), onPressed: () { },
+              child: null,
               // child: Image.asset(MyLocationIcon, width: 24),
             ),
           ),

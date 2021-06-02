@@ -66,276 +66,292 @@ class ContactUsViewState extends State<ContactUsView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Form(
-        key: formKey,
-        autovalidateMode: _mode,
-        child: LocalizedView(
-          builder: (context, lang) => Column(children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 18),
-              child: Text(
-                lang.contact,
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
+    return LocalizedView(
+      builder: (context, lang) => SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constraints) => Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 18),
+                child: Text(
+                  lang.contact,
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 16,
+                    color: Colors.grey.shade600,
+                  ),
                 ),
               ),
-            ),
-         kIsWeb?           Container(
-           margin: const EdgeInsets.symmetric(horizontal: 400,vertical: 15),
-           padding: const EdgeInsets.only(bottom: 10),
-           decoration: BoxDecoration(
-             color: Color(0xFFF5F5F5),
-             borderRadius: BorderRadius.circular(22),
-             boxShadow: [
-               BoxShadow(
-                 color: Colors.grey.shade400,
-                 blurRadius: 3,
-                 offset: Offset(0, 2),
-               )
-             ],
-           ),
-           child: Column(
-             children: [
-               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                 child: Column(
-                   children: [
-                     AppTextField(
-                       value: _contact.name,
-                       label: lang.name,
-                       validator: Validators.required,
-                       onSaved: (value) => _contact.name = value,
-                     ),
-                     AppTextField(
-                       label: lang.email,
-                       value: _contact.email,
-                       validator: emailValidator,
-                       onSaved: (value) => _contact.email = value,
-                     ),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 18),
-                       child: Text(
-                         lang.message,
-                         style: GoogleFonts.bebasNeue(
-                           fontSize: 16,
-                           color: Colors.grey.shade600,
-                         ),
-                       ),
-                     ),
-                   ],
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                 ),
-               ),
-               Container(
-                 margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
-                 child: TextFormField(
-                   maxLines: 4,
-                   onSaved: (value) => _contact.email = value,
-                   validator: Validators.required,
-                   initialValue: _contact.message,
-                   decoration: InputDecoration(
-                     filled: true,
-                     fillColor: Colors.white,
-                     contentPadding: EdgeInsets.all(10),
-                     border: OutlineInputBorder(
-                       borderRadius: BorderRadius.circular(10),
-                     ),
-                   ),
-                 ),
-                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(16),
-                   boxShadow: [
-                     BoxShadow(
-                       offset: Offset(2, 2),
-                       color: Colors.grey.shade400,
-                       blurRadius: 2,
-                     )
-                   ],
-                 ),
-               ),
-               Padding(
-                 padding: const EdgeInsets.only(left: 7.5, right: 9),
-                 child: Row(children: [
-                   Checkbox(
-                     value: _termsAccepted,
-                     visualDensity: VisualDensity.compact,
-                     onChanged: (val) =>
-                         setState(() => _termsAccepted = val),
-                   ),
-                   Expanded(
-                       child: Text(
-                         lang.terms,
-                         style: TextStyle(fontSize: 13),
-                       )),
-                   Transform.scale(
-                     scale: .8,
-                     child: TextButton(
-                       child: Text(lang.send),
-                       style: TextButton.styleFrom(
-                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                       ),
-                       onPressed: _termsAccepted ? _sendMessage : null,
-                     ),
-                   )
-                 ]),
-               )
-             ],
-           ),
-         ):  Container(
-              margin: const EdgeInsets.fromLTRB(15, 15, 15, 35),
-              padding: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                color: Color(0xFFF5F5F5),
-                borderRadius: BorderRadius.circular(22),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade400,
-                    blurRadius: 3,
-                    offset: Offset(0, 2),
-                  )
-                ],
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      children: [
-                        AppTextField(
-                          value: _contact.name,
-                          label: lang.name,
-                          validator: Validators.required,
-                          onSaved: (value) => _contact.name = value,
-                        ),
-                        AppTextField(
-                          label: lang.email,
-                          value: _contact.email,
-                          validator: emailValidator,
-                          onSaved: (value) => _contact.email = value,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 18),
-                          child: Text(
-                            lang.message,
-                            style: GoogleFonts.bebasNeue(
-                              fontSize: 16,
-                              color: Colors.grey.shade600,
+              Container(
+                margin: const EdgeInsets.all(20),
+                constraints: BoxConstraints(maxWidth: 700),
+                padding: const EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xFFF5F5F5),
+                  borderRadius: BorderRadius.circular(22),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade400,
+                      blurRadius: 3,
+                      offset: Offset(0, 2),
+                    )
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        children: [
+                          AppTextField(
+                            value: _contact.name,
+                            label: lang.name,
+                            validator: Validators.required,
+                            onSaved: (value) => _contact.name = value,
+                          ),
+                          AppTextField(
+                            label: lang.email,
+                            value: _contact.email,
+                            validator: emailValidator,
+                            onSaved: (value) => _contact.email = value,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 18),
+                            child: Text(
+                              lang.message,
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 16,
+                                color: Colors.grey.shade600,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
-                    child: TextFormField(
-                      maxLines: 4,
-                      onSaved: (value) => _contact.email = value,
-                      validator: Validators.required,
-                      initialValue: _contact.message,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: EdgeInsets.all(10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
                       ),
                     ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(2, 2),
-                          color: Colors.grey.shade400,
-                          blurRadius: 2,
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 7.5, right: 9),
-                    child: Row(children: [
-                      Checkbox(
-                        value: _termsAccepted,
-                        visualDensity: VisualDensity.compact,
-                        onChanged: (val) =>
-                            setState(() => _termsAccepted = val),
-                      ),
-                      Expanded(
-                          child: Text(
-                        lang.terms,
-                        style: TextStyle(fontSize: 13),
-                      )),
-                      Transform.scale(
-                        scale: .8,
-                        child: TextButton(
-                          child: Text(lang.send),
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
+                      child: TextFormField(
+                        maxLines: 4,
+                        onSaved: (value) => _contact.email = value,
+                        validator: Validators.required,
+                        initialValue: _contact.message,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: EdgeInsets.all(10),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          onPressed: _termsAccepted ? _sendMessage : null,
                         ),
-                      )
-                    ]),
-                  )
-                ],
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(2, 2),
+                            color: Colors.grey.shade400,
+                            blurRadius: 2,
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 7.5, right: 9),
+                      child: Row(children: [
+                        Checkbox(
+                          value: _termsAccepted,
+                          visualDensity: VisualDensity.compact,
+                          onChanged: (val) =>
+                              setState(() => _termsAccepted = val),
+                        ),
+                        Expanded(
+                            child: Text(
+                          lang.terms,
+                          style: TextStyle(fontSize: 13),
+                        )),
+                        Transform.scale(
+                          scale: .8,
+                          child: TextButton(
+                            child: Text(lang.send),
+                            style: TextButton.styleFrom(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                            ),
+                            onPressed: _termsAccepted ? _sendMessage : null,
+                          ),
+                        )
+                      ]),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 30),
-              child: Row(children: [
-                TextButton(
-                  child: Text('WEB'),
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 35),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Row(children: [
+                  TextButton(
+                    child: Text('WEB'),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
+                    ),
+                    onPressed: () => launch('https://nbqpro.com/en/'),
                   ),
-                  onPressed: () => launch('https://nbqpro.com/en/'),
-                ),
-                SizedBox(width: 5),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: const StadiumBorder(),
-                    minimumSize: const Size(35, 35),
+                  SizedBox(width: 5),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: const StadiumBorder(),
+                      minimumSize: const Size(35, 35),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 6, left: 5),
+                      child: Icon(FontAwesomeIcons.facebookF, size: 27),
+                    ),
+                    onPressed: () =>
+                        launch('https://www.facebook.com/NBQCompany/'),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 6, left: 5),
-                    child: Icon(FontAwesomeIcons.facebookF, size: 27),
+                  SizedBox(width: 5),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: const StadiumBorder(),
+                      minimumSize: const Size(40, 40),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: Icon(FontAwesomeIcons.instagram),
+                    ),
+                    onPressed: () =>
+                        launch('https://www.instagram.com/nbqspray/'),
                   ),
-                  onPressed: () =>
-                      launch('https://www.facebook.com/NBQCompany/'),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: const StadiumBorder(),
-                    minimumSize: const Size(35, 35),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 2),
-                    child: Icon(FontAwesomeIcons.instagram),
-                  ),
-                  onPressed: () =>
-                      launch('https://www.instagram.com/nbqspray/'),
-                ),
-              ], mainAxisAlignment: MainAxisAlignment.center),
-            ),
-            Text(
-              '''C/ Empalme 27
+                ], mainAxisAlignment: MainAxisAlignment.center),
+              ),
+              Text(
+                '''C/ Empalme 27
 43712 LLORENS DEL PENEDÉS (Spain)
 Tel. +34 977 677 305
             ''',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.bebasNeue(),
-            ),
-          ]),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.bebasNeue(fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
     );
+//     return SingleChildScrollView(
+//       physics: BouncingScrollPhysics(),
+//       child: Form(
+//           key: formKey,
+//           autovalidateMode: _mode,
+//           child: false ? Container()
+//               : Container(
+//             margin: const EdgeInsets.fromLTRB(15, 15, 15, 35),
+//             padding: const EdgeInsets.only(bottom: 10),
+//             decoration: BoxDecoration(
+//               color: Color(0xFFF5F5F5),
+//               borderRadius: BorderRadius.circular(22),
+//               boxShadow: [
+//                 BoxShadow(
+//                   color: Colors.grey.shade400,
+//                   blurRadius: 3,
+//                   offset: Offset(0, 2),
+//                 )
+//               ],
+//             ),
+//             child: Column(
+//               children: [
+//                 Padding(
+//                   padding: const EdgeInsets.symmetric(horizontal: 15),
+//                   child: Column(
+//                     children: [
+//                       AppTextField(
+//                         value: _contact.name,
+//                         label: lang.name,
+//                         validator: Validators.required,
+//                         onSaved: (value) => _contact.name = value,
+//                       ),
+//                       AppTextField(
+//                         label: lang.email,
+//                         value: _contact.email,
+//                         validator: emailValidator,
+//                         onSaved: (value) => _contact.email = value,
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 18),
+//                         child: Text(
+//                           lang.message,
+//                           style: GoogleFonts.bebasNeue(
+//                             fontSize: 16,
+//                             color: Colors.grey.shade600,
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                   ),
+//                 ),
+//                 Container(
+//                   margin: const EdgeInsets.fromLTRB(15, 5, 15, 15),
+//                   child: TextFormField(
+//                     maxLines: 4,
+//                     onSaved: (value) => _contact.email = value,
+//                     validator: Validators.required,
+//                     initialValue: _contact.message,
+//                     decoration: InputDecoration(
+//                       filled: true,
+//                       fillColor: Colors.white,
+//                       contentPadding: EdgeInsets.all(10),
+//                       border: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(10),
+//                       ),
+//                     ),
+//                   ),
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(16),
+//                     boxShadow: [
+//                       BoxShadow(
+//                         offset: Offset(2, 2),
+//                         color: Colors.grey.shade400,
+//                         blurRadius: 2,
+//                       )
+//                     ],
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: const EdgeInsets.only(left: 7.5, right: 9),
+//                   child: Row(children: [
+//                     Checkbox(
+//                       value: _termsAccepted,
+//                       visualDensity: VisualDensity.compact,
+//                       onChanged: (val) =>
+//                           setState(() => _termsAccepted = val),
+//                     ),
+//                     Expanded(
+//                         child: Text(
+//                           lang.terms,
+//                           style: TextStyle(fontSize: 13),
+//                         )),
+//                     Transform.scale(
+//                       scale: .8,
+//                       child: TextButton(
+//                         child: Text(lang.send),
+//                         style: TextButton.styleFrom(
+//                           padding: const EdgeInsets.symmetric(
+//                               horizontal: 20),
+//                         ),
+//                         onPressed: _termsAccepted ? _sendMessage : null,
+//                       ),
+//                     )
+//                   ]),
+//                 )
+//               ],
+//             ),
+//           ),
+//
+//           ]),
+//     ),)
+//     ,
+//     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -21,57 +22,69 @@ class ImagesDetailPage extends StatefulWidget {
 }
 
 class _ImagesDetailPageState extends State<ImagesDetailPage> {
+  var _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseStorage.instance.ref(widget.title).list().then((value) {
+      print(value.items);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        title: Text(widget.title, style: TextStyle(color: Colors.black)),
       ),
-      body: SimpleStreamBuilder.simpler(
-        context: context,
-        stream: ImagesService().fetchByCategory(widget.title),
-        builder:(List<ImageModel> images)=> kIsWeb ? Scrollbar(
-          isAlwaysShown: true,
-            thickness: 15,
-            child: imgGrid(images)) : imgGrid(images),
-      ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return GridView.builder(
+          itemBuilder: (context, index) => Image.network(''),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+        );
+      }),
     );
   }
 
-  Widget imgGrid(List<ImageModel> images)=>GridView.builder(
-    itemCount: images.length,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: kIsWeb ? 5 : 2,
-      crossAxisSpacing: kIsWeb ? 12 : 4.0,
-      mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
-    ),
-    itemBuilder: (ctx, index) {
-      final _image = images[index].image;
-      final image = Image.network(
-        _image,
-        fit: BoxFit.fill,
-        // height: 300,
-        cacheHeight: 200,
-        cacheWidth: 200,
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) {
-            return child;
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
-
-      return InkWell(
-        onTap: () {
-          return AppNavigation.navigateTo(
-            context,
-            createImagePage(image: _image, imageWidget: image),
-          );
-        },
-        child: Hero(tag: _image, child: image),
-      );
-    },
-  );
+// Widget imgGrid(List<ImageModel> images)=>GridView.builder(
+//   itemCount: images.length,
+//   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//     crossAxisCount: kIsWeb ? 5 : 2,
+//     crossAxisSpacing: kIsWeb ? 12 : 4.0,
+//     mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
+//   ),
+//   itemBuilder: (ctx, index) {
+//     final _image = images[index].image;
+//     final image = Image.network(
+//       _image,
+//       fit: BoxFit.fill,
+//       // height: 300,
+//       cacheHeight: 200,
+//       cacheWidth: 200,
+//       loadingBuilder: (context, child, loadingProgress) {
+//         if (loadingProgress == null) {
+//           return child;
+//         }
+//         return Center(
+//           child: CircularProgressIndicator(),
+//         );
+//       },
+//     );
+//
+//     return InkWell(
+//       onTap: () {
+//         return AppNavigation.navigateTo(
+//           context,
+//           createImagePage(image: _image, imageWidget: image),
+//         );
+//       },
+//       child: Hero(tag: _image, child: image),
+//     );
+//   },
+// );
 }

@@ -1,13 +1,18 @@
+import 'package:hive/hive.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
 
-class CartProduct {
+part 'cart.g.dart';
+
+@HiveType(typeId: 5)
+class CartProduct with HiveObjectMixin {
+  @HiveField(0)
   int cans;
+  @HiveField(1)
   int packs;
+  @HiveField(3)
   Product product;
 
-  CartProduct(this.product)
-      : cans = 0,
-        packs = 0;
+  CartProduct({this.product, this.cans = 0, this.packs = 0});
 }
 
 class Cart {
@@ -27,6 +32,11 @@ class Cart {
 
   void addAll(Iterable<CartProduct> products) {
     _products.addAll(products);
+  }
+
+
+  void removeProductsOf(ProductCategory category) {
+    _products.removeWhere((element) => element.product.category == category);
   }
 
   void clear() => _products.clear();

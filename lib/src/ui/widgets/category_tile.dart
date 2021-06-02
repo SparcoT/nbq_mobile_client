@@ -76,6 +76,7 @@ class CategoryTile extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 45),
               child: TextButton(
                 onPressed: () {
+                  // Navigator.of(context).pushNamed('/products', arguments: _detail);
                   AppNavigation.navigateTo(context, ProductDetailPage(_detail));
                 },
                 style: TextButton.styleFrom(
@@ -103,19 +104,19 @@ class CategoryTile extends StatelessWidget {
                       _detail.name,
                       style: TextStyle(fontFamily: 'Futura', fontSize: 42),
                     ),
-                    Text(
-                      Product.all
-                              .where((element) =>
-                                  element.category == _detail.category)
-                              .length
-                              .toString() +
-                          ' ${lang.colors}',
-                      style: GoogleFonts.bebasNeue(
-                        fontSize: 12,
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
+                    // Text(
+                    //   Product.all
+                    //           .where((element) =>
+                    //               element.category == _detail.category)
+                    //           .length
+                    //           .toString() +
+                    //       ' ${lang.colors}',
+                    //   style: GoogleFonts.bebasNeue(
+                    //     fontSize: 12,
+                    //     color: Colors.black,
+                    //     fontWeight: FontWeight.normal,
+                    //   ),
+                    // ),
                   ],
                     crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,),
                 ]),
@@ -127,6 +128,7 @@ class CategoryTile extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 45),
               child: TextButton(
                 onPressed: () {
+                  // Navigator.of(context).pushNamed('/products', arguments: _detail);
                   AppNavigation.navigateTo(context, ProductDetailPage(_detail));
                 },
                 style: TextButton.styleFrom(
@@ -164,11 +166,11 @@ class CategoryTile extends StatelessWidget {
                       style: TextStyle(fontFamily: 'Futura', fontSize: 42),
                     ),
                     Text(
-                      Product.all
-                              .where((element) =>
-                                  element.category == _detail.category)
-                              .length
-                              .toString() +
+                      // Product.all
+                      //         .where((element) =>
+                      //             element.category == _detail.category)
+                      //         .length
+                      //         .toString() +
                           ' ${lang.colors}',
                       style: GoogleFonts.bebasNeue(
                         fontSize: 12,

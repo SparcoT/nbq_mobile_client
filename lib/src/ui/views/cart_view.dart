@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import '../../utils/pdf_share.dart'
     if (dart.library.io) '../../utils/pdf_share_io.dart'
     if (dart.library.html) '../../utils/pdf_share_html.dart';
@@ -23,12 +25,14 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
+  var _loading = true;
   var isHeaderBuilt = false;
 
   final _wtfProducts = <CartProduct>[];
   final _proProducts = <CartProduct>[];
   final _slowProducts = <CartProduct>[];
   final _fastProducts = <CartProduct>[];
+  LazyBox<CartProduct> _cart;
 
   final _data = OrderData();
 
@@ -37,249 +41,91 @@ class _CartViewState extends State<CartView> {
   var _cans = 0;
   var _packs = 0;
 
+  Future<void> _loadProducts() async {
+    _cart = Hive.lazyBox<CartProduct>('cart_products');
+
+    for (final key in _cart.keys) {
+      final char = key[0];
+      final element = await _cart.get(key);
+
+      if (char == '0') {
+        _slowProducts.add(element);
+      } else if (char == '1') {
+        _fastProducts.add(element);
+      } else if (char == '2') {
+        _wtfProducts.add(element);
+      } else if (char == '3') {
+        _proProducts.add(element);
+      }
+
+      _cans += element.cans;
+      _packs += element.cans;
+    }
+
+    setState(() {
+      _loading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-
-    _slowProducts.addAll(Cart()
-        .products
-        .where((e) => e.product.category == ProductCategory.slow));
-
-    _fastProducts.addAll(Cart()
-        .products
-        .where((e) => e.product.category == ProductCategory.fast));
-
-    _wtfProducts.addAll(Cart()
-        .products
-        .where((e) => e.product.category == ProductCategory.wtf));
-
-    _proProducts.addAll(Cart()
-        .products
-        .where((e) => e.product.category == ProductCategory.pro));
-
-    Cart().products.forEach((element) {
-      _cans += element.cans;
-      _packs += element.packs;
-    });
+    _loadProducts();
   }
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    isHeaderBuilt = false;
+    if (_loading) {
+      return Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CupertinoActivityIndicator(),
+            SizedBox(width: 10),
+            Text('Loading Cart'),
+          ],
+        ),
+      );
+    }
 
-    return kIsWeb
-        ? Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 350, vertical: 8),
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 12,
-                right: 8,
-                bottom: 12,
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(width: 1, color: Colors.grey)),
-              child: Form(
-                key: _formKey,
-                autovalidateMode: _mode,
-                child: LocalizedView(
-                  builder: (context, lang) => CustomScrollView(
-                      physics: BouncingScrollPhysics(),
-                      slivers: [
-                        if (Cart().products.isNotEmpty)
-                          SliverToBoxAdapter(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 15),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: TextButton.icon(
-                                  style: TextButton.styleFrom(
-                                    minimumSize: Size(50, 15),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _slowProducts.clear();
-                                      _fastProducts.clear();
-                                      _wtfProducts.clear();
-                                      _proProducts.clear();
-
-                                      Cart().clear();
-                                    });
-                                  },
-                                  icon: Padding(
-                                    padding: const EdgeInsets.all(4.0),
-                                    child: Icon(
-                                      CupertinoIcons.trash,
-                                      size: 15,
-                                    ),
-                                  ),
-                                  label: Padding(
-                                    padding: const EdgeInsets.only(right: 4),
-                                    child: Text(
-                                      'Clear',
-                                      style: TextStyle(fontSize: 13),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (_slowProducts.isNotEmpty) ...[
-                          SliverToBoxAdapter(child: _buildHeader('SLOW')),
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: ColorTile(_slowProducts[index]),
-                              ),
-                              childCount: _slowProducts.length,
-                            ),
-                          ),
-                        ],
-                        if (_fastProducts.isNotEmpty) ...[
-                          SliverToBoxAdapter(child: _buildHeader('FAST')),
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: ColorTile(_fastProducts[index]),
-                              ),
-                              childCount: _fastProducts.length,
-                            ),
-                          ),
-                        ],
-                        if (_wtfProducts.isNotEmpty) ...[
-                          SliverToBoxAdapter(child: _buildHeader('WTF')),
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: ColorTile(_wtfProducts[index]),
-                              ),
-                              childCount: _wtfProducts.length,
-                            ),
-                          ),
-                        ],
-                        if (_proProducts.isNotEmpty) ...[
-                          SliverToBoxAdapter(child: _buildHeader('PRO')),
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (context, index) => Padding(
-                                padding: const EdgeInsets.only(bottom: 5),
-                                child: ColorTile(_proProducts[index]),
-                              ),
-                              childCount: _proProducts.length,
-                            ),
-                          ),
-                        ],
-                        if (Cart().products.isNotEmpty) ...[
-                          SliverPadding(
-                            padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
-                            sliver: SliverToBoxAdapter(
-                                child: AppTextField(
-                              label: lang.name,
-                              // validator: Validators.required,
-                              onSaved: (val) => _data.name = val,
-                            )),
-                          ),
-                          SliverPadding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            sliver: SliverToBoxAdapter(
-                                child: AppTextField(
-                              label: lang.email,
-                              keyboardType: TextInputType.emailAddress,
-                              // validator: (val) => emailValidator(val),
-                              onSaved: (val) => _data.email = val,
-                            )),
-                          ),
-                          SliverPadding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            sliver: SliverToBoxAdapter(
-                              child: AppTextField(
-                                label: lang.telephone,
-                                keyboardType: TextInputType.phone,
-                                // validator: Validators.required,
-                                onSaved: (val) => _data.contact = val,
-                              ),
-                            ),
-                          ),
-                          SliverPadding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                            sliver: SliverToBoxAdapter(
-                              child: AppTextField(
-                                maxLines: 3,
-                                label: "Note",
-                                // validator: Validators.required,
-                                onSaved: (val) => _data.note = val,
-                              ),
-                            ),
-                          ),
-                          SliverPadding(
-                            padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
-                            sliver: SliverToBoxAdapter(
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  if (!_formKey.currentState.validate()) {
-                                    setState(() {
-                                      _mode = AutovalidateMode.always;
-                                    });
-                                    return;
-                                  }
-                                  _formKey.currentState.save();
-                                  await _generatePdf();
-                                },
-                                child: Text(
-                                    kIsWeb ? "DOWNLOAD" : lang.sendOrShare),
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 5,
-                                  primary: Colors.black,
-                                  onPrimary: AppTheme.primaryColor,
-                                  minimumSize: Size.fromHeight(40),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ] else
-                          SliverFillRemaining(
-                            child: Center(
-                              child: Text(
-                                lang.noProducts,
-                                style: TextStyle(
-                                    fontSize: 20, fontFamily: 'Futura'),
-                              ),
-                            ),
-                          )
-                      ]),
-                ),
-              ),
-            ),
-          )
-        : Form(
-            key: _formKey,
-            autovalidateMode: _mode,
-            child: LocalizedView(
-              builder: (context, lang) =>
-                  CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
-                if (Cart().products.isNotEmpty)
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, .2),
+            blurRadius: 10,
+          )],
+        ),
+        constraints: BoxConstraints(maxWidth: 700),
+        child: Form(
+          key: _formKey,
+          autovalidateMode: _mode,
+          child: LocalizedView(
+            builder: (context, lang) => CustomScrollView(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverToBoxAdapter(child: SizedBox(height: 15)),
+                if (_cart.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            minimumSize: Size(50, 15),
-                          ),
-                          onPressed: () {
+                          onPressed: () async {
+                            await _cart.clear();
+
                             setState(() {
                               _slowProducts.clear();
                               _fastProducts.clear();
                               _wtfProducts.clear();
                               _proProducts.clear();
-
-                              Cart().clear();
                             });
                           },
                           icon: Icon(
@@ -342,7 +188,7 @@ class _CartViewState extends State<CartView> {
                     ),
                   ),
                 ],
-                if (Cart().products.isNotEmpty) ...[
+                if (_cart.isNotEmpty) ...[
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                     sliver: SliverToBoxAdapter(
@@ -417,9 +263,12 @@ class _CartViewState extends State<CartView> {
                       ),
                     ),
                   )
-              ]),
+              ],
             ),
-          );
+          ),
+        ),
+      ),
+    );
   }
 
   // pw.Table _generateTable(List<CartProduct> products) {
@@ -558,8 +407,8 @@ class _CartViewState extends State<CartView> {
         ));
       }
     }
-for(int i=0; i<widgets.length;i++) {
-    // for (final page in widgets) {
+    for (int i = 0; i < widgets.length; i++) {
+      // for (final page in widgets) {
       document.addPage(pw.Page(build: (context) {
         return pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -602,44 +451,43 @@ for(int i=0; i<widgets.length;i++) {
             ]),
             pw.Divider(),
             ...widgets[i],
-            if(i==widgets.length-1)
-              ...[
-                pw.SizedBox(height: 10),
-                pw.Table(
-                  children: <pw.TableRow>[
-                    pw.TableRow(
-                      children: [
-                        pw.Text(
-                          'Total',
-                          style: pw.TextStyle(
-                            fontSize: 16,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
+            if (i == widgets.length - 1) ...[
+              pw.SizedBox(height: 10),
+              pw.Table(
+                children: <pw.TableRow>[
+                  pw.TableRow(
+                    children: [
+                      pw.Text(
+                        'Total',
+                        style: pw.TextStyle(
+                          fontSize: 16,
+                          fontWeight: pw.FontWeight.bold,
                         ),
-                        pw.Text(
-                          '$_totalCans',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
+                      ),
+                      pw.Text(
+                        '$_totalCans',
+                        style: pw.TextStyle(
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
                         ),
-                        pw.Text(
-                          '$_totalPacks',
-                          style: pw.TextStyle(
-                            fontSize: 12,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
+                      ),
+                      pw.Text(
+                        '$_totalPacks',
+                        style: pw.TextStyle(
+                          fontSize: 12,
+                          fontWeight: pw.FontWeight.bold,
                         ),
-                      ],
-                    ),
-                  ],
-                  columnWidths: {
-                    0: pw.FlexColumnWidth(5.8),
-                    1: pw.FlexColumnWidth(1),
-                    2: pw.FlexColumnWidth(1),
-                  },
-                ),
-              ]
+                      ),
+                    ],
+                  ),
+                ],
+                columnWidths: {
+                  0: pw.FlexColumnWidth(5.8),
+                  1: pw.FlexColumnWidth(1),
+                  2: pw.FlexColumnWidth(1),
+                },
+              ),
+            ]
           ],
         );
       }));
