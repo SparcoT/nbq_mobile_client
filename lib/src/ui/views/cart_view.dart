@@ -255,11 +255,14 @@ class _CartViewState extends State<CartView> {
                     ),
                   ),
                 ] else
-                  SliverFillRemaining(
+                  SliverToBoxAdapter(
                     child: Center(
-                      child: Text(
-                        lang.noProducts,
-                        style: TextStyle(fontSize: 20, fontFamily: 'Futura'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(100),
+                        child: Text(
+                          lang.noProducts,
+                          style: TextStyle(fontSize: 20, fontFamily: 'Futura'),
+                        ),
                       ),
                     ),
                   )

@@ -47,25 +47,49 @@ class _DesignImagesState extends State<DesignImages> {
       return LayoutBuilder(
         builder: (context, constraints) {
           final crossAxisCount = constraints.maxWidth < 700 ? 1 : 2;
-          final itemWidth =
-              (constraints.maxWidth - (15 * crossAxisCount) - 15) ~/
-                  crossAxisCount;
-          final itemHeight = (itemWidth * .3).toInt();
 
-          return GridView.count(
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: 6,
-            physics: BouncingScrollPhysics(),
-            padding: const EdgeInsets.all(20),
-            crossAxisCount: crossAxisCount,
-            children: _folders
-                .map((e) => _FolderTile(title: e, context: context))
-                .toList(),
+          return Scaffold(
+            body: GridView.count(
+              mainAxisSpacing: 20,
+              crossAxisSpacing: 20,
+              childAspectRatio: 6,
+              physics: BouncingScrollPhysics(),
+              padding: const EdgeInsets.all(20),
+              crossAxisCount: crossAxisCount,
+              children: _folders
+                  .map((e) => _FolderTile(title: e, context: context))
+                  .toList(),
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: _handleFolderCreate,
+              icon: Icon(Icons.create_new_folder),
+              label: Text('Create New Folder'),
+            ),
           );
         },
       );
     }
+  }
+
+  void _handleFolderCreate() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(child: Text('Create a new Folder')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Folder Name'
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
