@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nbq_mobile_client/src/firebase-videos/firebase-storage-service.dart';
 import 'package:nbq_mobile_client/src/ui/pages/images-detail_page.dart';
 
 import '../../app.dart';
@@ -27,6 +25,10 @@ class _DesignImagesState extends State<DesignImages> {
   }
 
   _updateFolders() async {
+    _loading = true;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {});
+    });
     final folders = await FirebaseStorage.instance.ref().list();
     _folders = folders.prefixes.map((e) => e.fullPath).toList();
 
@@ -83,7 +85,9 @@ class _DesignImagesState extends State<DesignImages> {
   void _handleFolderCreate() {
     showDialog(
       context: context,
-      builder: (context) => _CreateFolderDialog(),
+      builder: (context) => _CreateFolderDialog(
+        onUpdated: _updateFolders,
+      ),
     );
   }
 }
@@ -117,7 +121,9 @@ class _FolderTile extends Material {
 }
 
 class _CreateFolderDialog extends StatefulWidget {
-  const _CreateFolderDialog({Key key}) : super(key: key);
+  final VoidCallback onUpdated;
+
+  const _CreateFolderDialog({Key key, this.onUpdated}) : super(key: key);
 
   @override
   __CreateFolderDialogState createState() => __CreateFolderDialogState();
@@ -224,14 +230,17 @@ class __CreateFolderDialogState extends State<_CreateFolderDialog> {
                         name = DateTime.now().toString() + name.split('.').last;
 
                         await (FirebaseStorage.instance
-                            .ref('$folderName/$name')
-                            .putData(_selectedImage[i].bytes)
-                            ..snapshotEvents.listen((event) => controller.add(event.bytesTransferred))).then((val) {
-                        });
+                                .ref('$folderName/$name')
+                                .putData(_selectedImage[i].bytes)
+                                  ..snapshotEvents.listen((event) =>
+                                      controller.add(event.bytesTransferred)))
+                            .then((val) {});
                       }
 
                       controller.close();
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                      widget.onUpdated();
                     },
                   ),
                 ]),
