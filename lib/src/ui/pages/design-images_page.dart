@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -36,7 +37,7 @@ class _DesignImagesState extends State<DesignImages> {
 
   @override
   Widget build(BuildContext context) {
-    return _CreateFolderDialog();
+    // return _CreateFolderDialog();
 
     if (_loading) {
       return Center(
@@ -123,79 +124,119 @@ class _CreateFolderDialog extends StatefulWidget {
 }
 
 class __CreateFolderDialogState extends State<_CreateFolderDialog> {
+  var folderName = '';
+  final _key = GlobalKey<FormState>();
   List<PlatformFile> _selectedImage = [];
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      // title: Center(child: Text('Create a new Folder')),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(40, 48, 40, 36),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 700),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Folder Name'),
-              ),
-              SizedBox(height: 20),
-              Container(
-                constraints: BoxConstraints.expand(height: 200),
-                color: Colors.grey.shade200,
-                child: _selectedImage.isEmpty
-                    ? Center(
-                        child: Text(
-                          'Select At least one image to proceed',
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: _selectedImage.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return SelectedImage(image: _selectedImage[index]);
-                        },
-                      ),
-              ),
-              SizedBox(height: 15),
-              Row(children: [
-                OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    primary: AppTheme.primaryColor,
-                    padding: kIsWeb ? EdgeInsets.all(17) : null,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    side: BorderSide(color: AppTheme.primaryColor),
-                  ),
-                  label: Text('Add Image'),
-                  icon: Icon(Icons.upload_outlined),
-                  onPressed: () async {
-                    final _files = await FilePicker.platform.pickFiles(
-                      type: FileType.image,
-                      allowMultiple: false,
-                    );
-                    if (_selectedImage == null) return;
-                    _selectedImage.addAll(_files.files);
-                    setState(() {});
-                  },
-                ),
-                Spacer(),
-                TextButton(
-                  child: Text('Create'),
-                  onPressed: () async {
-                    final task = FirebaseStorage.instance.ref('').putData([]);
+      child: Form(
+        key: _key,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(40, 48, 40, 36),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 700),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  validator: (val) {
+                    if (val == null || val == '') {
+                      return 'Enter a valid folder name';
+                    }
 
-                    task.snapshotEvents.listen((event) {
-                      event.bytesTransferred;
-                    });
-                    // if (_selectedImage == null) return;
-                    // await FirebaseStorageService.uploadImage(
-                    //     _selectedImage.bytes, _selectedImage.path);
+                    return null;
                   },
+                  onSaved: (val) => folderName = val,
+                  decoration: InputDecoration(labelText: 'Folder Name'),
                 ),
-              ]),
-            ],
+                SizedBox(height: 20),
+                Container(
+                  constraints: BoxConstraints.expand(height: 200),
+                  color: Colors.grey.shade200,
+                  child: _selectedImage.isEmpty
+                      ? Center(
+                          child: Text('Select At least one image to proceed'),
+                        )
+                      : ListView.builder(
+                          itemCount: _selectedImage.length,
+                          scrollDirection: Axis.horizontal,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          itemBuilder: (context, index) {
+                            return SelectedImage(
+                              image: _selectedImage[index],
+                              onRemoved: () {
+                                _selectedImage.removeAt(index);
+                                setState(() {});
+                              },
+                            );
+                          },
+                        ),
+                ),
+                SizedBox(height: 15),
+                Row(children: [
+                  OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      primary: AppTheme.primaryColor,
+                      padding: kIsWeb ? EdgeInsets.all(17) : null,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      side: BorderSide(color: AppTheme.primaryColor),
+                    ),
+                    label: Text('Add Image'),
+                    icon: Icon(Icons.upload_outlined),
+                    onPressed: () async {
+                      final _files = await FilePicker.platform.pickFiles(
+                        type: FileType.image,
+                        allowMultiple: false,
+                      );
+                      if (_selectedImage == null) return;
+                      _selectedImage.addAll(_files.files);
+                      setState(() {});
+                    },
+                  ),
+                  // UploadingDialog(),
+                  Spacer(),
+                  TextButton(
+                    child: Text('Create'),
+                    onPressed: () async {
+                      if (_key.currentState.validate()) {
+                        _key.currentState.save();
+                      }
+
+                      final total = _selectedImage.fold(
+                          0,
+                          (previousValue, element) =>
+                              previousValue + element.size);
+
+                      final controller = StreamController<int>();
+                      showDialog(
+                        context: context,
+                        builder: (context) => UploadingDialog(
+                          total: total,
+                          progress: controller.stream,
+                        ),
+                      );
+                      for (int i = 0; i < _selectedImage.length; ++i) {
+                        var name = _selectedImage[i].name;
+                        name = DateTime.now().toString() + name.split('.').last;
+
+                        await (FirebaseStorage.instance
+                            .ref('$folderName/$name')
+                            .putData(_selectedImage[i].bytes)
+                            ..snapshotEvents.listen((event) => controller.add(event.bytesTransferred))).then((val) {
+                        });
+                      }
+
+                      controller.close();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ]),
+              ],
+            ),
           ),
         ),
       ),
@@ -203,32 +244,80 @@ class __CreateFolderDialogState extends State<_CreateFolderDialog> {
   }
 }
 
-class SelectedImage extends StatefulWidget {
-  final PlatformFile image;
+class UploadingDialog extends StatefulWidget {
+  final int total;
+  final Stream<int> progress;
+  final VoidCallback onCanceled;
 
-  const SelectedImage({this.image}) : super();
+  const UploadingDialog({
+    this.total,
+    this.progress,
+    this.onCanceled,
+  }) : super();
 
   @override
-  _SelectedImageState createState() => _SelectedImageState();
+  _UploadingDialogState createState() => _UploadingDialogState();
 }
 
-class _SelectedImageState extends State<SelectedImage> {
+class _UploadingDialogState extends State<UploadingDialog> {
+  int progress = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.progress.listen((event) {
+      setState(() => progress = event);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Center(child: Text('Uploading Images')),
+      content: LinearProgressIndicator(
+        value: progress.toDouble() / widget.total,
+        valueColor: AlwaysStoppedAnimation(AppTheme.primaryColor),
+        backgroundColor: AppTheme.primaryColor.withOpacity(.2),
+      ),
+    );
+  }
+}
+
+class SelectedImage extends StatelessWidget {
+  final PlatformFile image;
+  final VoidCallback onRemoved;
+
+  const SelectedImage({this.image, this.onRemoved}) : super();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
       height: 200,
       clipBehavior: Clip.antiAlias,
+      child: Align(
+        alignment: Alignment.topRight,
+        child: TextButton(
+          onPressed: onRemoved,
+          child: Icon(CupertinoIcons.delete),
+          style: TextButton.styleFrom(
+            fixedSize: Size(50, 50),
+            elevation: 10,
+            padding: EdgeInsets.zero,
+            backgroundColor: Colors.red,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8)),
+            ),
+          ),
+        ),
+      ),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4)
-      ),
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 5,
-      ),
-      child: Image.memory(
-        widget.image.bytes,
-        fit: BoxFit.cover,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: MemoryImage(image.bytes),
+        ),
+        borderRadius: BorderRadius.circular(4),
       ),
     );
   }

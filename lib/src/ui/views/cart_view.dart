@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nbq_mobile_client/src/app.dart';
-import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/data/cart.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
