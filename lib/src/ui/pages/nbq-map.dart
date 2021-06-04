@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:ui' as ui;
@@ -25,7 +26,7 @@ class NBQMap extends StatefulWidget {
 }
 
 class _NBQMapState extends State<NBQMap> {
-  bool _initiated = true;
+  bool _initiated = true, _showAddMarker = false;
 
   LatLng currentLocation = LatLng(51.323946, 10.296971);
   final _markers = Set<Marker>();
@@ -48,22 +49,25 @@ class _NBQMapState extends State<NBQMap> {
 //        ?.asUint8List();
   }
 
-  _showContactDialog(String email,Uint8List image) {
+  _showContactDialog(String email, Uint8List image) {
     showDialog(
       context: context,
       builder: (ctx) {
-        return _ShowDialog(email: email,image: image,);
+        return _ShowDialog(
+          email: email,
+          image: image,
+        );
       },
     );
   }
 
   Future<void> _loadMarkers() async {
     for (final element in countries) {
-      final image =
-       kIsWeb ? await getBytesFromAsset(
-          'assets/countries_web/${element['image']}.png', 1)
-      : await getBytesFromAsset(
-          'assets/countries/${element['image']}.jpg', 50);
+      final image = kIsWeb
+          ? await getBytesFromAsset(
+              'assets/countries_web/${element['image']}.png', 1)
+          : await getBytesFromAsset(
+              'assets/countries/${element['image']}.jpg', 50);
 
       _markers.add(Marker(
         markerId: MarkerId(element['image']),
@@ -72,8 +76,10 @@ class _NBQMapState extends State<NBQMap> {
         infoWindow: InfoWindow(
           title: element['name'],
           snippet: element['email'],
-          onTap: () {
-            _showContactDialog(element['email'],image);
+          onTap: () async {
+            final _image = await getBytesFromAsset(
+                'assets/countries/${element['image']}.jpg', 100);
+            _showContactDialog(element['email'], _image);
           },
         ),
       ));
@@ -83,7 +89,9 @@ class _NBQMapState extends State<NBQMap> {
   @override
   void initState() {
     super.initState();
-    _loadMarkers().then((_) {setState(() {});});
+    _loadMarkers().then((_) {
+      setState(() {});
+    });
   }
 
   @override
@@ -100,12 +108,41 @@ class _NBQMapState extends State<NBQMap> {
               angle: Localizations.localeOf(context).toString() == 'ar'
                   ? 3.14159
                   : 0,
-              child: Icon(Icons.arrow_back_ios, color: Colors.black,),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
             onPressed: Navigator.of(context).pop,
           ),
         ),
-        body: _resolveMap(),
+        body: Column(
+          children: [
+            if (kIsWeb)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    CupertinoSwitch(
+                      value: _showAddMarker,
+                      onChanged: (value) =>
+                          setState(() => _showAddMarker = value),
+                      activeColor: AppTheme.primaryColor,
+                    ),
+                    Text(
+                      'Add Marker',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: AppTheme.primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            Expanded(child: _resolveMap()),
+          ],
+        ),
       ),
     );
   }
@@ -141,7 +178,8 @@ class _NBQMapState extends State<NBQMap> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
-              padding: const EdgeInsets.all(0), onPressed: () { },
+              padding: const EdgeInsets.all(0),
+              onPressed: () {},
               child: null,
               // child: Image.asset(MyLocationIcon, width: 24),
             ),
@@ -179,7 +217,7 @@ class _ShowDialog extends StatefulWidget {
   final String email;
   final Uint8List image;
 
-  _ShowDialog({@required this.email,this.image});
+  _ShowDialog({@required this.email, this.image});
 
   @override
   __ShowDialogState createState() => __ShowDialogState();
@@ -262,10 +300,9 @@ class __ShowDialogState extends State<_ShowDialog> {
                 ),
                 Image.memory(
                   widget.image,
-                  scale: 0.7,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 7.5, right: 9,top: 10),
+                  padding: const EdgeInsets.only(left: 7.5, right: 9, top: 10),
                   child: Row(
                     children: [
                       Checkbox(
