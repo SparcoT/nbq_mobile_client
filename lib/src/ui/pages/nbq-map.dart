@@ -48,11 +48,11 @@ class _NBQMapState extends State<NBQMap> {
 //        ?.asUint8List();
   }
 
-  _showContactDialog(String email) {
+  _showContactDialog(String email,Uint8List image) {
     showDialog(
       context: context,
       builder: (ctx) {
-        return _ShowDialog(email: email);
+        return _ShowDialog(email: email,image: image,);
       },
     );
   }
@@ -73,7 +73,7 @@ class _NBQMapState extends State<NBQMap> {
           title: element['name'],
           snippet: element['email'],
           onTap: () {
-            _showContactDialog(element['email']);
+            _showContactDialog(element['email'],image);
           },
         ),
       ));
@@ -177,8 +177,9 @@ const apiKey = "AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w";
 
 class _ShowDialog extends StatefulWidget {
   final String email;
+  final Uint8List image;
 
-  _ShowDialog({@required this.email});
+  _ShowDialog({@required this.email,this.image});
 
   @override
   __ShowDialogState createState() => __ShowDialogState();
@@ -259,8 +260,12 @@ class __ShowDialogState extends State<_ShowDialog> {
                     ],
                   ),
                 ),
+                Image.memory(
+                  widget.image,
+                  scale: 0.7,
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 7.5, right: 9),
+                  padding: const EdgeInsets.only(left: 7.5, right: 9,top: 10),
                   child: Row(
                     children: [
                       Checkbox(
