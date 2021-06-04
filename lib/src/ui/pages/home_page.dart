@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
+    _configureFcm();
     tabController = TabController(
       length: 5,
       vsync: this,
@@ -45,6 +47,44 @@ class HomePageState extends State<HomePage>
         createDatabase();
       }
     });
+  }
+
+  _configureFcm() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        print(
+            'Message also contained a notification: ${message.notification.body}');
+        _showNotificationDialog(message.notification);
+      }
+    });
+  }
+
+  _showNotificationDialog(RemoteNotification notification) {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(notification.title),
+            content: Text(notification.body),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        });
   }
 
   createDatabase() {
