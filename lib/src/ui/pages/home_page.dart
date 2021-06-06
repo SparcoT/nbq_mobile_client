@@ -195,9 +195,9 @@ class HomePageState extends State<HomePage>
               controller: tabController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                DesignImages(),
                 HomeView(),
                 ProductsView(),
+                DesignImages(),
                 CartView(),
                 ContactUsView(),
               ],
