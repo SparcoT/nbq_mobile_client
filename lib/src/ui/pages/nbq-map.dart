@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,35 +31,78 @@ class _NBQMapState extends State<NBQMap> {
 
   LatLng currentLocation = LatLng(51.323946, 10.296971);
   final _markers = Set<Marker>();
+  final _formKey = GlobalKey<FormState>();
+  var hasAction = true;
+
+  var deleteAction = false;
 
   static Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     return data.buffer.asUint8List();
-//    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-//        targetWidth: width);
-//      print(codec);
-//
-//    ui.FrameInfo fi = await codec.getNextFrame();
-//    print('frame');
-//
-//    final d = (await fi.image.toByteData(format: ui.ImageByteFormat.png));
-//    print(d);
-//
-//    return d
-//        ?.buffer
-//        ?.asUint8List();
   }
 
-  _showContactDialog(String email, Uint8List image) {
-    showDialog(
+  _showContactDialog(String email, [Uint8List image]) async {
+    var temp = hasAction;
+    setState(() => hasAction = false);
+    await showDialog(
       context: context,
-      builder: (ctx) {
-        return _ShowDialog(
-          email: email,
-          image: image,
-        );
-      },
+      builder: (ctx) => _ShowDialog(email: email, image: image),
     );
+    setState(() => hasAction = temp);
+  }
+
+  Future<void> _loadOtherMarkers() async {
+    final data = (await FirebaseFirestore.instance.collection('markers').get())
+        .docs
+        .map((e) => {'uid': e.id, ...e.data()});
+
+    print('OTHER MARKERS $data');
+
+    data.forEach((element) {
+      _markers.add(Marker(
+        markerId: MarkerId(element['uid']),
+        position: LatLng(element['lat'], element['lng']),
+        onTap: () {
+          if (deleteAction) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Do you want to remove it?'),
+                  actions: [
+                    TextButton(
+                      onPressed: Navigator.of(context).pop,
+                      child: Text('No'),
+                    ),
+                    TextButton(
+                      child: Text('Yes'),
+                      onPressed: () async {
+                        await FirebaseFirestore.instance
+                            .collection('markers')
+                            .doc(element['uid'])
+                            .delete();
+
+                        _markers.removeWhere(
+                            (e) => e.markerId.value == element['uid']);
+                        Navigator.of(context).pop();
+                        setState(() {});
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        },
+        infoWindow: InfoWindow(
+          title: element['name'],
+          snippet: element['email'],
+          onTap: () async {
+            _showContactDialog(element['email']);
+          },
+        ),
+      ));
+    });
   }
 
   Future<void> _loadMarkers() async {
@@ -84,6 +128,8 @@ class _NBQMapState extends State<NBQMap> {
         ),
       ));
     }
+
+    await _loadOtherMarkers();
   }
 
   @override
@@ -115,34 +161,57 @@ class _NBQMapState extends State<NBQMap> {
             ),
             onPressed: Navigator.of(context).pop,
           ),
-        ),
-        body: Column(
-          children: [
+          actions: [
             if (kIsWeb)
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                padding: const EdgeInsets.all(10),
+                child: ToggleButtons(
+                  fillColor: AppTheme.primaryColor.withOpacity(.2),
+                  splashColor: AppTheme.primaryColor.withOpacity(.2),
+                  highlightColor: Colors.transparent,
+                  selectedColor: AppTheme.primaryColor,
+                  onPressed: (index) {
+                    if (index == 0) {
+                      _showAddMarker = !_showAddMarker;
+                      deleteAction = false;
+                    } else {
+                      deleteAction = !deleteAction;
+                      _showAddMarker = false;
+                    }
+
+                    hasAction = _showAddMarker || deleteAction;
+
+                    setState(() {});
+                  },
+                  borderRadius: BorderRadius.circular(4),
                   children: [
-                    CupertinoSwitch(
-                      value: _showAddMarker,
-                      onChanged: (value) =>
-                          setState(() => _showAddMarker = value),
-                      activeColor: AppTheme.primaryColor,
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text('Add Marker'),
                     ),
-                    Text(
-                      'Add Marker',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: AppTheme.primaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text('Remove Marker'),
                     ),
                   ],
+                  isSelected: [_showAddMarker, deleteAction],
                 ),
               ),
-            Expanded(child: _resolveMap()),
+            // Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     Text('Add Markers', style: TextStyle(color: Colors.black)),
+            //     Switch(
+            //       value: _showAddMarker,
+            //       onChanged: (value) =>
+            //           setState(() => _showAddMarker = value),
+            //       activeColor: AppTheme.primaryColor,
+            //     ),
+            //   ],
+            // ),
           ],
         ),
+        body: _resolveMap(),
       ),
     );
   }
@@ -157,6 +226,92 @@ class _NBQMapState extends State<NBQMap> {
           onMapCreated: (controller) {
             // _controller = controller;
           },
+          onTap: hasAction
+              ? (pos) async {
+                  if (_showAddMarker) {
+                    String name;
+                    String email;
+
+                    final lang = AppLocalizations.of(context);
+                    setState(() => hasAction = false);
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              constraints: BoxConstraints(maxWidth: 700),
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Enter Marker Details',
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    AppTextField(
+                                      label: lang.name,
+                                      validator: Validators.required,
+                                      onSaved: (value) => name = value,
+                                    ),
+                                    AppTextField(
+                                      label: lang.email,
+                                      validator: Validators.required,
+                                      onSaved: (value) => email = value,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: TextButton(
+                                          child: Text('Submit'),
+                                          onPressed: () async {
+                                            if (_formKey.currentState
+                                                .validate()) {
+                                              _formKey.currentState.save();
+
+                                              final id = DateTime.now()
+                                                  .millisecondsSinceEpoch
+                                                  .toString();
+                                              FirebaseFirestore.instance
+                                                  .collection('markers')
+                                                  .add({
+                                                'id': id,
+                                                'name': name,
+                                                'email': email,
+                                                'lat': pos.latitude,
+                                                'lng': pos.longitude,
+                                              });
+
+                                              await _loadOtherMarkers();
+                                              Navigator.of(context).pop();
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        });
+                    setState(() => hasAction = true);
+                    // print(pos.latitude);
+                    // print(pos.longitude);
+                  }
+                  // FirebaseFirestore.instance.collection('markers').add({
+                  //   'lat': '',
+                  //   'lng': '',
+                  //   'name': '',
+                  //   'email': ''
+                  // });
+                }
+              : null,
           compassEnabled: true,
           markers: _markers,
         ),
@@ -298,9 +453,7 @@ class __ShowDialogState extends State<_ShowDialog> {
                     ],
                   ),
                 ),
-                Image.memory(
-                  widget.image,
-                ),
+                if (widget.image != null) Image.memory(widget.image),
                 Padding(
                   padding: const EdgeInsets.only(left: 7.5, right: 9, top: 10),
                   child: Row(
