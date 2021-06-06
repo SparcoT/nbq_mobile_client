@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,7 @@ class ImagesDetailPage extends StatefulWidget {
 class _ImagesDetailPageState extends State<ImagesDetailPage> {
   var _loading = true;
   List<String> images = [];
+  List<Reference> rawImages = [];
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
       images = [];
       for (var i = 0; i < value.items.length; i++) {
         images.add((await value.items[i].getDownloadURL()));
+        rawImages.add(value.items[i]);
       }
     });
     _loading = false;
@@ -50,107 +53,123 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
-        title: Text(widget.title, style: TextStyle(color: Colors.black)),
-      ),
-      body: _loading
-          ? Center(child: CircularProgressIndicator())
-          : images.isEmpty
-              ? Center(child: Text('No Data'))
-              : LayoutBuilder(builder: (context, constraints) {
-                  return GridView.builder(
-                    itemCount: images.length,
-                    itemBuilder: (context, index) {
-                      final _image = images[index];
-                      final child = Image.network(
-                        _image,
-                        // fit: BoxFit.cover,
-                        cacheHeight: 200,
-                        cacheWidth: 200,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      );
-                      return InkWell(
-                        onTap: () {
-                          return AppNavigation.navigateTo(
-                            context,
-                            createImagePage(image: _image, imageWidget: child),
-                          );
-                        },
-                        child: Hero(
-                          tag: _image,
-                          child: child,
-                        ),
-                      );
+    return LayoutBuilder(builder: (context, constraints) {
+      Widget child;
+      if (_loading) {
+        child = Center(
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+          CupertinoActivityIndicator(),
+          SizedBox(width: 10),
+          Text('Loading Images')
+        ]));
+      } else if (images.isEmpty) {
+        child = Center(child: Text('No Images'));
+      } else {
+        child = GridView.builder(
+          itemCount: images.length,
+          padding: const EdgeInsets.all(5),
+          itemBuilder: (context, index) {
+            Widget child;
+            Widget image = Image.network(
+              images[index],
+              cacheWidth: 200,
+              cacheHeight: 200,
+              fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+
+                return Center(child: CircularProgressIndicator());
+              },
+            );
+            if (kIsWeb) {
+              child = Stack(children: [
+                ConstrainedBox(
+                  child: image,
+                  constraints: BoxConstraints.expand(),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                    onPressed: () async {
+                      FirebaseStorage.instance
+                          .ref(rawImages[index].fullPath)
+                          .delete();
+                      images.removeAt(index);
+                      rawImages.removeAt(index);
+                      setState(() {});
                     },
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    child: Icon(CupertinoIcons.delete),
+                    style: TextButton.styleFrom(
+                      elevation: 10,
+                      minimumSize: Size(50, 50),
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ]);
+            } else {
+              child = image;
+            }
+            return Hero(
+              tag: images[index],
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.1), blurRadius: 5)
+                  ],
+                ),
+                child: GestureDetector(
+                  child: child,
+                  onTap: () {
+                    return AppNavigation.navigateTo(
+                      context,
+                      createImagePage(image: images[index], imageWidget: image),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: constraints.maxWidth ~/ 200,
+          ),
+        );
+      }
+      return Scaffold(
+        body: child,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.white,
+          title: Text(widget.title, style: TextStyle(color: Colors.black)),
+        ),
+        floatingActionButton: kIsWeb
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => _UploadFolderImages(
+                      title: widget.title,
+                      onUpdated: _getImages,
                     ),
                   );
-                }),
-      floatingActionButton: kIsWeb
-          ? FloatingActionButton.extended(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => _UploadFolderImages(
-                    title: widget.title,
-                    onUpdated: _getImages,
-                  ),
-                );
-              },
-              icon: Icon(Icons.photo),
-              label: Text('Upload Images'),
-            )
-          : null,
-    );
+                },
+                icon: Icon(Icons.photo),
+                label: Text('Upload Images'),
+              )
+            : null,
+      );
+    });
   }
-
-// Widget imgGrid(List<ImageModel> images)=>GridView.builder(
-//   itemCount: images.length,
-//   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//     crossAxisCount: kIsWeb ? 5 : 2,
-//     crossAxisSpacing: kIsWeb ? 12 : 4.0,
-//     mainAxisSpacing: kIsWeb ? 12.0 : 4.0,
-//   ),
-//   itemBuilder: (ctx, index) {
-//     final _image = images[index].image;
-//     final image = Image.network(
-//       _image,
-//       fit: BoxFit.fill,
-//       // height: 300,
-//       cacheHeight: 200,
-//       cacheWidth: 200,
-//       loadingBuilder: (context, child, loadingProgress) {
-//         if (loadingProgress == null) {
-//           return child;
-//         }
-//         return Center(
-//           child: CircularProgressIndicator(),
-//         );
-//       },
-//     );
-//
-//     return InkWell(
-//       onTap: () {
-//         return AppNavigation.navigateTo(
-//           context,
-//           createImagePage(image: _image, imageWidget: image),
-//         );
-//       },
-//       child: Hero(tag: _image, child: image),
-//     );
-//   },
-// );
 }
 
 class _UploadFolderImages extends StatefulWidget {
