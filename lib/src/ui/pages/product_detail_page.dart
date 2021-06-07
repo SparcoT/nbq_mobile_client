@@ -53,6 +53,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     for (final key in box.keys.where((e) => e[0] == index)) {
       products.add(CartProduct(product: await box.get(key)));
     }
+    print('Length: ' + products.length.toString());
 
     viewedProducts = List.from(products);
     setState(() => _loading = false);
@@ -73,6 +74,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       builder: (context, lang) => LayoutBuilder(builder: (_, constraints) {
         var parts = constraints.maxWidth ~/ 400;
         parts = parts > viewedProducts.length ? viewedProducts.length : parts;
+        if (parts == 0) parts = 1;
 
         Widget child;
         if (_loading) {
@@ -134,7 +136,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             child: child,
           ),
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(160),
+            preferredSize: Size.fromHeight(165),
             child: Container(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 5,
@@ -335,7 +337,8 @@ class __PageBottomState extends State<_PageBottom> {
         Row(children: [
           Spacer(),
           ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 600),
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width / 1.2),
             child: Row(children: [
               SizedBox(width: 30),
               Expanded(
@@ -389,7 +392,7 @@ class __PageBottomState extends State<_PageBottom> {
 class CounterHeader extends Container {
   CounterHeader()
       : super(
-          width: 225,
+          width: 185,
           height: 30,
           margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(

@@ -16,6 +16,7 @@ class ProductsView extends StatelessWidget {
               CategoryTile.fast(),
               CategoryTile.wtf(),
               CategoryTile.pro(),
+              CategoryTile.caps(),
             ],
           )
         : SingleChildScrollView(
@@ -25,6 +26,7 @@ class ProductsView extends StatelessWidget {
               CategoryTile.fast(),
               CategoryTile.wtf(),
               CategoryTile.pro(),
+              CategoryTile.caps(),
             ]),
           );
   }

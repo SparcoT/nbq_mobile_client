@@ -40,7 +40,7 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
 
     return Center(
       child: Container(
-        width: 105,
+        width: 90,
         height: 25,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
         ),
         child: Row(children: [
           SizedBox(
-            width: 30,
+            width: 25,
             child: TextButton(
               style: style,
               onPressed: _decrementAction,
@@ -63,7 +63,7 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: SizedBox(
-              width: 35,
+              width: 30,
               child: Text(
                 _qty.toString(),
                 style: GoogleFonts.bebasNeue(),
@@ -73,7 +73,7 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
           ),
           VerticalDivider(indent: 5, endIndent: 5, thickness: 1.5, width: 0),
           SizedBox(
-            width: 30,
+            width: 25,
             child: TextButton(
               style: style,
               onPressed: _incrementAction,

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:nbq_mobile_client/src/data/db.dart';
 
 import '../../utils/pdf_share.dart'
     if (dart.library.io) '../../utils/pdf_share_io.dart'
@@ -31,6 +32,7 @@ class _CartViewState extends State<CartView> {
   final _proProducts = <CartProduct>[];
   final _slowProducts = <CartProduct>[];
   final _fastProducts = <CartProduct>[];
+  final _capsProducts = <CartProduct>[];
   LazyBox<CartProduct> _cart;
 
   final _data = OrderData();
@@ -55,6 +57,8 @@ class _CartViewState extends State<CartView> {
         _wtfProducts.add(element);
       } else if (char == '3') {
         _proProducts.add(element);
+      } else if (char == '4') {
+        _capsProducts.add(element);
       }
 
       _cans += element.cans;
@@ -95,10 +99,12 @@ class _CartViewState extends State<CartView> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, .2),
-            blurRadius: 10,
-          )],
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, .2),
+              blurRadius: 10,
+            )
+          ],
         ),
         constraints: BoxConstraints(maxWidth: 700),
         child: Form(
@@ -184,6 +190,18 @@ class _CartViewState extends State<CartView> {
                         child: ColorTile(_proProducts[index]),
                       ),
                       childCount: _proProducts.length,
+                    ),
+                  ),
+                ],
+                if (_capsProducts.isNotEmpty) ...[
+                  SliverToBoxAdapter(child: _buildHeader('CAPS')),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: ColorTile(_capsProducts[index]),
+                      ),
+                      childCount: _capsProducts.length,
                     ),
                   ),
                 ],
@@ -321,12 +339,19 @@ class _CartViewState extends State<CartView> {
         return first.product.sku.toInt() - second.product.sku.toInt();
       });
     }
+    if (_capsProducts.isNotEmpty) {
+      _capsProducts.forEach((element) {
+        _totalCans += element.cans;
+        _totalPacks += element.packs;
+      });
+    }
 
     var products = [
       if (_slowProducts.isNotEmpty) ...['SLOW', ..._slowProducts],
       if (_fastProducts.isNotEmpty) ...['FAST', ..._fastProducts],
       if (_wtfProducts.isNotEmpty) ...['WTF', ..._wtfProducts],
-      if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts]
+      if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts],
+      if (_capsProducts.isNotEmpty) ...['CAPS', ..._capsProducts]
     ];
 
     List<pw.Widget> page = [];
@@ -393,7 +418,7 @@ class _CartViewState extends State<CartView> {
           children: [
             pw.Container(
               height: 14,
-              color: PdfColor.fromInt(e.product.color.value),
+              color: PdfColor.fromInt(e.product?.color?.value??0),
             ),
             pw.Text(' ' + e.product.ref),
             pw.Text(
@@ -546,23 +571,34 @@ class ColorTile extends StatelessWidget {
     return Row(children: [
       Expanded(
         child: Row(children: [
-          Container(
-            width: 60,
-            height: 30,
-            decoration: BoxDecoration(
-              color: product.product.color,
-              borderRadius: BorderRadius.horizontal(right: Radius.circular(4)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 2,
+          product.product.category == ProductCategory.caps
+              ? Container(
+                  width: 60,
+                  height: 50,
+                  child: Image.asset(
+                    product.product.ref,
+                    width: 150,
+                    fit: BoxFit.fill,
+                  ),
                 )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: SizedBox(
+              : Container(
+                  width: 60,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: product.product.color,
+                    borderRadius:
+                        BorderRadius.horizontal(right: Radius.circular(4)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 2,
+                      )
+                    ],
+                  ),
+                ),
+          SizedBox(width: 8),
+          if (product.product.category != ProductCategory.caps) ...[
+            SizedBox(
               width: 35,
               child: Text(
                 product.product.ref,
@@ -573,7 +609,8 @@ class ColorTile extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+            SizedBox(width: 8),
+          ],
           Text(product.product.name, style: TextStyle(fontSize: 15)),
         ]),
       ),

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:nbq_mobile_client/src/base/assets.dart';
+
 import './db.dart';
 
 final products = [
@@ -1682,5 +1684,40 @@ final products = [
     ref: 'W022',
     ml: '520/400',
     color: Color.fromRGBO(255, 255, 255, 1.0),
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'B1',
+    ref: Assets.yellowCap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'N1',
+    ref: Assets.whiteN1Cap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'N2',
+    ref: Assets.whiteN2Cap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'N3',
+    ref: Assets.redN3Cap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'N4',
+    ref: Assets.blackCap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'Q1',
+    ref: Assets.whiteQ1Cap,
+  ),
+  Product(
+    ProductCategory.caps,
+    name: 'Q2',
+    ref: Assets.whiteQ2Cap,
   ),
 ];

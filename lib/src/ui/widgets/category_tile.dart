@@ -68,6 +68,16 @@ class CategoryTile extends StatelessWidget {
           category: ProductCategory.pro,
         );
 
+  const CategoryTile.caps()
+      : _detail = const $Category._(
+          width: 200,
+          name: 'CAPS',
+          offset: Offset(7, -10),
+          image: Assets.redN3Cap,
+          color: AppTheme.colorOfPropulse,
+          category: ProductCategory.caps,
+        );
+
   @override
   Widget build(BuildContext context) {
     return kIsWeb

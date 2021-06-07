@@ -12,7 +12,9 @@ enum ProductCategory {
   @HiveField(2)
   wtf,
   @HiveField(3)
-  pro
+  pro,
+  @HiveField(4)
+  caps
 }
 
 @HiveType(typeId: 1)

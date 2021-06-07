@@ -260,7 +260,8 @@ class _NBQMapState extends State<NBQMap> {
                                     ),
                                     AppTextField(
                                       label: lang.email,
-                                      validator: Validators.required,
+                                      validator: emailValidator,
+                                      keyboardType: TextInputType.emailAddress,
                                       onSaved: (value) => email = value,
                                     ),
                                     Align(
