@@ -161,55 +161,6 @@ class _NBQMapState extends State<NBQMap> {
             ),
             onPressed: Navigator.of(context).pop,
           ),
-          actions: [
-            if (kIsWeb)
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: ToggleButtons(
-                  fillColor: AppTheme.primaryColor.withOpacity(.2),
-                  splashColor: AppTheme.primaryColor.withOpacity(.2),
-                  highlightColor: Colors.transparent,
-                  selectedColor: AppTheme.primaryColor,
-                  onPressed: (index) {
-                    if (index == 0) {
-                      _showAddMarker = !_showAddMarker;
-                      deleteAction = false;
-                    } else {
-                      deleteAction = !deleteAction;
-                      _showAddMarker = false;
-                    }
-
-                    hasAction = _showAddMarker || deleteAction;
-
-                    setState(() {});
-                  },
-                  borderRadius: BorderRadius.circular(4),
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text('Add Marker'),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text('Remove Marker'),
-                    ),
-                  ],
-                  isSelected: [_showAddMarker, deleteAction],
-                ),
-              ),
-            // Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     Text('Add Markers', style: TextStyle(color: Colors.black)),
-            //     Switch(
-            //       value: _showAddMarker,
-            //       onChanged: (value) =>
-            //           setState(() => _showAddMarker = value),
-            //       activeColor: AppTheme.primaryColor,
-            //     ),
-            //   ],
-            // ),
-          ],
         ),
         body: _resolveMap(),
       ),
@@ -218,130 +169,16 @@ class _NBQMapState extends State<NBQMap> {
 
   _resolveMap() {
     if (_initiated) {
-      return Stack(children: [
-        GoogleMap(
-          myLocationButtonEnabled: false,
-          initialCameraPosition:
-              CameraPosition(target: currentLocation, zoom: 5),
-          onMapCreated: (controller) {
-            // _controller = controller;
-          },
-          onTap: hasAction
-              ? (pos) async {
-                  if (_showAddMarker) {
-                    String name;
-                    String email;
-
-                    final lang = AppLocalizations.of(context);
-                    setState(() => hasAction = false);
-                    await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return Dialog(
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              constraints: BoxConstraints(maxWidth: 700),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'Enter Marker Details',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    AppTextField(
-                                      label: lang.name,
-                                      validator: Validators.required,
-                                      onSaved: (value) => name = value,
-                                    ),
-                                    AppTextField(
-                                      label: lang.email,
-                                      validator: emailValidator,
-                                      keyboardType: TextInputType.emailAddress,
-                                      onSaved: (value) => email = value,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: TextButton(
-                                          child: Text('Submit'),
-                                          onPressed: () async {
-                                            if (_formKey.currentState
-                                                .validate()) {
-                                              _formKey.currentState.save();
-
-                                              final id = DateTime.now()
-                                                  .millisecondsSinceEpoch
-                                                  .toString();
-                                              FirebaseFirestore.instance
-                                                  .collection('markers')
-                                                  .add({
-                                                'id': id,
-                                                'name': name,
-                                                'email': email,
-                                                'lat': pos.latitude,
-                                                'lng': pos.longitude,
-                                              });
-
-                                              await _loadOtherMarkers();
-                                              Navigator.of(context).pop();
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        });
-                    setState(() => hasAction = true);
-                    // print(pos.latitude);
-                    // print(pos.longitude);
-                  }
-                  // FirebaseFirestore.instance.collection('markers').add({
-                  //   'lat': '',
-                  //   'lng': '',
-                  //   'name': '',
-                  //   'email': ''
-                  // });
-                }
-              : null,
-          compassEnabled: true,
-          markers: _markers,
-        ),
-        Positioned(
-          right: 15,
-          bottom: 125,
-          child: Container(
-            width: 35,
-            height: 35,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey.shade300,
-                spreadRadius: 2,
-                blurRadius: 10,
-              )
-            ]),
-            child: FlatButton(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              padding: const EdgeInsets.all(0),
-              onPressed: () {},
-              child: null,
-              // child: Image.asset(MyLocationIcon, width: 24),
-            ),
-          ),
-        ),
-      ]);
+      return GoogleMap(
+        myLocationButtonEnabled: false,
+        initialCameraPosition:
+            CameraPosition(target: currentLocation, zoom: 5),
+        onMapCreated: (controller) {
+          // _controller = controller;
+        },
+        compassEnabled: true,
+        markers: _markers,
+      );
     } else {
       return Center(
         child: Row(children: [
@@ -357,15 +194,6 @@ class _NBQMapState extends State<NBQMap> {
     }
   }
 }
-
-// class _MapUtilsImpl {
-//   final pickUpLocation = loc.Location();
-//
-//   Future<LatLng> fetchCurrentLocation() async {
-//     final position = await pickUpLocation.getLocation();
-//     return LatLng(position.latitude, position.longitude);
-//   }
-// }
 
 const apiKey = "AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w";
 
