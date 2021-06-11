@@ -61,7 +61,7 @@ class _NBQMapState extends State<NBQMap> {
     data.forEach((element) {
       _markers.add(Marker(
         markerId: MarkerId(element['uid']),
-        position: LatLng(element['lat'], element['lng']),
+        position: LatLng(element['lat'].toDouble(), element['lng'].toDouble()),
         onTap: () {
           if (deleteAction) {
             showDialog(
@@ -167,7 +167,7 @@ class _NBQMapState extends State<NBQMap> {
     );
   }
 
-  _resolveMap() {
+  Widget _resolveMap() {
     if (_initiated) {
       return GoogleMap(
         myLocationButtonEnabled: false,

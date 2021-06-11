@@ -40,13 +40,6 @@ class HomePageState extends State<HomePage>
       vsync: this,
       initialIndex: widget.initialIndex,
     );
-
-    box = Hive.lazyBox<Product>('products');
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (box.isEmpty) {
-        createDatabase();
-      }
-    });
   }
 
   _configureFcm() async {
@@ -85,24 +78,6 @@ class HomePageState extends State<HomePage>
             ],
           );
         });
-  }
-
-  createDatabase() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          content: Text('Database is empty'),
-        );
-      },
-    );
-
-    for (var i = 0; i < products.length; ++i) {
-      box.put('${products[i].category.index}$i', products[i]);
-    }
-
-    Navigator.of(context).pop();
   }
 
   @override

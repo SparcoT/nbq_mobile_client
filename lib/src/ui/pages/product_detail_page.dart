@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:nbq_mobile_client/src/data/cart.dart';
+import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
+import 'package:nbq_mobile_client/src/data/product.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/product_tile.dart';
@@ -37,23 +39,19 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  List<CartProduct> products;
-  List<CartProduct> viewedProducts;
-
-  static LazyBox<CartProduct> cart;
+  List<Purchasable> products;
+  List<Purchasable> viewedProducts = [];
 
   var _loading = true;
   final _controller = ProductDetailPageController();
 
   Future<void> _loadProducts() async {
     products = [];
-    cart = Hive.lazyBox('cart_products');
-    final box = Hive.lazyBox<Product>('products');
-    final index = widget.category.category.index.toString();
-    for (final key in box.keys.where((e) => e[0] == index)) {
-      products.add(CartProduct(product: await box.get(key)));
+
+    print('WIDGET ${widget.category.keys}');
+    for (final item in widget.category.keys) {
+      products.add(await DataManager.loadSpray(widget.category.type, item));
     }
-    print('Length: ' + products.length.toString());
 
     viewedProducts = List.from(products);
     setState(() => _loading = false);
@@ -64,8 +62,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     super.initState();
 
     _loadProducts();
-
-    viewedProducts = List.from(products);
   }
 
   @override
@@ -75,6 +71,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         var parts = constraints.maxWidth ~/ 400;
         parts = parts > viewedProducts.length ? viewedProducts.length : parts;
         if (parts == 0) parts = 1;
+
+        int length = widget.category.keys.length < viewedProducts.length
+            ? widget.category.keys.length
+            : viewedProducts.length;
 
         Widget child;
         if (_loading) {
@@ -90,11 +90,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           );
         } else if (parts == 1) {
           child = ListView.separated(
+            itemCount: length,
             physics: BouncingScrollPhysics(),
-            itemCount: viewedProducts.length,
             separatorBuilder: (_, __) => SizedBox(height: 5),
             padding: const EdgeInsets.symmetric(vertical: 15),
             itemBuilder: (_, i) => ProductTile(
+              type: widget.category.type,
               product: viewedProducts[i],
               controller: _controller,
             ),
@@ -120,10 +121,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         constraints.maxWidth / (30 * parts) - parts,
                   ),
                   itemBuilder: (_, i) => ProductTile(
+                    type: widget.category.type,
                     product: viewedProducts[i],
                     controller: _controller,
                   ),
-                  itemCount: viewedProducts.length,
+                  itemCount: length,
                 ),
               ),
             ],
@@ -222,11 +224,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
           bottomNavigationBar: _loading
               ? null
-              : _PageBottom(
-                  lang: lang,
-                  products: products,
-                  controller: _controller,
-                ),
+              : _PageBottom(lang: lang, controller: _controller),
         );
       }),
     );
@@ -235,16 +233,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _onSearched(String val) {
     viewedProducts = List.from(
       products.where(
-        (e) => (e.product.ref.contains(val.toUpperCase()) ||
-            e.product.name.toLowerCase().contains(val.toLowerCase())),
+        (e) => (e.ref.contains(val.toUpperCase()) ||
+            e.name.toLowerCase().contains(val.toLowerCase())),
       ),
     );
     setState(() {});
   }
 
   void _onReset() {
-    Cart().removeProductsOf(widget.category.category);
-    viewedProducts.forEach((e) => e.packs = e.cans = 0);
+    DataManager.clearAllSelection(widget.category.type);
+
+    products.forEach((element) {
+      element.singleQty = element.boxQty = 0;
+    });
+
     _controller.cansCount = 0;
     _controller.boxesCount = 0;
 
@@ -254,11 +256,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
 class _PageBottom extends StatefulWidget {
   final dynamic lang;
-  final List<CartProduct> products;
   final ProductDetailPageController controller;
 
-  const _PageBottom({this.lang, this.products, this.controller, Key key})
-      : super(key: key);
+  const _PageBottom({this.lang, this.controller, Key key}) : super(key: key);
 
   @override
   __PageBottomState createState() => __PageBottomState();
@@ -340,32 +340,9 @@ class __PageBottomState extends State<_PageBottom> {
             constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width / 1.2),
             child: Row(children: [
-              SizedBox(width: 30),
+              Spacer(flex: 5),
               Expanded(
-                child: Builder(
-                  builder: (ctx) => ElevatedButton(
-                    onPressed: () async {
-                      widget.products.forEach((element) {
-                        if (element.cans > 0 || element.packs > 0) {
-                          _ProductDetailPageState.cart.put(
-                            '${element.product.category.index}${element.product.ref}',
-                            element,
-                          );
-                        }
-                      });
-                    },
-                    child: Text(lang.add),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                      minimumSize: Size.fromHeight(40),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 15),
-              Expanded(
+                flex: 3,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();

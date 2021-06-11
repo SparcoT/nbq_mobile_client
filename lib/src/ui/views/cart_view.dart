@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
+import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
+import 'package:nbq_mobile_client/src/data/product.dart';
 
 import '../../utils/pdf_share.dart'
     if (dart.library.io) '../../utils/pdf_share_io.dart'
@@ -12,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nbq_mobile_client/src/app.dart';
-import 'package:nbq_mobile_client/src/data/cart.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/data/order_data.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/text_field.dart';
@@ -28,12 +29,11 @@ class _CartViewState extends State<CartView> {
   var _loading = true;
   var isHeaderBuilt = false;
 
-  final _wtfProducts = <CartProduct>[];
-  final _proProducts = <CartProduct>[];
-  final _slowProducts = <CartProduct>[];
-  final _fastProducts = <CartProduct>[];
-  final _capsProducts = <CartProduct>[];
-  LazyBox<CartProduct> _cart;
+  final _wtfProducts = <Spray>[];
+  final _proProducts = <Spray>[];
+  final _slowProducts = <Spray>[];
+  final _fastProducts = <Spray>[];
+  final _capsProducts = <Cap>[];
 
   final _data = OrderData();
 
@@ -43,40 +43,40 @@ class _CartViewState extends State<CartView> {
   var _packs = 0;
 
   Future<void> _loadProducts() async {
-    _cart = Hive.lazyBox<CartProduct>('cart_products');
+    final cart = DataManager.cart as Cart;
 
-    for (final key in _cart.keys) {
-      final char = key[0];
-      final element = await _cart.get(key);
+    _slowProducts.clear();
+    _fastProducts.clear();
+    _wtfProducts.clear();
+    _proProducts.clear();
 
-      if (char == '0') {
-        _slowProducts.add(element);
-      } else if (char == '1') {
-        _fastProducts.add(element);
-      } else if (char == '2') {
-        _wtfProducts.add(element);
-      } else if (char == '3') {
-        _proProducts.add(element);
-      } else if (char == '4') {
-        _capsProducts.add(element);
-      }
-
-      _cans += element.cans;
-      _packs += element.cans;
+    _cans = _packs = 0;
+    for (final key in cart.slow) {
+      _slowProducts.add(await DataManager.loadSpray(0, key));
+    }
+    for (final key in cart.fast) {
+      _fastProducts.add(await DataManager.loadSpray(1, key));
+    }
+    for (final key in cart.wtf) {
+      _wtfProducts.add(await DataManager.loadSpray(2, key));
+    }
+    for (final key in cart.pro) {
+      _proProducts.add(await DataManager.loadSpray(3, key));
+    }
+    for (final key in cart.caps) {
+      _capsProducts.add(await DataManager.loadSpray(4, key));
     }
 
-    setState(() {
-      _loading = false;
-    });
+    setState(() => _loading = false);
   }
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
     _loadProducts();
   }
-
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +116,10 @@ class _CartViewState extends State<CartView> {
               physics: BouncingScrollPhysics(),
               slivers: [
                 SliverToBoxAdapter(child: SizedBox(height: 15)),
-                if (_cart.isNotEmpty)
+                if (_slowProducts.isNotEmpty ||
+                    _fastProducts.isNotEmpty ||
+                    _wtfProducts.isNotEmpty ||
+                    _proProducts.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15),
@@ -124,13 +127,55 @@ class _CartViewState extends State<CartView> {
                         alignment: Alignment.centerRight,
                         child: TextButton.icon(
                           onPressed: () async {
-                            await _cart.clear();
+                            DataManager.clearAllSelection(0);
+                            DataManager.clearAllSelection(1);
+                            DataManager.clearAllSelection(2);
+                            DataManager.clearAllSelection(3);
+                            DataManager.clearAllSelection(4);
 
                             setState(() {
-                              _slowProducts.clear();
-                              _fastProducts.clear();
-                              _wtfProducts.clear();
-                              _proProducts.clear();
+                              _slowProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _slowProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _fastProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _wtfProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _proProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _capsProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
                             });
                           },
                           icon: Icon(
@@ -205,7 +250,10 @@ class _CartViewState extends State<CartView> {
                     ),
                   ),
                 ],
-                if (_cart.isNotEmpty) ...[
+                if (_slowProducts.isNotEmpty ||
+                    _fastProducts.isNotEmpty ||
+                    _wtfProducts.isNotEmpty ||
+                    _proProducts.isNotEmpty) ...[
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                     sliver: SliverToBoxAdapter(
@@ -301,48 +349,48 @@ class _CartViewState extends State<CartView> {
     var _totalPacks = 0;
     if (_slowProducts.isNotEmpty) {
       _slowProducts.forEach((element) {
-        _totalCans += element.cans;
-        _totalPacks += element.packs;
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
       });
       _slowProducts.sort((first, second) {
-        return first.product.sku.toInt() - second.product.sku.toInt();
+        return (double.tryParse(first.sku) ?? 0).toInt() -
+            (double.tryParse(second.sku) ?? 0).toInt();
       });
     }
     if (_fastProducts.isNotEmpty) {
       _fastProducts.forEach((element) {
-        _totalCans += element.cans;
-        _totalPacks += element.packs;
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
       });
       _fastProducts.sort((first, second) {
-        return first.product.sku.toInt() - second.product.sku.toInt();
+        return (double.tryParse(first.sku) ?? 0).toInt() -
+            (double.tryParse(second.sku) ?? 0).toInt();
       });
     }
     if (_wtfProducts.isNotEmpty) {
       _wtfProducts.forEach((element) {
-        _totalCans += element.cans;
-        _totalPacks += element.packs;
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
       });
       _wtfProducts.sort((first, second) {
-        return int.parse(first.product.ref.substring(1)) -
-            int.parse(second.product.ref.substring(1));
-        // return first.product?.sku?.toInt() ??
-        //     0 - second.product?.sku?.toInt() ??
-        //     0;
+        return (double.tryParse(first.ref.substring(1)) ?? 0).toInt() -
+            (double.tryParse(second.ref.substring(1)) ?? 0).toInt();
       });
     }
     if (_proProducts.isNotEmpty) {
       _proProducts.forEach((element) {
-        _totalCans += element.cans;
-        _totalPacks += element.packs;
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
       });
       _proProducts.sort((first, second) {
-        return first.product.sku.toInt() - second.product.sku.toInt();
+        return (double.tryParse(first.sku) ?? 0).toInt() -
+            (double.tryParse(second.sku) ?? 0).toInt();
       });
     }
     if (_capsProducts.isNotEmpty) {
       _capsProducts.forEach((element) {
-        _totalCans += element.cans;
-        _totalPacks += element.packs;
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
       });
     }
 
@@ -376,23 +424,25 @@ class _CartViewState extends State<CartView> {
         if (rows.isEmpty) {
           rows.add(pw.TableRow(children: [
             pw.Text(
-              ' Color',
+              e is Cap ? 'Image' : 'Color',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
-            pw.Text(
-              ' Ref',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-            ),
-            pw.Text(
-              ' Sku',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-            ),
+            if (e is Spray)
+              pw.Text(
+                ' Ref',
+                style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              ),
+            if (e is Spray)
+              pw.Text(
+                ' Sku',
+                style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              ),
             pw.Text(
               ' Name',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(
-              ' Cans',
+              (e is Spray) ? ' Cans' : ' Single',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(
@@ -403,33 +453,47 @@ class _CartViewState extends State<CartView> {
           page.add(pw.Table(
             children: rows,
             border: pw.TableBorder.all(color: PdfColors.black),
-            columnWidths: {
-              0: pw.FixedColumnWidth(40),
-              1: pw.FlexColumnWidth(1),
-              2: pw.FlexColumnWidth(1),
-              3: pw.FlexColumnWidth(3),
-              4: pw.FlexColumnWidth(1),
-              5: pw.FlexColumnWidth(1),
-            },
+            columnWidths: e is Spray
+                ? {
+                    0: pw.FixedColumnWidth(40),
+                    1: pw.FlexColumnWidth(1),
+                    2: pw.FlexColumnWidth(1),
+                    3: pw.FlexColumnWidth(3),
+                    4: pw.FixedColumnWidth(60),
+                    5: pw.FixedColumnWidth(60),
+                  }
+                : {
+                    0: pw.FixedColumnWidth(40),
+                    1: pw.FlexColumnWidth(3),
+                    2: pw.FixedColumnWidth(60),
+                    3: pw.FixedColumnWidth(60),
+                  },
           ));
         }
 
         rows.add(pw.TableRow(
           children: [
-            pw.Container(
-              height: 14,
-              color: PdfColor.fromInt(e.product?.color?.value??0),
-            ),
-            pw.Text(' ' + e.product.ref),
-            pw.Text(
-              ' ' +
-                  (e.product.sku == null
-                      ? ''
-                      : e.product.sku.toInt().toString()),
-            ),
-            pw.Text(' ' + e.product.name),
-            pw.Text(' ' + e.cans.toString()),
-            pw.Text(' ' + e.packs.toString())
+            if (e is Cap) ...[
+              pw.Image(pw.MemoryImage(
+                  (await rootBundle.load(e.image)).buffer.asUint8List())),
+              // pw.Text(''),
+              // pw.Text(''),
+            ] else ...[
+              pw.Container(
+                height: 14,
+                color: PdfColor.fromInt(e?.color?.value ?? 0),
+              ),
+              pw.Text(' ' + e.ref),
+              pw.Text(
+                ' ' +
+                    (e.sku == null
+                        ? ''
+                        : (double.tryParse(e.sku) ?? 0).toInt().toString()),
+              ),
+            ],
+            pw.Text(' ' + e.name),
+            pw.Text(' ' + (e.singleQty ?? 0).toString()),
+            pw.Text(' ' + (e.boxQty ?? 0).toString())
           ],
         ));
       }
@@ -540,10 +604,11 @@ class _CartViewState extends State<CartView> {
           children: [
             Expanded(child: header),
             ShadowedBox(
-                width: 50,
-                height: 20,
-                borderRadius: 6,
-                child: Center(child: Text('Lata'))),
+              width: 50,
+              height: 20,
+              borderRadius: 6,
+              child: Center(child: Text('Lata')),
+            ),
             Padding(
               padding: const EdgeInsets.only(right: 15, left: 10),
               child: ShadowedBox(
@@ -562,56 +627,58 @@ class _CartViewState extends State<CartView> {
 }
 
 class ColorTile extends StatelessWidget {
-  final CartProduct product;
+  final Purchasable product;
 
   ColorTile(this.product);
 
   @override
   Widget build(BuildContext context) {
+    print(product?.name);
     return Row(children: [
       Expanded(
         child: Row(children: [
-          product.product.category == ProductCategory.caps
-              ? Container(
-                  width: 60,
-                  height: 50,
-                  child: Image.asset(
-                    product.product.ref,
-                    width: 150,
-                    fit: BoxFit.fill,
-                  ),
-                )
-              : Container(
-                  width: 60,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: product.product.color,
-                    borderRadius:
-                        BorderRadius.horizontal(right: Radius.circular(4)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 2,
-                      )
-                    ],
-                  ),
-                ),
-          SizedBox(width: 8),
-          if (product.product.category != ProductCategory.caps) ...[
-            SizedBox(
-              width: 35,
-              child: Text(
-                product.product.ref,
-                style: TextStyle(
-                  fontFamily: 'Futura',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
+          if (product is Cap)
+            Container(
+              width: 60,
+              height: 50,
+              child: Image.asset(
+                (product as Cap).image,
+                width: 150,
+                fit: BoxFit.fill,
               ),
             ),
-            SizedBox(width: 8),
-          ],
-          Text(product.product.name, style: TextStyle(fontSize: 15)),
+          if (product is Spray)
+            Container(
+              width: 60,
+              height: 30,
+              decoration: BoxDecoration(
+                color: (product as Spray).color,
+                borderRadius:
+                    BorderRadius.horizontal(right: Radius.circular(4)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 2,
+                  )
+                ],
+              ),
+            ),
+          SizedBox(width: 8),
+          // if (product is Cap) ...[
+          //   SizedBox(
+          //     width: 35,
+          //     child: Text(
+          //       product.ref,
+          //       style: TextStyle(
+          //         fontFamily: 'Futura',
+          //         fontWeight: FontWeight.bold,
+          //         fontSize: 12,
+          //       ),
+          //     ),
+          //   ),
+          //   SizedBox(width: 8),
+          // ],
+          Text(product.name, style: TextStyle(fontSize: 15)),
         ]),
       ),
       ShadowedBox(
@@ -619,7 +686,8 @@ class ColorTile extends StatelessWidget {
         height: 20,
         borderRadius: 6,
         child: Center(
-          child: Text(product.cans.toString(), style: TextStyle(fontSize: 12)),
+          child: Text((product.singleQty ?? 0).toString(),
+              style: TextStyle(fontSize: 12)),
         ),
       ),
       Padding(
@@ -630,7 +698,7 @@ class ColorTile extends StatelessWidget {
           borderRadius: 6,
           child: Center(
             child: Text(
-              product.packs.toString(),
+              (product.boxQty ?? 0).toString(),
               style: TextStyle(fontSize: 12),
             ),
           ),

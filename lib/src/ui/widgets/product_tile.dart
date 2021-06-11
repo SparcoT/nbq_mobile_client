@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nbq_mobile_client/src/data/cart.dart';
-import 'package:nbq_mobile_client/src/data/db.dart';
-import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
+import 'package:nbq_mobile_client/src/data/product.dart';
+import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/product_counter.dart';
-import 'dart:ui' as ui;
+import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
 
 class ProductTile extends StatefulWidget {
-  final CartProduct product;
+  final int type;
+  final Purchasable product;
   final ProductDetailPageController controller;
 
-  ProductTile({this.product, this.controller});
+  ProductTile({this.product, this.controller, this.type});
 
   @override
   _ProductTileState createState() => _ProductTileState();
@@ -18,18 +18,18 @@ class ProductTile extends StatefulWidget {
 class _ProductTileState extends State<ProductTile> {
   @override
   Widget build(BuildContext context) {
+    print(widget.product);
+    if (widget.product == null) {
+      return SizedBox();
+    }
     return Row(children: [
-      widget.product.product.category == ProductCategory.caps
-          ? Container(
-              width: 60,
-              height: 60,
-              child: Image.asset(widget.product.product.ref,width: 100,),
-            )
+      widget.product is Cap
+          ? Image.asset((widget.product as Cap).image, width: 100)
           : Container(
               width: 60,
               height: 30,
               decoration: BoxDecoration(
-                color: widget.product.product.color,
+                color: (widget.product as Spray).color,
                 borderRadius:
                     BorderRadius.horizontal(right: Radius.circular(4)),
                 boxShadow: [
@@ -41,7 +41,7 @@ class _ProductTileState extends State<ProductTile> {
               ),
               child: Center(
                 child: Text(
-                  widget.product.product.ref,
+                  widget.product.ref,
                   style: TextStyle(
                     fontFamily: 'Futura',
                     fontWeight: FontWeight.bold,
@@ -63,7 +63,7 @@ class _ProductTileState extends State<ProductTile> {
       SizedBox(width: 10),
       Expanded(
         child: Text(
-          widget.product.product.name,
+          widget.product.name,
           style: TextStyle(fontSize: 15),
           overflow: TextOverflow.ellipsis,
         ),
@@ -73,10 +73,11 @@ class _ProductTileState extends State<ProductTile> {
         child: Row(children: [
           Expanded(
             child: ProductQtyCounter(
-              quantity: widget.product.cans ?? 0,
+              quantity: widget.product.singleQty ?? 0,
               onChanged: (val) {
-                widget.product.cans = val;
+                widget.product.singleQty = val;
                 widget.controller.cansCount = val;
+                _updateDBCounter(widget.product);
 
                 setState(() {});
               },
@@ -84,10 +85,11 @@ class _ProductTileState extends State<ProductTile> {
           ),
           Expanded(
             child: ProductQtyCounter(
-              quantity: widget.product.packs ?? 0,
+              quantity: widget.product.boxQty ?? 0,
               onChanged: (val) {
-                widget.product.packs = val;
+                widget.product.boxQty = val;
                 widget.controller.boxesCount = val;
+                _updateDBCounter(widget.product);
 
                 setState(() {});
               },
@@ -97,5 +99,16 @@ class _ProductTileState extends State<ProductTile> {
       ),
       SizedBox(width: 10)
     ]);
+  }
+
+  Future<void> _updateDBCounter(Purchasable purchasable) async {
+    await purchasable.save();
+    if (purchasable.singleQty == 0 &&   purchasable.boxQty == 0) {
+      DataManager.removeFromCartSelection(widget.type, purchasable.id);
+    } else {
+      print('ADDING TO CART: ${widget.type}');
+      print('ADDING TO CART: ${purchasable.id}');
+      DataManager.addToCart(widget.type, purchasable.id);
+    }
   }
 }

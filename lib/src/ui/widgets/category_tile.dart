@@ -2,21 +2,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nbq_mobile_client/src/app.dart';
+import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 
 class $Category {
+  final int type;
   final String name;
   final Color color;
   final String image;
   final double width;
   final Offset offset;
-  final ProductCategory category;
+  final Iterable<dynamic> keys;
 
   const $Category._({
-    this.category,
+    this.type,
+    this.keys,
     this.name,
     this.color,
     this.offset,
@@ -28,54 +31,59 @@ class $Category {
 class CategoryTile extends StatelessWidget {
   final $Category _detail;
 
-  const CategoryTile.slow()
-      : _detail = const $Category._(
+  CategoryTile.slow()
+      : _detail = $Category._(
+          type: 0,
           width: 130,
           name: 'SLOW',
           image: Assets.nbqSlow,
           offset: Offset(25, 16),
           color: AppTheme.colorOfSlow,
-          category: ProductCategory.slow,
+          keys: DataManager.slowSprays,
         );
 
-  const CategoryTile.fast()
-      : _detail = const $Category._(
+  CategoryTile.fast()
+      : _detail = $Category._(
+          type: 1,
           width: 167,
           name: 'FAST',
           offset: Offset(-4.55, -28.5),
           image: Assets.nbqFast,
           color: AppTheme.colorOfFast,
-          category: ProductCategory.fast,
+          keys: DataManager.fastSprays,
         );
 
-  const CategoryTile.wtf()
-      : _detail = const $Category._(
+  CategoryTile.wtf()
+      : _detail = $Category._(
+          type: 2,
           width: 167,
           name: 'WTF',
           offset: Offset(-4.55, 7.5),
           image: Assets.nbqWTF,
           color: AppTheme.colorOfWTF,
-          category: ProductCategory.wtf,
+          keys: DataManager.wtfSprays,
         );
 
-  const CategoryTile.pro()
-      : _detail = const $Category._(
+  CategoryTile.pro()
+      : _detail = $Category._(
+          type: 3,
           width: 161,
           name: 'PRO',
           offset: Offset(7, 16),
           image: Assets.nbqPropulse,
           color: AppTheme.colorOfPropulse,
-          category: ProductCategory.pro,
+          keys: DataManager.proSprays,
         );
 
-  const CategoryTile.caps()
-      : _detail = const $Category._(
+  CategoryTile.caps()
+      : _detail = $Category._(
+          type: 4,
           width: 200,
           name: 'CAPS',
           offset: Offset(7, -10),
           image: Assets.redN3Cap,
           color: AppTheme.colorOfPropulse,
-          category: ProductCategory.caps,
+          keys: DataManager.caps,
         );
 
   @override
@@ -109,26 +117,16 @@ class CategoryTile extends StatelessWidget {
                     child: Image.asset(_detail.image, width: _detail.width),
                   ),
                   SizedBox(width: 30),
-                  Column( children: [
-                    Text(
-                      _detail.name,
-                      style: TextStyle(fontFamily: 'Futura', fontSize: 42),
-                    ),
-                    // Text(
-                    //   Product.all
-                    //           .where((element) =>
-                    //               element.category == _detail.category)
-                    //           .length
-                    //           .toString() +
-                    //       ' ${lang.colors}',
-                    //   style: GoogleFonts.bebasNeue(
-                    //     fontSize: 12,
-                    //     color: Colors.black,
-                    //     fontWeight: FontWeight.normal,
-                    //   ),
-                    // ),
-                  ],
-                    crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.center,),
+                  Column(
+                    children: [
+                      Text(
+                        _detail.name,
+                        style: TextStyle(fontFamily: 'Futura', fontSize: 42),
+                      ),
+                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  ),
                 ]),
               ),
             ),
@@ -176,12 +174,7 @@ class CategoryTile extends StatelessWidget {
                       style: TextStyle(fontFamily: 'Futura', fontSize: 42),
                     ),
                     Text(
-                      // Product.all
-                      //         .where((element) =>
-                      //             element.category == _detail.category)
-                      //         .length
-                      //         .toString() +
-                          ' ${lang.colors}',
+                      ' ${lang.colors} ${DataManager.getCount(_detail.type)}',
                       style: GoogleFonts.bebasNeue(
                         fontSize: 12,
                         color: Colors.black,

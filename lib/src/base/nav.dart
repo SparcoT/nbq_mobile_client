@@ -25,9 +25,6 @@ class AppNavigation {
       key.currentState.pushNamed(page.name);
 
   static final _routes = <String, WidgetBuilder>{
-    AppPages.signIn.name: (context) => SignIn(),
     AppPages.home.name: (context) => HomePage(),
-    AppPages.adminHome.name: (context) => AdminHome(),
-    // AppPages.products.name: (context) => ProductDetailPage()
   };
 }
