@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/data/product.dart';
+import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
+import 'package:nbq_mobile_client/src/utils/validators.dart';
 
 import '../../utils/pdf_share.dart'
     if (dart.library.io) '../../utils/pdf_share_io.dart'
@@ -259,7 +263,7 @@ class _CartViewState extends State<CartView> {
                     sliver: SliverToBoxAdapter(
                         child: AppTextField(
                       label: lang.name,
-                      // validator: Validators.required,
+                      validator: Validators.required,
                       onSaved: (val) => _data.name = val,
                     )),
                   ),
@@ -269,7 +273,7 @@ class _CartViewState extends State<CartView> {
                         child: AppTextField(
                       label: lang.email,
                       keyboardType: TextInputType.emailAddress,
-                      // validator: (val) => emailValidator(val),
+                      validator: (val) => emailValidator(val),
                       onSaved: (val) => _data.email = val,
                     )),
                   ),
@@ -307,9 +311,33 @@ class _CartViewState extends State<CartView> {
                             return;
                           }
                           _formKey.currentState.save();
-                          await _generatePdf();
+                          final document = await _generatePdf();
+
+                          await performLazyTask(context, () async {
+                            final name = '_order/${_data.name}'
+                                '-${_data.email}_${DateTime.now()}.pdf';
+                            final task = await FirebaseStorage.instance
+                                .ref(name)
+                                .putData(await document.document.save());
+
+                            final url = await task.ref.getDownloadURL();
+
+                            await FirebaseFirestore.instance
+                                .collection('orders')
+                                .add({
+                              'name': _data.name,
+                              'email': _data.email,
+                              'note': _data.note,
+                              'contact': _data.contact,
+                              'filename': name,
+                              'file': url,
+                              'created_at': DateTime.now()
+                            });
+                          });
+
+                          sharePDF(document);
                         },
-                        child: Text(kIsWeb ? "DOWNLOAD" : lang.sendOrShare),
+                        child: Text(kIsWeb ? lang.download : lang.sendOrShare),
                         style: ElevatedButton.styleFrom(
                           elevation: 5,
                           primary: Colors.black,
@@ -339,10 +367,7 @@ class _CartViewState extends State<CartView> {
     );
   }
 
-  // pw.Table _generateTable(List<CartProduct> products) {
-  //   return ;
-  // }
-  _generatePdf() async {
+  Future<pw.Document> _generatePdf() async {
     final document = pw.Document();
     final _image = (await rootBundle.load(Assets.logo)).buffer.asUint8List();
     var _totalCans = 0;
@@ -584,7 +609,7 @@ class _CartViewState extends State<CartView> {
       }));
     }
 
-    sharePDF(document);
+    return document;
   }
 
   Widget _buildHeader(String text) {
