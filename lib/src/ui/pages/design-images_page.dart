@@ -69,13 +69,13 @@ class _DesignImagesState extends State<DesignImages> {
                   .map((e) => _FolderTile(title: e, context: context))
                   .toList(),
             ),
-            floatingActionButton: kIsWeb
-                ? FloatingActionButton.extended(
-                    onPressed: _handleFolderCreate,
-                    icon: Icon(Icons.create_new_folder),
-                    label: Text('Create New Folder'),
-                  )
-                : null,
+            // floatingActionButton: kIsWeb
+            //     ? FloatingActionButton.extended(
+            //         onPressed: _handleFolderCreate,
+            //         icon: Icon(Icons.create_new_folder),
+            //         label: Text('Create New Folder'),
+            //       )
+            //     : null,
           );
         },
       );

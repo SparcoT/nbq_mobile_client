@@ -81,40 +81,6 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
                 return Center(child: CircularProgressIndicator());
               },
             );
-            if (kIsWeb) {
-              child = Stack(children: [
-                ConstrainedBox(
-                  child: image,
-                  constraints: BoxConstraints.expand(),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    onPressed: () async {
-                      FirebaseStorage.instance
-                          .ref(rawImages[index].fullPath)
-                          .delete();
-                      images.removeAt(index);
-                      rawImages.removeAt(index);
-                      setState(() {});
-                    },
-                    child: Icon(CupertinoIcons.delete),
-                    style: TextButton.styleFrom(
-                      elevation: 10,
-                      minimumSize: Size(50, 50),
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(8),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ]);
-            } else {
-              child = image;
-            }
             return Hero(
               tag: images[index],
               child: Container(
@@ -129,7 +95,7 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
                   ],
                 ),
                 child: GestureDetector(
-                  child: child,
+                  child: image,
                   onTap: () {
                     return AppNavigation.navigateTo(
                       context,
@@ -152,21 +118,21 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
           backgroundColor: Colors.white,
           title: Text(widget.title, style: TextStyle(color: Colors.black)),
         ),
-        floatingActionButton: kIsWeb
-            ? FloatingActionButton.extended(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => _UploadFolderImages(
-                      title: widget.title,
-                      onUpdated: _getImages,
-                    ),
-                  );
-                },
-                icon: Icon(Icons.photo),
-                label: Text('Upload Images'),
-              )
-            : null,
+        // floatingActionButton: kIsWeb
+        //     ? FloatingActionButton.extended(
+        //         onPressed: () {
+        //           showDialog(
+        //             context: context,
+        //             builder: (context) => _UploadFolderImages(
+        //               title: widget.title,
+        //               onUpdated: _getImages,
+        //             ),
+        //           );
+        //         },
+        //         icon: Icon(Icons.photo),
+        //         label: Text('Upload Images'),
+        //       )
+        //     : null,
       );
     });
   }
