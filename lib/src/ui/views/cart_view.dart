@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hive/hive.dart';
-import 'package:nbq_mobile_client/src/data/data_manager.dart';
-import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/data/product.dart';
 import 'package:nbq_mobile_client/src/utils/lazy_task.dart';
 import 'package:nbq_mobile_client/src/utils/validators.dart';
+import 'package:nbq_mobile_client/src/data/data_manager.dart';
+import 'package:nbq_mobile_client/src/ui/widgets/product_counter.dart';
 
 import '../../utils/pdf_share.dart'
     if (dart.library.io) '../../utils/pdf_share_io.dart'
@@ -82,8 +81,56 @@ class _CartViewState extends State<CartView> {
     _loadProducts();
   }
 
+  void _onCanUpdated(Purchasable product) {
+    _slowProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(0, product.key);
+        return true;
+      }
+
+      return false;
+    });
+    _fastProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(1, product.key);
+        return true;
+      }
+
+      return false;
+    });
+    _wtfProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(2, product.key);
+        return true;
+      }
+
+      return false;
+    });
+    _proProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(3, product.key);
+        return true;
+      }
+
+      return false;
+    });
+    _capsProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(4, product.key);
+        return true;
+      }
+
+      return false;
+    });
+
+    setState(() {});
+  }
+  void _onBoxUpdated(Purchasable product) => _onCanUpdated(product);
+
   @override
   Widget build(BuildContext context) {
+    this.isHeaderBuilt = false;
+
     if (_loading) {
       return Center(
         child: Row(
@@ -200,7 +247,12 @@ class _CartViewState extends State<CartView> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: ColorTile(_slowProducts[index]),
+                        child: ColorTile(
+                          type: 0,
+                          product: _slowProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
                       ),
                       childCount: _slowProducts.length,
                     ),
@@ -212,7 +264,12 @@ class _CartViewState extends State<CartView> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: ColorTile(_fastProducts[index]),
+                        child: ColorTile(
+                          type: 1,
+                          product: _fastProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
                       ),
                       childCount: _fastProducts.length,
                     ),
@@ -224,7 +281,12 @@ class _CartViewState extends State<CartView> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: ColorTile(_wtfProducts[index]),
+                        child: ColorTile(
+                          type: 2,
+                          product: _wtfProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
                       ),
                       childCount: _wtfProducts.length,
                     ),
@@ -236,7 +298,12 @@ class _CartViewState extends State<CartView> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: ColorTile(_proProducts[index]),
+                        child: ColorTile(
+                          type: 3,
+                          product: _proProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
                       ),
                       childCount: _proProducts.length,
                     ),
@@ -248,7 +315,12 @@ class _CartViewState extends State<CartView> {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
                         padding: const EdgeInsets.only(bottom: 5),
-                        child: ColorTile(_capsProducts[index]),
+                        child: ColorTile(
+                          type: 4,
+                          product: _capsProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
                       ),
                       childCount: _capsProducts.length,
                     ),
@@ -312,13 +384,15 @@ class _CartViewState extends State<CartView> {
                           }
                           _formKey.currentState.save();
                           final document = await _generatePdf();
+                          final data = await document.save();
 
                           await performLazyTask(context, () async {
                             final name = '_order/${_data.name}'
                                 '-${_data.email}_${DateTime.now()}.pdf';
+
                             final task = await FirebaseStorage.instance
                                 .ref(name)
-                                .putData(await document.document.save());
+                                .putData(data);
 
                             final url = await task.ref.getDownloadURL();
 
@@ -629,7 +703,7 @@ class _CartViewState extends State<CartView> {
           children: [
             Expanded(child: header),
             ShadowedBox(
-              width: 50,
+              width: 92.5,
               height: 20,
               borderRadius: 6,
               child: Center(child: Text('Lata')),
@@ -637,7 +711,7 @@ class _CartViewState extends State<CartView> {
             Padding(
               padding: const EdgeInsets.only(right: 15, left: 10),
               child: ShadowedBox(
-                width: 50,
+                width: 92.5,
                 height: 20,
                 borderRadius: 6,
                 child: Center(child: Text('Pack')),
@@ -652,13 +726,15 @@ class _CartViewState extends State<CartView> {
 }
 
 class ColorTile extends StatelessWidget {
+  final int type;
   final Purchasable product;
+  final Function(Purchasable) onCanUpdated;
+  final Function(Purchasable) onBoxUpdated;
 
-  ColorTile(this.product);
+  ColorTile({this.product, this.type, this.onCanUpdated, this.onBoxUpdated});
 
   @override
   Widget build(BuildContext context) {
-    print(product?.name);
     return Row(children: [
       Expanded(
         child: Row(children: [
@@ -689,46 +765,49 @@ class ColorTile extends StatelessWidget {
               ),
             ),
           SizedBox(width: 8),
-          // if (product is Cap) ...[
-          //   SizedBox(
-          //     width: 35,
-          //     child: Text(
-          //       product.ref,
-          //       style: TextStyle(
-          //         fontFamily: 'Futura',
-          //         fontWeight: FontWeight.bold,
-          //         fontSize: 12,
-          //       ),
-          //     ),
-          //   ),
-          //   SizedBox(width: 8),
-          // ],
           Text(product.name, style: TextStyle(fontSize: 15)),
         ]),
       ),
-      ShadowedBox(
-        width: 50,
-        height: 20,
-        borderRadius: 6,
-        child: Center(
-          child: Text((product.singleQty ?? 0).toString(),
-              style: TextStyle(fontSize: 12)),
+      SizedBox(
+        width: 92.5,
+        child: ProductQtyCounter(
+          quantity: product.singleQty ?? 0,
+          onChanged: (val) {
+            product.singleQty = val;
+            // _cansCount = val;
+            _updateDBCounter(product);
+            onCanUpdated(product);
+
+            //
+            // setState(() {});
+          },
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(right: 15, left: 10),
-        child: ShadowedBox(
-          width: 50,
-          height: 20,
-          borderRadius: 6,
-          child: Center(
-            child: Text(
-              (product.boxQty ?? 0).toString(),
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
+      SizedBox(width: 10),
+      SizedBox(
+        width: 92.5,
+        child: ProductQtyCounter(
+          quantity: product.boxQty ?? 0,
+          onChanged: (val) {
+            product.boxQty = val;
+            _updateDBCounter(product);
+
+            onBoxUpdated(product);
+          },
         ),
       ),
+      SizedBox(width: 15)
     ]);
+  }
+
+  Future<void> _updateDBCounter(Purchasable purchasable) async {
+    await purchasable.save();
+    if ((purchasable.singleQty ?? 0) == 0 && (purchasable.boxQty ?? 0) == 0) {
+      DataManager.removeFromCartSelection(type, purchasable.id);
+    } else {
+      print('ADDING TO CART: $type');
+      print('ADDING TO CART: ${purchasable.id}');
+      DataManager.addToCart(type, purchasable.id);
+    }
   }
 }
