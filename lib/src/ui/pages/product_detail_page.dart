@@ -249,7 +249,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     DataManager.clearAllSelection(widget.category.type);
 
     products.forEach((element) {
-      element.singleQty = element.boxQty = 0;
+      if ((element.singleQty ?? 0) > 0 || (element.boxQty ?? 0) > 0) {
+        element.singleQty = element.boxQty = 0;
+        element.save();
+      }
     });
 
     _controller.cansCount = 0;

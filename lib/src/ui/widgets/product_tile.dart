@@ -90,7 +90,6 @@ class _ProductTileState extends State<ProductTile> {
               quantity: widget.product.boxQty ?? 0,
               onChanged: (val) {
                 widget.product.boxQty = val;
-                widget.controller.boxesCount -= 1;
                 _updateDBCounter(widget.product);
 
                 setState(() {});
