@@ -165,7 +165,7 @@ List<Map<String, dynamic>> countries = [
     'latitude': 18.210446,
     'longitude': -66.905341,
     'email': 'puertorico@nbqpro.com',
-    'image': 'PuertoRicobaby',
+    'image': 'Puerto Rico',
   },
   {
     'name': 'Romania ',

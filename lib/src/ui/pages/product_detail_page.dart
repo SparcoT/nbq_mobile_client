@@ -18,6 +18,9 @@ class ProductDetailPageController extends ChangeNotifier {
   int _cansCount = 0;
   int _boxesCount = 0;
 
+  get cansCount => _cansCount;
+  get boxesCount => _boxesCount;
+
   set cansCount(int value) {
     _cansCount = value;
     notifyListeners();
@@ -47,10 +50,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   Future<void> _loadProducts() async {
     products = [];
-
-    print('WIDGET ${widget.category.keys}');
     for (final item in widget.category.keys) {
-      products.add(await DataManager.loadSpray(widget.category.type, item));
+      final product = await DataManager.loadSpray(widget.category.type, item);
+      _controller.boxesCount += product.boxQty ?? 0;
+      _controller.cansCount += product.singleQty ?? 0;
+
+      products.add(product);
     }
 
     viewedProducts = List.from(products);
@@ -369,7 +374,7 @@ class __PageBottomState extends State<_PageBottom> {
 class CounterHeader extends Container {
   CounterHeader()
       : super(
-          width: 185,
+          width: 195,
           height: 30,
           margin: const EdgeInsets.only(right: 10),
           decoration: BoxDecoration(

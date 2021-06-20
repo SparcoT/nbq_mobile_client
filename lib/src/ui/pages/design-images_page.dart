@@ -30,7 +30,10 @@ class _DesignImagesState extends State<DesignImages> {
       setState(() {});
     });
     final folders = await FirebaseStorage.instance.ref().list();
-    _folders = folders.prefixes.map((e) => e.fullPath).toList();
+    _folders = folders.prefixes
+        .map((e) => e.fullPath)
+        .where((element) => !element.contains('_order'))
+        .toList();
 
     setState(() {
       _loading = false;
@@ -39,8 +42,6 @@ class _DesignImagesState extends State<DesignImages> {
 
   @override
   Widget build(BuildContext context) {
-    // return _CreateFolderDialog();
-
     if (_loading) {
       return Center(
         child: Row(
@@ -69,13 +70,6 @@ class _DesignImagesState extends State<DesignImages> {
                   .map((e) => _FolderTile(title: e, context: context))
                   .toList(),
             ),
-            // floatingActionButton: kIsWeb
-            //     ? FloatingActionButton.extended(
-            //         onPressed: _handleFolderCreate,
-            //         icon: Icon(Icons.create_new_folder),
-            //         label: Text('Create New Folder'),
-            //       )
-            //     : null,
           );
         },
       );

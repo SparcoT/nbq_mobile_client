@@ -5,9 +5,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProductQtyCounter extends StatefulWidget {
   final int quantity;
+  final VoidCallback onDecrement;
+  final VoidCallback onIncrement;
   final ValueChanged<int> onChanged;
 
-  ProductQtyCounter({this.quantity = 0, this.onChanged});
+  ProductQtyCounter({
+    this.quantity = 0,
+    this.onChanged,
+    this.onIncrement,
+    this.onDecrement,
+  });
 
   @override
   _ProductQtyCounterState createState() => _ProductQtyCounterState();
@@ -21,9 +28,18 @@ class _ProductQtyCounterState extends State<ProductQtyCounter> {
     super.initState();
   }
 
-  void _increment() => widget.onChanged?.call(++_qty);
-  void _decrement() => widget.onChanged?.call(--_qty);
+  void _increment() {
+    widget.onChanged?.call(++_qty);
+    widget.onIncrement?.call();
+  }
+
+  void _decrement() {
+    widget.onChanged?.call(--_qty);
+    widget.onDecrement?.call();
+  }
+
   void _incrementAction() => setState(_increment);
+
   void _decrementAction() {
     if (_qty > 0) setState(_decrement);
   }

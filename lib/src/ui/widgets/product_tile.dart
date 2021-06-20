@@ -69,30 +69,34 @@ class _ProductTileState extends State<ProductTile> {
         ),
       ),
       SizedBox(
-        width: 185,
+        width: 195,
         child: Row(children: [
           Expanded(
             child: ProductQtyCounter(
               quantity: widget.product.singleQty ?? 0,
               onChanged: (val) {
                 widget.product.singleQty = val;
-                widget.controller.cansCount = val;
                 _updateDBCounter(widget.product);
 
                 setState(() {});
               },
+              onIncrement: () => widget.controller.cansCount += 1,
+              onDecrement: () => widget.controller.cansCount -= 1,
             ),
           ),
+          SizedBox(width: 10),
           Expanded(
             child: ProductQtyCounter(
               quantity: widget.product.boxQty ?? 0,
               onChanged: (val) {
                 widget.product.boxQty = val;
-                widget.controller.boxesCount = val;
+                widget.controller.boxesCount -= 1;
                 _updateDBCounter(widget.product);
 
                 setState(() {});
               },
+              onIncrement: () => widget.controller.boxesCount += 1,
+              onDecrement: () => widget.controller.boxesCount -= 1,
             ),
           ),
         ]),
@@ -103,7 +107,7 @@ class _ProductTileState extends State<ProductTile> {
 
   Future<void> _updateDBCounter(Purchasable purchasable) async {
     await purchasable.save();
-    if (purchasable.singleQty == 0 &&   purchasable.boxQty == 0) {
+    if (purchasable.singleQty == 0 && purchasable.boxQty == 0) {
       DataManager.removeFromCartSelection(widget.type, purchasable.id);
     } else {
       print('ADDING TO CART: ${widget.type}');

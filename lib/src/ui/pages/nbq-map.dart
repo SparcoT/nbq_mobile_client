@@ -41,7 +41,7 @@ class _NBQMapState extends State<NBQMap> {
     return data.buffer.asUint8List();
   }
 
-  _showContactDialog(String email, [Uint8List image]) async {
+  _showContactDialog(String email, [String image]) async {
     var temp = hasAction;
     setState(() => hasAction = false);
     await showDialog(
@@ -123,7 +123,7 @@ class _NBQMapState extends State<NBQMap> {
           onTap: () async {
             final _image = await getBytesFromAsset(
                 'assets/countries/${element['image']}.jpg', 100);
-            _showContactDialog(element['email'], _image);
+            _showContactDialog(element['email'], element['image']);
           },
         ),
       ));
@@ -171,8 +171,7 @@ class _NBQMapState extends State<NBQMap> {
     if (_initiated) {
       return GoogleMap(
         myLocationButtonEnabled: false,
-        initialCameraPosition:
-            CameraPosition(target: currentLocation, zoom: 5),
+        initialCameraPosition: CameraPosition(target: currentLocation, zoom: 5),
         onMapCreated: (controller) {
           // _controller = controller;
         },
@@ -199,7 +198,7 @@ const apiKey = "AIzaSyDdNpY6LGWgHqRfTRZsKkVhocYOaER325w";
 
 class _ShowDialog extends StatefulWidget {
   final String email;
-  final Uint8List image;
+  final String image;
 
   _ShowDialog({@required this.email, this.image});
 
@@ -282,7 +281,6 @@ class __ShowDialogState extends State<_ShowDialog> {
                     ],
                   ),
                 ),
-                if (widget.image != null) Image.memory(widget.image),
                 Padding(
                   padding: const EdgeInsets.only(left: 7.5, right: 9, top: 10),
                   child: Row(
@@ -295,9 +293,9 @@ class __ShowDialogState extends State<_ShowDialog> {
                       ),
                       Expanded(
                           child: Text(
-                        lang.terms,
-                        style: TextStyle(fontSize: 13),
-                      )),
+                            lang.terms,
+                            style: TextStyle(fontSize: 13),
+                          )),
                       Transform.scale(
                         scale: .8,
                         child: TextButton(
@@ -310,7 +308,15 @@ class __ShowDialogState extends State<_ShowDialog> {
                       )
                     ],
                   ),
-                )
+                ),
+                if (widget.image != null)
+                  SizedBox(
+                    width: 280,
+                    child: Image.asset(
+                      'assets/countries_hq/${widget.image}.jpg',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
               ],
             ),
           ),
