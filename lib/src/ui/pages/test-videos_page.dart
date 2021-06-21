@@ -1,12 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:nbq_mobile_client/src/app.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nbq_mobile_client/src/firebase-videos/video_model.dart';
 import 'package:nbq_mobile_client/src/ui/pages/video_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
+import 'package:video_player/video_player.dart';
 
 class UserVideosPage extends StatefulWidget {
   @override
@@ -28,6 +30,7 @@ class _UserVideosPageState extends State<UserVideosPage> {
         .map(
           (event) => event.docs
               .map((e) => VideoModel.fromJson(e.data())..id = e.id)
+              .where((element) => element.video != null)
               .toList(),
         )
         .listen((event) {
@@ -43,16 +46,91 @@ class _UserVideosPageState extends State<UserVideosPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LocalizedView(
-      builder: (ctx, lang) => Scaffold(
-        appBar: AppBar(title: Text(lang.test)),
-        body: Column(
-          children: [
+    return LayoutBuilder(builder: (context, constraints) {
+      final parts = constraints.maxWidth ~/ 150;
+
+      return LocalizedView(builder: (context, lang) {
+        Widget child;
+        if (videosList == null) {
+          child = Center(child: CupertinoActivityIndicator());
+        } else {
+          child = GridView.builder(
+            padding: const EdgeInsets.all(15),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15,
+              crossAxisCount: parts,
+              childAspectRatio: 300 / 321.5,
+            ),
+            itemCount: searchList.length,
+            itemBuilder: (context, i) {
+              final video = videosList[searchList[i].index];
+              final videoName = lang.localeName == 'en'
+                  ? video.nameInEnglish
+                  : video.nameInSpanish;
+
+              return GestureDetector(
+                onTap: () {
+                  AppNavigation.navigateTo(
+                    context,
+                    VideoPage(url: video.video, videoName: videoName),
+                  );
+                },
+                child: Column(children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                            blurRadius: 10,
+                          )
+                        ],
+                        image: DecorationImage(
+                          image: NetworkImage(video.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Center(
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white54,
+                          ),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(Icons.play_arrow_rounded),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 7.5),
+                  Text(
+                    videoName,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ]),
+              );
+            },
+          );
+        }
+
+        return Scaffold(
+          appBar: AppBar(title: Text(lang.test)),
+          body: Column(children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: CupertinoTextField(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                placeholderStyle: TextStyle(fontSize: 14),
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 10),
+              child: CupertinoSearchTextField(
                 placeholder: lang.searchVideo,
                 onChanged: (e) {
                   if (e.isEmpty) {
@@ -83,97 +161,12 @@ class _UserVideosPageState extends State<UserVideosPage> {
                 },
               ),
             ),
-            if (videosList == null)
-              CircularProgressIndicator()
-            else
-              Expanded(
-                child: kIsWeb
-                    ? Scrollbar(
-                        isAlwaysShown: true,
-                        thickness: 15,
-                        child: videosBuilder())
-                    : videosBuilder(),
-              ),
-          ],
-        ),
-      ),
-    );
+            Expanded(child: child)
+          ]),
+        );
+      });
+    });
   }
-
-  Widget videosBuilder() => GridView.builder(
-        itemCount: searchList.length,
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: kIsWeb ? 5 : 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          // childAspectRatio: MediaQuery.of(context).size.width / 5
-        ),
-        itemBuilder: (ctx, i) {
-          final video = videosList[searchList[i].index];
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.pink,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => AppNavigation.navigateTo(
-                      context,
-                      VideoPage(
-//                        image: video.image,
-                        url: video.video,
-                        videoName:
-                            LocalizationSelector.locale.value.languageCode ==
-                                    'en'
-                                ? video.nameInEnglish
-                                : video.nameInSpanish,
-                      ),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(55),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue,
-                        image: DecorationImage(
-                          image: NetworkImage(video.image),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Center(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.pink,
-                          child: Icon(CupertinoIcons.play),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                    child: Text(
-                      LocalizationSelector.locale.value.languageCode == 'en'
-                          ? video.nameInEnglish
-                          : video.nameInSpanish,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
-      );
 }
 
 int matchingDegree(String source, String query) {
