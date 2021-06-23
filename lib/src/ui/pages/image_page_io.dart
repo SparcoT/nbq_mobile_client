@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:isolate';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -19,14 +20,18 @@ class DecodeParam {
   );
 }
 
-Widget createImagePage({String image, Widget imageWidget}) => ImagePage(
+Widget createImagePage({String image, String name, Widget imageWidget}) =>
+    ImagePage(
       image: image,
+      name: name
     );
 
 class ImagePage extends StatefulWidget {
   final String image;
+  final String name;
 
   ImagePage({
+    this.name,
     this.image,
   });
 
@@ -35,15 +40,18 @@ class ImagePage extends StatefulWidget {
 }
 
 class _ImagePageState extends State<ImagePage> {
-  final imageName = Directory.systemTemp.path +
-      '/' +
-      DateTime.now().millisecondsSinceEpoch.toString() +
-      '.png';
+  String imageName;
 
   // '.jpg';
   var loading = false;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   var downloaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    imageName = '${Directory.systemTemp.path}/${widget.name}';
+  }
 
   @override
   void dispose() {
@@ -56,88 +64,72 @@ class _ImagePageState extends State<ImagePage> {
       final image = im.decodeImage((await File(list[0]).readAsBytes()));
       final file = await File(list[1]).writeAsBytes(im.encodePng(image));
       param.sendPort.send(file.path);
-    } catch (e) {
-      print('eeeeeeeeeee');
-      print(e);
-    }
+    } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget child;
+    if (loading) {
+      child = CupertinoActivityIndicator();
+    } else {
+      child = ConstrainedBox(
+        constraints: BoxConstraints.expand(),
+        child: InteractiveViewer(
+          child: Center(
+            child: Image.network(
+              widget.image,
+              fit: BoxFit.fill,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null && child != null) return child;
+                return CupertinoActivityIndicator();
+              },
+            ),
+          ),
+        ),
+      );
+    }
+
     return LocalizedView(
       builder: (ctx, lang) => Scaffold(
+        body: child,
         appBar: AppBar(),
         key: _scaffoldKey,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (loading)
-              Center(child: CircularProgressIndicator())
-            else ...[
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                child: Hero(
-                  tag: widget.image,
-                  child: Image.network(
-                    widget.image,
-                    fit: BoxFit.fill,
-                    // height: 300,
-                    // cacheHeight: 200,
-                    // cacheWidth: 200,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      }
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  ),
-                ),
-                // child: Image.file(
-                //   File(imageName),
-                //   fit: BoxFit.fill,
-                // ),
+        persistentFooterButtons: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: TextButton.icon(
+                onPressed: loading ? null : _downloadImage,
+                icon: Icon(Icons.download_sharp),
+                label: Text(lang.download),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: TextButton.icon(
-                    onPressed: loading ? null : _downloadImage,
-                    icon: Icon(Icons.download_sharp),
-                    label: Text(lang.download),
-                  ),
-                ),
-              ),
-            ]
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   _downloadImage() async {
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       print(imageName);
       openLoadingDialog(context, 'Saving');
       try {
         await Dio()
             .download(widget.image, imageName)
-            .then((value) =>
-            setState(() => downloaded = true));
+            .then((value) => setState(() => downloaded = true));
         // File imgFile = File(imageName);
         var receivePort = ReceivePort();
         final filePath =
             '${Directory.systemTemp.path}/${DateTime.now().millisecondsSinceEpoch.toString()}.png';
-        await Isolate.spawn(
-            decodeIsolate,
-            DecodeParam(imageName + '||' + filePath,
-                receivePort.sendPort));
+        await Isolate.spawn(decodeIsolate,
+            DecodeParam(imageName + '||' + filePath, receivePort.sendPort));
         var path = await receivePort.first as String;
         await GallerySaver.saveImage(path).then((_) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Image saved')));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Image saved')));
         });
         await File(imageName).delete();
         await File(path).delete();
@@ -146,44 +138,44 @@ class _ImagePageState extends State<ImagePage> {
       }
       Navigator.of(context).pop();
     } else {
+      Future<Directory> downloadsDirectory =
+          DownloadsPathProvider.downloadsDirectory;
+      final imageName = (await downloadsDirectory).path +
+          '/' +
+          DateTime.now().millisecondsSinceEpoch.toString();
+      print(imageName);
+      openLoadingDialog(context, 'Saving');
+      try {
+        await Dio().download(widget.image, imageName).then((value) async {
+          setState(() => downloaded = true);
+        });
 
-    Future<Directory> downloadsDirectory = DownloadsPathProvider.downloadsDirectory;
-    final imageName = (await downloadsDirectory).path +
-        '/' +
-        DateTime.now().millisecondsSinceEpoch.toString();
-    print(imageName);
-    openLoadingDialog(context, 'Saving');
-    try {
-      await Dio().download(widget.image, imageName).then((value) async {
-        setState(() => downloaded = true);
-      });
-
-      var receivePort = ReceivePort();
-      // final filePath =
-      //     '${(await getDownloadsDirectory()).path}/${DateTime.now().millisecondsSinceEpoch.toString()}';
-      await Isolate.spawn(decodeIsolate,
-          DecodeParam(imageName + '||' + imageName, receivePort.sendPort));
-      // var path = await receivePort.first as String;
-      // await Share.shareFiles([path]);
-      // await GallerySaver.saveImage(path).then((value) {
-      //   print('RRRRRRRRRRRRR');
-      //   print(value);
-      // }).catchError((e) {
-      //   print('Error');
-      //   print('Error');
-      //   print(e);
-      // });
-      // await GallerySaver.saveImage(path).then((_) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Image saved')));
-      // });
-      // await File(imageName).delete();
-      // await File(path).delete();
-    } catch (e) {
-      print(e);
+        var receivePort = ReceivePort();
+        // final filePath =
+        //     '${(await getDownloadsDirectory()).path}/${DateTime.now().millisecondsSinceEpoch.toString()}';
+        await Isolate.spawn(decodeIsolate,
+            DecodeParam(imageName + '||' + imageName, receivePort.sendPort));
+        // var path = await receivePort.first as String;
+        // await Share.shareFiles([path]);
+        // await GallerySaver.saveImage(path).then((value) {
+        //   print('RRRRRRRRRRRRR');
+        //   print(value);
+        // }).catchError((e) {
+        //   print('Error');
+        //   print('Error');
+        //   print(e);
+        // });
+        // await GallerySaver.saveImage(path).then((_) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Image saved')));
+        // });
+        // await File(imageName).delete();
+        // await File(path).delete();
+      } catch (e) {
+        print(e);
+      }
+      Navigator.of(context).pop();
     }
-    Navigator.of(context).pop();
-  }
   }
 }
 

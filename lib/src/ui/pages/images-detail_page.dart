@@ -24,8 +24,8 @@ class ImagesDetailPage extends StatefulWidget {
 
 class _ImagesDetailPageState extends State<ImagesDetailPage> {
   var _loading = true;
-  List<String> images = [];
-  List<Reference> rawImages = [];
+  List<String> ids = [];
+  List<Future<String>> images = [];
 
   @override
   void initState() {
@@ -38,11 +38,11 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {});
     });
-    await FirebaseStorage.instance.ref(widget.title).list().then((value) async {
+    await FirebaseStorage.instance.ref(widget.title).listAll().then((value) {
       images = [];
       for (var i = 0; i < value.items.length; i++) {
-        images.add((await value.items[i].getDownloadURL()));
-        rawImages.add(value.items[i]);
+        ids.add(value.items[i].name);
+        images.add(value.items[i].getDownloadURL());
       }
     });
     _loading = false;
@@ -53,15 +53,17 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final String title = widget.title.split('/').last;
     return LayoutBuilder(builder: (context, constraints) {
       Widget child;
       if (_loading) {
         child = Center(
-            child: Row(mainAxisSize: MainAxisSize.min, children: [
-          CupertinoActivityIndicator(),
-          SizedBox(width: 10),
-          Text('Loading Images')
-        ]));
+          child: Row(mainAxisSize: MainAxisSize.min, children: [
+            CupertinoActivityIndicator(),
+            SizedBox(width: 10),
+            Text('Loading Images')
+          ]),
+        );
       } else if (images.isEmpty) {
         child = Center(child: Text('No Images'));
       } else {
@@ -69,20 +71,9 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
           itemCount: images.length,
           padding: const EdgeInsets.all(5),
           itemBuilder: (context, index) {
-            Widget child;
-            Widget image = Image.network(
-              images[index],
-              cacheWidth: 200,
-              cacheHeight: 200,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-
-                return Center(child: CircularProgressIndicator());
-              },
-            );
+            Image image;
             return Hero(
-              tag: images[index],
+              tag: ids[index],
               child: Container(
                 clipBehavior: Clip.antiAlias,
                 margin: const EdgeInsets.all(5),
@@ -91,15 +82,52 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
                   borderRadius: BorderRadius.circular(4),
                   boxShadow: [
                     BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.1), blurRadius: 5)
+                      blurRadius: 5,
+                      color: Color.fromRGBO(0, 0, 0, 0.1),
+                    )
                   ],
                 ),
                 child: GestureDetector(
-                  child: image,
-                  onTap: () {
+                  child: FutureBuilder(
+                    future: images[index],
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.none:
+                        case ConnectionState.waiting:
+                          return Center(child: CupertinoActivityIndicator());
+                        case ConnectionState.active:
+                        case ConnectionState.done:
+                          break;
+                      }
+
+                      if (snapshot.hasData) {
+                        return (image = Image.network(
+                          snapshot.data,
+                          cacheWidth: 200,
+                          cacheHeight: 200,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null && child != null)
+                              return child;
+                            return Center(child: CupertinoActivityIndicator());
+                          },
+                        ));
+                      } else {
+                        return Text('Unknown state');
+                      }
+                    },
+                  ),
+                  onTap: () async {
+                    if (image == null) return;
                     return AppNavigation.navigateTo(
                       context,
-                      createImagePage(image: images[index], imageWidget: image),
+                      createImagePage(
+                        name: ids[index],
+                        image: await FirebaseStorage.instance
+                            .ref('$title/${ids[index]}')
+                            .getDownloadURL(),
+                        imageWidget: image
+                      ),
                     );
                   },
                 ),
@@ -116,23 +144,11 @@ class _ImagesDetailPageState extends State<ImagesDetailPage> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
-          title: Text(widget.title, style: TextStyle(color: Colors.black)),
+          title: Text(
+            title,
+            style: TextStyle(color: Colors.black),
+          ),
         ),
-        // floatingActionButton: kIsWeb
-        //     ? FloatingActionButton.extended(
-        //         onPressed: () {
-        //           showDialog(
-        //             context: context,
-        //             builder: (context) => _UploadFolderImages(
-        //               title: widget.title,
-        //               onUpdated: _getImages,
-        //             ),
-        //           );
-        //         },
-        //         icon: Icon(Icons.photo),
-        //         label: Text('Upload Images'),
-        //       )
-        //     : null,
       );
     });
   }

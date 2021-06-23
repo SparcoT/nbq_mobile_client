@@ -29,9 +29,9 @@ class _DesignImagesState extends State<DesignImages> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {});
     });
-    final folders = await FirebaseStorage.instance.ref().list();
+    final folders = await FirebaseStorage.instance.ref('_thumbnail').list();
     _folders = folders.prefixes
-        .map((e) => e.fullPath)
+        .map((e) => e.name)
         .where((element) => !element.contains('_order'))
         .toList();
 
@@ -56,7 +56,7 @@ class _DesignImagesState extends State<DesignImages> {
     } else {
       return LayoutBuilder(
         builder: (context, constraints) {
-          final crossAxisCount = constraints.maxWidth < 700 ? 1 : 2;
+          final crossAxisCount = constraints.maxWidth ~/ 600 + 1;
 
           return Scaffold(
             body: GridView.count(
@@ -94,7 +94,7 @@ class _FolderTile extends Material {
             borderRadius: BorderRadius.circular(10),
             onTap: () => AppNavigation.navigateTo(
               context,
-              ImagesDetailPage(title: title),
+              ImagesDetailPage(title: '_thumbnail/$title'),
             ),
             child: Row(children: [
               Padding(
