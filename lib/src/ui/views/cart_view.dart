@@ -125,6 +125,7 @@ class _CartViewState extends State<CartView> {
 
     setState(() {});
   }
+
   void _onBoxUpdated(Purchasable product) => _onCanUpdated(product);
 
   @override
@@ -329,7 +330,8 @@ class _CartViewState extends State<CartView> {
                 if (_slowProducts.isNotEmpty ||
                     _fastProducts.isNotEmpty ||
                     _wtfProducts.isNotEmpty ||
-                    _proProducts.isNotEmpty) ...[
+                    _proProducts.isNotEmpty ||
+                    _capsProducts.isNotEmpty) ...[
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                     sliver: SliverToBoxAdapter(
