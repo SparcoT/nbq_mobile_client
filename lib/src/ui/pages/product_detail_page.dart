@@ -114,7 +114,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   (index) => Expanded(
                       child: Align(
                     alignment: Alignment.centerRight,
-                    child: CounterHeader(),
+                    child: CounterHeader(widget.category.type != 4),
                   )),
                 ),
               ),
@@ -158,7 +158,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         child: Row(
                           children: [
                             Transform.rotate(
-                              angle: -1.56,
+                              angle: widget.category.type < 4 ? -1.56: 0,
                               child: Image.asset(
                                 widget.category.image,
                                 height: 109,
@@ -220,7 +220,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                       ),
-                    if (parts == 1) CounterHeader(),
+                    if (parts == 1) CounterHeader(widget.category.type != 4),
                   ]),
                   SizedBox(height: 10),
                 ],
@@ -375,7 +375,7 @@ class __PageBottomState extends State<_PageBottom> {
 }
 
 class CounterHeader extends Container {
-  CounterHeader()
+  CounterHeader([bool flag = true])
       : super(
           width: 195,
           height: 30,
@@ -386,9 +386,9 @@ class CounterHeader extends Container {
           ),
           child: Row(
             children: [
-              Expanded(child: Center(child: Text('Can'))),
+              Expanded(child: Center(child: Text(flag ? 'Can' : 'x1'))),
               VerticalDivider(indent: 7, endIndent: 7, thickness: 1, width: 1),
-              Expanded(child: Center(child: Text('Box')))
+              Expanded(child: Center(child: Text(flag ? 'Box' : 'x100')))
             ],
           ),
         );

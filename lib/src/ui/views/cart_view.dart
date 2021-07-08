@@ -311,7 +311,7 @@ class _CartViewState extends State<CartView> {
                   ),
                 ],
                 if (_capsProducts.isNotEmpty) ...[
-                  SliverToBoxAdapter(child: _buildHeader('CAPS')),
+                  SliverToBoxAdapter(child: _buildHeader('CAPS', true)),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
@@ -543,11 +543,11 @@ class _CartViewState extends State<CartView> {
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(
-              (e is Spray) ? ' Cans' : ' Single',
+              (e is Spray) ? ' Cans' : ' x1',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             ),
             pw.Text(
-              ' Packs',
+              (e is Spray) ? ' Packs' : ' x100',
               style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
             )
           ]));
@@ -688,11 +688,36 @@ class _CartViewState extends State<CartView> {
     return document;
   }
 
-  Widget _buildHeader(String text) {
+  Widget _buildHeader(String text, [bool flag = false]) {
     final header =
         Text(text, style: TextStyle(fontFamily: 'Futura', fontSize: 30));
 
-    if (isHeaderBuilt) {
+    if (flag) {
+      return Padding(
+        padding: const EdgeInsets.only(left: 15, top: 20, bottom: 10),
+        child: Row(
+          children: [
+            Expanded(child: header),
+            ShadowedBox(
+              width: 92.5,
+              height: 20,
+              borderRadius: 6,
+              child: Center(child: Text('x1')),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 15, left: 10),
+              child: ShadowedBox(
+                width: 92.5,
+                height: 20,
+                borderRadius: 6,
+                child: Center(child: Text('x100')),
+              ),
+            )
+          ],
+          crossAxisAlignment: CrossAxisAlignment.center,
+        ),
+      );
+    } else if (isHeaderBuilt) {
       return Padding(
         padding: const EdgeInsets.only(left: 15, bottom: 10),
         child: header,
