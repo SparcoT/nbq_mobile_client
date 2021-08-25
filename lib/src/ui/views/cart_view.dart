@@ -792,7 +792,13 @@ class ColorTile extends StatelessWidget {
               ),
             ),
           SizedBox(width: 8),
-          Text(product.name, style: TextStyle(fontSize: 15)),
+          Flexible(
+            child: Text(
+              product.name,
+              style: TextStyle(fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ]),
       ),
       SizedBox(
