@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nbq_mobile_client/src/data/product.dart';
 import 'package:hive_flutter/src/adapters/color_adapter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class DataManager {
   static Box<Cart> _cartBox;
@@ -42,11 +43,26 @@ abstract class DataManager {
     _spraysPro = await Hive.openLazyBox<Spray>('sprays_pro');
     _spraysWtf = await Hive.openLazyBox<Spray>('sprays_wtf');
 
-    if (_spraysFast.isEmpty) {
+    final _preference = await SharedPreferences.getInstance();
+    if (!(_preference?.getBool('v2') ?? false)) {
+      print('V@@@@@@@@222222222222222222');
+      await _spraysFast.clear();
+      await _spraysSlow.clear();
+      await _caps.clear();
+      await _spraysPro.clear();
+      await _spraysWtf.clear();
       _loadJsonToDB(_caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf);
       final cart = Cart();
       await _cartBox.add(cart);
       await cart.save();
+      await _preference.setBool('v2', true);
+    } else {
+      if (_spraysFast.isEmpty) {
+        _loadJsonToDB(_caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf);
+        final cart = Cart();
+        await _cartBox.add(cart);
+        await cart.save();
+      }
     }
   }
 
@@ -173,11 +189,19 @@ Future<void> _loadJsonToDB(
     if (product['type'] == 'spray') {
       final color = product['color'];
       final spray = Spray(
-        color: Color.fromRGBO(color['r'], color['g'], color['b'], color['o']),
-        ml: product['ml'].toString(),
+        color: Color.fromRGBO(
+          color['r'],
+          color['g'],
+          color['b'],
+          color['o'] * 1.0,
+        ),
+        ml: '',
+        // ml: product['ml'].toString(),
         ref: product['ref'].toString(),
         sku: product['sku'].toString(),
         name: product['name'].toString(),
+        pantone: product['Pantone'],
+        ral: product['RAL'],
       )..id = ++count;
       if (product['category'] == 'slow') {
         await slow.put(count, spray);
@@ -185,7 +209,7 @@ Future<void> _loadJsonToDB(
         await fast.put(count, spray);
       } else if (product['category'] == 'wtf') {
         await wtf.put(count, spray);
-      } else if (product['category'] == 'pro') {
+      } else if (product['category'] == 'propulse') {
         await pro.put(count, spray);
       }
 

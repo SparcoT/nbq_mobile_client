@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:hive/hive.dart';
-import 'package:pdf/pdf.dart';
 
 part 'product.g.dart';
 
@@ -41,6 +40,10 @@ class Spray extends Purchasable {
   String sku;
   @HiveField(7)
   Color color;
+  @HiveField(8)
+  int ral;
+  @HiveField(9)
+  int pantone;
 
   Spray({
     this.ml,
@@ -48,6 +51,8 @@ class Spray extends Purchasable {
     this.color,
     String ref,
     String name,
+    this.pantone,
+    this.ral,
   }) : super(name: name, ref: ref);
 }
 
