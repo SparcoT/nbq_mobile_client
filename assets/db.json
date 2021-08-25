@@ -3537,5 +3537,23 @@
     "type": "cap",
     "name": "Q2",
     "image": "assets/images/caps/Q2.png"
+  },
+  {
+    "type": "display",
+    "sku": 919,
+    "ref": "919",
+    "name": "EXPOSITOR NBQ 168 uds"
+  },
+  {
+    "type": "display",
+    "sku": 920,
+    "ref": "920",
+    "name": "EXPOSITOR NBQ 180 uds. (Bandejas)"
+  },
+  {
+    "type": "display",
+    "sku": 921,
+    "ref": "921",
+    "name": "EXPOSITOR NEGRO NBQ 546 uds. 520cc/650cc"
   }
 ]
