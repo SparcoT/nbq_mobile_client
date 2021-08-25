@@ -14,7 +14,7 @@ class ProductsView extends StatelessWidget {
             children: [
               CategoryTile.slow(),
               CategoryTile.fast(),
-              CategoryTile.wtf(),
+              // CategoryTile.wtf(),
               CategoryTile.pro(),
               CategoryTile.caps(),
             ],
@@ -24,7 +24,7 @@ class ProductsView extends StatelessWidget {
             child: Column(children: [
               CategoryTile.slow(),
               CategoryTile.fast(),
-              CategoryTile.wtf(),
+              // CategoryTile.wtf(),
               CategoryTile.pro(),
               CategoryTile.caps(),
             ]),
