@@ -1,2943 +1,3507 @@
 [
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 20.0,
-    "ref": "N20",
-    "name": "Verde digito",
-    "category": "slow",
-    "color": {
-      "r": 201,
-      "g": 229,
-      "b": 141,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 92.0,
-    "ref": "N92",
-    "name": "Verde refrigerante",
-    "category": "slow",
-    "color": {
-      "r": 182,
-      "g": 196,
-      "b": 148,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 93.0,
-    "ref": "N93",
-    "name": "Verde gamuso",
-    "category": "slow",
-    "color": {
-      "r": 169,
-      "g": 195,
-      "b": 108,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 57.0,
-    "ref": "N57",
-    "name": "Verde laser",
-    "category": "slow",
-    "color": {
-      "r": 140,
-      "g": 177,
-      "b": 67,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 120.0,
-    "ref": "N120",
-    "name": "Verde alga",
-    "category": "slow",
-    "color": {
-      "r": 100,
-      "g": 132,
-      "b": 98,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 91.0,
-    "ref": "N91",
-    "name": "Verde selvático",
-    "category": "slow",
-    "color": {
-      "r": 95,
-      "g": 116,
-      "b": 94,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 88.0,
-    "ref": "N88",
-    "name": "Verde alternativo",
-    "category": "slow",
-    "color": {
-      "r": 63,
-      "g": 93,
-      "b": 84,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 122.0,
-    "ref": "N122",
-    "name": "Verde monte",
-    "category": "slow",
-    "color": {
-      "r": 58,
-      "g": 103,
-      "b": 84,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 24.0,
-    "ref": "N24",
-    "name": "Verde roquefort",
-    "category": "slow",
-    "color": {
-      "r": 24,
-      "g": 125,
-      "b": 84,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 23.0,
-    "ref": "N23",
-    "name": "Verde musgo",
-    "category": "slow",
-    "color": {
-      "r": 92,
-      "g": 157,
-      "b": 90,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 153.0,
-    "ref": "N153",
-    "name": "Eco green",
-    "category": "slow",
-    "color": {
-      "r": 79,
-      "g": 143,
-      "b": 76,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 121.0,
-    "ref": "N121",
-    "name": "Verde transgenico",
-    "category": "slow",
-    "color": {
-      "r": 64,
-      "g": 164,
-      "b": 129,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 90.0,
-    "ref": "N90",
-    "name": "Verde Outdoor",
-    "category": "slow",
-    "color": {
-      "r": 136,
-      "g": 184,
-      "b": 138,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 68.0,
-    "ref": "N68",
-    "name": "Amarillo esponja",
-    "category": "slow",
-    "color": {
-      "r": 253,
-      "g": 204,
-      "b": 141,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 105.0,
-    "ref": "N105",
-    "name": "Naranja fresh",
-    "category": "slow",
-    "color": {
-      "r": 236,
-      "g": 187,
-      "b": 134,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 6.0,
-    "ref": "N06",
-    "name": "Amarillo necora",
-    "category": "slow",
-    "color": {
-      "r": 229,
-      "g": 172,
-      "b": 98,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 107.0,
-    "ref": "N107",
-    "name": "Amarillo tóxico",
-    "category": "slow",
-    "color": {
-      "r": 218,
-      "g": 150,
-      "b": 55,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 108.0,
-    "ref": "N108",
-    "name": "Amarillo desierto",
-    "category": "slow",
-    "color": {
-      "r": 198,
-      "g": 147,
-      "b": 80,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 96.0,
-    "ref": "N96",
-    "name": "Ocre cereales",
-    "category": "slow",
-    "color": {
-      "r": 196,
-      "g": 142,
-      "b": 56,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 67.0,
-    "ref": "N67",
-    "name": "Ocre terrenal",
-    "category": "slow",
-    "color": {
-      "r": 179,
-      "g": 136,
-      "b": 57,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 48.0,
-    "ref": "N48",
-    "name": "Ocre hera",
-    "category": "slow",
-    "color": {
-      "r": 181,
-      "g": 128,
-      "b": 63,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 109.0,
-    "ref": "N109",
-    "name": "Marron toffe",
-    "category": "slow",
-    "color": {
-      "r": 164,
-      "g": 121,
-      "b": 67,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 94.0,
-    "ref": "N94",
-    "name": "Ocre cuco",
-    "category": "slow",
-    "color": {
-      "r": 138,
-      "g": 110,
-      "b": 68,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 95.0,
-    "ref": "N95",
-    "name": "Ocre verdoso",
-    "category": "slow",
-    "color": {
-      "r": 120,
-      "g": 102,
-      "b": 69,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 104.0,
-    "ref": "N104",
-    "name": "Ocre colina",
-    "category": "slow",
-    "color": {
-      "r": 198,
-      "g": 150,
-      "b": 105,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 64.0,
-    "ref": "N64",
-    "name": "Ocre avena",
-    "category": "slow",
-    "color": {
-      "r": 200,
-      "g": 157,
-      "b": 105,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 113.0,
-    "ref": "N113",
-    "name": "Verde bajo",
-    "category": "slow",
-    "color": {
-      "r": 225,
-      "g": 213,
-      "b": 176,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 114.0,
-    "ref": "N114",
-    "name": "Verde palido",
-    "category": "slow",
-    "color": {
-      "r": 204,
-      "g": 187,
-      "b": 135,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 22.0,
-    "ref": "N22",
-    "name": "Verde wisha",
-    "category": "slow",
-    "color": {
-      "r": 176,
-      "g": 166,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 115.0,
-    "ref": "N115",
-    "name": "Verde aceituna",
-    "category": "slow",
-    "color": {
-      "r": 143,
-      "g": 137,
-      "b": 102,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 116.0,
-    "ref": "N116",
-    "name": "Verde mata",
-    "category": "slow",
-    "color": {
-      "r": 128,
-      "g": 125,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 65.0,
-    "ref": "N65",
-    "name": "Verde pistilo",
-    "category": "slow",
-    "color": {
-      "r": 168,
-      "g": 142,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 66.0,
-    "ref": "N66",
-    "name": "Verde mimetizado",
-    "category": "slow",
-    "color": {
-      "r": 148,
-      "g": 132,
-      "b": 103,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 51.0,
-    "ref": "N51",
-    "name": "Amarillo nuclear",
-    "category": "slow",
-    "color": {
-      "r": 221,
-      "g": 221,
-      "b": 55,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 69.0,
-    "ref": "N69",
-    "name": "Amarillo ácido",
-    "category": "slow",
-    "color": {
-      "r": 202,
-      "g": 212,
-      "b": 57,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 21.0,
-    "ref": "N21",
-    "name": "Verde indor",
-    "category": "slow",
-    "color": {
-      "r": 180,
-      "g": 196,
-      "b": 79,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 112.0,
-    "ref": "N112",
-    "name": "Verde residuo",
-    "category": "slow",
-    "color": {
-      "r": 151,
-      "g": 136,
-      "b": 63,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 63.0,
-    "ref": "N63",
-    "name": "Verde espiritual",
-    "category": "slow",
-    "color": {
-      "r": 128,
-      "g": 121,
-      "b": 65,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 117.0,
-    "ref": "N117",
-    "name": "Verde sabana",
-    "category": "slow",
-    "color": {
-      "r": 133,
-      "g": 139,
-      "b": 95,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 118.0,
-    "ref": "N118",
-    "name": "Verde camu",
-    "category": "slow",
-    "color": {
-      "r": 116,
-      "g": 121,
-      "b": 93,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 119.0,
-    "ref": "N119",
-    "name": "Verde militar",
-    "category": "slow",
-    "color": {
-      "r": 103,
-      "g": 108,
-      "b": 90,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 89.0,
-    "ref": "N89",
-    "name": "Verde paciente",
-    "category": "slow",
-    "color": {
-      "r": 176,
-      "g": 209,
-      "b": 177,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 123.0,
-    "ref": "N123",
-    "name": "Verde laguna",
-    "category": "slow",
-    "color": {
-      "r": 131,
-      "g": 204,
-      "b": 164,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 77.0,
-    "ref": "N77",
-    "name": "Turquesa mediterraneo",
-    "category": "slow",
-    "color": {
-      "r": 74,
-      "g": 150,
-      "b": 136,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 25.0,
-    "ref": "N25",
-    "name": "Turquesa cala",
-    "category": "slow",
-    "color": {
-      "r": 59,
-      "g": 155,
-      "b": 152,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 150.0,
-    "ref": "N150",
-    "name": "Azul quirofano",
-    "category": "slow",
-    "color": {
-      "r": 76,
-      "g": 143,
-      "b": 147,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 58.0,
-    "ref": "N58",
-    "name": "Azul turquesa",
-    "category": "slow",
-    "color": {
-      "r": 54,
-      "g": 98,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 56.0,
-    "ref": "N56",
-    "name": "Verde pepino",
-    "category": "slow",
-    "color": {
-      "r": 58,
-      "g": 73,
-      "b": 69,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 2.0,
-    "ref": "N02",
-    "name": "Beig dermos",
-    "category": "slow",
-    "color": {
-      "r": 218,
-      "g": 205,
-      "b": 184,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 3.0,
-    "ref": "N03",
-    "name": "Crema sogado",
-    "category": "slow",
-    "color": {
-      "r": 228,
-      "g": 198,
-      "b": 165,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 142.0,
-    "ref": "N142",
-    "name": "Marron arena",
-    "category": "slow",
-    "color": {
-      "r": 167,
-      "g": 121,
-      "b": 102,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 46.0,
-    "ref": "N46",
-    "name": "Marron caries",
-    "category": "slow",
-    "color": {
-      "r": 148,
-      "g": 111,
-      "b": 94,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 73.0,
-    "ref": "N73",
-    "name": "Marron tejado",
-    "category": "slow",
-    "color": {
-      "r": 143,
-      "g": 86,
-      "b": 63,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 162.0,
-    "ref": "N162",
-    "name": "Marron coco",
-    "category": "slow",
-    "color": {
-      "r": 130,
-      "g": 85,
-      "b": 75,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 47.0,
-    "ref": "N47",
-    "name": "Marron peca",
-    "category": "slow",
-    "color": {
-      "r": 121,
-      "g": 87,
-      "b": 72,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 144.0,
-    "ref": "N144",
-    "name": "Marron puro",
-    "category": "slow",
-    "color": {
-      "r": 89,
-      "g": 68,
-      "b": 66,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 55.0,
-    "ref": "N55",
-    "name": "Marron barro",
-    "category": "slow",
-    "color": {
-      "r": 92,
-      "g": 77,
-      "b": 71,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 97.0,
-    "ref": "N97",
-    "name": "Marron bombón",
-    "category": "slow",
-    "color": {
-      "r": 80,
-      "g": 73,
-      "b": 69,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 145.0,
-    "ref": "N145",
-    "name": "Marron roca",
-    "category": "slow",
-    "color": {
-      "r": 126,
-      "g": 109,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 44.0,
-    "ref": "N44",
-    "name": "Marron roña",
-    "category": "slow",
-    "color": {
-      "r": 136,
-      "g": 113,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 143.0,
-    "ref": "N143",
-    "name": "Marron haya",
-    "category": "slow",
-    "color": {
-      "r": 172,
-      "g": 141,
-      "b": 129,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 157.0,
-    "ref": "N157",
-    "name": "Marron duna",
-    "category": "slow",
-    "color": {
-      "r": 199,
-      "g": 157,
-      "b": 136,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 160.0,
-    "ref": "N160",
-    "name": "Brown box",
-    "category": "slow",
-    "color": {
-      "r": 199,
-      "g": 168,
-      "b": 149,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 159.0,
-    "ref": "N159",
-    "name": "Marron dieta",
-    "category": "slow",
-    "color": {
-      "r": 213,
-      "g": 195,
-      "b": 174,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 161.0,
-    "ref": "N161",
-    "name": "Brown camel",
-    "category": "slow",
-    "color": {
-      "r": 177,
-      "g": 134,
-      "b": 110,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 158.0,
-    "ref": "N158",
-    "name": "Marron combi",
-    "category": "slow",
-    "color": {
-      "r": 169,
-      "g": 118,
-      "b": 92,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 141.0,
-    "ref": "N141",
-    "name": "Marron arcilla",
-    "category": "slow",
-    "color": {
-      "r": 197,
-      "g": 131,
-      "b": 102,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 34.0,
-    "ref": "N34",
-    "name": "Violeta funki",
-    "category": "slow",
-    "color": {
-      "r": 195,
-      "g": 183,
-      "b": 202,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 129.0,
-    "ref": "N129",
-    "name": "Violeta chuche",
-    "category": "slow",
-    "color": {
-      "r": 184,
-      "g": 172,
-      "b": 198,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 35.0,
-    "ref": "N35",
-    "name": "Violeta jipi",
-    "category": "slow",
-    "color": {
-      "r": 160,
-      "g": 148,
-      "b": 179,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 130.0,
-    "ref": "N130",
-    "name": "Violeta vaticano",
-    "category": "slow",
-    "color": {
-      "r": 153,
-      "g": 129,
-      "b": 163,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 37.0,
-    "ref": "N37",
-    "name": "Violeta hematoma",
-    "category": "slow",
-    "color": {
-      "r": 113,
-      "g": 94,
-      "b": 133,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 83.0,
-    "ref": "N83",
-    "name": "Violeta paramecia",
-    "category": "slow",
-    "color": {
-      "r": 100,
-      "g": 79,
-      "b": 125,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 38.0,
-    "ref": "N38",
-    "name": "Violeta amatis",
-    "category": "slow",
-    "color": {
-      "r": 81,
-      "g": 67,
-      "b": 91,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 131.0,
-    "ref": "N131",
-    "name": "Violeta joker",
-    "category": "slow",
-    "color": {
-      "r": 116,
-      "g": 98,
-      "b": 125,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 36.0,
-    "ref": "N36",
-    "name": "Violeta varices",
-    "category": "slow",
-    "color": {
-      "r": 134,
-      "g": 108,
-      "b": 146,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 132.0,
-    "ref": "N132",
-    "name": "Violeta ahumado",
-    "category": "slow",
-    "color": {
-      "r": 170,
-      "g": 139,
-      "b": 153,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 17.0,
-    "ref": "N17",
-    "name": "Rojo caña",
-    "category": "slow",
-    "color": {
-      "r": 137,
-      "g": 91,
-      "b": 92,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 4.0,
-    "ref": "N04",
-    "name": "Crema dromeda",
-    "category": "slow",
-    "color": {
-      "r": 252,
-      "g": 209,
-      "b": 172,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 140.0,
-    "ref": "N140",
-    "name": "Naranja pastel",
-    "category": "slow",
-    "color": {
-      "r": 254,
-      "g": 171,
-      "b": 137,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 71.0,
-    "ref": "N71",
-    "name": "Naranja crin",
-    "category": "slow",
-    "color": {
-      "r": 255,
-      "g": 160,
-      "b": 128,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 70.0,
-    "ref": "N70",
-    "name": "Naranja sirope",
-    "category": "slow",
-    "color": {
-      "r": 245,
-      "g": 133,
-      "b": 85,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 9.0,
-    "ref": "N09",
-    "name": "Naranja sin",
-    "category": "slow",
-    "color": {
-      "r": 242,
-      "g": 110,
-      "b": 52,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 10.0,
-    "ref": "N10",
-    "name": "Naranja con",
-    "category": "slow",
-    "color": {
-      "r": 226,
-      "g": 93,
-      "b": 52,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 72.0,
-    "ref": "N72",
-    "name": "Naranja oxidado",
-    "category": "slow",
-    "color": {
-      "r": 180,
-      "g": 89,
-      "b": 60,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 52.0,
-    "ref": "N52",
-    "name": "Naranja gazpacho",
-    "category": "slow",
-    "color": {
-      "r": 231,
-      "g": 121,
-      "b": 102,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 7.0,
-    "ref": "N07",
-    "name": "Naranja eclipsado",
-    "category": "slow",
-    "color": {
-      "r": 216,
-      "g": 134,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 74.0,
-    "ref": "N74",
-    "name": "Naranja salpicon",
-    "category": "slow",
-    "color": {
-      "r": 246,
-      "g": 189,
-      "b": 167,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 40.0,
-    "ref": "N40",
-    "name": "Gris humo",
-    "category": "slow",
-    "color": {
-      "r": 193,
-      "g": 196,
-      "b": 195,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 41.0,
-    "ref": "N41",
-    "name": "Gris alẽrgico",
-    "category": "slow",
-    "color": {
-      "r": 154,
-      "g": 158,
-      "b": 159,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 42.0,
-    "ref": "N42",
-    "name": "Gris menhir",
-    "category": "slow",
-    "color": {
-      "r": 105,
-      "g": 110,
-      "b": 115,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 60.0,
-    "ref": "N60",
-    "name": "Gris magnum",
-    "category": "slow",
-    "color": {
-      "r": 83,
-      "g": 85,
-      "b": 89,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 148.0,
-    "ref": "N148",
-    "name": "Gris delfin",
-    "category": "slow",
-    "color": {
-      "r": 102,
-      "g": 99,
-      "b": 106,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 43.0,
-    "ref": "N43",
-    "name": "Gris baday",
-    "category": "slow",
-    "color": {
-      "r": 104,
-      "g": 97,
-      "b": 105,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 146.0,
-    "ref": "N146",
-    "name": "Gris roble",
-    "category": "slow",
-    "color": {
-      "r": 121,
-      "g": 108,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 100.0,
-    "ref": "N100",
-    "name": "Gris distante",
-    "category": "slow",
-    "color": {
-      "r": 138,
-      "g": 133,
-      "b": 141,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 147.0,
-    "ref": "N147",
-    "name": "Gris luna",
-    "category": "slow",
-    "color": {
-      "r": 175,
-      "g": 170,
-      "b": 177,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 103.0,
-    "ref": "N103",
-    "name": "Gris llanta",
-    "category": "slow",
-    "color": {
-      "r": 136,
-      "g": 136,
-      "b": 133,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 102.0,
-    "ref": "N102",
-    "name": "Gris nublado",
-    "category": "slow",
-    "color": {
-      "r": 158,
-      "g": 154,
-      "b": 147,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 101.0,
-    "ref": "N101",
-    "name": "Gris nivel",
-    "category": "slow",
-    "color": {
-      "r": 193,
-      "g": 179,
-      "b": 161,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 75.0,
-    "ref": "N75",
-    "name": "Rojo frambuesa",
-    "category": "slow",
-    "color": {
-      "r": 194,
-      "g": 86,
-      "b": 105,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 79.0,
-    "ref": "N79",
-    "name": "Rojo distante",
-    "category": "slow",
-    "color": {
-      "r": 160,
-      "g": 91,
-      "b": 104,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 80.0,
-    "ref": "N80",
-    "name": "Rojo congestionado",
-    "category": "slow",
-    "color": {
-      "r": 135,
-      "g": 76,
-      "b": 82,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 18.0,
-    "ref": "N18",
-    "name": "Rojo costra",
-    "category": "slow",
-    "color": {
-      "r": 112,
-      "g": 69,
-      "b": 68,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 138.0,
-    "ref": "N138",
-    "name": "Rojo otoño",
-    "category": "slow",
-    "color": {
-      "r": 114,
-      "g": 65,
-      "b": 66,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 139.0,
-    "ref": "N139",
-    "name": "Rojo vino",
-    "category": "slow",
-    "color": {
-      "r": 104,
-      "g": 66,
-      "b": 66,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 19.0,
-    "ref": "N19",
-    "name": "Rojo torelis",
-    "category": "slow",
-    "color": {
-      "r": 90,
-      "g": 71,
-      "b": 72,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 15.0,
-    "ref": "N15",
-    "name": "Rojo calimocho",
-    "category": "slow",
-    "color": {
-      "r": 142,
-      "g": 54,
-      "b": 59,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 16.0,
-    "ref": "N16",
-    "name": "Rojo coagulo",
-    "category": "slow",
-    "color": {
-      "r": 163,
-      "g": 61,
-      "b": 66,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 152.0,
-    "ref": "N152",
-    "name": "Rojo puro",
-    "category": "slow",
-    "color": {
-      "r": 178,
-      "g": 53,
-      "b": 58,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 76.0,
-    "ref": "N76",
-    "name": "Rojo capicua",
-    "category": "slow",
-    "color": {
-      "r": 176,
-      "g": 65,
-      "b": 84,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 126.0,
-    "ref": "N126",
-    "name": "Azul celestial",
+    "ml": null,
+    "sku": 126,
+    "ref": "n126",
+    "name": "NBQ N126 AZUL CELESTIAL MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 129,
-      "g": 201,
+      "g": 202,
       "b": 219,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 629
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 27.0,
-    "ref": "N27",
-    "name": "Azul trade",
+    "ml": null,
+    "sku": 128,
+    "ref": "n128",
+    "name": "NBQ N128 AZUL BEBE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 131,
+      "g": 182,
+      "b": 214,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2169
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 27,
+    "ref": "n027",
+    "name": "NBQ N027 AZUL TRADE MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 92,
-      "g": 183,
-      "b": 220,
-      "o": 1.0
-    }
+      "g": 182,
+      "b": 219,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 127.0,
-    "ref": "N127",
-    "name": "Azul oceano",
+    "ml": null,
+    "sku": 127,
+    "ref": "n127",
+    "name": "NBQ N127 AZUL OCEANO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 96,
-      "g": 160,
-      "b": 182,
-      "o": 1.0
-    }
+      "g": 159,
+      "b": 181,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 549
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 29.0,
-    "ref": "N29",
-    "name": "Azul pitufo",
+    "ml": null,
+    "sku": 33,
+    "ref": "n033",
+    "name": "NBQ N033 AZUL OZONO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 3,
-      "g": 150,
-      "b": 198,
-      "o": 1.0
-    }
+      "r": 101,
+      "g": 155,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2170
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 28.0,
-    "ref": "N28",
-    "name": "Azul osmosis",
+    "ml": null,
+    "sku": 29,
+    "ref": "n029",
+    "name": "NBQ N029 AZUL PITUFO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 66,
-      "g": 144,
-      "b": 187,
-      "o": 1.0
-    }
+      "r": 4,
+      "g": 151,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": 5015,
+    "Pantone": 3015
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 151.0,
-    "ref": "N151",
-    "name": "Just blue",
+    "ml": null,
+    "sku": 28,
+    "ref": "n028",
+    "name": "NBQ N028 AZUL OSMOSIS MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 65,
+      "g": 143,
+      "b": 186,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 151,
+    "ref": "n151",
+    "name": "NBQ N151 JUST BLUE MATE  MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 23,
       "g": 103,
       "b": 153,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 5010,
+    "Pantone": 541
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 59.0,
-    "ref": "N59",
-    "name": "Azul electro",
+    "ml": null,
+    "sku": 32,
+    "ref": "n032",
+    "name": "NBQ N032 AZUL YIN MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 56,
-      "g": 72,
-      "b": 100,
-      "o": 1.0
-    }
+      "r": 92,
+      "g": 120,
+      "b": 158,
+      "o": 1
+    },
+    "RAL": 5023,
+    "Pantone": 5405
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 31.0,
-    "ref": "N31",
-    "name": "Azul tatu",
+    "ml": null,
+    "sku": 31,
+    "ref": "n031",
+    "name": "NBQ N031 AZUL TATU MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 79,
       "g": 89,
       "b": 120,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 32.0,
-    "ref": "N32",
-    "name": "Azul Yin",
+    "ml": null,
+    "sku": 59,
+    "ref": "n059",
+    "name": "NBQ N059 AZUL ELECTRO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 91,
-      "g": 120,
-      "b": 157,
-      "o": 1.0
-    }
+      "r": 56,
+      "g": 72,
+      "b": 99,
+      "o": 1
+    },
+    "RAL": 5013,
+    "Pantone": 5255
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 33.0,
-    "ref": "N33",
-    "name": "Azul ozono",
+    "ml": null,
+    "sku": 149,
+    "ref": "n149",
+    "name": "NBQ N149 AZUL RELAX MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 100,
-      "g": 155,
-      "b": 198,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 128.0,
-    "ref": "N128",
-    "name": "Azul bebe",
-    "category": "slow",
-    "color": {
-      "r": 130,
-      "g": 181,
-      "b": 214,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 149.0,
-    "ref": "N149",
-    "name": "Azul relax",
-    "category": "slow",
-    "color": {
-      "r": 168,
-      "g": 202,
+      "r": 167,
+      "g": 201,
       "b": 201,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 5513
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 26.0,
-    "ref": "N26",
-    "name": "Azul refrigerante",
+    "ml": null,
+    "sku": 26,
+    "ref": "n026",
+    "name": "NBQ N026 AZUL REFRIGERANTE MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 169,
       "g": 219,
       "b": 219,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7464
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 124.0,
-    "ref": "N124",
-    "name": "Azul cristalino",
+    "ml": null,
+    "sku": 124,
+    "ref": "n124",
+    "name": "NBQ N124 AZUL CRISTALINO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 144,
-      "g": 206,
+      "r": 145,
+      "g": 207,
       "b": 204,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 6027,
+    "Pantone": 631
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 125.0,
-    "ref": "N125",
-    "name": "Azul medusa",
+    "ml": null,
+    "sku": 125,
+    "ref": "n125",
+    "name": "NBQ N125 AZUL MEDUSA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 95,
-      "g": 177,
-      "b": 176,
-      "o": 1.0
-    }
+      "g": 176,
+      "b": 174,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7472
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 87.0,
-    "ref": "N87",
-    "name": "Azul marea",
+    "ml": null,
+    "sku": 87,
+    "ref": "n087",
+    "name": "NBQ N087 AZUL MAREA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 67,
-      "g": 120,
-      "b": 139,
-      "o": 1.0
-    }
+      "g": 121,
+      "b": 140,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2224
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 30.0,
-    "ref": "N30",
-    "name": "Turquesa hondo",
+    "ml": null,
+    "sku": 85,
+    "ref": "n085",
+    "name": "NBQ N085 AZUL PLASTICO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 53,
-      "g": 85,
-      "b": 105,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 84.0,
-    "ref": "N84",
-    "name": "Turquesa poderoso",
-    "category": "slow",
-    "color": {
-      "r": 64,
-      "g": 75,
-      "b": 83,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 86.0,
-    "ref": "N86",
-    "name": "Azul pirata",
-    "category": "slow",
-    "color": {
-      "r": 104,
-      "g": 128,
-      "b": 137,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 85.0,
-    "ref": "N85",
-    "name": "Azul plástico",
-    "category": "slow",
-    "color": {
-      "r": 107,
+      "r": 108,
       "g": 153,
       "b": 168,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 8028,
+    "Pantone": 4695
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 12.0,
-    "ref": "N12",
-    "name": "Rosa cerdito",
+    "ml": null,
+    "sku": 30,
+    "ref": "n030",
+    "name": "NBQ N030 TURQUESA HONDO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 219,
-      "g": 172,
-      "b": 171,
-      "o": 1.0
-    }
+      "r": 52,
+      "g": 85,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2215
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 13.0,
-    "ref": "N13",
-    "name": "Rosa placenta",
+    "ml": null,
+    "sku": 86,
+    "ref": "n086",
+    "name": "NBQ N086 AZUL PIRATA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 189,
-      "g": 127,
-      "b": 143,
-      "o": 1.0
-    }
+      "r": 105,
+      "g": 128,
+      "b": 138,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2180
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 135.0,
-    "ref": "N135",
-    "name": "Rosa deformación",
+    "ml": null,
+    "sku": 61,
+    "ref": "n061",
+    "name": "NBQ N061 AMARILLO PASEO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 166,
-      "g": 122,
-      "b": 125,
-      "o": 1.0
-    }
+      "r": 245,
+      "g": 218,
+      "b": 149,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7402
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 78.0,
-    "ref": "N78",
-    "name": "Rosa ahumado",
+    "ml": null,
+    "sku": 51,
+    "ref": "n051",
+    "name": "NBQ N051 AMARILLO NUCLEAR MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 178,
-      "g": 108,
-      "b": 124,
-      "o": 1.0
-    }
+      "r": 222,
+      "g": 222,
+      "b": 55,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 133.0,
-    "ref": "N133",
-    "name": "Violeta berenjena",
+    "ml": null,
+    "sku": 69,
+    "ref": "n069",
+    "name": "NBQ N069 AMARILLO ACIDO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 127,
-      "g": 97,
-      "b": 110,
-      "o": 1.0
-    }
+      "r": 201,
+      "g": 212,
+      "b": 57,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 134.0,
-    "ref": "N134",
-    "name": "Violeta apagado",
+    "ml": null,
+    "sku": 110,
+    "ref": "n110",
+    "name": "NBQ N110 AMARILLO DANGER MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 82,
-      "g": 71,
-      "b": 74,
-      "o": 1.0
-    }
+      "r": 237,
+      "g": 197,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": 1012,
+    "Pantone": 612
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 81.0,
-    "ref": "N81",
-    "name": "Lila comodín",
+    "ml": null,
+    "sku": 155,
+    "ref": "n155",
+    "name": "NBQ N155 AMARILLO CAPA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 127,
-      "g": 110,
-      "b": 115,
-      "o": 1.0
-    }
+      "r": 237,
+      "g": 190,
+      "b": 17,
+      "o": 1
+    },
+    "RAL": 1018,
+    "Pantone": 123
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 14.0,
-    "ref": "N14",
-    "name": "Rosa pate",
+    "ml": null,
+    "sku": 5,
+    "ref": "n005",
+    "name": "NBQ N005 AMARILLO PESETA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 151,
-      "g": 125,
-      "b": 133,
-      "o": 1.0
-    }
+      "r": 227,
+      "g": 182,
+      "b": 27,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 99.0,
-    "ref": "N99",
-    "name": "Piel con",
-    "category": "slow",
-    "color": {
-      "r": 163,
-      "g": 144,
-      "b": 140,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 98.0,
-    "ref": "N98",
-    "name": "Piel sin",
-    "category": "slow",
-    "color": {
-      "r": 195,
-      "g": 178,
-      "b": 175,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520cc/400",
-    "sku": 11.0,
-    "ref": "N11",
-    "name": "Rosa tiquis",
+    "ml": null,
+    "sku": 11,
+    "ref": "n011",
+    "name": "NBQ N011 ROSA TIQUIS MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 235,
-      "g": 189,
+      "g": 188,
       "b": 199,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 510
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 136.0,
-    "ref": "N136",
-    "name": "Rosa colorete",
+    "ml": null,
+    "sku": 62,
+    "ref": "n062",
+    "name": "NBQ N062 AMARILLO GASTADO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 221,
-      "g": 139,
-      "b": 160,
-      "o": 1.0
-    }
+      "r": 189,
+      "g": 160,
+      "b": 49,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 103
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 53.0,
-    "ref": "N53",
-    "name": "Magenta claro",
+    "ml": null,
+    "sku": 64,
+    "ref": "n064",
+    "name": "NBQ N064 OCRE AVENA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 205,
+      "r": 199,
+      "g": 157,
+      "b": 103,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7407
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 67,
+    "ref": "n067",
+    "name": "NBQ N067 OCRE TERRENAL MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 179,
+      "g": 136,
+      "b": 57,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 1245
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 4,
+    "ref": "n004",
+    "name": "NBQ N004 BEIGE DRÓMEDA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 252,
+      "g": 210,
+      "b": 172,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2015
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 68,
+    "ref": "n068",
+    "name": "NBQ N068 AMARILLO ESPONJA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 252,
+      "g": 204,
+      "b": 141,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 148
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 140,
+    "ref": "n140",
+    "name": "NBQ N140 NARANJA PASTEL MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 171,
+      "b": 138,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2022
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 105,
+    "ref": "n105",
+    "name": "NBQ N105 NARANJA FRESH MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 237,
+      "g": 187,
+      "b": 135,
+      "o": 1
+    },
+    "RAL": 1034,
+    "Pantone": 715
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 106,
+    "ref": "n106",
+    "name": "NBQ N106 NARANJA MELOCOTON MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 181,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": 1017,
+    "Pantone": 150
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 71,
+    "ref": "n071",
+    "name": "NBQ N071 NARANJA CRIN MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 161,
+      "b": 128,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 1625
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 104,
+    "ref": "n104",
+    "name": "NBQ N104 OCRE COLINA  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 199,
+      "g": 151,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2313
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 8,
+    "ref": "n008",
+    "name": "NBQ N008 AMARILLO FÉTIDO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 247,
+      "g": 158,
+      "b": 37,
+      "o": 1
+    },
+    "RAL": 1033,
+    "Pantone": 1375
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 6,
+    "ref": "n006",
+    "name": "NBQ N006 AMARILLO NÉCORA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 230,
+      "g": 172,
+      "b": 99,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 96,
+    "ref": "n096",
+    "name": "NBQ N096 OCRE CEREALES MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 196,
+      "g": 141,
+      "b": 57,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 107,
+    "ref": "n107",
+    "name": "NBQ N107 AMARILLO TOXICO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 217,
+      "g": 150,
+      "b": 54,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 124
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 2,
+    "ref": "n002",
+    "name": "NBQ N002 BEIGE DERMOS MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 217,
+      "g": 204,
+      "b": 182,
+      "o": 1
+    },
+    "RAL": 1015,
+    "Pantone": 726
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 3,
+    "ref": "n003",
+    "name": "NBQ N003 CREMA SOGADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 227,
+      "g": 197,
+      "b": 163,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 74,
+    "ref": "n074",
+    "name": "NBQ N074 NARANJA SALPICON MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 245,
+      "g": 188,
+      "b": 166,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 488
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 7,
+    "ref": "n007",
+    "name": "NBQ N007 NARANJA ECLIPSADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 217,
+      "g": 134,
+      "b": 100,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 70,
+    "ref": "n070",
+    "name": "NBQ N070  NARANJA SIROPE  MATE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 245,
+      "g": 132,
+      "b": 86,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 52,
+    "ref": "n052",
+    "name": "NBQ N052 GAZPACHO ORANGE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 232,
+      "g": 121,
+      "b": 102,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2344
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 9,
+    "ref": "n009",
+    "name": "NBQ N009 NARANJA SIN MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 242,
+      "g": 109,
+      "b": 51,
+      "o": 1
+    },
+    "RAL": 2009,
+    "Pantone": 172
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 10,
+    "ref": "n010",
+    "name": "NBQ N010 NARANJA CON MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 227,
+      "g": 93,
+      "b": 52,
+      "o": 1
+    },
+    "RAL": 2004,
+    "Pantone": 1655
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 72,
+    "ref": "n072",
+    "name": "NBQ N072 NARANJA OXIDADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 181,
+      "g": 89,
+      "b": 60,
+      "o": 1
+    },
+    "RAL": 2010,
+    "Pantone": 1665
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 108,
+    "ref": "n108",
+    "name": "NBQ N108 AMARILLO DESIERTO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 199,
+      "g": 147,
+      "b": 80,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 45,
+    "ref": "n045",
+    "name": "NBQ N045 MARRÓN TOCHANO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 161,
+      "g": 109,
+      "b": 66,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2318
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 109,
+    "ref": "n109",
+    "name": "NBQ N109 MARRON TOFFE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 163,
+      "g": 121,
+      "b": 67,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 146
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 48,
+    "ref": "n048",
+    "name": "NBQ N048 OCRE HERA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 181,
       "g": 129,
-      "b": 170,
-      "o": 1.0
-    }
+      "b": 63,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 39.0,
-    "ref": "N39",
-    "name": "Magenta ",
+    "ml": null,
+    "sku": 141,
+    "ref": "n141",
+    "name": "NBQ N141 MARRON ARCILLA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 196,
+      "g": 130,
+      "b": 102,
+      "o": 1
+    },
+    "RAL": 3012,
+    "Pantone": 729
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 46,
+    "ref": "n046",
+    "name": "NBQ N046 MARRÓN CARIES MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 148,
+      "g": 111,
+      "b": 95,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 478
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 73,
+    "ref": "n073",
+    "name": "NBQ N073 MARRON TEJADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 143,
+      "g": 86,
+      "b": 63,
+      "o": 1
+    },
+    "RAL": 8004,
+    "Pantone": 4635
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 162,
+    "ref": "n162",
+    "name": "NBQ N162 MARRON COCO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 130,
+      "g": 85,
+      "b": 75,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 181
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 144,
+    "ref": "n144",
+    "name": "NBQ N144 MARRON PURO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 89,
+      "g": 68,
+      "b": 66,
+      "o": 1
+    },
+    "RAL": 8011,
+    "Pantone": 477
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 55,
+    "ref": "n055",
+    "name": "NBQ N055 MARRÓN BARRO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 92,
+      "g": 77,
+      "b": 71,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2335
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 97,
+    "ref": "n097",
+    "name": "NBQ N097 MARRON BONBON MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 79,
+      "g": 72,
+      "b": 68,
+      "o": 1
+    },
+    "RAL": 7022,
+    "Pantone": 465
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 159,
+    "ref": "n159",
+    "name": "NBQ N159 MARRON DIETA  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 214,
+      "g": 197,
+      "b": 176,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 160,
+    "ref": "n160",
+    "name": "NBQ N160 BROWN BOX  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 199,
+      "g": 167,
+      "b": 149,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 480
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 157,
+    "ref": "n157",
+    "name": "NBQ N157 MARRON DUNA MATE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 199,
+      "g": 157,
+      "b": 135,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7521
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 161,
+    "ref": "n161",
+    "name": "NBQ N161 BROWN CAMEL MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 176,
+      "g": 134,
+      "b": 109,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 479
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 142,
+    "ref": "n142",
+    "name": "NBQ N142 MARRON ARENA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 166,
+      "g": 119,
+      "b": 101,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7516
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 158,
+    "ref": "n158",
+    "name": "NBQ N158 MARRON COMBI  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 168,
+      "g": 118,
+      "b": 91,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7566
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 143,
+    "ref": "n143",
+    "name": "NBQ N143 MARRON HAYA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 171,
+      "g": 140,
+      "b": 128,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 479
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 47,
+    "ref": "n047",
+    "name": "NBQ N047 MARRÓN PECA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 120,
+      "g": 86,
+      "b": 72,
+      "o": 1
+    },
+    "RAL": 8025,
+    "Pantone": 4705
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 81,
+    "ref": "n081",
+    "name": "NBQ N081 LILA COMODIN MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 128,
+      "g": 111,
+      "b": 116,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7518
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 44,
+    "ref": "n044",
+    "name": "NBQ N044 MARRÓN ROÑA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 135,
+      "g": 112,
+      "b": 100,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7505
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 145,
+    "ref": "n145",
+    "name": "NBQ N145 MARRON ROCA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 125,
+      "g": 109,
+      "b": 104,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7596
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 114,
+    "ref": "n114",
+    "name": "NBQ N114 VERDE PALIDO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 204,
+      "g": 188,
+      "b": 135,
+      "o": 1
+    },
+    "RAL": 1000,
+    "Pantone": 4525
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 92,
+    "ref": "n092",
+    "name": "NBQ N092 VERDE MATE 400 ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 183,
+      "g": 196,
+      "b": 149,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7493
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 90,
+    "ref": "n090",
+    "name": "NBQ N090 VERDE OUTDOOR MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 136,
+      "g": 184,
+      "b": 138,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 121,
+    "ref": "n121",
+    "name": "NBQ N121 VERDE TRANSGENICO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 64,
+      "g": 163,
+      "b": 129,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7723
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 153,
+    "ref": "n153",
+    "name": "NBQ N153 ECO GREEN MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 79,
+      "g": 143,
+      "b": 76,
+      "o": 1
+    },
+    "RAL": 6018,
+    "Pantone": 363
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 23,
+    "ref": "n023",
+    "name": "NBQ N023 VERDE MUSGO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 93,
+      "g": 158,
+      "b": 90,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 362
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 24,
+    "ref": "n024",
+    "name": "NBQ N024 VERDE ROQUEFORT MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 24,
+      "g": 125,
+      "b": 84,
+      "o": 1
+    },
+    "RAL": 6032,
+    "Pantone": 3288
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 122,
+    "ref": "n122",
+    "name": "NBQ N122 VERDE MONTE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 57,
+      "g": 102,
+      "b": 84,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 345
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 88,
+    "ref": "n088",
+    "name": "NBQ N088 VERDE ALTERNATIVO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 62,
+      "g": 92,
+      "b": 83,
+      "o": 1
+    },
+    "RAL": 6005,
+    "Pantone": 3308
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 89,
+    "ref": "n089",
+    "name": "NBQ N089 VERDE PACIENTE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 176,
+      "g": 209,
+      "b": 178,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2260
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 123,
+    "ref": "n123",
+    "name": "NBQ N123 VERDE LAGUNA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 131,
+      "g": 204,
+      "b": 163,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 77,
+    "ref": "n077",
+    "name": "NBQ N077 TURQUESA MEDITERRANEO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 74,
+      "g": 150,
+      "b": 137,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2243
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 150,
+    "ref": "n150",
+    "name": "NBQ N150 AZUL QUIROFANO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 77,
+      "g": 143,
+      "b": 148,
+      "o": 1
+    },
+    "RAL": 6033,
+    "Pantone": 569
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 25,
+    "ref": "n025",
+    "name": "NBQ N025 TURQUESA CALA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 59,
+      "g": 156,
+      "b": 152,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7716
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 58,
+    "ref": "n058",
+    "name": "NBQ N058 AZUL TURQUESA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 54,
+      "g": 98,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": 5020,
+    "Pantone": 3155
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 84,
+    "ref": "n084",
+    "name": "NBQ N084 TURQUESA PODEROSO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 65,
+      "g": 76,
+      "b": 84,
+      "o": 1
+    },
+    "RAL": 7024,
+    "Pantone": 432
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 56,
+    "ref": "n056",
+    "name": "NBQ N056 VERDE PEPINO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 58,
+      "g": 74,
+      "b": 70,
+      "o": 1
+    },
+    "RAL": 6009,
+    "Pantone": 5467
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 113,
+    "ref": "n113",
+    "name": "NBQ N113 VERDE BAJO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 224,
+      "g": 213,
+      "b": 175,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7500
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 20,
+    "ref": "n020",
+    "name": "NBQ N020 VERDE DÍGITO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 202,
+      "g": 230,
+      "b": 142,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 365
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 21,
+    "ref": "n021",
+    "name": "NBQ N021 VERDE INDOR MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 181,
+      "g": 196,
+      "b": 79,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 93,
+    "ref": "n093",
+    "name": "NBQ N093 VERDE GAMUSO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 169,
+      "g": 194,
+      "b": 107,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 57,
+    "ref": "n057",
+    "name": "NBQ N057 VERDE LÁSER MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 139,
+      "g": 176,
+      "b": 67,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 63,
+    "ref": "n063",
+    "name": "NBQ N063 VERDE ESPIRITUAL MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 128,
+      "g": 121,
+      "b": 65,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 392
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 117,
+    "ref": "n117",
+    "name": "NBQ N117 VERDE SABANA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 135,
+      "g": 140,
+      "b": 95,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7748
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 120,
+    "ref": "n120",
+    "name": "NBQ N120 VERDE ALGA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 101,
+      "g": 133,
+      "b": 98,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7742
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 118,
+    "ref": "n118",
+    "name": "NBQ N118 VERDE CAMU MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 115,
+      "g": 120,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": 6013,
+    "Pantone": 417
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 91,
+    "ref": "n091",
+    "name": "NBQ N091 VERDE SELVATICO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 94,
+      "g": 115,
+      "b": 93,
+      "o": 1
+    },
+    "RAL": 6025,
+    "Pantone": 371
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 119,
+    "ref": "n119",
+    "name": "NBQ N119 VERDE MILITAR 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 102,
+      "g": 107,
+      "b": 89,
+      "o": 1
+    },
+    "RAL": 6003,
+    "Pantone": 448
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 22,
+    "ref": "n022",
+    "name": "NBQ N022 VERDE WISHA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 176,
+      "g": 165,
+      "b": 104,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 5845
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 112,
+    "ref": "n112",
+    "name": "NBQ N112 VERDE RESIDUO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 150,
+      "g": 135,
+      "b": 63,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7768
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 115,
+    "ref": "n115",
+    "name": "NBQ N115 VERDE ACEITUNA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 143,
+      "g": 137,
+      "b": 101,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 5825
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 65,
+    "ref": "n065",
+    "name": "NBQ N065 VERDE PÍSTILO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 168,
+      "g": 143,
+      "b": 104,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 465
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 66,
+    "ref": "n066",
+    "name": "NBQ N066 VERDE MIMETIZADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 148,
+      "g": 132,
+      "b": 104,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7560
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 116,
+    "ref": "n116",
+    "name": "NBQ N116 VERDE MATA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 128,
+      "g": 125,
+      "b": 99,
+      "o": 1
+    },
+    "RAL": 7002,
+    "Pantone": 7756
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 94,
+    "ref": "n094",
+    "name": "NBQ N094 OCRE CUCO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 138,
+      "g": 110,
+      "b": 67,
+      "o": 1
+    },
+    "RAL": 8000,
+    "Pantone": 464
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 95,
+    "ref": "n095",
+    "name": "NBQ N095 OCRE VERDOSO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 120,
+      "g": 102,
+      "b": 68,
+      "o": 1
+    },
+    "RAL": 7008,
+    "Pantone": 463
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 98,
+    "ref": "n098",
+    "name": "NBQ N098 PIEL SIN  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 194,
+      "g": 176,
+      "b": 174,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7529
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 99,
+    "ref": "n099",
+    "name": "NBQ N099 PIEL CON MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 166,
+      "g": 144,
+      "b": 141,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 408
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 14,
+    "ref": "n014",
+    "name": "NBQ N014 ROSA PATÉ MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 150,
+      "g": 125,
+      "b": 132,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 76,
+    "ref": "n076",
+    "name": "NBQ N076 ROJO CAPICUA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 176,
+      "g": 65,
+      "b": 84,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 152,
+    "ref": "n152",
+    "name": "NBQ N152 ROJO PURO MATE  MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 179,
+      "g": 54,
+      "b": 59,
+      "o": 1
+    },
+    "RAL": 3020,
+    "Pantone": 485
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 79,
+    "ref": "n079",
+    "name": "NBQ N079 ROJO DISTANTE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 161,
+      "g": 92,
+      "b": 104,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7637
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 16,
+    "ref": "n016",
+    "name": "NBQ N016 ROJO COÁGULO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 163,
+      "g": 60,
+      "b": 65,
+      "o": 1
+    },
+    "RAL": 3031,
+    "Pantone": 1805
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 15,
+    "ref": "n015",
+    "name": "NBQ N015 ROJO CALIMOCHO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 143,
+      "g": 54,
+      "b": 60,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 492
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 138,
+    "ref": "n138",
+    "name": "NBQ N138 ROJO OTOÑO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 115,
+      "g": 65,
+      "b": 67,
+      "o": 1
+    },
+    "RAL": 3003,
+    "Pantone": 704
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 17,
+    "ref": "n017",
+    "name": "NBQ N017 ROJO CAÑA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 138,
+      "g": 91,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 80,
+    "ref": "n080",
+    "name": "NBQ N080 ROJO CONGESTIONADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 135,
+      "g": 76,
+      "b": 82,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 4985
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 139,
+    "ref": "n139",
+    "name": "NBQ N139 ROJO VINO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 105,
+      "g": 66,
+      "b": 66,
+      "o": 1
+    },
+    "RAL": 3004,
+    "Pantone": 491
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 18,
+    "ref": "n018",
+    "name": "NBQ N018 ROJO COSTRA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 112,
+      "g": 70,
+      "b": 68,
+      "o": 1
+    },
+    "RAL": 3009,
+    "Pantone": 181
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 19,
+    "ref": "n019",
+    "name": "NBQ N019 ROJO TORELIS MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 89,
+      "g": 71,
+      "b": 71,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 438
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 11,
+    "ref": "n011",
+    "name": "NBQ N011 ROSA TIQUIS MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 235,
+      "g": 188,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 510
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 12,
+    "ref": "n012",
+    "name": "NBQ N012 ROSA CERDITO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 219,
+      "g": 173,
+      "b": 164,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 501
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 132,
+    "ref": "n132",
+    "name": "NBQ N132 VIOLETA AHUMADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 171,
+      "g": 140,
+      "b": 154,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 5215
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 136,
+    "ref": "n136",
+    "name": "NBQ N136 ROSA COLORETE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 222,
+      "g": 140,
+      "b": 160,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 493
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 53,
+    "ref": "n053",
+    "name": "NBQ N053 MAGENTA CLARO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 204,
+      "g": 129,
+      "b": 169,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 13,
+    "ref": "n013",
+    "name": "NBQ N013 ROSA PLACENTA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 189,
+      "g": 126,
+      "b": 143,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 694
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 135,
+    "ref": "n135",
+    "name": "NBQ N135 ROSA DEFORMACION MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 166,
+      "g": 121,
+      "b": 124,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 4995
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 75,
+    "ref": "n075",
+    "name": "NBQ N075 ROJO FRAMBUESA 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 194,
+      "g": 85,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": 3018,
+    "Pantone": 710
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 78,
+    "ref": "n078",
+    "name": "NBQ N078 ROSA AHUMADO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 179,
+      "g": 109,
+      "b": 125,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 695
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 39,
+    "ref": "n039",
+    "name": "NBQ N039 MAGENTA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 186,
       "g": 91,
       "b": 132,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7432
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 154.0,
-    "ref": "N154",
-    "name": "Magenta afilado",
+    "ml": null,
+    "sku": 154,
+    "ref": "n154",
+    "name": "NBQ N154 MAGENTA AFILADO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 190,
+      "r": 191,
       "g": 90,
       "b": 130,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 4003,
+    "Pantone": 205
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 156.0,
-    "ref": "N156",
-    "name": "Reina purpura",
+    "ml": null,
+    "sku": 156,
+    "ref": "n156",
+    "name": "NBQ N156 REINA PURPURA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 155,
+      "r": 156,
       "g": 73,
-      "b": 128,
-      "o": 1.0
-    }
+      "b": 129,
+      "o": 1
+    },
+    "RAL": 4006,
+    "Pantone": 248
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 54.0,
-    "ref": "N54",
-    "name": "Purpura pocion",
+    "ml": null,
+    "sku": 54,
+    "ref": "n054",
+    "name": "NBQ N054 PÚRPURA POCIÓN MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 137,
-      "g": 72,
-      "b": 108,
-      "o": 1.0
-    }
+      "r": 138,
+      "g": 73,
+      "b": 109,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2056
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 137.0,
-    "ref": "N137",
-    "name": "Violeta fiesta",
+    "ml": null,
+    "sku": 137,
+    "ref": "n137",
+    "name": "NBQ N137 VIOLETA FIESTA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 122,
       "g": 78,
-      "b": 107,
-      "o": 1.0
-    }
+      "b": 108,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 5135
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 82.0,
-    "ref": "N82",
-    "name": "Purpura lacado",
+    "ml": null,
+    "sku": 82,
+    "ref": "n082",
+    "name": "NBQ N082 PURPURA LACADO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 110,
       "g": 76,
       "b": 102,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7652
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 61.0,
-    "ref": "N61",
-    "name": "Amarillo paseo",
+    "ml": null,
+    "sku": 133,
+    "ref": "n133",
+    "name": "NBQ N133 VIOLETA BERENJENA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 244,
-      "g": 217,
-      "b": 148,
-      "o": 1.0
-    }
+      "r": 128,
+      "g": 97,
+      "b": 111,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7643
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 110.0,
-    "ref": "N110",
-    "name": "Amarillo danger",
+    "ml": null,
+    "sku": 134,
+    "ref": "n134",
+    "name": "NBQ N134 VIOLETA APAGADO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 238,
-      "g": 197,
-      "b": 92,
-      "o": 1.0
-    }
+      "r": 82,
+      "g": 71,
+      "b": 73,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 438
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 155.0,
-    "ref": "N155",
-    "name": "Amarillo capa",
+    "ml": null,
+    "sku": 34,
+    "ref": "n034",
+    "name": "NBQ N034 VIOLETA FUNKI MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 237,
-      "g": 189,
-      "b": 17,
-      "o": 1.0
-    }
+      "r": 195,
+      "g": 183,
+      "b": 201,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 665
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 5.0,
-    "ref": "N05",
-    "name": "Amarillo peseta",
+    "ml": null,
+    "sku": 129,
+    "ref": "n129",
+    "name": "NBQ N129 VIOLETA CHUCHE MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 226,
-      "g": 180,
-      "b": 27,
-      "o": 1.0
-    }
+      "r": 185,
+      "g": 173,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 111.0,
-    "ref": "N111",
-    "name": "Amarillo mustard",
+    "ml": null,
+    "sku": 35,
+    "ref": "n035",
+    "name": "NBQ N035 VIOLETA JIPI MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 202,
-      "g": 167,
-      "b": 47,
-      "o": 1.0
-    }
+      "r": 159,
+      "g": 148,
+      "b": 179,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 666
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 62.0,
-    "ref": "N62",
-    "name": "Amarillo gastado",
+    "ml": null,
+    "sku": 130,
+    "ref": "n130",
+    "name": "NBQ N130 VIOLETA VATICANO  MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 188,
-      "g": 160,
-      "b": 49,
-      "o": 1.0
-    }
+      "r": 153,
+      "g": 129,
+      "b": 163,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7661
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 45.0,
-    "ref": "N45",
-    "name": "Marron tochano",
+    "ml": null,
+    "sku": 36,
+    "ref": "n036",
+    "name": "NBQ N036 VIOLETA VARICES MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 160,
+      "r": 134,
       "g": 108,
-      "b": 65,
-      "o": 1.0
-    }
+      "b": 145,
+      "o": 1
+    },
+    "RAL": 4001,
+    "Pantone": 682
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 8.0,
-    "ref": "N08",
-    "name": "Amarillo fetido",
+    "ml": null,
+    "sku": 131,
+    "ref": "n131",
+    "name": "NBQ N131 VIOLETA JOKER MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 247,
-      "g": 158,
-      "b": 36,
-      "o": 1.0
-    }
+      "r": 116,
+      "g": 97,
+      "b": 125,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 669
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 106.0,
-    "ref": "N106",
-    "name": "Naranja meloco",
+    "ml": null,
+    "sku": 37,
+    "ref": "n037",
+    "name": "NBQ N037 VIOLETA HEMATOMA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 255,
+      "r": 113,
+      "g": 94,
+      "b": 133,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7680
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 83,
+    "ref": "n083",
+    "name": "NBQ N083 VIOLETA PARAMECIA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 100,
+      "g": 79,
+      "b": 125,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 668
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 38,
+    "ref": "n038",
+    "name": "NBQ N038 VIOLETA AMATIS MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 82,
+      "g": 68,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 40,
+    "ref": "n040",
+    "name": "NBQ N040 GRIS HUMO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 192,
+      "g": 196,
+      "b": 194,
+      "o": 1
+    },
+    "RAL": 7035,
+    "Pantone": 421
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 101,
+    "ref": "n101",
+    "name": "NBQ N101 GRIS NIVEL MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 194,
       "g": 180,
-      "b": 91,
-      "o": 1.0
-    }
+      "b": 161,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7535
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 1.0,
-    "ref": "N01",
-    "name": "Blanco",
+    "ml": null,
+    "sku": 147,
+    "ref": "n147",
+    "name": "NBQ N147 GRIS LUNA MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 240,
-      "g": 239,
-      "b": 231,
-      "o": 1.0
-    }
+      "r": 174,
+      "g": 169,
+      "b": 176,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2358
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 501.0,
-    "ref": "N501",
-    "name": "Blanco Translucido",
+    "ml": null,
+    "sku": 102,
+    "ref": "n102",
+    "name": "NBQ N102 GRIS NUBLADO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 238,
-      "g": 239,
-      "b": 226,
-      "o": 1.0
-    }
+      "r": 158,
+      "g": 153,
+      "b": 147,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 402
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 50.0,
-    "ref": "N50",
-    "name": "Negro",
+    "ml": null,
+    "sku": 100,
+    "ref": "n100",
+    "name": "NBQ N100 GRIS DISTANTE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 137,
+      "g": 132,
+      "b": 140,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 41,
+    "ref": "n041",
+    "name": "NBQ N041 GRIS ALÉRGICO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 153,
+      "g": 157,
+      "b": 158,
+      "o": 1
+    },
+    "RAL": 7040,
+    "Pantone": 422
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 103,
+    "ref": "n103",
+    "name": "NBQ N103 GRIS LLANTA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 135,
+      "g": 135,
+      "b": 132,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2332
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 42,
+    "ref": "n042",
+    "name": "NBQ N042 GRIS MENHIR MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 104,
+      "g": 110,
+      "b": 115,
+      "o": 1
+    },
+    "RAL": 7011,
+    "Pantone": 432
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 148,
+    "ref": "n148",
+    "name": "NBQ N148 GRIS DELFIN MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 103,
+      "g": 100,
+      "b": 107,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 433
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 43,
+    "ref": "n043",
+    "name": "NBQ N043 GRIS BADAY MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 104,
+      "g": 96,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 146,
+    "ref": "n146",
+    "name": "NBQ N146 GRIS ROBLE MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 120,
+      "g": 107,
+      "b": 103,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7519
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 50,
+    "ref": "n050",
+    "name": "NBQ N050 NEGRO MATE 400ML SPRAY",
     "category": "slow",
     "color": {
       "r": 55,
       "g": 55,
       "b": 56,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 9005,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 502.0,
-    "ref": "N502",
-    "name": "Negro Translucido",
+    "ml": null,
+    "sku": 60,
+    "ref": "n060",
+    "name": "NBQ N060 GRIS MAGNUM MATE 400ML SPRAY",
     "category": "slow",
     "color": {
-      "r": 86,
-      "g": 83,
-      "b": 78,
-      "o": 1.0
-    }
+      "r": 84,
+      "g": 87,
+      "b": 89,
+      "o": 1
+    },
+    "RAL": 7015,
+    "Pantone": 446
   },
   {
     "type": "spray",
-    "ml": "520cc/400",
-    "sku": 49.0,
-    "ref": "N49",
-    "name": "Plata",
+    "ml": null,
+    "sku": 501,
+    "ref": "n501",
+    "name": "NBQ N501 BLANCO TRANS 400ML SPRAY",
     "category": "slow",
-    "color": {
-      "r": 213,
-      "g": 215,
-      "b": 218,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": 702.0,
-    "ref": "F02",
-    "name": "Oro",
-    "category": "fast",
-    "color": {
-      "r": 213,
-      "g": 192,
-      "b": 126,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": 704.0,
-    "ref": "F04",
-    "name": "Blanco ",
-    "category": "fast",
     "color": {
       "r": 240,
-      "g": 239,
-      "b": 231,
-      "o": 1.0
-    }
+      "g": 240,
+      "b": 228,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 705.0,
-    "ref": "F05",
-    "name": "Violeta ",
-    "category": "fast",
+    "ml": null,
+    "sku": 502,
+    "ref": "n502",
+    "name": "NBQ N502 NEGRO TRANS 400ML SPRAY",
+    "category": "slow",
     "color": {
-      "r": 100,
-      "g": 79,
-      "b": 125,
-      "o": 1.0
-    }
+      "r": 87,
+      "g": 84,
+      "b": 79,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 706.0,
-    "ref": "F06",
-    "name": "Amarillo",
+    "ml": null,
+    "sku": 1,
+    "ref": "n001",
+    "name": "NBQ N001 BLANCO MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 240,
+      "g": 240,
+      "b": 230,
+      "o": 1
+    },
+    "RAL": 9010,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 49,
+    "ref": "n049",
+    "name": "NBQ N049 PLATA MATE 400ML SPRAY",
+    "category": "slow",
+    "color": {
+      "r": 212,
+      "g": 215,
+      "b": 217,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 427
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 163,
+    "ref": "n551",
+    "name": "NBQ SLOW GLOSS VARNISH N551  520/400 ML",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 164,
+    "ref": "n553",
+    "name": "NBQ SLOW MATT VARNISH N553 520/400 ML",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 165,
+    "ref": "n552",
+    "name": "NBQ SLOW SATIN VARNISH N552 520/400ML",
+    "category": "slow",
+    "color": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 742,
+    "ref": "f075",
+    "name": "NBQ FAST ROJO FRAMBUESA BRILLO F075 400 ML SPRAY",
     "category": "fast",
     "color": {
-      "r": 238,
+      "r": 194,
+      "g": 85,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": 3018,
+    "Pantone": 710
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 744,
+    "ref": "f152",
+    "name": "NBQ FAST ROJO PURO BRILLO F152 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 179,
+      "g": 54,
+      "b": 59,
+      "o": 1
+    },
+    "RAL": 3020,
+    "Pantone": 485
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 709,
+    "ref": "f016",
+    "name": "NBQ FAST ROJO COÁGULO BRILLO F016 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 163,
+      "g": 60,
+      "b": 65,
+      "o": 1
+    },
+    "RAL": 3031,
+    "Pantone": 1805
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 743,
+    "ref": "f138",
+    "name": "NBQ FAST ROJO OTOÑO BRILLO F138 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 115,
+      "g": 65,
+      "b": 67,
+      "o": 1
+    },
+    "RAL": 3003,
+    "Pantone": 704
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 745,
+    "ref": "f004",
+    "name": "NBQ FAST BEIGE DROMEDA BRILLO F004 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 252,
+      "g": 210,
+      "b": 172,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2015
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 748,
+    "ref": "f140",
+    "name": "NBQ FAST NARANJA PASTEL BRILLO F140 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 255,
+      "g": 171,
+      "b": 138,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2022
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 747,
+    "ref": "f052",
+    "name": "NBQ FAST NARANJA GAZPACHO BRILLO F052 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 232,
+      "g": 121,
+      "b": 102,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2344
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 746,
+    "ref": "f009",
+    "name": "NBQ FAST NARANJA SIN BRILLO F009 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 242,
+      "g": 109,
+      "b": 51,
+      "o": 1
+    },
+    "RAL": 2009,
+    "Pantone": 172
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 706,
+    "ref": "f110",
+    "name": "NBQ FAST AMARILLO DANGER BRILLO F110 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 237,
       "g": 197,
       "b": 92,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 1012,
+    "Pantone": 612
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 707.0,
-    "ref": "F07",
-    "name": "Azul ",
+    "ml": null,
+    "sku": 736,
+    "ref": "f061",
+    "name": "NBQ FAST AMARILLO PASEO BRILLO F061 400 ML SPRAY",
     "category": "fast",
     "color": {
-      "r": 95,
-      "g": 177,
-      "b": 176,
-      "o": 1.0
-    }
+      "r": 245,
+      "g": 218,
+      "b": 149,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7402
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 708.0,
-    "ref": "F08",
-    "name": "Verde",
+    "ml": null,
+    "sku": 738,
+    "ref": "f155",
+    "name": "NBQ FAST AMARILLO CAPA BRILLO F155 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 237,
+      "g": 190,
+      "b": 17,
+      "o": 1
+    },
+    "RAL": 1018,
+    "Pantone": 123
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 737,
+    "ref": "f111",
+    "name": "NBQ FAST AMARILLO MUSTARD BRILLO F111 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 201,
+      "g": 167,
+      "b": 46,
+      "o": 1
+    },
+    "RAL": 1032,
+    "Pantone": 124
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 740,
+    "ref": "f093",
+    "name": "NBQ FAST VERDE GAMUSO BRILLO F093 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 169,
+      "g": 194,
+      "b": 107,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 739,
+    "ref": "f090",
+    "name": "NBQ FAST VERDE OUTDOOR BRILOO F090 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 136,
+      "g": 184,
+      "b": 138,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 741,
+    "ref": "f153",
+    "name": "NBQ FAST ECO GREEN BRILLO F153 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 79,
+      "g": 143,
+      "b": 76,
+      "o": 1
+    },
+    "RAL": 6018,
+    "Pantone": 363
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 708,
+    "ref": "f024",
+    "name": "NBQ FAST VERDE ROQUEFORT BRILLO F024 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 24,
       "g": 125,
       "b": 84,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 6032,
+    "Pantone": 3288
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 709.0,
-    "ref": "F09",
-    "name": "Rojo",
+    "ml": null,
+    "sku": 724,
+    "ref": "f126",
+    "name": "NBQ FAST AZUL CELESTIAL F126 400 ML SPRAY",
     "category": "fast",
     "color": {
-      "r": 163,
-      "g": 61,
-      "b": 66,
-      "o": 1.0
-    }
+      "r": 129,
+      "g": 202,
+      "b": 219,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 629
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 710.0,
-    "ref": "F10",
-    "name": "Plata",
+    "ml": null,
+    "sku": 723,
+    "ref": "f033",
+    "name": "NBQ FAST AZUL OZONO BRILLO F033 400 ML SPRAY",
     "category": "fast",
     "color": {
-      "r": 213,
+      "r": 101,
+      "g": 155,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2170
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 722,
+    "ref": "f029",
+    "name": "NBQ FAST AZUL PITUFO BRILLO F029  400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 4,
+      "g": 151,
+      "b": 199,
+      "o": 1
+    },
+    "RAL": 5015,
+    "Pantone": 3015
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 725,
+    "ref": "f151",
+    "name": "NBQ FAST JUST BLUE BRILLO F151 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 23,
+      "g": 103,
+      "b": 153,
+      "o": 1
+    },
+    "RAL": 5010,
+    "Pantone": 541
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 730,
+    "ref": "f136",
+    "name": "NBQ FAST ROSA COLORETE BRILLO F136 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 222,
+      "g": 140,
+      "b": 160,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 493
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 731,
+    "ref": "f154",
+    "name": "NBQ FAST MAGENTA AFILADO BRILLO F154 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 191,
+      "g": 90,
+      "b": 130,
+      "o": 1
+    },
+    "RAL": 4003,
+    "Pantone": 205
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 732,
+    "ref": "f156",
+    "name": "NBQ FAST REINA PÚRPURA BRILLO F156 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 156,
+      "g": 73,
+      "b": 129,
+      "o": 1
+    },
+    "RAL": 4006,
+    "Pantone": 248
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 729,
+    "ref": "f054",
+    "name": "NBQ FAST PURPURA POCION BRILLO F054 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 138,
+      "g": 73,
+      "b": 109,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2056
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 735,
+    "ref": "f130",
+    "name": "NBQ FAST VIOLETA VATICANO BRILLO F130 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 153,
+      "g": 129,
+      "b": 163,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7661
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 733,
+    "ref": "f037",
+    "name": "NBQ FAST VIOLETA HEMATOMA BRILLO F037 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 113,
+      "g": 94,
+      "b": 133,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7680
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 705,
+    "ref": "f083",
+    "name": "NBQ FAST VIOLETA PARAMECIA F083 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 100,
+      "g": 79,
+      "b": 125,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 668
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 734,
+    "ref": "f038",
+    "name": "NBQ FAST VIOLETA AMATIS BRILLO F038 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 82,
+      "g": 68,
+      "b": 92,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 707,
+    "ref": "f125",
+    "name": "NBQ FAST AZUL MEDUSA F125 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 95,
+      "g": 176,
+      "b": 174,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 7472
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 728,
+    "ref": "f124",
+    "name": "NBQ FAST AZUL CRISTALINO BRILLO F124 400 ML.",
+    "category": "fast",
+    "color": {
+      "r": 145,
+      "g": 207,
+      "b": 204,
+      "o": 1
+    },
+    "RAL": 6027,
+    "Pantone": 631
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 727,
+    "ref": "f077",
+    "name": "NBQ FAST TURQUESA MEDITERRANEO BRILLO F077 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 74,
+      "g": 150,
+      "b": 137,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2243
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 726,
+    "ref": "f058",
+    "name": "NBQ FAST AZUL TURQUESA BRILLO F058 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 54,
+      "g": 98,
+      "b": 105,
+      "o": 1
+    },
+    "RAL": 5020,
+    "Pantone": 3155
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 718,
+    "ref": "f040",
+    "name": "NBQ FAST GRIS HUMO BRILLO F040 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 192,
+      "g": 196,
+      "b": 194,
+      "o": 1
+    },
+    "RAL": 7035,
+    "Pantone": 421
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 719,
+    "ref": "f041",
+    "name": "NBQ FAST GIRS ALÉRGICO BRILLO F041 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 153,
+      "g": 157,
+      "b": 158,
+      "o": 1
+    },
+    "RAL": 7040,
+    "Pantone": 422
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 720,
+    "ref": "f042",
+    "name": "NBQ FAST GRIS MENHIR BRILLO F042 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 104,
+      "g": 110,
+      "b": 115,
+      "o": 1
+    },
+    "RAL": 7011,
+    "Pantone": 432
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 721,
+    "ref": "f060",
+    "name": "NBQ FAST GRIS MAGNUM BRILLO F060  400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 84,
+      "g": 87,
+      "b": 89,
+      "o": 1
+    },
+    "RAL": 7015,
+    "Pantone": 446
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 710,
+    "ref": "f049",
+    "name": "NBQ FAST PLATA BRILLO F049 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 212,
       "g": 215,
-      "b": 218,
-      "o": 1.0
-    }
+      "b": 217,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 427
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 711.0,
-    "ref": "F11",
-    "name": "Negro",
+    "ml": null,
+    "sku": 702,
+    "ref": "f400",
+    "name": "NBQ FAST ORO BRILLO F400 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 214,
+      "g": 193,
+      "b": 126,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 704,
+    "ref": "f001",
+    "name": "NBQ FAST BLANCO BRILLO F001 400 ML SPRAY",
+    "category": "fast",
+    "color": {
+      "r": 240,
+      "g": 240,
+      "b": 230,
+      "o": 1
+    },
+    "RAL": 9010,
+    "Pantone": null
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 711,
+    "ref": "f050",
+    "name": "NBQ FAST NEGRO BRILLO F050 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 55,
       "g": 55,
       "b": 56,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 9005,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 712.0,
-    "ref": "F12",
-    "name": "Rojo",
+    "ml": null,
+    "sku": 712,
+    "ref": "f510",
+    "name": "NBQ FAST FLUOR. ROJO  F510 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 255,
       "g": 115,
-      "b": 119,
-      "o": 1.0
-    }
+      "b": 120,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 713.0,
-    "ref": "F13",
-    "name": "Cereza",
+    "ml": null,
+    "sku": 714,
+    "ref": "f511",
+    "name": "NBQ FAST FLUOR. ORANGE F511 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 255,
-      "g": 65,
-      "b": 180,
-      "o": 1.0
-    }
+      "g": 143,
+      "b": 110,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2023
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 714.0,
-    "ref": "F14",
-    "name": "Naranja",
-    "category": "fast",
-    "color": {
-      "r": 255,
-      "g": 144,
-      "b": 109,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": 715.0,
-    "ref": "F15",
-    "name": "Amarillo",
+    "ml": null,
+    "sku": 715,
+    "ref": "f512",
+    "name": "NBQ FAST FLUOR. YELLOW F512 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 227,
       "g": 232,
       "b": 42,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 809
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 716.0,
-    "ref": "F16",
-    "name": "Verde",
+    "ml": null,
+    "sku": 716,
+    "ref": "f513",
+    "name": "NBQ FAST FLUOR. VERDE F513 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 56,
-      "g": 23,
-      "b": 48,
-      "o": 1.0
-    }
+      "g": 214,
+      "b": 49,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": 717.0,
-    "ref": "F17",
-    "name": "Azul",
+    "ml": null,
+    "sku": 717,
+    "ref": "f514",
+    "name": "NBQ FAST FLUOR. AZUL  F514 400 ML SPRAY",
     "category": "fast",
     "color": {
       "r": 0,
-      "g": 131,
-      "b": 203,
-      "o": 1.0
-    }
+      "g": 133,
+      "b": 204,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 2194
   },
   {
     "type": "spray",
-    "ml": "1000/750",
-    "sku": 601.0,
-    "ref": "P01",
-    "name": "Plata",
-    "category": "pro",
+    "ml": null,
+    "sku": 713,
+    "ref": "f515",
+    "name": "NBQ FAST FLUOR. CHERRY F515 400 ML SPRAY",
+    "category": "fast",
     "color": {
-      "r": 213,
-      "g": 215,
-      "b": 218,
-      "o": 1.0
-    }
+      "r": 255,
+      "g": 64,
+      "b": 181,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 813
   },
   {
     "type": "spray",
-    "ml": "1000/750",
-    "sku": 603.0,
-    "ref": "P03",
-    "name": "Negro",
-    "category": "pro",
+    "ml": null,
+    "sku": 620,
+    "ref": "P049",
+    "name": "NBQ PROPULSE PLATA P049 800/600ml",
+    "category": "propulse",
+    "color": {
+      "r": 212,
+      "g": 215,
+      "b": 217,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 427
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 619,
+    "ref": "P050 ",
+    "name": "NBQ PROPULSE NEGRO P050 800/600ml",
+    "category": "propulse",
     "color": {
       "r": 55,
       "g": 55,
       "b": 56,
-      "o": 1.0
-    }
+      "o": 1
+    },
+    "RAL": 9005,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "1000/750",
-    "sku": 617.0,
-    "ref": "P17",
-    "name": "Blanco",
-    "category": "pro",
-    "color": {
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "WTF",
-    "sku": null,
-    "ref": "W001",
-    "name": "White cargo",
-    "category": "wtf",
+    "ml": null,
+    "sku": 618,
+    "ref": "P001",
+    "name": "NBQ PROPULSE BLANCO P001 800/600ml",
+    "category": "propulse",
     "color": {
       "r": 240,
-      "g": 239,
-      "b": 231,
-      "o": 1.0
-    }
+      "g": 240,
+      "b": 230,
+      "o": 1
+    },
+    "RAL": 9010,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W002",
-    "name": "Grey bullet",
-    "category": "wtf",
+    "ml": null,
+    "sku": 601,
+    "ref": "P049+",
+    "name": "NBQ PROPULSE PLATA P049 1000/750ml",
+    "category": "propulse",
     "color": {
-      "r": 132,
-      "g": 143,
-      "b": 149,
-      "o": 1.0
-    }
+      "r": 212,
+      "g": 215,
+      "b": 217,
+      "o": 1
+    },
+    "RAL": null,
+    "Pantone": 427
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W003",
-    "name": "Black swan",
-    "category": "wtf",
+    "ml": null,
+    "sku": 603,
+    "ref": "P050+",
+    "name": "NBQ PROPULSE NEGRO P050 1000/750ml",
+    "category": "propulse",
     "color": {
-      "r": 58,
-      "g": 58,
-      "b": 59,
-      "o": 1.0
-    }
+      "r": 55,
+      "g": 55,
+      "b": 56,
+      "o": 1
+    },
+    "RAL": 9005,
+    "Pantone": null
   },
   {
     "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W004",
-    "name": "Citric yellow",
-    "category": "wtf",
+    "ml": null,
+    "sku": 617,
+    "ref": "P001+",
+    "name": "NBQ PROPULSE BLANCO P001 1000/750ml",
+    "category": "propulse",
     "color": {
-      "r": 221,
-      "g": 218,
-      "b": 61,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W005",
-    "name": "Melon yellow",
-    "category": "wtf",
-    "color": {
-      "r": 254,
-      "g": 160,
-      "b": 0,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W006",
-    "name": "Pink powder",
-    "category": "wtf",
-    "color": {
-      "r": 231,
-      "g": 184,
-      "b": 187,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W007",
-    "name": "Antique fuchsia",
-    "category": "wtf",
-    "color": {
-      "r": 198,
-      "g": 105,
-      "b": 147,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W008",
-    "name": "Purple music",
-    "category": "wtf",
-    "color": {
-      "r": 141,
-      "g": 70,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W009",
-    "name": "Clean violet",
-    "category": "wtf",
-    "color": {
-      "r": 163,
-      "g": 149,
-      "b": 203,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W010",
-    "name": "Chakra violet",
-    "category": "wtf",
-    "color": {
-      "r": 103,
-      "g": 82,
-      "b": 151,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W011",
-    "name": "Tangerine red",
-    "category": "wtf",
-    "color": {
-      "r": 207,
-      "g": 78,
-      "b": 76,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W012",
-    "name": "Red cherry",
-    "category": "wtf",
-    "color": {
-      "r": 176,
-      "g": 64,
-      "b": 78,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W013",
-    "name": "Green algae",
-    "category": "wtf",
-    "color": {
-      "r": 0,
-      "g": 121,
-      "b": 77,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W014",
-    "name": "Green army",
-    "category": "wtf",
-    "color": {
-      "r": 112,
-      "g": 132,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W015",
-    "name": "Dark green",
-    "category": "wtf",
-    "color": {
-      "r": 59,
-      "g": 68,
-      "b": 64,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W016",
-    "name": "Green clover",
-    "category": "wtf",
-    "color": {
-      "r": 96,
-      "g": 159,
-      "b": 71,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W017",
-    "name": "Turquoise",
-    "category": "wtf",
-    "color": {
-      "r": 54,
-      "g": 145,
-      "b": 146,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W018",
-    "name": "Dirty blue",
-    "category": "wtf",
-    "color": {
-      "r": 95,
-      "g": 192,
-      "b": 202,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W019",
-    "name": "Dawn blue",
-    "category": "wtf",
-    "color": {
-      "r": 65,
-      "g": 176,
-      "b": 208,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W020",
-    "name": "Mechanical blue",
-    "category": "wtf",
-    "color": {
-      "r": 19,
-      "g": 101,
-      "b": 147,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W203",
-    "name": "Black swan",
-    "category": "wtf",
-    "color": {
-      "r": 58,
-      "g": 58,
-      "b": 59,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W204",
-    "name": "Citric yellow",
-    "category": "wtf",
-    "color": {
-      "r": 221,
-      "g": 218,
-      "b": 61,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W209",
-    "name": "Clean violet",
-    "category": "wtf",
-    "color": {
-      "r": 163,
-      "g": 149,
-      "b": 203,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W212",
-    "name": "Red cherry",
-    "category": "wtf",
-    "color": {
-      "r": 176,
-      "g": 64,
-      "b": 78,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W214",
-    "name": "Green army",
-    "category": "wtf",
-    "color": {
-      "r": 112,
-      "g": 132,
-      "b": 100,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "800/600",
-    "sku": null,
-    "ref": "W219",
-    "name": "Dwan blue",
-    "category": "wtf",
-    "color": {
-      "r": 65,
-      "g": 176,
-      "b": 208,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W021",
-    "name": "Matt varnish",
-    "category": "wtf",
-    "color": {
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "o": 1.0
-    }
-  },
-  {
-    "type": "spray",
-    "ml": "520/400",
-    "sku": null,
-    "ref": "W022",
-    "name": "Gloss varnish",
-    "category": "wtf",
-    "color": {
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "o": 1.0
-    }
+      "r": 240,
+      "g": 240,
+      "b": 230,
+      "o": 1
+    },
+    "RAL": 9010,
+    "Pantone": null
   },
   {
     "type": "cap",
