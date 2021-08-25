@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:nbq_mobile_client/src/data/cart.dart';
 import 'package:nbq_mobile_client/src/data/data_manager.dart';
-import 'package:nbq_mobile_client/src/data/db.dart';
 import 'package:nbq_mobile_client/src/data/product.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/category_tile.dart';
@@ -14,11 +11,20 @@ import 'package:nbq_mobile_client/src/ui/widgets/product_tile.dart';
 import '../../app.dart';
 import 'home_page.dart';
 
+enum SearchFilters {
+  Name,
+  Code,
+  Reference,
+  RAL,
+  PANTONE,
+}
+
 class ProductDetailPageController extends ChangeNotifier {
   int _cansCount = 0;
   int _boxesCount = 0;
 
   get cansCount => _cansCount;
+
   get boxesCount => _boxesCount;
 
   set cansCount(int value) {
@@ -44,6 +50,7 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   List<Purchasable> products;
   List<Purchasable> viewedProducts = [];
+  var _searchFilter = SearchFilters.Name;
 
   var _loading = true;
   final _controller = ProductDetailPageController();
@@ -158,7 +165,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         child: Row(
                           children: [
                             Transform.rotate(
-                              angle: widget.category.type < 4 ? -1.56: 0,
+                              angle: widget.category.type < 4 ? -1.56 : 0,
                               child: Image.asset(
                                 widget.category.image,
                                 height: 109,
@@ -205,18 +212,44 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             border: Border.all(color: Colors.grey.shade400),
                           ),
                           margin: const EdgeInsets.only(left: 10, right: 10),
-                          child: TextFormField(
-                            onChanged: _onSearched,
-                            onFieldSubmitted: _onSearched,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              border: InputBorder.none,
-                              fillColor: Colors.grey.shade200,
-                              filled: true,
-                              contentPadding: const EdgeInsets.all(10),
-                              hintText: lang.searchByReference,
-                              hintStyle: TextStyle(fontSize: 14),
-                            ),
+                          child: Row(
+                            children: [
+                              if (products.first is Spray)
+                                Material(
+                                  child: InkWell(
+                                    child: Icon(
+                                      Icons.filter_alt_outlined,
+                                      color: AppTheme.primaryColor,
+                                    ),
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (ctx) => FilterDialogMenu(
+                                          value: _searchFilter,
+                                          onChanged: (value) {
+                                            _searchFilter = value;
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              Expanded(
+                                child: TextFormField(
+                                  onChanged: _onSearched,
+                                  onFieldSubmitted: _onSearched,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    border: InputBorder.none,
+                                    fillColor: Colors.grey.shade200,
+                                    filled: true,
+                                    contentPadding: const EdgeInsets.all(10),
+                                    hintText: lang.searchByReference,
+                                    hintStyle: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -238,8 +271,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void _onSearched(String val) {
     viewedProducts = List.from(
       products.where(
-        (e) => (e.ref.contains(val.toUpperCase()) ||
-            e.name.toLowerCase().contains(val.toLowerCase())),
+        (e) {
+          if (e is Spray) {
+            switch (_searchFilter) {
+              case SearchFilters.Name:
+                return e.name.toUpperCase().contains(val.toUpperCase());
+              case SearchFilters.Code:
+                return e.sku.toUpperCase().contains(val.toUpperCase());
+              case SearchFilters.Reference:
+                return e.ref.toUpperCase().contains(val.toUpperCase());
+              case SearchFilters.RAL:
+                return e.ral
+                    .toString()
+                    .toUpperCase()
+                    .contains(val.toUpperCase());
+              case SearchFilters.PANTONE:
+                return e.pantone
+                    .toString()
+                    .toUpperCase()
+                    .contains(val.toUpperCase());
+            }
+          }
+          return (e.ref.contains(val.toUpperCase()) ||
+              e.name.toLowerCase().contains(val.toLowerCase()));
+        },
       ),
     );
     setState(() {});
@@ -392,4 +447,74 @@ class CounterHeader extends Container {
             ],
           ),
         );
+}
+
+class FilterDialogMenu extends StatefulWidget {
+  final SearchFilters value;
+  final Function(SearchFilters) onChanged;
+
+  FilterDialogMenu({
+    @required this.value,
+    @required this.onChanged,
+  });
+
+  @override
+  _FilterDialogMenuState createState() => _FilterDialogMenuState();
+}
+
+class _FilterDialogMenuState extends State<FilterDialogMenu> {
+  SearchFilters _searchFilter;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchFilter = widget.value ?? SearchFilters.Name;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      title: Text(
+        'Select Search Filter',
+        style: TextStyle(
+          color: AppTheme.primaryColor,
+          fontSize: 15,
+        ),
+      ),
+      content: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: SearchFilters.values
+              .map<Widget>(
+                (e) => RadioListTile(
+                  value: e,
+                  groupValue: _searchFilter,
+                  onChanged: (value) {
+                    _searchFilter = value;
+                    setState(() {});
+                  },
+                  title: Text(e.toString().split('.').last),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+      actions: [
+        TextButton(
+          style: TextButton.styleFrom(
+            fixedSize: Size(80, 25),
+          ),
+          onPressed: () {
+            widget.onChanged(_searchFilter);
+            Navigator.of(context).pop();
+          },
+          child: Text('Ok'),
+        ),
+      ],
+    );
+  }
 }

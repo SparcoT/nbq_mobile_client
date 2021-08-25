@@ -18,7 +18,6 @@ class ProductTile extends StatefulWidget {
 class _ProductTileState extends State<ProductTile> {
   @override
   Widget build(BuildContext context) {
-    print(widget.product);
     if (widget.product == null) {
       return SizedBox();
     }
