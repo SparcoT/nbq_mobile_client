@@ -22,43 +22,80 @@ class _ProductTileState extends State<ProductTile> {
       return SizedBox();
     }
     return Row(children: [
-      widget.product is Cap
-          ? Image.asset((widget.product as Cap).image, width: 100)
-          : Container(
-              width: 60,
-              height: 30,
-              decoration: BoxDecoration(
-                color: (widget.product as Spray).color,
-                borderRadius:
-                    BorderRadius.horizontal(right: Radius.circular(4)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 2,
-                  )
+      if ((widget.product is Displays))
+        Container(
+          width: 60,
+          height: 30,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius:
+            BorderRadius.horizontal(right: Radius.circular(4)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 2,
+              )
+            ],
+          ),
+          child: Center(
+            child: Text(
+              widget.product.ref,
+              style: TextStyle(
+                fontFamily: 'Futura',
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                shadows: <Shadow>[
+                  Shadow(
+                    blurRadius: 3.0,
+                    color: Colors.white,
+                  ),
+                  Shadow(
+                    blurRadius: 8.0,
+                    color: Colors.white,
+                  ),
                 ],
               ),
-              child: Center(
-                child: Text(
-                  widget.product.ref,
-                  style: TextStyle(
-                    fontFamily: 'Futura',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    shadows: <Shadow>[
-                      Shadow(
-                        blurRadius: 3.0,
-                        color: Colors.white,
-                      ),
-                      Shadow(
-                        blurRadius: 8.0,
-                        color: Colors.white,
-                      ),
-                    ],
+            ),
+          ),
+        )
+      else
+        widget.product is Cap
+            ? Image.asset((widget.product as Cap).image, width: 100)
+            : Container(
+                width: 60,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: (widget.product as Spray).color,
+                  borderRadius:
+                      BorderRadius.horizontal(right: Radius.circular(4)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 2,
+                    )
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    widget.product.ref,
+                    style: TextStyle(
+                      fontFamily: 'Futura',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      shadows: <Shadow>[
+                        Shadow(
+                          blurRadius: 3.0,
+                          color: Colors.white,
+                        ),
+                        Shadow(
+                          blurRadius: 8.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
       SizedBox(width: 10),
       Expanded(
         child: Text(

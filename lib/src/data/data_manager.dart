@@ -15,6 +15,7 @@ abstract class DataManager {
   static LazyBox<Spray> _spraysFast;
   static LazyBox<Spray> _spraysPro;
   static LazyBox<Spray> _spraysWtf;
+  static LazyBox<Displays> _displays;
 
   static get caps => _caps.keys;
 
@@ -28,6 +29,8 @@ abstract class DataManager {
 
   static get cart => _cartBox.values.first;
 
+  static get displays => _displays.keys;
+
   static Future<void> initializeDB() async {
     await Hive.initFlutter();
 
@@ -35,6 +38,7 @@ abstract class DataManager {
     Hive.registerAdapter(CapAdapter());
     Hive.registerAdapter(ColorAdapter());
     Hive.registerAdapter(CartAdapter());
+    Hive.registerAdapter(DisplaysAdapter());
 
     _cartBox = await Hive.openBox('cart');
     _caps = await Hive.openLazyBox<Cap>('caps');
@@ -42,6 +46,7 @@ abstract class DataManager {
     _spraysFast = await Hive.openLazyBox<Spray>('sprays_fast');
     _spraysPro = await Hive.openLazyBox<Spray>('sprays_pro');
     _spraysWtf = await Hive.openLazyBox<Spray>('sprays_wtf');
+    _displays = await Hive.openLazyBox<Displays>('display');
 
     final _preference = await SharedPreferences.getInstance();
     if (!(_preference?.getBool('v2') ?? false)) {
@@ -51,14 +56,18 @@ abstract class DataManager {
       await _caps.clear();
       await _spraysPro.clear();
       await _spraysWtf.clear();
-      _loadJsonToDB(_caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf);
+      await _cartBox.clear();
+      await _displays.clear();
+      _loadJsonToDB(
+          _caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf, _displays);
       final cart = Cart();
       await _cartBox.add(cart);
       await cart.save();
       await _preference.setBool('v2', true);
     } else {
       if (_spraysFast.isEmpty) {
-        _loadJsonToDB(_caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf);
+        _loadJsonToDB(
+            _caps, _spraysSlow, _spraysFast, _spraysPro, _spraysWtf, _displays);
         final cart = Cart();
         await _cartBox.add(cart);
         await cart.save();
@@ -78,6 +87,8 @@ abstract class DataManager {
         return _spraysPro.get(id);
       case 4:
         return _caps.get(id);
+      case 5:
+        return _displays.get(id);
     }
   }
 
@@ -99,6 +110,9 @@ abstract class DataManager {
         break;
       case 4:
         cart.caps.clear();
+        break;
+      case 5:
+        cart.displays.clear();
         break;
     }
 
@@ -124,6 +138,9 @@ abstract class DataManager {
       case 4:
         cart.caps.remove(id);
         break;
+      case 5:
+        cart.displays.remove(id);
+        break;
     }
 
     return cart.save();
@@ -148,6 +165,9 @@ abstract class DataManager {
       case 4:
         if (!cart.caps.contains(id)) cart.caps.add(id);
         break;
+      case 5:
+        if (!cart.displays.contains(id)) cart.displays.add(id);
+        break;
     }
 
     print('SLOW => ${cart.slow}');
@@ -155,6 +175,7 @@ abstract class DataManager {
     print('WTF => ${cart.wtf}');
     print('PRO => ${cart.pro}');
     print('CAPS => ${cart.caps}');
+    print('DISPLAYS => ${cart.displays}');
 
     cart.save();
   }
@@ -171,6 +192,8 @@ abstract class DataManager {
         return _spraysPro.length;
       case 4:
         return _caps.length;
+      case 5:
+        return _displays.length;
     }
   }
 }
@@ -181,6 +204,7 @@ Future<void> _loadJsonToDB(
   LazyBox<Spray> fast,
   LazyBox<Spray> pro,
   LazyBox<Spray> wtf,
+  LazyBox<Displays> displays,
 ) async {
   int count = 0;
   final products = jsonDecode(await rootBundle.loadString('assets/db.json'));
@@ -214,11 +238,19 @@ Future<void> _loadJsonToDB(
       }
 
       await spray.save();
-    } else {
+    } else if (product['type'] == 'cap') {
       final cap = Cap(name: product['name'], image: product['image'])
         ..id = ++count;
       await caps.put(count, cap);
       await cap.save();
+    } else {
+      final display = Displays(
+        ref: product['ref'],
+        name: product['name'],
+        sku: product['sku'],
+      )..id = ++count;
+      await displays.put(count, display);
+      await display.save();
     }
   }
 }

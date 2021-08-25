@@ -176,7 +176,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               style: TextStyle(
                                 color: widget.category.color,
                                 fontFamily: 'Futura',
-                                fontSize: 60,
+                                fontSize: widget.category.type == 5 ? 30 : 60,
                               ),
                             ),
                           ],

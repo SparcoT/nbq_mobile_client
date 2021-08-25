@@ -15,6 +15,8 @@ class Cart with HiveObjectMixin {
   List<dynamic> pro = [];
   @HiveField(4)
   List<dynamic> caps = [];
+  @HiveField(5)
+  List<dynamic> displays = [];
 }
 
 class Purchasable with HiveObjectMixin {
@@ -62,4 +64,12 @@ class Cap extends Purchasable {
   String image;
 
   Cap({String name, String ref, this.image}) : super(name: name, ref: ref);
+}
+
+@HiveType(typeId: 3)
+class Displays extends Purchasable {
+  @HiveField(5)
+  int sku;
+
+  Displays({this.sku, String name, String ref}) : super(name: name, ref: ref);
 }

@@ -37,6 +37,7 @@ class _CartViewState extends State<CartView> {
   final _slowProducts = <Spray>[];
   final _fastProducts = <Spray>[];
   final _capsProducts = <Cap>[];
+  final _displayProducts = <Displays>[];
 
   final _data = OrderData();
 
@@ -52,6 +53,7 @@ class _CartViewState extends State<CartView> {
     _fastProducts.clear();
     _wtfProducts.clear();
     _proProducts.clear();
+    _displayProducts.clear();
 
     _cans = _packs = 0;
     for (final key in cart.slow) {
@@ -68,6 +70,9 @@ class _CartViewState extends State<CartView> {
     }
     for (final key in cart.caps) {
       _capsProducts.add(await DataManager.loadSpray(4, key));
+    }
+    for (final key in cart.displays) {
+      _displayProducts.add(await DataManager.loadSpray(5, key));
     }
 
     setState(() => _loading = false);
@@ -115,6 +120,14 @@ class _CartViewState extends State<CartView> {
       return false;
     });
     _capsProducts.removeWhere((element) {
+      if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
+        // DataManager.removeFromCartSelection(4, product.key);
+        return true;
+      }
+
+      return false;
+    });
+    _displayProducts.removeWhere((element) {
       if ((element.boxQty ?? 0) == 0 && (element.singleQty ?? 0) == 0) {
         // DataManager.removeFromCartSelection(4, product.key);
         return true;
@@ -171,7 +184,8 @@ class _CartViewState extends State<CartView> {
                 if (_slowProducts.isNotEmpty ||
                     _fastProducts.isNotEmpty ||
                     _wtfProducts.isNotEmpty ||
-                    _proProducts.isNotEmpty)
+                    _proProducts.isNotEmpty ||
+                    _displayProducts.isNotEmpty)
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.only(right: 15),
@@ -184,6 +198,7 @@ class _CartViewState extends State<CartView> {
                             DataManager.clearAllSelection(2);
                             DataManager.clearAllSelection(3);
                             DataManager.clearAllSelection(4);
+                            DataManager.clearAllSelection(5);
 
                             setState(() {
                               _slowProducts
@@ -222,6 +237,13 @@ class _CartViewState extends State<CartView> {
                                 })
                                 ..clear();
                               _capsProducts
+                                ..forEach((element) {
+                                  element.singleQty = 0;
+                                  element.boxQty = 0;
+                                  element.save();
+                                })
+                                ..clear();
+                              _displayProducts
                                 ..forEach((element) {
                                   element.singleQty = 0;
                                   element.boxQty = 0;
@@ -327,10 +349,28 @@ class _CartViewState extends State<CartView> {
                     ),
                   ),
                 ],
+                if (_displayProducts.isNotEmpty) ...[
+                  SliverToBoxAdapter(child: _buildHeader('DISPLAYS', true)),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 5),
+                        child: ColorTile(
+                          type: 4,
+                          product: _displayProducts[index],
+                          onCanUpdated: _onCanUpdated,
+                          onBoxUpdated: _onBoxUpdated,
+                        ),
+                      ),
+                      childCount: _displayProducts.length,
+                    ),
+                  ),
+                ],
                 if (_slowProducts.isNotEmpty ||
                     _fastProducts.isNotEmpty ||
                     _wtfProducts.isNotEmpty ||
                     _proProducts.isNotEmpty ||
+                    _displayProducts.isNotEmpty||
                     _capsProducts.isNotEmpty) ...[
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),

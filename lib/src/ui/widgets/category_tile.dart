@@ -86,6 +86,17 @@ class CategoryTile extends StatelessWidget {
           keys: DataManager.caps,
         );
 
+  CategoryTile.displays()
+      : _detail = $Category._(
+          type: 5,
+          width: 200,
+          name: 'DISPLAYS',
+          offset: Offset(7, -10),
+          image: Assets.redN3Cap,
+          color: AppTheme.colorOfPropulse,
+          keys: DataManager.displays,
+        );
+
   @override
   Widget build(BuildContext context) {
     return kIsWeb
