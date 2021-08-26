@@ -370,7 +370,7 @@ class _CartViewState extends State<CartView> {
                     _fastProducts.isNotEmpty ||
                     _wtfProducts.isNotEmpty ||
                     _proProducts.isNotEmpty ||
-                    _displayProducts.isNotEmpty||
+                    _displayProducts.isNotEmpty ||
                     _capsProducts.isNotEmpty) ...[
                   SliverPadding(
                     padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
@@ -528,6 +528,15 @@ class _CartViewState extends State<CartView> {
             (double.tryParse(second.sku) ?? 0).toInt();
       });
     }
+    if (_displayProducts.isNotEmpty) {
+      _displayProducts.forEach((element) {
+        _totalCans += element.singleQty ?? 0;
+        _totalPacks += element.boxQty ?? 0;
+      });
+      _displayProducts.sort((first, second) {
+        return (first.sku.toInt() - second.sku);
+      });
+    }
     if (_capsProducts.isNotEmpty) {
       _capsProducts.forEach((element) {
         _totalCans += element.singleQty ?? 0;
@@ -540,7 +549,8 @@ class _CartViewState extends State<CartView> {
       if (_fastProducts.isNotEmpty) ...['FAST', ..._fastProducts],
       if (_wtfProducts.isNotEmpty) ...['WTF', ..._wtfProducts],
       if (_proProducts.isNotEmpty) ...['PRO', ..._proProducts],
-      if (_capsProducts.isNotEmpty) ...['CAPS', ..._capsProducts]
+      if (_capsProducts.isNotEmpty) ...['CAPS', ..._capsProducts],
+      if (_displayProducts.isNotEmpty) ...['DISPLAYS', ..._displayProducts]
     ];
 
     List<pw.Widget> page = [];
@@ -564,16 +574,17 @@ class _CartViewState extends State<CartView> {
         final dynamic e = products[i];
         if (rows.isEmpty) {
           rows.add(pw.TableRow(children: [
-            pw.Text(
-              e is Cap ? 'Image' : 'Color',
-              style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-            ),
-            if (e is Spray)
+            if (e is Cap || e is Spray)
+              pw.Text(
+                e is Cap ? 'Image' : 'Color',
+                style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+              ),
+            if (e is Spray || e is Displays)
               pw.Text(
                 ' Ref',
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
               ),
-            if (e is Spray)
+            if (e is Spray || e is Displays)
               pw.Text(
                 ' Sku',
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
@@ -603,12 +614,21 @@ class _CartViewState extends State<CartView> {
                     4: pw.FixedColumnWidth(60),
                     5: pw.FixedColumnWidth(60),
                   }
-                : {
-                    0: pw.FixedColumnWidth(40),
-                    1: pw.FlexColumnWidth(3),
-                    2: pw.FixedColumnWidth(60),
-                    3: pw.FixedColumnWidth(60),
-                  },
+                : e is Cap
+                    ? {
+                        0: pw.FixedColumnWidth(40),
+                        1: pw.FlexColumnWidth(3),
+                        2: pw.FixedColumnWidth(60),
+                        3: pw.FixedColumnWidth(60),
+                      }
+                    : {
+                        // 0: pw.FixedColumnWidth(40),
+                        0: pw.FlexColumnWidth(1),
+                        1: pw.FlexColumnWidth(1),
+                        2: pw.FlexColumnWidth(3),
+                        3: pw.FixedColumnWidth(60),
+                        4: pw.FixedColumnWidth(60),
+                      },
           ));
         }
 
@@ -619,17 +639,20 @@ class _CartViewState extends State<CartView> {
                   (await rootBundle.load(e.image)).buffer.asUint8List())),
               // pw.Text(''),
               // pw.Text(''),
-            ] else ...[
-              pw.Container(
-                height: 14,
-                color: PdfColor.fromInt(e?.color?.value ?? 0),
-              ),
+            ] else if (e is Spray || e is Displays) ...[
+              if (e is Spray)
+                pw.Container(
+                  height: 14,
+                  color: PdfColor.fromInt(e?.color?.value ?? 0),
+                ),
               pw.Text(' ' + e.ref),
               pw.Text(
                 ' ' +
                     (e.sku == null
                         ? ''
-                        : (double.tryParse(e.sku) ?? 0).toInt().toString()),
+                        : e.sku is String
+                            ? (double.tryParse(e.sku) ?? 0).toInt().toString()
+                            : e.sku.toString()),
               ),
             ],
             pw.Text(' ' + e.name),
