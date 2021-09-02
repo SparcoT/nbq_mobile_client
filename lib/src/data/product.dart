@@ -30,16 +30,26 @@ class Purchasable with HiveObjectMixin {
   int singleQty = 0;
   @HiveField(4)
   String ref;
+  @HiveField(5)
+  String sku;
 
-  Purchasable({this.id, this.name, this.boxQty, this.singleQty, this.ref});
+  Purchasable({
+    this.id,
+    this.name,
+    this.boxQty,
+    this.singleQty,
+    this.ref,
+    this.sku,
+  });
 }
 
 @HiveType(typeId: 1)
 class Spray extends Purchasable {
-  @HiveField(5)
-  String ml;
   @HiveField(6)
-  String sku;
+  String ml;
+
+  // @HiveField(6)
+  // String sku;
   @HiveField(7)
   Color color;
   @HiveField(8)
@@ -49,27 +59,26 @@ class Spray extends Purchasable {
 
   Spray({
     this.ml,
-    this.sku,
     this.color,
     String ref,
     String name,
+    String sku,
     this.pantone,
     this.ral,
-  }) : super(name: name, ref: ref);
+  }) : super(name: name, ref: ref, sku: sku);
 }
 
 @HiveType(typeId: 2)
 class Cap extends Purchasable {
-  @HiveField(5)
+  @HiveField(6)
   String image;
 
-  Cap({String name, String ref, this.image}) : super(name: name, ref: ref);
+  Cap({String name, String ref, this.image, String sku})
+      : super(name: name, ref: ref, sku: sku);
 }
 
 @HiveType(typeId: 3)
 class Displays extends Purchasable {
-  @HiveField(5)
-  int sku;
-
-  Displays({this.sku, String name, String ref}) : super(name: name, ref: ref);
+  Displays({String sku, String name, String ref})
+      : super(name: name, ref: ref, sku: sku);
 }

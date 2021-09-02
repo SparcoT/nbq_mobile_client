@@ -239,15 +239,19 @@ Future<void> _loadJsonToDB(
 
       await spray.save();
     } else if (product['type'] == 'cap') {
-      final cap = Cap(name: product['name'], image: product['image'])
-        ..id = ++count;
+      final cap = Cap(
+        name: product['name'],
+        image: product['image'],
+        sku: product['sku'].toString(),
+        ref: product['ref'].toString(),
+      )..id = ++count;
       await caps.put(count, cap);
       await cap.save();
     } else {
       final display = Displays(
-        ref: product['ref'],
+        ref: product['ref'].toString(),
         name: product['name'],
-        sku: product['sku'],
+        sku: product['sku'].toString(),
       )..id = ++count;
       await displays.put(count, display);
       await display.save();

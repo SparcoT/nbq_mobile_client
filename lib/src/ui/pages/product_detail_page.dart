@@ -121,7 +121,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   (index) => Expanded(
                       child: Align(
                     alignment: Alignment.centerRight,
-                    child: CounterHeader(widget.category.type != 4),
+                    child: CounterHeader(widget.category.type != 4 && widget.category.type!=5),
                   )),
                 ),
               ),
@@ -253,7 +253,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                       ),
-                    if (parts == 1) CounterHeader(widget.category.type != 4),
+                    if (parts == 1) CounterHeader(widget.category.type != 4 && widget.category.type != 5),
                   ]),
                   SizedBox(height: 10),
                 ],

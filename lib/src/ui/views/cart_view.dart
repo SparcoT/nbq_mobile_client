@@ -534,7 +534,8 @@ class _CartViewState extends State<CartView> {
         _totalPacks += element.boxQty ?? 0;
       });
       _displayProducts.sort((first, second) {
-        return (first.sku.toInt() - second.sku);
+        return (double.tryParse(first.sku) ?? 0).toInt() -
+            (double.tryParse(second.sku) ?? 0).toInt();
       });
     }
     if (_capsProducts.isNotEmpty) {
