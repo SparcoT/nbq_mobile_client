@@ -8,7 +8,6 @@ import 'package:nbq_mobile_client/src/firebase-videos/video_model.dart';
 import 'package:nbq_mobile_client/src/ui/pages/video_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 import 'package:nbq_mobile_client/src/ui/widgets/localization_selector.dart';
-import 'package:video_player/video_player.dart';
 
 class UserVideosPage extends StatefulWidget {
   @override
@@ -64,6 +63,7 @@ class _UserVideosPageState extends State<UserVideosPage> {
             ),
             itemCount: searchList.length,
             itemBuilder: (context, i) {
+              print(i);
               final video = videosList[searchList[i].index];
               final videoName = lang.localeName == 'en'
                   ? video.nameInEnglish
@@ -186,7 +186,7 @@ int matchingDegree(String source, String query) {
 
       var k = 0;
       for (; k < keyword.length; ++k) {
-        if (keyword[k] != source[j + k]) {
+        if (j + k < source.length && keyword[k] != source[j + k]) {
           ++k;
           hasMatch = false;
           break;
