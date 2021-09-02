@@ -20,6 +20,7 @@ abstract class Assets {
   static const nbqFast = '$_imagesDir/nbq_fast.png';
   static const nbqPropulse = '$_imagesDir/nbq_propulse.png';
   static const nbqSlow = '$_imagesDir/nbq_slow.png';
+  static const nbqDisplay = '$_imagesDir/nbq_display.png';
   static const nbqWTF = '$_imagesDir/nbq_wtf.png';
   static const ukFlag = '$_imagesDir/united-kingdom.png';
   static const spainFlag = '$_imagesDir/spain.png';

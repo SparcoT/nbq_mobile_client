@@ -89,10 +89,10 @@ class CategoryTile extends StatelessWidget {
   CategoryTile.displays()
       : _detail = $Category._(
           type: 5,
-          width: 200,
+          width: 90,
           name: 'DISPLAYS',
-          offset: Offset(7, -10),
-          image: Assets.redN3Cap,
+          offset: Offset(57, 5),
+          image: Assets.nbqDisplay,
           color: AppTheme.colorOfPropulse,
           keys: DataManager.displays,
         );
