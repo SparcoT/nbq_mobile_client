@@ -73,5 +73,11 @@
   "noProducts": "No Products are selected",
   "@noProducts": {},
   "addedToCart": "Added to Cart",
-  "@addedToCart": {}
+  "@addedToCart": {},
+  "slowSubTitle":"Low pressure matt",
+  "@slowSubTitle": {},
+  "fastSubTitle":"High pressure gloss",
+  "@fastSubTitle": {},
+  "proSubTitle":"High pressure matt",
+  "@proSubTitle": {}
 }

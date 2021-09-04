@@ -73,5 +73,12 @@
   "noProducts": "No has añadido nada todavía.",
   "@noProducts": {},
   "addedToCart": "Añadido al pedido",
-  "@addedToCart": {}
+  "@addedToCart": {},
+  "slowSubTitle": "Baja presión mate",
+  "@slowSubTitle": {},
+  "fastSubTitle": "Alta presión brillo",
+  "@fastSubTitle": {},
+  "proSubTitle": "Alta presión mate",
+  "@proSubTitle": {}
+
 }

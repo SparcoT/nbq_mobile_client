@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nbq_mobile_client/src/app.dart';
 import 'package:nbq_mobile_client/src/data/data_manager.dart';
 import 'package:nbq_mobile_client/src/data/db.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nbq_mobile_client/src/base/assets.dart';
 import 'package:nbq_mobile_client/src/ui/pages/product_detail_page.dart';
 import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
@@ -11,6 +12,7 @@ import 'package:nbq_mobile_client/src/ui/views/localized_view.dart';
 class $Category {
   final int type;
   final String name;
+  final String subTitle;
   final Color color;
   final String image;
   final double width;
@@ -25,50 +27,55 @@ class $Category {
     this.offset,
     this.image,
     this.width,
+    this.subTitle = '',
   });
 }
 
 class CategoryTile extends StatelessWidget {
   final $Category _detail;
 
-  CategoryTile.slow()
+  CategoryTile.slow(String subTitle)
       : _detail = $Category._(
           type: 0,
           width: 130,
           name: 'SLOW',
+          subTitle: subTitle,
           image: Assets.nbqSlow,
           offset: Offset(25, 16),
           color: AppTheme.colorOfSlow,
           keys: DataManager.slowSprays,
         );
 
-  CategoryTile.fast()
+  CategoryTile.fast(String subTitle)
       : _detail = $Category._(
           type: 1,
           width: 167,
           name: 'FAST',
+          subTitle: subTitle,
           offset: Offset(-4.55, -28.5),
           image: Assets.nbqFast,
           color: AppTheme.colorOfFast,
           keys: DataManager.fastSprays,
         );
 
-  CategoryTile.wtf()
+  CategoryTile.wtf(String subTitle)
       : _detail = $Category._(
           type: 2,
           width: 167,
           name: 'WTF',
+          subTitle: subTitle,
           offset: Offset(-4.55, 7.5),
           image: Assets.nbqWTF,
           color: AppTheme.colorOfWTF,
           keys: DataManager.wtfSprays,
         );
 
-  CategoryTile.pro()
+  CategoryTile.pro(String subTitle)
       : _detail = $Category._(
           type: 3,
           width: 161,
           name: 'PRO',
+          subTitle: subTitle,
           offset: Offset(7, 16),
           image: Assets.nbqPropulse,
           color: AppTheme.colorOfPropulse,
@@ -134,6 +141,15 @@ class CategoryTile extends StatelessWidget {
                         _detail.name,
                         style: TextStyle(fontFamily: 'Futura', fontSize: 42),
                       ),
+                      if (_detail.subTitle.isNotEmpty)
+                        Text(
+                          _detail.subTitle,
+                          style: GoogleFonts.bebasNeue(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -184,6 +200,15 @@ class CategoryTile extends StatelessWidget {
                       _detail.name,
                       style: TextStyle(fontFamily: 'Futura', fontSize: 42),
                     ),
+                    if (_detail.subTitle.isNotEmpty)
+                      Text(
+                        _detail.subTitle,
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     Text(
                       ' ${lang.colors} ${DataManager.getCount(_detail.type)}',
                       style: GoogleFonts.bebasNeue(
