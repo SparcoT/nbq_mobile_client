@@ -15,8 +15,10 @@ enum SearchFilters {
   Name,
   Code,
   Reference,
+  CMYK,
   RAL,
   PANTONE,
+  ALL,
 }
 
 class ProductDetailPageController extends ChangeNotifier {
@@ -50,7 +52,7 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   List<Purchasable> products;
   List<Purchasable> viewedProducts = [];
-  var _searchFilter = SearchFilters.Name;
+  var _searchFilter = SearchFilters.ALL;
 
   var _loading = true;
   final _controller = ProductDetailPageController();
@@ -121,7 +123,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   (index) => Expanded(
                       child: Align(
                     alignment: Alignment.centerRight,
-                    child: CounterHeader(widget.category.type != 4 && widget.category.type!=5),
+                    child: CounterHeader(
+                        widget.category.type != 4 && widget.category.type != 5),
                   )),
                 ),
               ),
@@ -253,7 +256,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                         ),
                       ),
-                    if (parts == 1) CounterHeader(widget.category.type != 4 && widget.category.type != 5),
+                    if (parts == 1)
+                      CounterHeader(widget.category.type != 4 &&
+                          widget.category.type != 5),
                   ]),
                   SizedBox(height: 10),
                 ],
@@ -290,6 +295,24 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     .toString()
                     .toUpperCase()
                     .contains(val.toUpperCase());
+              case SearchFilters.ALL:
+                var _name = e.name.toUpperCase().contains(val.toUpperCase());
+                if (_name) return _name;
+                var _sku = e.name.toUpperCase().contains(val.toUpperCase());
+                if (_sku) return _sku;
+                var _ref = e.ref.toUpperCase().contains(val.toUpperCase());
+                if (_ref) return _ref;
+                var _ral =
+                    e.ral.toString().toUpperCase().contains(val.toUpperCase());
+                if (_ral) return _ral;
+                var _pantone = e.pantone
+                    .toString()
+                    .toUpperCase()
+                    .contains(val.toUpperCase());
+                if (_pantone) return _pantone;
+                return false;
+              case SearchFilters.CMYK:
+                break;
             }
           }
           return (e.ref.contains(val.toUpperCase()) ||
