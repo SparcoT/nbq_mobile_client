@@ -15,7 +15,7 @@ enum SearchFilters {
   Name,
   Code,
   Reference,
-  CMYK,
+  // CMYK,
   RAL,
   PANTONE,
   ALL,
@@ -311,8 +311,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     .contains(val.toUpperCase());
                 if (_pantone) return _pantone;
                 return false;
-              case SearchFilters.CMYK:
-                break;
+              // case SearchFilters.CMYK:
+              //   break;
             }
           }
           return (e.ref.contains(val.toUpperCase()) ||

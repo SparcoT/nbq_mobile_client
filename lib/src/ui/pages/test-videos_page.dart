@@ -16,6 +16,7 @@ class UserVideosPage extends StatefulWidget {
 
 class _UserVideosPageState extends State<UserVideosPage> {
   List<VideoModel> videosList;
+  List<VideoModel> initialVideosList;
   List<_IndexTuple> searchList;
   List<_IndexTuple> indexesList;
 
@@ -35,6 +36,7 @@ class _UserVideosPageState extends State<UserVideosPage> {
         .listen((event) {
       if (event != null) {
         videosList = event;
+        initialVideosList = videosList;
         indexesList =
             List.generate(videosList.length, (index) => _IndexTuple(index, 0));
         searchList = indexesList;
@@ -61,10 +63,10 @@ class _UserVideosPageState extends State<UserVideosPage> {
               crossAxisCount: parts,
               childAspectRatio: 300 / 321.5,
             ),
-            itemCount: searchList.length,
+            itemCount: videosList.length,
             itemBuilder: (context, i) {
               print(i);
-              final video = videosList[searchList[i].index];
+              final video = videosList[i];
               final videoName = lang.localeName == 'en'
                   ? video.nameInEnglish
                   : video.nameInSpanish;
@@ -134,29 +136,42 @@ class _UserVideosPageState extends State<UserVideosPage> {
                 placeholder: lang.searchVideo,
                 onChanged: (e) {
                   if (e.isEmpty) {
-                    searchList = indexesList;
+                    videosList = initialVideosList;
+                    // searchList = indexesList;
                     setState(() {});
 
                     return;
                   }
-
-                  searchList = [];
-                  for (var i = 0; i < videosList.length; ++i) {
-                    String text;
+                  videosList = initialVideosList.where((element) {
                     if (LocalizationSelector.locale.value.languageCode ==
                         'en') {
-                      text = videosList[i].nameInEnglish;
+                      return element.nameInEnglish
+                          .toLowerCase()
+                          .contains(e.toLowerCase());
                     } else {
-                      text = videosList[i].nameInSpanish;
+                      return element.nameInSpanish
+                          .toLowerCase()
+                          .contains(e.toLowerCase());
                     }
+                  }).toList();
 
-                    final matchResult = matchingDegree(text, e);
-                    if (matchResult >= 0) {
-                      searchList.add(_IndexTuple(i, matchResult));
-                    }
-                  }
-
-                  searchList.sort((a, b) => b.score.compareTo(a.score));
+                  // searchList = [];
+                  // for (var i = 0; i < videosList.length; ++i) {
+                  //   String text;
+                  //   if (LocalizationSelector.locale.value.languageCode ==
+                  //       'en') {
+                  //     text = videosList[i].nameInEnglish;
+                  //   } else {
+                  //     text = videosList[i].nameInSpanish;
+                  //   }
+                  //
+                  //   final matchResult = matchingDegree(text, e);
+                  //   if (matchResult >= 0) {
+                  //     searchList.add(_IndexTuple(i, matchResult));
+                  //   }
+                  // }
+                  //
+                  // searchList.sort((a, b) => b.score.compareTo(a.score));
                   setState(() {});
                 },
               ),
