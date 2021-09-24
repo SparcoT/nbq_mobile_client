@@ -49,7 +49,7 @@ abstract class DataManager {
     _displays = await Hive.openLazyBox<Displays>('display');
 
     final _preference = await SharedPreferences.getInstance();
-    if (!(_preference?.getBool('v2') ?? false)) {
+    if (!(_preference?.getBool('v3') ?? false)) {
       print('V@@@@@@@@222222222222222222');
       await _spraysFast.clear();
       await _spraysSlow.clear();
@@ -63,7 +63,7 @@ abstract class DataManager {
       final cart = Cart();
       await _cartBox.add(cart);
       await cart.save();
-      await _preference.setBool('v2', true);
+      await _preference.setBool('v3', true);
     } else {
       if (_spraysFast.isEmpty) {
         _loadJsonToDB(

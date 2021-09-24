@@ -52,7 +52,7 @@
     "ml": null,
     "sku": 127,
     "ref": "n127",
-    "name": "AZUL OCEANO MATE",
+    "name": "AZUL OCEANO MATE ",
     "category": "slow",
     "color": {
       "r": 96,
@@ -132,7 +132,7 @@
     "ml": null,
     "sku": 32,
     "ref": "n032",
-    "name": "AZUL YIN MATE",
+    "name": "AZUL YIN MATE ",
     "category": "slow",
     "color": {
       "r": 92,
@@ -148,7 +148,7 @@
     "ml": null,
     "sku": 31,
     "ref": "n031",
-    "name": "AZUL TATU MATE",
+    "name": "AZUL TATU MATE ",
     "category": "slow",
     "color": {
       "r": 79,
@@ -164,7 +164,7 @@
     "ml": null,
     "sku": 59,
     "ref": "n059",
-    "name": "AZUL ELECTRO MATE",
+    "name": "AZUL ELECTRO MATE ",
     "category": "slow",
     "color": {
       "r": 56,
@@ -244,7 +244,7 @@
     "ml": null,
     "sku": 87,
     "ref": "n087",
-    "name": "AZUL MAREA MATE",
+    "name": "AZUL MAREA MATE ",
     "category": "slow",
     "color": {
       "r": 67,
@@ -324,7 +324,7 @@
     "ml": null,
     "sku": 51,
     "ref": "n051",
-    "name": "AMARILLO NUCLEAR MATE",
+    "name": "AMARILLO NUCLEAR MATE ",
     "category": "slow",
     "color": {
       "r": 222,
@@ -340,7 +340,7 @@
     "ml": null,
     "sku": 69,
     "ref": "n069",
-    "name": "AMARILLO ACIDO MATE",
+    "name": "AMARILLO ACIDO MATE ",
     "category": "slow",
     "color": {
       "r": 201,
@@ -356,7 +356,7 @@
     "ml": null,
     "sku": 110,
     "ref": "n110",
-    "name": "AMARILLO DANGER MATE",
+    "name": "AMARILLO DANGER MATE ",
     "category": "slow",
     "color": {
       "r": 237,
@@ -372,7 +372,7 @@
     "ml": null,
     "sku": 155,
     "ref": "n155",
-    "name": "AMARILLO CAPA MATE",
+    "name": "AMARILLO CAPA MATE ",
     "category": "slow",
     "color": {
       "r": 237,
@@ -388,7 +388,7 @@
     "ml": null,
     "sku": 5,
     "ref": "n005",
-    "name": "AMARILLO PESETA MATE",
+    "name": "AMARILLO PESETA MATE ",
     "category": "slow",
     "color": {
       "r": 227,
@@ -402,25 +402,25 @@
   {
     "type": "spray",
     "ml": null,
-    "sku": 11,
-    "ref": "n011",
-    "name": "ROSA TIQUIS MATE",
+    "sku": 111,
+    "ref": "n111",
+    "name": "AMARILLO MUSTARD MATE ",
     "category": "slow",
     "color": {
-      "r": 235,
-      "g": 188,
-      "b": 199,
+      "r": 201,
+      "g": 167,
+      "b": 46,
       "o": 1
     },
-    "RAL": null,
-    "Pantone": 510
+    "RAL": 1032,
+    "Pantone": 124
   },
   {
     "type": "spray",
     "ml": null,
     "sku": 62,
     "ref": "n062",
-    "name": "AMARILLO GASTADO MATE",
+    "name": "AMARILLO GASTADO MATE ",
     "category": "slow",
     "color": {
       "r": 189,
@@ -436,7 +436,7 @@
     "ml": null,
     "sku": 64,
     "ref": "n064",
-    "name": "OCRE AVENA MATE",
+    "name": "OCRE AVENA MATE ",
     "category": "slow",
     "color": {
       "r": 199,
@@ -676,7 +676,7 @@
     "ml": null,
     "sku": 74,
     "ref": "n074",
-    "name": "NARANJA SALPICON MATE",
+    "name": "NARANJA SALPICON MATE ",
     "category": "slow",
     "color": {
       "r": 245,
@@ -692,7 +692,7 @@
     "ml": null,
     "sku": 7,
     "ref": "n007",
-    "name": "NARANJA ECLIPSADO MATE",
+    "name": "NARANJA ECLIPSADO MATE ",
     "category": "slow",
     "color": {
       "r": 217,
@@ -708,7 +708,7 @@
     "ml": null,
     "sku": 70,
     "ref": "n070",
-    "name": "NARANJA SIROPE  MATE",
+    "name": " NARANJA SIROPE  MATE MATE ",
     "category": "slow",
     "color": {
       "r": 245,
@@ -740,7 +740,7 @@
     "ml": null,
     "sku": 9,
     "ref": "n009",
-    "name": "NARANJA SIN MATE",
+    "name": "NARANJA SIN MATE ",
     "category": "slow",
     "color": {
       "r": 242,
@@ -756,7 +756,7 @@
     "ml": null,
     "sku": 10,
     "ref": "n010",
-    "name": "NARANJA CON MATE",
+    "name": "NARANJA CON MATE ",
     "category": "slow",
     "color": {
       "r": 227,
@@ -788,7 +788,7 @@
     "ml": null,
     "sku": 108,
     "ref": "n108",
-    "name": "AMARILLO DESIERTO MATE",
+    "name": "AMARILLO DESIERTO MATE ",
     "category": "slow",
     "color": {
       "r": 199,
@@ -804,7 +804,7 @@
     "ml": null,
     "sku": 45,
     "ref": "n045",
-    "name": "MARRÓN TOCHANO MATE",
+    "name": "MARRÓN TOCHANO MATE ",
     "category": "slow",
     "color": {
       "r": 161,
@@ -820,7 +820,7 @@
     "ml": null,
     "sku": 109,
     "ref": "n109",
-    "name": "MARRON TOFFE MATE",
+    "name": "MARRON TOFFE MATE ",
     "category": "slow",
     "color": {
       "r": 163,
@@ -900,7 +900,7 @@
     "ml": null,
     "sku": 162,
     "ref": "n162",
-    "name": "MARRON COCO MATE",
+    "name": "MARRON COCO MATE ",
     "category": "slow",
     "color": {
       "r": 130,
@@ -916,7 +916,7 @@
     "ml": null,
     "sku": 144,
     "ref": "n144",
-    "name": "MARRON PURO MATE",
+    "name": "MARRON PURO MATE ",
     "category": "slow",
     "color": {
       "r": 89,
@@ -948,7 +948,7 @@
     "ml": null,
     "sku": 97,
     "ref": "n097",
-    "name": "MARRON BONBON MATE",
+    "name": "MARRON BONBON MATE ",
     "category": "slow",
     "color": {
       "r": 79,
@@ -980,7 +980,7 @@
     "ml": null,
     "sku": 160,
     "ref": "n160",
-    "name": "BROWN BOX  MATE",
+    "name": "BROWN BOX  MATE ",
     "category": "slow",
     "color": {
       "r": 199,
@@ -996,7 +996,7 @@
     "ml": null,
     "sku": 157,
     "ref": "n157",
-    "name": "MARRON DUNA MATE ",
+    "name": "MARRON DUNA MATE MATE ",
     "category": "slow",
     "color": {
       "r": 199,
@@ -1012,7 +1012,7 @@
     "ml": null,
     "sku": 161,
     "ref": "n161",
-    "name": "BROWN CAMEL MATE",
+    "name": " BROWN CAMEL MATE ",
     "category": "slow",
     "color": {
       "r": 176,
@@ -1028,7 +1028,7 @@
     "ml": null,
     "sku": 142,
     "ref": "n142",
-    "name": "MARRON ARENA MATE",
+    "name": "MARRON ARENA MATE ",
     "category": "slow",
     "color": {
       "r": 166,
@@ -1044,7 +1044,7 @@
     "ml": null,
     "sku": 158,
     "ref": "n158",
-    "name": "MARRON COMBI  MATE",
+    "name": "MARRON COMBI  MATE ",
     "category": "slow",
     "color": {
       "r": 168,
@@ -1076,7 +1076,7 @@
     "ml": null,
     "sku": 47,
     "ref": "n047",
-    "name": "MARRÓN PECA MATE",
+    "name": "MARRÓN PECA MATE ",
     "category": "slow",
     "color": {
       "r": 120,
@@ -1156,7 +1156,7 @@
     "ml": null,
     "sku": 92,
     "ref": "n092",
-    "name": "VERDE REFRIGERANTE MATE",
+    "name": "VERDE MATE 400 ML SPRAY",
     "category": "slow",
     "color": {
       "r": 183,
@@ -1188,7 +1188,7 @@
     "ml": null,
     "sku": 121,
     "ref": "n121",
-    "name": "VERDE TRANSGENICO MATE",
+    "name": "VERDE TRANSGENICO MATE ",
     "category": "slow",
     "color": {
       "r": 64,
@@ -1236,7 +1236,7 @@
     "ml": null,
     "sku": 24,
     "ref": "n024",
-    "name": " VERDE ROQUEFORT MATE",
+    "name": "VERDE ROQUEFORT MATE ",
     "category": "slow",
     "color": {
       "r": 24,
@@ -1268,7 +1268,7 @@
     "ml": null,
     "sku": 88,
     "ref": "n088",
-    "name": "VERDE ALTERNATIVO MATE",
+    "name": "VERDE ALTERNATIVO MATE ",
     "category": "slow",
     "color": {
       "r": 62,
@@ -1284,7 +1284,7 @@
     "ml": null,
     "sku": 89,
     "ref": "n089",
-    "name": "VERDE PACIENTE MATE",
+    "name": "VERDE PACIENTE MATE ",
     "category": "slow",
     "color": {
       "r": 176,
@@ -1300,7 +1300,7 @@
     "ml": null,
     "sku": 123,
     "ref": "n123",
-    "name": "VERDE LAGUNA MATE",
+    "name": "VERDE LAGUNA MATE ",
     "category": "slow",
     "color": {
       "r": 131,
@@ -1348,7 +1348,7 @@
     "ml": null,
     "sku": 25,
     "ref": "n025",
-    "name": "TURQUESA CALA MATE",
+    "name": "TURQUESA CALA MATE ",
     "category": "slow",
     "color": {
       "r": 59,
@@ -1364,7 +1364,7 @@
     "ml": null,
     "sku": 58,
     "ref": "n058",
-    "name": "AZUL TURQUESA MATE",
+    "name": "AZUL TURQUESA MATE ",
     "category": "slow",
     "color": {
       "r": 54,
@@ -1380,7 +1380,7 @@
     "ml": null,
     "sku": 84,
     "ref": "n084",
-    "name": "TURQUESA PODEROSO MATE",
+    "name": "TURQUESA PODEROSO MATE ",
     "category": "slow",
     "color": {
       "r": 65,
@@ -1412,7 +1412,7 @@
     "ml": null,
     "sku": 113,
     "ref": "n113",
-    "name": "VERDE BAJO MATE",
+    "name": "VERDE BAJO MATE ",
     "category": "slow",
     "color": {
       "r": 224,
@@ -1428,7 +1428,7 @@
     "ml": null,
     "sku": 20,
     "ref": "n020",
-    "name": "VERDE DÍGITO MATE",
+    "name": "VERDE DÍGITO MATE ",
     "category": "slow",
     "color": {
       "r": 202,
@@ -1444,7 +1444,7 @@
     "ml": null,
     "sku": 21,
     "ref": "n021",
-    "name": " VERDE INDOR MATE",
+    "name": "VERDE INDOR MATE ",
     "category": "slow",
     "color": {
       "r": 181,
@@ -1492,7 +1492,7 @@
     "ml": null,
     "sku": 63,
     "ref": "n063",
-    "name": "VERDE ESPIRITUAL MATE",
+    "name": "VERDE ESPIRITUAL MATE ",
     "category": "slow",
     "color": {
       "r": 128,
@@ -1540,7 +1540,7 @@
     "ml": null,
     "sku": 118,
     "ref": "n118",
-    "name": "VERDE CAMU MATE",
+    "name": "VERDE CAMU MATE ",
     "category": "slow",
     "color": {
       "r": 115,
@@ -1572,7 +1572,7 @@
     "ml": null,
     "sku": 119,
     "ref": "n119",
-    "name": "VERDE MILITAR MATE",
+    "name": "VERDE MILITAR ",
     "category": "slow",
     "color": {
       "r": 102,
@@ -1588,7 +1588,7 @@
     "ml": null,
     "sku": 22,
     "ref": "n022",
-    "name": "VERDE WISHA MATE",
+    "name": "VERDE WISHA MATE ",
     "category": "slow",
     "color": {
       "r": 176,
@@ -1636,7 +1636,7 @@
     "ml": null,
     "sku": 65,
     "ref": "n065",
-    "name": "VERDE PÍSTILO MATE",
+    "name": "VERDE PÍSTILO MATE ",
     "category": "slow",
     "color": {
       "r": 168,
@@ -1652,7 +1652,7 @@
     "ml": null,
     "sku": 66,
     "ref": "n066",
-    "name": "VERDE MIMETIZADO MATE",
+    "name": "VERDE MIMETIZADO MATE ",
     "category": "slow",
     "color": {
       "r": 148,
@@ -1668,7 +1668,7 @@
     "ml": null,
     "sku": 116,
     "ref": "n116",
-    "name": "VERDE MATA MATE",
+    "name": "VERDE MATA MATE ",
     "category": "slow",
     "color": {
       "r": 128,
@@ -1716,7 +1716,7 @@
     "ml": null,
     "sku": 98,
     "ref": "n098",
-    "name": "PIEL SIN  MATE  ",
+    "name": "PIEL SIN  MATE ",
     "category": "slow",
     "color": {
       "r": 194,
@@ -1732,7 +1732,7 @@
     "ml": null,
     "sku": 99,
     "ref": "n099",
-    "name": "PIEL CON MATE",
+    "name": "PIEL CON MATE ",
     "category": "slow",
     "color": {
       "r": 166,
@@ -1764,7 +1764,7 @@
     "ml": null,
     "sku": 76,
     "ref": "n076",
-    "name": "ROJO CAPICUA MATE      ",
+    "name": "ROJO CAPICUA MATE ",
     "category": "slow",
     "color": {
       "r": 176,
@@ -1780,7 +1780,7 @@
     "ml": null,
     "sku": 152,
     "ref": "n152",
-    "name": "ROJO PURO MATE  ",
+    "name": "ROJO PURO MATE  MATE ",
     "category": "slow",
     "color": {
       "r": 179,
@@ -1796,7 +1796,7 @@
     "ml": null,
     "sku": 79,
     "ref": "n079",
-    "name": "ROJO DISTANTE MATE",
+    "name": "ROJO DISTANTE ",
     "category": "slow",
     "color": {
       "r": 161,
@@ -1812,7 +1812,7 @@
     "ml": null,
     "sku": 16,
     "ref": "n016",
-    "name": "ROJO COÁGULO MATE",
+    "name": "ROJO COÁGULO MATE ",
     "category": "slow",
     "color": {
       "r": 163,
@@ -1828,7 +1828,7 @@
     "ml": null,
     "sku": 15,
     "ref": "n015",
-    "name": "ROJO CALIMOCHO MATE",
+    "name": "ROJO CALIMOCHO MATE ",
     "category": "slow",
     "color": {
       "r": 143,
@@ -1876,7 +1876,7 @@
     "ml": null,
     "sku": 80,
     "ref": "n080",
-    "name": "ROJO CONGESTIONADO MATE",
+    "name": "ROJO CONGESTIONADO MATE ",
     "category": "slow",
     "color": {
       "r": 135,
@@ -1892,7 +1892,7 @@
     "ml": null,
     "sku": 139,
     "ref": "n139",
-    "name": " ROJO VINO MATE ",
+    "name": "ROJO VINO MATE ",
     "category": "slow",
     "color": {
       "r": 105,
@@ -1924,7 +1924,7 @@
     "ml": null,
     "sku": 19,
     "ref": "n019",
-    "name": "ROJO TORELIS MATE",
+    "name": "ROJO TORELIS MATE ",
     "category": "slow",
     "color": {
       "r": 89,
@@ -1972,7 +1972,7 @@
     "ml": null,
     "sku": 132,
     "ref": "n132",
-    "name": "VIOLETA AHUMADO MATE",
+    "name": "VIOLETA AHUMADO MATE ",
     "category": "slow",
     "color": {
       "r": 171,
@@ -2020,7 +2020,7 @@
     "ml": null,
     "sku": 13,
     "ref": "n013",
-    "name": "ROSA PLACENTA MATE",
+    "name": "ROSA PLACENTA MATE ",
     "category": "slow",
     "color": {
       "r": 189,
@@ -2052,7 +2052,7 @@
     "ml": null,
     "sku": 75,
     "ref": "n075",
-    "name": "ROJO FRAMBUESA MATE",
+    "name": "ROJO FRAMBUESA ",
     "category": "slow",
     "color": {
       "r": 194,
@@ -2100,7 +2100,7 @@
     "ml": null,
     "sku": 154,
     "ref": "n154",
-    "name": "MAGENTA AFILADO MATE",
+    "name": "MAGENTA AFILADO MATE ",
     "category": "slow",
     "color": {
       "r": 191,
@@ -2116,7 +2116,7 @@
     "ml": null,
     "sku": 156,
     "ref": "n156",
-    "name": "REINA PURPURA MATE",
+    "name": "REINA PURPURA MATE ",
     "category": "slow",
     "color": {
       "r": 156,
@@ -2148,7 +2148,7 @@
     "ml": null,
     "sku": 137,
     "ref": "n137",
-    "name": "VIOLETA FIESTA MATE",
+    "name": "VIOLETA FIESTA MATE ",
     "category": "slow",
     "color": {
       "r": 122,
@@ -2196,7 +2196,7 @@
     "ml": null,
     "sku": 134,
     "ref": "n134",
-    "name": "VIOLETA APAGADO MATE",
+    "name": "VIOLETA APAGADO MATE ",
     "category": "slow",
     "color": {
       "r": 82,
@@ -2212,7 +2212,7 @@
     "ml": null,
     "sku": 34,
     "ref": "n034",
-    "name": "VIOLETA FUNKI MATE",
+    "name": "VIOLETA FUNKI MATE ",
     "category": "slow",
     "color": {
       "r": 195,
@@ -2244,7 +2244,7 @@
     "ml": null,
     "sku": 35,
     "ref": "n035",
-    "name": "VIOLETA JIPI MATE",
+    "name": "VIOLETA JIPI MATE ",
     "category": "slow",
     "color": {
       "r": 159,
@@ -2308,7 +2308,7 @@
     "ml": null,
     "sku": 37,
     "ref": "n037",
-    "name": "VIOLETA HEMATOMA MATE",
+    "name": "VIOLETA HEMATOMA MATE ",
     "category": "slow",
     "color": {
       "r": 113,
@@ -2420,7 +2420,7 @@
     "ml": null,
     "sku": 100,
     "ref": "n100",
-    "name": "GRIS DISTANTE MATE   ",
+    "name": "GRIS DISTANTE MATE ",
     "category": "slow",
     "color": {
       "r": 137,
@@ -2468,7 +2468,7 @@
     "ml": null,
     "sku": 42,
     "ref": "n042",
-    "name": "GRIS MENHIR MATE",
+    "name": "GRIS MENHIR MATE ",
     "category": "slow",
     "color": {
       "r": 104,
@@ -2500,7 +2500,7 @@
     "ml": null,
     "sku": 43,
     "ref": "n043",
-    "name": "GRIS BADAY MATE",
+    "name": "GRIS BADAY MATE ",
     "category": "slow",
     "color": {
       "r": 104,
@@ -2530,25 +2530,9 @@
   {
     "type": "spray",
     "ml": null,
-    "sku": 50,
-    "ref": "n050",
-    "name": "NEGRO MATE",
-    "category": "slow",
-    "color": {
-      "r": 55,
-      "g": 55,
-      "b": 56,
-      "o": 1
-    },
-    "RAL": 9005,
-    "Pantone": null
-  },
-  {
-    "type": "spray",
-    "ml": null,
     "sku": 60,
     "ref": "n060",
-    "name": "GRIS MAGNUM MATE",
+    "name": "GRIS MAGNUM MATE ",
     "category": "slow",
     "color": {
       "r": 84,
@@ -2558,6 +2542,22 @@
     },
     "RAL": 7015,
     "Pantone": 446
+  },
+  {
+    "type": "spray",
+    "ml": null,
+    "sku": 50,
+    "ref": "n050",
+    "name": "NEGRO MATE ",
+    "category": "slow",
+    "color": {
+      "r": 55,
+      "g": 55,
+      "b": 56,
+      "o": 1
+    },
+    "RAL": 9005,
+    "Pantone": null
   },
   {
     "type": "spray",
@@ -2628,7 +2628,7 @@
     "ml": null,
     "sku": 163,
     "ref": "n551",
-    "name": "GLOSS VARNISH ",
+    "name": "GLOSS VARNISH",
     "category": "slow",
     "color": {
       "r": 255,
@@ -2644,7 +2644,7 @@
     "ml": null,
     "sku": 164,
     "ref": "n553",
-    "name": "MATT VARNISH ",
+    "name": "MATT VARNISH",
     "category": "slow",
     "color": {
       "r": 255,
@@ -2660,7 +2660,7 @@
     "ml": null,
     "sku": 165,
     "ref": "n552",
-    "name": " SATIN VARNISH",
+    "name": "SATIN VARNISH",
     "category": "slow",
     "color": {
       "r": 255,
@@ -2676,7 +2676,7 @@
     "ml": null,
     "sku": 742,
     "ref": "f075",
-    "name": "ROJO FRAMBUESA BRILLO ",
+    "name": " ROJO FRAMBUESA BRILLO",
     "category": "fast",
     "color": {
       "r": 194,
@@ -2692,7 +2692,7 @@
     "ml": null,
     "sku": 744,
     "ref": "f152",
-    "name": "ROJO PURO BRILLO",
+    "name": " ROJO PURO BRILLO",
     "category": "fast",
     "color": {
       "r": 179,
@@ -2708,7 +2708,7 @@
     "ml": null,
     "sku": 709,
     "ref": "f016",
-    "name": "ROJO COÁGULO BRILLO ",
+    "name": " ROJO COÁGULO BRILLO",
     "category": "fast",
     "color": {
       "r": 163,
@@ -2724,7 +2724,7 @@
     "ml": null,
     "sku": 743,
     "ref": "f138",
-    "name": "ROJO OTOÑO BRILLO",
+    "name": " ROJO OTOÑO BRILLO",
     "category": "fast",
     "color": {
       "r": 115,
@@ -2740,7 +2740,7 @@
     "ml": null,
     "sku": 745,
     "ref": "f004",
-    "name": "BEIGE DROMEDA BRILLO ",
+    "name": " BEIGE DROMEDA BRILLO",
     "category": "fast",
     "color": {
       "r": 252,
@@ -2756,7 +2756,7 @@
     "ml": null,
     "sku": 748,
     "ref": "f140",
-    "name": "NARANJA PASTEL BRILLO ",
+    "name": " NARANJA PASTEL BRILLO",
     "category": "fast",
     "color": {
       "r": 255,
@@ -2772,7 +2772,7 @@
     "ml": null,
     "sku": 747,
     "ref": "f052",
-    "name": "NARANJA GAZPACHO BRILLO",
+    "name": " NARANJA GAZPACHO BRILLO",
     "category": "fast",
     "color": {
       "r": 232,
@@ -2788,7 +2788,7 @@
     "ml": null,
     "sku": 746,
     "ref": "f009",
-    "name": "NARANJA SIN BRILLO ",
+    "name": " NARANJA SIN BRILLO",
     "category": "fast",
     "color": {
       "r": 242,
@@ -2804,7 +2804,7 @@
     "ml": null,
     "sku": 706,
     "ref": "f110",
-    "name": "AMARILLO DANGER BRILLO ",
+    "name": " AMARILLO DANGER BRILLO",
     "category": "fast",
     "color": {
       "r": 237,
@@ -2820,7 +2820,7 @@
     "ml": null,
     "sku": 736,
     "ref": "f061",
-    "name": "AMARILLO PASEO BRILLO ",
+    "name": " AMARILLO PASEO BRILLO",
     "category": "fast",
     "color": {
       "r": 245,
@@ -2836,7 +2836,7 @@
     "ml": null,
     "sku": 738,
     "ref": "f155",
-    "name": "AMARILLO CAPA BRILLO ",
+    "name": " AMARILLO CAPA BRILLO",
     "category": "fast",
     "color": {
       "r": 237,
@@ -2852,7 +2852,7 @@
     "ml": null,
     "sku": 737,
     "ref": "f111",
-    "name": "AMARILLO MUSTARD BRILLO ",
+    "name": " AMARILLO MUSTARD BRILLO",
     "category": "fast",
     "color": {
       "r": 201,
@@ -2868,7 +2868,7 @@
     "ml": null,
     "sku": 740,
     "ref": "f093",
-    "name": "VERDE GAMUSO BRILLO ",
+    "name": " VERDE GAMUSO BRILLO",
     "category": "fast",
     "color": {
       "r": 169,
@@ -2884,7 +2884,7 @@
     "ml": null,
     "sku": 739,
     "ref": "f090",
-    "name": "VERDE OUTDOOR BRILLO",
+    "name": " VERDE OUTDOOR BRILOO",
     "category": "fast",
     "color": {
       "r": 136,
@@ -2900,7 +2900,7 @@
     "ml": null,
     "sku": 741,
     "ref": "f153",
-    "name": "ECO GREEN BRILLO ",
+    "name": " ECO GREEN BRILLO",
     "category": "fast",
     "color": {
       "r": 79,
@@ -2916,7 +2916,7 @@
     "ml": null,
     "sku": 708,
     "ref": "f024",
-    "name": "VERDE ROQUEFORT BRILLO ",
+    "name": " VERDE ROQUEFORT BRILLO",
     "category": "fast",
     "color": {
       "r": 24,
@@ -2932,7 +2932,7 @@
     "ml": null,
     "sku": 724,
     "ref": "f126",
-    "name": "AZUL CELESTIAL BRILLO",
+    "name": " AZUL CELESTIAL",
     "category": "fast",
     "color": {
       "r": 129,
@@ -2948,7 +2948,7 @@
     "ml": null,
     "sku": 723,
     "ref": "f033",
-    "name": "AZUL OZONO BRILLO ",
+    "name": " AZUL OZONO BRILLO",
     "category": "fast",
     "color": {
       "r": 101,
@@ -2964,7 +2964,7 @@
     "ml": null,
     "sku": 722,
     "ref": "f029",
-    "name": "AZUL PITUFO BRILLO",
+    "name": " AZUL PITUFO BRILLO ",
     "category": "fast",
     "color": {
       "r": 4,
@@ -2980,7 +2980,7 @@
     "ml": null,
     "sku": 725,
     "ref": "f151",
-    "name": "JUST BLUE BRILLO",
+    "name": " JUST BLUE BRILLO",
     "category": "fast",
     "color": {
       "r": 23,
@@ -2996,7 +2996,7 @@
     "ml": null,
     "sku": 730,
     "ref": "f136",
-    "name": "ROSA COLORETE BRILLO",
+    "name": " ROSA COLORETE BRILLO",
     "category": "fast",
     "color": {
       "r": 222,
@@ -3012,7 +3012,7 @@
     "ml": null,
     "sku": 731,
     "ref": "f154",
-    "name": "MAGENTA AFILADO BRILLO",
+    "name": " MAGENTA AFILADO BRILLO",
     "category": "fast",
     "color": {
       "r": 191,
@@ -3028,7 +3028,7 @@
     "ml": null,
     "sku": 732,
     "ref": "f156",
-    "name": "REINA PÚRPURA BRILLO ",
+    "name": " REINA PÚRPURA BRILLO",
     "category": "fast",
     "color": {
       "r": 156,
@@ -3044,7 +3044,7 @@
     "ml": null,
     "sku": 729,
     "ref": "f054",
-    "name": "PURPURA POCION BRILLO ",
+    "name": " PURPURA POCION BRILLO",
     "category": "fast",
     "color": {
       "r": 138,
@@ -3060,7 +3060,7 @@
     "ml": null,
     "sku": 735,
     "ref": "f130",
-    "name": "VIOLETA VATICANO BRILLO ",
+    "name": " VIOLETA VATICANO BRILLO",
     "category": "fast",
     "color": {
       "r": 153,
@@ -3076,7 +3076,7 @@
     "ml": null,
     "sku": 733,
     "ref": "f037",
-    "name": "VIOLETA HEMATOMA BRILLO ",
+    "name": " VIOLETA HEMATOMA BRILLO",
     "category": "fast",
     "color": {
       "r": 113,
@@ -3092,7 +3092,7 @@
     "ml": null,
     "sku": 705,
     "ref": "f083",
-    "name": "VIOLETA PARAMECIA BRILLO",
+    "name": " VIOLETA PARAMECIA",
     "category": "fast",
     "color": {
       "r": 100,
@@ -3108,7 +3108,7 @@
     "ml": null,
     "sku": 734,
     "ref": "f038",
-    "name": "VIOLETA AMATIS BRILLO",
+    "name": " VIOLETA AMATIS BRILLO",
     "category": "fast",
     "color": {
       "r": 82,
@@ -3124,7 +3124,7 @@
     "ml": null,
     "sku": 707,
     "ref": "f125",
-    "name": "AZUL MEDUSA BRILLO",
+    "name": " AZUL MEDUSA",
     "category": "fast",
     "color": {
       "r": 95,
@@ -3140,7 +3140,7 @@
     "ml": null,
     "sku": 728,
     "ref": "f124",
-    "name": "AZUL CRISTALINO BRILLO ",
+    "name": " AZUL CRISTALINO BRILLO",
     "category": "fast",
     "color": {
       "r": 145,
@@ -3156,7 +3156,7 @@
     "ml": null,
     "sku": 727,
     "ref": "f077",
-    "name": "TURQUESA MEDITERRANEO BRILLO ",
+    "name": " TURQUESA MEDITERRANEO BRILLO",
     "category": "fast",
     "color": {
       "r": 74,
@@ -3172,7 +3172,7 @@
     "ml": null,
     "sku": 726,
     "ref": "f058",
-    "name": "AZUL TURQUESA BRILLO ",
+    "name": " AZUL TURQUESA BRILLO",
     "category": "fast",
     "color": {
       "r": 54,
@@ -3188,7 +3188,7 @@
     "ml": null,
     "sku": 718,
     "ref": "f040",
-    "name": "GRIS HUMO BRILLO",
+    "name": " GRIS HUMO BRILLO",
     "category": "fast",
     "color": {
       "r": 192,
@@ -3204,7 +3204,7 @@
     "ml": null,
     "sku": 719,
     "ref": "f041",
-    "name": "GIRS ALÉRGICO BRILLO",
+    "name": " GIRS ALÉRGICO BRILLO",
     "category": "fast",
     "color": {
       "r": 153,
@@ -3220,7 +3220,7 @@
     "ml": null,
     "sku": 720,
     "ref": "f042",
-    "name": "GRIS MENHIR BRILLO",
+    "name": " GRIS MENHIR BRILLO",
     "category": "fast",
     "color": {
       "r": 104,
@@ -3236,7 +3236,7 @@
     "ml": null,
     "sku": 721,
     "ref": "f060",
-    "name": "GRIS MAGNUM BRILLO",
+    "name": " GRIS MAGNUM BRILLO ",
     "category": "fast",
     "color": {
       "r": 84,
@@ -3252,7 +3252,7 @@
     "ml": null,
     "sku": 710,
     "ref": "f049",
-    "name": "PLATA BRILLO ",
+    "name": " PLATA BRILLO",
     "category": "fast",
     "color": {
       "r": 212,
@@ -3268,7 +3268,7 @@
     "ml": null,
     "sku": 702,
     "ref": "f400",
-    "name": "ORO BRILLO",
+    "name": " ORO BRILLO",
     "category": "fast",
     "color": {
       "r": 214,
@@ -3284,7 +3284,7 @@
     "ml": null,
     "sku": 704,
     "ref": "f001",
-    "name": "BLANCO BRILLO",
+    "name": " BLANCO BRILLO",
     "category": "fast",
     "color": {
       "r": 240,
@@ -3300,7 +3300,7 @@
     "ml": null,
     "sku": 711,
     "ref": "f050",
-    "name": "NEGRO BRILLO",
+    "name": " NEGRO BRILLO",
     "category": "fast",
     "color": {
       "r": 55,
@@ -3316,7 +3316,7 @@
     "ml": null,
     "sku": 712,
     "ref": "f510",
-    "name": "FLUOR. ROJO  ",
+    "name": " FLUOR. ROJO ",
     "category": "fast",
     "color": {
       "r": 255,
@@ -3332,7 +3332,7 @@
     "ml": null,
     "sku": 714,
     "ref": "f511",
-    "name": "FLUOR. NARANJA",
+    "name": " FLUOR. ORANGE",
     "category": "fast",
     "color": {
       "r": 255,
@@ -3348,7 +3348,7 @@
     "ml": null,
     "sku": 715,
     "ref": "f512",
-    "name": "FLUOR. AMARILLO",
+    "name": " FLUOR. YELLOW",
     "category": "fast",
     "color": {
       "r": 227,
@@ -3364,7 +3364,7 @@
     "ml": null,
     "sku": 716,
     "ref": "f513",
-    "name": "FLUOR. VERDE",
+    "name": " FLUOR. VERDE",
     "category": "fast",
     "color": {
       "r": 56,
@@ -3380,7 +3380,7 @@
     "ml": null,
     "sku": 717,
     "ref": "f514",
-    "name": "FLUOR. AZUL",
+    "name": "FLUOR. AZUL ",
     "category": "fast",
     "color": {
       "r": 0,
@@ -3396,7 +3396,7 @@
     "ml": null,
     "sku": 713,
     "ref": "f515",
-    "name": "FLUOR. CEREZA",
+    "name": "FLUOR. CHERRY",
     "category": "fast",
     "color": {
       "r": 255,
@@ -3412,7 +3412,7 @@
     "ml": null,
     "sku": 620,
     "ref": "P049",
-    "name": "PLATA P049 800/600ml",
+    "name": "PLATA 800/600ml",
     "category": "propulse",
     "color": {
       "r": 212,
@@ -3428,7 +3428,7 @@
     "ml": null,
     "sku": 619,
     "ref": "P050 ",
-    "name": "NEGRO P050 800/600ml",
+    "name": "NEGRO 800/600ml",
     "category": "propulse",
     "color": {
       "r": 55,
@@ -3444,7 +3444,7 @@
     "ml": null,
     "sku": 618,
     "ref": "P001",
-    "name": "BLANCO P001 800/600ml",
+    "name": "BLANCO 800/600ml",
     "category": "propulse",
     "color": {
       "r": 240,
@@ -3460,7 +3460,7 @@
     "ml": null,
     "sku": 601,
     "ref": "P049+",
-    "name": "PLATA P049 1000/750ml",
+    "name": "PLATA 1000/750ml",
     "category": "propulse",
     "color": {
       "r": 212,
@@ -3476,7 +3476,7 @@
     "ml": null,
     "sku": 603,
     "ref": "P050+",
-    "name": "NEGRO P050 1000/750ml",
+    "name": "NEGRO 1000/750ml",
     "category": "propulse",
     "color": {
       "r": 55,
@@ -3492,7 +3492,7 @@
     "ml": null,
     "sku": 617,
     "ref": "P001+",
-    "name": "BLANCO P001 1000/750ml",
+    "name": "BLANCO 1000/750ml",
     "category": "propulse",
     "color": {
       "r": 240,
@@ -3556,18 +3556,18 @@
     "type": "display",
     "sku": 919,
     "ref": "919",
-    "name": "168 uds"
+    "name": "NBQ 168 uds"
   },
   {
     "type": "display",
     "sku": 920,
     "ref": "920",
-    "name": "180 uds"
+    "name": "NBQ 180 uds. (Bandejas)"
   },
   {
     "type": "display",
     "sku": 921,
     "ref": "921",
-    "name": "546 uds"
+    "name": "NEGRO NBQ 546 uds. 520cc/650cc"
   }
 ]
